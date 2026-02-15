@@ -31,8 +31,7 @@ function FinalCTAContent() {
         <section className="py-32 relative overflow-hidden">
             {/* Immersive Background */}
             <div className="absolute inset-0 bg-slate-950">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent)]" />
-                <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.15),transparent)] opacity-40" />
             </div>
 
             <div className="container relative z-10 mx-auto px-4">

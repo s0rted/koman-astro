@@ -72,7 +72,7 @@ function WhatsAppFloatContent() {
                     <span className="absolute inset-0 rounded-xl bg-[#25D366] animate-ping opacity-20" />
                 )}
                 <Image
-                    src="/whatsapp.png"
+                    src="/whatsapp.webp"
                     alt="WhatsApp"
                     fill
                     className="object-contain"

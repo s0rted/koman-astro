@@ -50,8 +50,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.04 250);
 
-  --primary: oklch(0.72 0.16 175);
-  /* lake-turquoise */
+  --primary: oklch(0.65 0.16 175);
+  /* lake-turquoise - darkened for better contrast */
   --primary-foreground: oklch(0.985 0.005 240);
 
   --secondary: oklch(0.92 0.01 240);
@@ -160,13 +160,11 @@
   100% {
     opacity: 1;
     transform: scale(1);
-    filter: drop-shadow(0 0 0px rgba(37, 211, 102, 0));
   }
 
   50% {
-    opacity: 0.5;
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.4));
+    opacity: 0.7;
+    transform: scale(1.05);
   }
 }
 

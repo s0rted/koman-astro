@@ -78,7 +78,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
                     <Link href="/" className="flex items-center gap-2 group">
                         <div className="bg-white w-10 h-10 rounded-full shadow-md group-hover:scale-110 transition-transform flex items-center justify-center border border-slate-100/50 overflow-hidden shrink-0 aspect-square">
                             <img
-                                src="/images/logo.svg"
+                                src="/images/logo-icon.webp"
                                 alt="Koman Lake Tours Logo"
                                 className="w-full h-full object-cover scale-[1.1]"
                             />
@@ -150,7 +150,11 @@ function NavbarContent({ pathname }: { pathname: string }) {
                         </div>
                         <span className="font-heading text-lg font-bold text-slate-900">KOMAN LAKE TOURS</span>
                     </div>
-                    <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 bg-slate-100 rounded-full">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="p-2 bg-slate-100 rounded-full"
+                        aria-label={t('closeMenu') || 'Close menu'}
+                    >
                         <X className="w-6 h-6 text-slate-900" />
                     </button>
                 </div>

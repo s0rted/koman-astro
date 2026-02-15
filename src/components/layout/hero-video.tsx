@@ -57,6 +57,7 @@ export function HeroVideo({
                 >
                     <source src={mp4Src || videoSrc} type="video/mp4" />
                     {webmSrc && <source src={webmSrc} type="video/webm" />}
+                    <track kind="captions" label="Background visuals of Komani Lake" src="" />
                 </video>
             </div>
 
