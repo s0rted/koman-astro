@@ -1,8 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { HeroVideo } from '../../components/layout/HeroVideo.astro';
+import HeroVideo from '../../components/layout/HeroVideo.astro';
 import { BookingWidget } from '../../components/booking/booking-widget';
-import { TrustBar } from '../../components/sections/TrustBar.astro';
+import TrustBar from '../../components/sections/TrustBar.astro';
 import { FeaturedTour } from '../../components/sections/featured-tour';
 import { TourGrid } from '../../components/sections/tour-grid';
 import { WhyChooseUs } from '../../components/sections/why-choose-us';
@@ -35,7 +35,7 @@ const subheadline = t(locale, 'Index.description');
       posterSrc="/images/hero-poster.webp"
       mobilePosterSrc="/images/hero-poster-mobile.webp"
     >
-      <BookingWidget client:load messages={messages} locale={locale} />
+      <BookingWidget client:visible messages={messages} locale={locale} />
     </HeroVideo>
 
     <TrustBar messages={messages} locale={locale} />
