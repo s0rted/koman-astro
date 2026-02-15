@@ -31,7 +31,7 @@ function FooterContent() {
                         <Link href="/" className="flex items-center gap-2 group">
                             <div className="bg-white w-10 h-10 rounded-full shadow-md flex items-center justify-center border border-slate-100/50 overflow-hidden shrink-0 aspect-square">
                                 <img
-                                    src="/images/logo-icon.webp"
+                                    src="/images/logo-icon.svg"
                                     alt="Logo"
                                     className="w-full h-full object-cover scale-[1.1]"
                                 />
