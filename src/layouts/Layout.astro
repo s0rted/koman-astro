@@ -19,7 +19,6 @@ const messages = getMessages(locale);
 const siteUrl = 'https://komanlake.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const ogImageUrl = '/og-image.jpg';
-const ogImageFullUrl = new URL(ogImageUrl, Astro.url).toString();
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 
@@ -44,19 +43,17 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImageFullUrl} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:type" content="image/jpeg" />
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={ogImageFullUrl} />
+		<meta property="twitter:image" content={ogImageUrl} />
 		<!-- Self-hosted Fonts - eliminates 3rd party connection -->
 		<style is:inline>
 			@font-face {
