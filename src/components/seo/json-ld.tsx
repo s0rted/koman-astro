@@ -3,9 +3,9 @@ export function JsonLd() {
         "@context": "https://schema.org",
         "@type": "TravelAgency",
         "name": "Komani Lake Tours",
-        "image": "/og-image.jpg",
-        "@id": "/",
-        "url": "/",
+        "image": "https://koman-astro.pages.dev/og-image.jpg",
+        "@id": "https://koman-astro.pages.dev",
+        "url": "https://koman-astro.pages.dev",
         "telephone": "+35569XXXXXXX",
         "address": {
             "@type": "PostalAddress",

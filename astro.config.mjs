@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // site: 'https://komanlake.com', // Disabled during staging to prevent incorrect og:image resolution
+  site: 'https://koman-astro.pages.dev',
   output: 'static',
   compressHTML: true,
   integrations: [react(), sitemap()],

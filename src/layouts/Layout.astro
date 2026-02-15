@@ -16,7 +16,8 @@ interface Props {
 
 const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
-const ogImageUrl = '/og-image.jpg';
+const siteUrl = 'https://koman-astro.pages.dev';
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 
@@ -30,10 +31,10 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		<title>{title}</title>
 		<meta name="description" content={description || "Experience the breathtaking Komani Lake and Shala River with our guided boat tours."} />
 
-		<!-- Relative canonical linking during staging -->
-		<link rel="alternate" hreflang="en" href="/en/" />
-		<link rel="alternate" hreflang="sq" href="/sq/" />
-		<link rel="alternate" hreflang="x-default" href="/en/" />
+		<link rel="canonical" href={siteUrl + Astro.url.pathname} />
+		<link rel="alternate" hreflang="en" href={siteUrl + "/en/"} />
+		<link rel="alternate" hreflang="sq" href={siteUrl + "/sq/"} />
+		<link rel="alternate" hreflang="x-default" href={siteUrl + "/en/"} />
 
 		{isHomePage && (
 			<link rel="preload" href="/images/hero-poster-mobile.webp" as="image" fetchpriority="high" media="(max-width: 768px)" />
@@ -42,6 +43,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		<!-- Open Graph / Facebook -->
 		<meta property="fb:app_id" content="966242223397117" />
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={siteUrl + Astro.url.pathname} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image:width" content="1024" />
