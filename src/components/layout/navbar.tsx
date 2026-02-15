@@ -130,6 +130,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
                                 isScrolled || isLightPage ? "text-slate-900" : "text-white"
                             )}
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label={isMobileMenuOpen ? t('closeMenu') : t('openMenu')}
                         >
                             {isMobileMenuOpen ? <X /> : <Menu />}
                         </button>

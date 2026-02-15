@@ -51,10 +51,20 @@ function TestimonialsContent() {
                         <div className="flex flex-col sm:flex-row gap-4 items-end sm:items-center">
                             {/* Navigation Buttons */}
                             <div className="flex gap-2 order-2 sm:order-1">
-                                <Button size="icon" variant="outline" className="swiper-prev-review rounded-full hover:bg-slate-100 border-slate-200">
+                                <Button
+                                    size="icon"
+                                    variant="outline"
+                                    className="swiper-prev-review rounded-full hover:bg-slate-100 border-slate-200"
+                                    aria-label="Previous review"
+                                >
                                     <ArrowLeft className="w-4 h-4 text-slate-600" />
                                 </Button>
-                                <Button size="icon" variant="outline" className="swiper-next-review rounded-full hover:bg-slate-100 border-slate-200">
+                                <Button
+                                    size="icon"
+                                    variant="outline"
+                                    className="swiper-next-review rounded-full hover:bg-slate-100 border-slate-200"
+                                    aria-label="Next review"
+                                >
                                     <ArrowRight className="w-4 h-4 text-slate-600" />
                                 </Button>
                             </div>
@@ -117,9 +127,9 @@ function TestimonialsContent() {
                                         </div>
 
                                         {/* Title */}
-                                        <h4 className="font-bold text-lg text-slate-900 mb-3 line-clamp-1">
+                                        <h3 className="font-bold text-lg text-slate-900 mb-3 line-clamp-1">
                                             {review.title}
-                                        </h4>
+                                        </h3>
 
                                         {/* Text */}
                                         <div className="flex-grow mb-6">
@@ -131,7 +141,7 @@ function TestimonialsContent() {
                                         {/* Footer */}
                                         <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
                                             <div>
-                                                <h5 className="font-bold text-slate-900 text-sm">{review.name}</h5>
+                                                <div className="font-bold text-slate-900 text-sm">{review.name}</div>
                                                 <div className="flex items-center gap-1 text-xs text-slate-500 mt-1">
                                                     <MapPin className="w-3 h-3" />
                                                     <span className="truncate max-w-[120px]">{review.origin}</span>

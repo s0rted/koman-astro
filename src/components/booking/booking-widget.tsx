@@ -67,7 +67,7 @@ function BookingWidgetContent() {
 
     // Refined "Thin Bar" aesthetics
     const segmentBase = "flex flex-col items-start justify-center h-full px-5 hover:bg-slate-50 transition-all cursor-pointer select-none";
-    const labelBase = "text-[9px] uppercase tracking-[0.15em] text-primary font-bold mb-0.5 pointer-events-none";
+    const labelBase = "text-[9px] uppercase tracking-[0.15em] text-slate-500 font-bold mb-0.5 pointer-events-none";
     const valueBase = "font-bold text-slate-900 text-[13px] md:text-sm truncate w-full pointer-events-none leading-none";
 
     return (
@@ -77,7 +77,10 @@ function BookingWidgetContent() {
                 {/* 1. Tour Type */}
                 <div className="flex-[1.2] relative min-w-0">
                     <Select value={tour} onValueChange={setTour}>
-                        <SelectTrigger className="w-full h-12 md:h-full border-0 bg-transparent hover:bg-slate-50 transition-all rounded-xl md:rounded-l-full px-4 md:px-5 flex items-center !justify-start gap-3 focus:ring-0 focus:ring-offset-0 shadow-none ring-0">
+                        <SelectTrigger
+                            aria-label={t('selectExperience')}
+                            className="w-full h-12 md:h-full border-0 bg-transparent hover:bg-slate-50 transition-all rounded-xl md:rounded-l-full px-4 md:px-5 flex items-center !justify-start gap-3 focus:ring-0 focus:ring-offset-0 shadow-none ring-0"
+                        >
                             <MapPin className="h-4 w-4 text-primary shrink-0 opacity-80" />
                             <div className="flex-1 flex flex-col items-start overflow-hidden text-left">
                                 <span className={labelBase}>{t('selectExperience')}</span>
@@ -113,7 +116,10 @@ function BookingWidgetContent() {
                 <div className="flex-1 relative">
                     <Popover>
                         <PopoverTrigger asChild>
-                            <button className={cn(segmentBase, "w-full h-12 md:h-full rounded-xl md:rounded-none flex flex-row items-center gap-3 px-4 md:px-5 group/date")}>
+                            <button
+                                aria-label={t('pickDate')}
+                                className={cn(segmentBase, "w-full h-12 md:h-full rounded-xl md:rounded-none flex flex-row items-center gap-3 px-4 md:px-5 group/date")}
+                            >
                                 <CalendarIcon className="h-4 w-4 text-primary shrink-0 opacity-80" />
                                 <div className="flex-1 flex flex-col items-start overflow-hidden text-left">
                                     <span className={labelBase}>{t('pickDate')}</span>
@@ -142,7 +148,10 @@ function BookingWidgetContent() {
                 {/* 3. Number of Guests */}
                 <div className="flex-1 relative">
                     <Select value={guests} onValueChange={setGuests}>
-                        <SelectTrigger className="w-full h-12 md:h-full border-0 bg-transparent hover:bg-slate-50 transition-all rounded-xl md:rounded-none px-4 md:px-5 flex items-center !justify-start gap-3 focus:ring-0 focus:ring-offset-0 shadow-none ring-0">
+                        <SelectTrigger
+                            aria-label={t('guests')}
+                            className="w-full h-12 md:h-full border-0 bg-transparent hover:bg-slate-50 transition-all rounded-xl md:rounded-none px-4 md:px-5 flex items-center !justify-start gap-3 focus:ring-0 focus:ring-offset-0 shadow-none ring-0"
+                        >
                             <User className="h-4 w-4 text-primary shrink-0 opacity-80" />
                             <div className="flex-1 flex flex-col items-start overflow-hidden text-left">
                                 <span className={labelBase}>{t('guests')}</span>

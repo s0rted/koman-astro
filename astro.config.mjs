@@ -9,11 +9,23 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://komanlake.com',
   output: 'static',
+  compressHTML: true,
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['framer-motion'],
+      noExternal: ['framer-motion', 'lucide-react'],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom'],
+            'vendor-framer': ['framer-motion'],
+            'vendor-utils': ['date-fns', 'clsx', 'tailwind-merge'],
+          }
+        }
+      }
+    }
   },
 });

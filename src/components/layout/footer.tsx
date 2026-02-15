@@ -48,11 +48,16 @@ function FooterContent() {
                                 href="https://www.instagram.com/molla_mario/"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Follow us on Instagram"
                                 className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                             >
                                 <Instagram className="w-5 h-5" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                            <a
+                                href="#"
+                                aria-label="Follow us on Facebook"
+                                className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+                            >
                                 <Facebook className="w-5 h-5" />
                             </a>
                         </div>
@@ -60,7 +65,7 @@ function FooterContent() {
 
                     {/* Links Column 1 */}
                     <div>
-                        <h4 className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('experiences')}</h4>
+                        <div className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('experiences')}</div>
                         <ul className="space-y-4 text-sm">
                             <li><Link href="/tours" className="hover:text-primary transition-colors">{n('tours')}</Link></li>
                             <li><Link href="/about" className="hover:text-primary transition-colors">{n('about')}</Link></li>
@@ -70,7 +75,7 @@ function FooterContent() {
 
                     {/* Links Column 2 */}
                     <div>
-                        <h4 className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('company')}</h4>
+                        <div className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('company')}</div>
                         <ul className="space-y-4 text-sm">
                             <li><Link href="/gallery" className="hover:text-primary transition-colors">{n('gallery')}</Link></li>
                             <li><Link href="/contact" className="hover:text-primary transition-colors">{n('contact')}</Link></li>
@@ -81,7 +86,7 @@ function FooterContent() {
 
                     {/* Connect Column */}
                     <div>
-                        <h4 className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('connect')}</h4>
+                        <div className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('connect')}</div>
                         <div className="space-y-4 text-sm">
                             <div className="flex items-center gap-3">
                                 <MapPin className="w-4 h-4 text-primary" />

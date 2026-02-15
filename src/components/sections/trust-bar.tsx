@@ -29,7 +29,7 @@ function TrustBarContent() {
                         <div className="flex items-center gap-4 bg-primary/5 rounded-full px-8 py-4 border border-primary/10 hover:bg-primary/10 transition-colors">
                             <Star className="h-6 w-6 text-primary fill-primary/20" />
                             <div className="text-left">
-                                <h3 className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('rating')}</h3>
+                                <div className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('rating')}</div>
                                 <p className="text-slate-500 text-xs md:text-sm">{t('reviews')}</p>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ function TrustBarContent() {
                         <div className="flex items-center gap-4 bg-primary/5 rounded-full px-8 py-4 border border-primary/10 hover:bg-primary/10 transition-colors">
                             <ShieldCheck className="h-6 w-6 text-primary" />
                             <div className="text-left">
-                                <h3 className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('est')}</h3>
+                                <div className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('est')}</div>
                                 <p className="text-slate-500 text-xs md:text-sm">{t('pioneer')}</p>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ function TrustBarContent() {
                         <div className="flex items-center gap-4 bg-primary/5 rounded-full px-8 py-4 border border-primary/10 hover:bg-primary/10 transition-colors">
                             <Users className="h-6 w-6 text-primary" />
                             <div className="text-left">
-                                <h3 className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('guests')}</h3>
+                                <div className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('guests')}</div>
                                 <p className="text-slate-500 text-xs md:text-sm">{t('owned')}</p>
                             </div>
                         </div>
