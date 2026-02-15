@@ -16,9 +16,11 @@ interface Props {
 
 const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
-const siteUrl = 'https://komanlake.com';
+// Use current URL origin to prevent scrapers from Jumping to the old Wix site via canonical links
+const currentOrigin = Astro.url.origin;
+const siteUrl = currentOrigin.includes('komanlake.com') ? 'https://komanlake.com' : currentOrigin;
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const ogImageUrl = '/og-image.jpg';
+const ogImageUrl = new URL('/og-image.jpg', siteUrl).toString();
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 
@@ -42,7 +44,9 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		)}
 
 		<!-- Open Graph / Facebook -->
+		<meta property="fb:app_id" content="966242223397117" /> <!-- Essential for Facebook Scraper analytics -->
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image:width" content="1024" />
@@ -52,6 +56,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		<meta property="og:image:type" content="image/jpeg" />
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content={ogImageUrl} />
