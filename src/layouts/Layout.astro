@@ -18,7 +18,7 @@ const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
 const siteUrl = 'https://komanlake.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const ogImageUrl = '/og-social.png'; // Relative path for staging compatibility
+const ogImageUrl = '/og-social.jpg'; // Relative path for staging compatibility
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 
@@ -45,13 +45,13 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:image" content={new URL(ogImageUrl, Astro.url.origin).toString()} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={ogImageUrl} />
+		<meta property="twitter:image" content={new URL(ogImageUrl, Astro.url.origin).toString()} />
 
 		<!-- Self-hosted Fonts - eliminates 3rd party connection -->
 		<style is:inline>
