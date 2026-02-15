@@ -18,9 +18,9 @@ const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
 const siteUrl = 'https://komanlake.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const ogImageUrl = ogImage 
-	? (ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).toString())
-	: new URL('/og-image.jpg', siteUrl).toString();
+const ogImageUrl = '/og-image.jpg'; // Relative path for staging compatibility
+const siteUrl = 'https://komanlake.com';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 

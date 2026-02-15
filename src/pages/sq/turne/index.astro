@@ -1,0 +1,30 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { TourGrid } from '../../../components/sections/tour-grid';
+import { FinalCTA } from '../../../components/sections/final-cta';
+import { t, getMessages } from '../../../i18n/utils';
+
+const locale = 'sq';
+const messages = getMessages(locale);
+const title = "Të Gjitha Turet | Komani Lake Tours";
+const description = "Eksploroni turet tona me varkë, aventurat e ecjes dhe eksperiencat private në Liqenin e Komanit.";
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <main class="min-h-screen bg-slate-50 pt-32 pb-24">
+    <div class="container mx-auto px-4 md:px-6 mb-16">
+        <h1 class="font-heading text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+            {t(locale, 'ToursPage.title')}
+        </h1>
+        <p class="text-xl text-slate-600 max-w-2xl leading-relaxed">
+            {t(locale, 'ToursPage.subtitle')}
+        </p>
+    </div>
+
+    <TourGrid client:load messages={messages} locale={locale} />
+    
+    <div class="mt-24">
+        <FinalCTA client:visible messages={messages} locale={locale} />
+    </div>
+  </main>
+</Layout>

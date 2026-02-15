@@ -5,6 +5,10 @@
         "metaTitle": "Komani Lake Tours | The Fjord of the Balkans",
         "metaDescription": "Experience the breathtaking Komani Lake ferry and tours with Mario Molla. Explore the Shala River, hike the Albanian Alps, and discover the hidden gem of Europe."
     },
+    "ToursPage": {
+        "title": "All Adventures",
+        "subtitle": "From daily boat crossings to immersive mountain retreats. Choose your way to experience the wild heart of Albania."
+    },
     "Booking": {
         "selectExperience": "Select Experience",
         "pickDate": "Pick a date",

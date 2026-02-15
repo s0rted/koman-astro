@@ -5,6 +5,10 @@
         "metaTitle": "Turne në Liqenin e Komanit | Zbuloni Fjordet e Ballkanit",
         "metaDescription": "Përjetoni Liqenin e mrekullueshëm të Komanit dhe Lumin e Shalës me turet tona të udhëhequra me varkë. Zbuloni margaritarin e fshehur të Europës."
     },
+    "ToursPage": {
+        "title": "Të Gjitha Aventurat",
+        "subtitle": "Nga udhëtimet ditore me varkë deri te eksperiencat e paharrueshme malore. Zgjidhni mënyrën tuaj për të zbuluar zemrën e egër të Shqipërisë."
+    },
     "Booking": {
         "selectExperience": "Zgjidh Eksperiencën",
         "pickDate": "Zgjidh datën",
