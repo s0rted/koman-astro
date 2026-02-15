@@ -16,10 +16,11 @@ interface Props {
 
 const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
-const ogImageUrl = ogImage || '/og-image.jpg';
-
 const siteUrl = 'https://komanlake.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const ogImageUrl = ogImage 
+	? (ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).toString())
+	: new URL('/og-image.jpg', siteUrl).toString();
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 

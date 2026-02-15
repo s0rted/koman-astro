@@ -37,12 +37,12 @@ function FinalCTAContent() {
             <div className="container relative z-10 mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <RevealOnScroll>
-                        <span className="text-primary font-bold uppercase tracking-[0.3em] mb-6 block text-sm">
+                        <span className="text-white font-bold uppercase tracking-[0.3em] mb-6 block text-sm">
                             {t('badge')}
                         </span>
                         <h2 className="font-heading text-6xl md:text-8xl font-bold text-white mb-8 leading-none">
                             {t('title')} <br />
-                            <span className="text-slate-500">{t('subtitle')}</span>
+                            <span className="text-white/60">{t('subtitle')}</span>
                         </h2>
                         <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
                             {t('description')}

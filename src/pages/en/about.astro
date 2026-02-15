@@ -43,12 +43,12 @@ const ui = {
 
       <div class="container relative z-10 mx-auto px-4 md:px-6">
         <RevealOnScroll client:load>
-          <span class="text-primary font-bold uppercase tracking-[0.2em] mb-4 block">
+          <span class="text-white font-bold uppercase tracking-[0.2em] mb-4 block">
             {ui.headerBadge}
           </span>
           <h1 class="font-heading text-5xl md:text-8xl font-bold mb-8 leading-none">
             {ui.headerTitle} <br />
-            <span class="text-white/60">{ui.headerSubtitle}</span>
+            <span class="text-white/90">{ui.headerSubtitle}</span>
           </h1>
         </RevealOnScroll>
       </div>
@@ -93,7 +93,7 @@ const ui = {
           
           <RevealOnScroll delay={0.1} className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100" client:visible>
             <div class="bg-white w-12 h-12 rounded-full shadow-sm border border-slate-100 flex items-center justify-center overflow-hidden shrink-0 aspect-square mb-6">
-               <img src="/images/logo-icon.webp" class="w-full h-full object-contain p-2" alt="" />
+               <img src="/images/logo-icon.svg" class="w-full h-full object-contain p-2" alt="" />
             </div>
             <h3 class="font-bold text-xl text-slate-900 mb-4">{ui.valConservationTitle}</h3>
             <p class="text-sm text-slate-500 leading-relaxed">{ui.valConservationText}</p>

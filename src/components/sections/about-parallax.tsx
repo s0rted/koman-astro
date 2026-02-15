@@ -34,7 +34,7 @@ function AboutParallaxContent() {
             <div className="container relative z-10 mx-auto px-4 md:px-6">
                 <div className="max-w-3xl">
                     <RevealOnScroll>
-                        <div className="flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider">
+                        <div className="flex items-center gap-2 text-white font-bold mb-4 uppercase tracking-wider">
                             <Leaf className="w-5 h-5" />
                             <span>{t('badge')}</span>
                         </div>
@@ -43,12 +43,12 @@ function AboutParallaxContent() {
                     <RevealOnScroll delay={0.1}>
                         <h2 className="font-heading text-4xl md:text-6xl font-bold mb-8 leading-tight">
                             {t('title')} <br />
-                            <span className="text-white/70">{t('subtitle')}</span>
+                            <span className="text-white/90">{t('subtitle')}</span>
                         </h2>
                     </RevealOnScroll>
 
                     <RevealOnScroll delay={0.2}>
-                        <p className="text-xl text-slate-300 leading-relaxed mb-8">
+                        <p className="text-xl text-white leading-relaxed mb-8">
                             {t('quote')}
                         </p>
                     </RevealOnScroll>
