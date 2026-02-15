@@ -1,4 +1,4 @@
-import { Tour } from "@/lib/tours";
+import type { Tour } from "@/lib/tours";
 
 interface TourJsonLdProps {
     tour: Tour;
