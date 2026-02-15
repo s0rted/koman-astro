@@ -6,6 +6,7 @@ import { Footer } from '../components/layout/footer';
 import { WhatsAppFloat } from '../components/ui/whatsapp-float';
 import { CookieBanner } from '../components/ui/cookie-banner';
 import { JsonLd } from '../components/seo/json-ld';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -17,6 +18,10 @@ interface Props {
 const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
 const ogImageUrl = ogImage || '/og-image.jpg';
+
+const siteUrl = 'https://komanlake.com';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
 ---
 
 <!doctype html>
@@ -28,6 +33,12 @@ const ogImageUrl = ogImage || '/og-image.jpg';
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description || "Experience the breathtaking Komani Lake and Shala River with our guided boat tours."} />
+
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="alternate" hreflang="en" href={new URL('/en/', siteUrl)} />
+		<link rel="alternate" hreflang="sq" href={new URL('/sq/', siteUrl)} />
+		<link rel="alternate" hreflang="x-default" href={new URL('/en/', siteUrl)} />
+		{isHomePage && <link rel="preload" href="/images/hero-poster.webp" as="image" />}
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
@@ -46,6 +57,7 @@ const ogImageUrl = ogImage || '/og-image.jpg';
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 		<JsonLd />
+		<ClientRouter />
 	</head>
 	<body class="min-h-screen bg-white font-sans antialiased text-slate-900" style="font-family: 'Outfit', 'Inter', sans-serif">
         <Navbar client:load messages={messages} locale={locale} pathname={Astro.url.pathname} />

@@ -64,17 +64,17 @@ export function HeroVideo({
             <div className="relative z-20 h-full flex flex-col items-center px-4 pt-32 pb-24 md:pt-32 md:pb-48 text-center text-white sm:px-6 lg:px-8">
                 <div className="w-full max-w-6xl mx-auto space-y-12 md:space-y-16 flex-grow flex flex-col justify-center">
                     <div className="space-y-4 md:space-y-6 max-w-5xl mx-auto">
-                        <RevealOnScroll direction="up" delay={0.2} className="w-full">
+                        <div className="w-full">
                             <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight drop-shadow-2xl text-center leading-[1.1] md:leading-tight">
                                 {headline}
                             </h1>
-                        </RevealOnScroll>
+                        </div>
 
-                        <RevealOnScroll direction="up" delay={0.4} className="w-full max-w-2xl mx-auto">
+                        <div className="w-full max-w-2xl mx-auto">
                             <p className="text-lg sm:text-xl md:text-2xl text-white/95 drop-shadow-xl font-medium text-center leading-relaxed px-4 mx-auto" style={{ textWrap: "balance" }}>
                                 {subheadline}
                             </p>
-                        </RevealOnScroll>
+                        </div>
                     </div>
 
                     {/* Booking Widget Slot */}
