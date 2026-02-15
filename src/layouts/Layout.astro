@@ -38,7 +38,12 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		<link rel="alternate" hreflang="en" href={new URL('/en/', siteUrl)} />
 		<link rel="alternate" hreflang="sq" href={new URL('/sq/', siteUrl)} />
 		<link rel="alternate" hreflang="x-default" href={new URL('/en/', siteUrl)} />
-		{isHomePage && <link rel="preload" href="/images/hero-poster.webp" as="image" fetchpriority="high" />}
+		{isHomePage && (
+			<>
+				<link rel="preload" href="/images/hero-poster-mobile.webp" as="image" fetchpriority="high" media="(max-width: 768px)" />
+				<link rel="preload" href="/images/hero-poster.webp" as="image" fetchpriority="high" media="(min-width: 769px)" />
+			</>
+		)}
 
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />

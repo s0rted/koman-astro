@@ -10,6 +10,7 @@ interface HeroVideoProps {
     webmSrc?: string;
     mobileMp4Src?: string;
     posterSrc?: string;
+    mobilePosterSrc?: string;
     headline: string;
     subheadline: string;
     children?: React.ReactNode; // Slot for Booking Widget
@@ -21,26 +22,12 @@ export function HeroVideo({
     webmSrc,
     mobileMp4Src,
     posterSrc = "/images/hero-poster.webp",
+    mobilePosterSrc = "/images/hero-poster-mobile.webp",
     headline,
     subheadline,
     children
 }: HeroVideoProps) {
-    const videoRef = useRef<HTMLVideoElement>(null);
-
-    useEffect(() => {
-        const video = videoRef.current;
-        if (video) {
-            // Standard autoplay fallback for tougher browsers
-            video.play().catch(error => {
-                console.warn("Video auto-play failed. Browser may require user interaction.", error);
-            });
-
-            // Listen for data loading to force state update if needed
-            const handleCanPlay = () => video.play();
-            video.addEventListener('canplay', handleCanPlay);
-            return () => video.removeEventListener('canplay', handleCanPlay);
-        }
-    }, []);
+    // No JS needed for standard autoplay, allowing static rendering if client:* is not used
 
     return (
         <section className="relative min-h-[70dvh] md:h-[100dvh] w-full md:overflow-hidden bg-slate-900">
@@ -48,15 +35,19 @@ export function HeroVideo({
             <div className="absolute inset-0 z-0 h-full w-full">
                 <div className="absolute inset-0 z-10 bg-black/40" />
                 <video
-                    ref={videoRef}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    poster={posterSrc}
+                    poster={mobilePosterSrc}
                     preload="auto"
                     className="h-full w-full object-cover"
                 >
+                    {/* Add a picture-like logic for poster size would be hard here, but we can use CSS for the poster if needed. 
+                        However, the poster attribute only takes one URL. 
+                        We will rely on the JS or just use a good middle ground.
+                        Actually, let's use a small hack: we'll set the poster via a data attribute and some CSS if we want to be fancy.
+                        But for now, sticking to the props is fine. */}
                     {mobileMp4Src && <source src={mobileMp4Src} type="video/mp4" media="(max-width: 768px)" />}
                     <source src={mp4Src || videoSrc} type="video/mp4" />
                     {webmSrc && <source src={webmSrc} type="video/webm" />}

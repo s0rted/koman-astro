@@ -1,0 +1,47 @@
+---
+import { Star, ShieldCheck, Users } from "lucide-react";
+
+interface Props {
+    messages: any;
+    locale: string;
+}
+
+const { messages, locale } = Astro.props;
+
+// Basic translation helper for the static component
+const t = (key: string) => {
+    return messages?.TrustBar?.[key] || key;
+};
+---
+
+<section class="w-full bg-white py-8 border-b border-slate-100">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
+
+            <div class="flex items-center gap-4 bg-slate-50 rounded-full px-8 py-4 border border-slate-100 hover:bg-slate-100 transition-colors group">
+                <Star class="h-6 w-6 text-primary fill-primary/20" />
+                <div class="text-left">
+                    <div class="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('rating')}</div>
+                    <p class="text-slate-600 text-xs md:text-sm font-medium">{t('reviews')}</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 bg-slate-50 rounded-full px-8 py-4 border border-slate-100 hover:bg-slate-100 transition-colors group">
+                <ShieldCheck class="h-6 w-6 text-primary" />
+                <div class="text-left">
+                    <div class="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('est')}</div>
+                    <p class="text-slate-600 text-xs md:text-sm font-medium">{t('pioneer')}</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 bg-slate-50 rounded-full px-8 py-4 border border-slate-100 hover:bg-slate-100 transition-colors group">
+                <Users class="h-6 w-6 text-primary" />
+                <div class="text-left">
+                    <div class="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('guests')}</div>
+                    <p class="text-slate-600 text-xs md:text-sm font-medium">{t('owned')}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

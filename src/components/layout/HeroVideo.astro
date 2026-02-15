@@ -1,0 +1,66 @@
+---
+interface Props {
+    mp4Src?: string;
+    webmSrc?: string;
+    mobileMp4Src?: string;
+    posterSrc?: string;
+    mobilePosterSrc?: string;
+    headline: string;
+    subheadline: string;
+}
+
+const {
+    mp4Src = "/videos/hero-banner.mp4",
+    webmSrc = "/videos/hero-banner.webm",
+    mobileMp4Src = "/videos/hero-banner-mobile.mp4",
+    posterSrc = "/images/hero-poster.webp",
+    mobilePosterSrc = "/images/hero-poster-mobile.webp",
+    headline,
+    subheadline,
+} = Astro.props;
+---
+
+<section class="relative min-h-[70dvh] md:h-[100dvh] w-full md:overflow-hidden bg-slate-900">
+    {/* Background Video */}
+    <div class="absolute inset-0 z-0 h-full w-full">
+        <div class="absolute inset-0 z-10 bg-black/40"></div>
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            poster={mobilePosterSrc}
+            preload="auto"
+            class="h-full w-full object-cover"
+        >
+            {mobileMp4Src && <source src={mobileMp4Src} type="video/mp4" media="(max-width: 768px)" />}
+            <source src={mp4Src} type="video/mp4" />
+            {webmSrc && <source src={webmSrc} type="video/webm" />}
+            <track kind="captions" label="Background visuals of Komani Lake" src="" />
+        </video>
+    </div>
+
+    {/* Content */}
+    <div class="relative z-20 h-full flex flex-col items-center px-4 pt-32 pb-24 md:pt-32 md:pb-48 text-center text-white sm:px-6 lg:px-8">
+        <div class="w-full max-w-6xl mx-auto space-y-12 md:space-y-16 flex-grow flex flex-col justify-center">
+            <div class="space-y-4 md:space-y-6 max-w-5xl mx-auto">
+                <div class="w-full">
+                    <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight drop-shadow-2xl text-center leading-[1.1] md:leading-tight">
+                        {headline}
+                    </h1>
+                </div>
+
+                <div class="w-full max-w-2xl mx-auto">
+                    <p class="text-lg sm:text-xl md:text-2xl text-white/95 drop-shadow-xl font-medium text-center leading-relaxed px-4 mx-auto" style="text-wrap: balance">
+                        {subheadline}
+                    </p>
+                </div>
+            </div>
+
+            {/* Slot for Booking Widget */}
+            <div class="w-full max-w-4xl mx-auto">
+                <slot />
+            </div>
+        </div>
+    </div>
+</section>

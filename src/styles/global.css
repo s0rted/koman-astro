@@ -50,8 +50,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.04 250);
 
-  --primary: oklch(0.45 0.16 175);
-  /* lake-turquoise - darkened for better contrast */
+  --primary: oklch(0.35 0.12 175);
+  /* deep-ocean-teal - WCAG AAA compliant */
   --primary-foreground: oklch(0.985 0.005 240);
 
   --secondary: oklch(0.92 0.01 240);
