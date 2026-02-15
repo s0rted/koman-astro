@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import { getMessages } from '../i18n/utils';
+import { Navbar } from '../components/layout/navbar';
+import { Footer } from '../components/layout/footer';
+import { WhatsAppFloat } from '../components/ui/whatsapp-float';
+import { CookieBanner } from '../components/ui/cookie-banner';
+import { JsonLd } from '../components/seo/json-ld';
+
+interface Props {
+	title: string;
+	description?: string;
+	locale: 'en' | 'sq';
+	ogImage?: string;
+}
+
+const { title, description, locale, ogImage } = Astro.props;
+const messages = getMessages(locale);
+const ogImageUrl = ogImage || '/og-image.jpg';
+---
+
+<!doctype html>
+<html lang={locale} class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description || "Experience the breathtaking Komani Lake and Shala River with our guided boat tours."} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImageUrl} />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<JsonLd />
+	</head>
+	<body class="min-h-screen bg-white font-sans antialiased text-slate-900" style="font-family: 'Outfit', 'Inter', sans-serif">
+        <Navbar client:load messages={messages} locale={locale} pathname={Astro.url.pathname} />
+        <slot />
+        <Footer client:visible messages={messages} locale={locale} />
+        <WhatsAppFloat client:idle messages={messages} locale={locale} />
+        <CookieBanner client:idle messages={messages} locale={locale} />
+    </body>
+</html>

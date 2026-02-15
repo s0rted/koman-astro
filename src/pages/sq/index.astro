@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { HeroVideo } from '../../components/layout/hero-video';
+import { BookingWidget } from '../../components/booking/booking-widget';
+import { TrustBar } from '../../components/sections/trust-bar';
+import { FeaturedTour } from '../../components/sections/featured-tour';
+import { TourGrid } from '../../components/sections/tour-grid';
+import { WhyChooseUs } from '../../components/sections/why-choose-us';
+import { GalleryTeaser } from '../../components/sections/gallery-teaser';
+import { Testimonials } from '../../components/sections/testimonials';
+import { FaqAccordion } from '../../components/sections/faq-accordion';
+import { FinalCTA } from '../../components/sections/final-cta';
+import { AboutParallax } from '../../components/sections/about-parallax';
+import { t, getMessages } from '../../i18n/utils';
+import { FaqJsonLd, ReviewJsonLd } from '../../components/seo/tour-json-ld';
+
+const locale = 'sq';
+const messages = getMessages(locale);
+// Fallback titles if keys don't exist
+const title = t(locale, 'Index.metaTitle') === 'Index.metaTitle' ? 'Turne në Liqenin e Komanit | Zbuloni Fjordet e Ballkanit' : t(locale, 'Index.metaTitle');
+const description = t(locale, 'Index.metaDescription') === 'Index.metaDescription' ? 'Përjetoni Liqenin e Komanit dhe Lumin e Shalës me turet tona të udhëhequra me varkë.' : t(locale, 'Index.metaDescription');
+
+const headline = t(locale, 'Index.title');
+const subheadline = t(locale, 'Index.description');
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <main class="flex min-h-screen flex-col">
+    <HeroVideo
+      headline={headline}
+      subheadline={subheadline}
+      mp4Src="/videos/hero-banner.mp4"
+      webmSrc="/videos/hero-banner.webm"
+      posterSrc="/images/hero-poster.webp"
+      client:load
+    >
+      <BookingWidget client:load messages={messages} locale={locale} />
+    </HeroVideo>
+
+    <TrustBar client:visible messages={messages} locale={locale} />
+    <FeaturedTour client:visible messages={messages} locale={locale} />
+    <TourGrid client:visible messages={messages} locale={locale} />
+    <WhyChooseUs client:visible messages={messages} locale={locale} />
+    <GalleryTeaser client:visible messages={messages} locale={locale} />
+    <AboutParallax client:visible messages={messages} locale={locale} />
+    <Testimonials client:visible messages={messages} locale={locale} />
+    <FaqAccordion client:visible messages={messages} locale={locale} />
+    <FinalCTA client:visible messages={messages} locale={locale} />
+    <FaqJsonLd />
+    <ReviewJsonLd />
+  </main>
+</Layout>

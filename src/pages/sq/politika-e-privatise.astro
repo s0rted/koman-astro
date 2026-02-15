@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { RevealOnScroll } from '../../components/animations/reveal-on-scroll';
+import { t } from '../../i18n/utils';
+
+const locale = 'sq';
+const lastUpdated = t(locale, 'Legal.lastUpdated');
+const title = t(locale, 'Legal.privacyTitle');
+const description = t(locale, 'Legal.privacyDescription');
+---
+
+<Layout title={`${title} | Komani Lake Tours`} description={description} locale={locale}>
+  <main class="min-h-screen bg-white pt-32 pb-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+      <RevealOnScroll client:load direction="up">
+        <span class="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">
+          {lastUpdated}: Shkurt 2026
+        </span>
+        <h1 class="font-heading text-4xl md:text-6xl font-bold text-slate-900 mb-8">
+          {title}
+        </h1>
+        <p class="text-xl text-slate-600 mb-12 leading-relaxed">
+          {description}
+        </p>
+      </RevealOnScroll>
+
+      <div class="prose prose-slate prose-lg max-w-none space-y-12">
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">1. Data Collection</h2>
+          <p class="text-slate-600">
+            We collect personal information that you provide to us directly when you book a tour or contact us. This includes your name, email address, phone number, and any special requests or dietary requirements. We also collect anonymous usage data via cookies to improve our website performance.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">2. How We Use Your Data</h2>
+          <p class="text-slate-600">
+            Your information is used strictly for managing your bookings, providing customer support, and ensuring your safety during our tours. We do not sell your personal data to third parties. We may share your name with local partners (like local ferry operators or guesthouses) solely to facilitate your journey.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">3. Data Security</h2>
+          <p class="text-slate-600">
+            We implement industry-standard security measures to protect your information. However, please note that no method of transmission over the internet is 100% secure. We store your data only as long as necessary to fulfill the purposes outlined in this policy or to comply with legal obligations.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">4. Your Rights (GDPR)</h2>
+          <p class="text-slate-600">
+            As a user, you have the right to access, correct, or delete your personal data. You can also object to the processing of your data or request data portability. To exercise these rights, please contact us at info@komanlake.com.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">5. Cookies</h2>
+          <p class="text-slate-600">
+            We use essential cookies for site functionality and analytical cookies (like Google Analytics) to understand how visitors interact with our content. You can manage your cookie preferences through the banner on our homepage or via your browser settings.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">6. Contact Us</h2>
+          <p class="text-slate-600">
+            If you have any questions about our Privacy Policy, please reach out to our team via our contact page or email us directly.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>

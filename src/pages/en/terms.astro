@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { RevealOnScroll } from '../../components/animations/reveal-on-scroll';
+import { t } from '../../i18n/utils';
+
+const locale = 'en';
+const lastUpdated = t(locale, 'Legal.lastUpdated');
+const title = t(locale, 'Legal.termsTitle');
+const description = t(locale, 'Legal.termsDescription');
+---
+
+<Layout title={`${title} | Komani Lake Tours`} description={description} locale={locale}>
+  <main class="min-h-screen bg-white pt-32 pb-24">
+    <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+      <RevealOnScroll client:load direction="up">
+        <span class="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">
+          {lastUpdated}: February 2026
+        </span>
+        <h1 class="font-heading text-4xl md:text-6xl font-bold text-slate-900 mb-8">
+          {title}
+        </h1>
+        <p class="text-xl text-slate-600 mb-12 leading-relaxed">
+          {description}
+        </p>
+      </RevealOnScroll>
+
+      <div class="prose prose-slate prose-lg max-w-none space-y-12">
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">1. Booking & Confirmation</h2>
+          <p class="text-slate-600">
+            By booking a tour with Komani Lake Tours (Mario Molla), you agree to our terms. All bookings are subject to availability. A booking is considered confirmed once you receive a confirmation email or voucher from us. Standard prices include the services explicitly mentioned in the tour description.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">2. Payment Policy</h2>
+          <p class="text-slate-600">
+            Currently, we primarily accept cash payments (Euro or Albanian LEK) upon arrival or at the start of the tour. For large groups or private charters, a deposit may be requested in advance. All prices are final as listed, with no hidden booking fees.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">3. Cancellation & Refunds</h2>
+          <p class="text-slate-600">
+            We understand that plans change. You can cancel your booking free of charge up to 48 hours before the tour start time. Cancellations made less than 48 hours in advance or "no-shows" may not be eligible for a refund of any prepaid deposits.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">4. Weather & Safety</h2>
+          <p class="text-slate-600">
+            The safety of our guests is our absolute priority. Komani Lake and the Shala River are alpine environments where weather can change rapidly. We reserve the right to modify itineraries or cancel tours due to extreme weather, safety concerns, or government restrictions. In the event of a cancellation by us, a full refund or alternative date will be offered.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">5. Liability</h2>
+          <p class="text-slate-600">
+            While we maintain high safety standards and fully insured vessels, participation in outdoor activities (including hiking, kayaking, and boat travel) involves inherent risks. Komani Lake Tours and its partners are not liable for personal injury, loss, or damage to personal property unless caused by our direct negligence.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-900 mb-4">6. Governing Law</h2>
+          <p class="text-slate-600">
+            These terms are governed by the laws of the Republic of Albania. Any disputes arising from our services shall be resolved through local courts or mutually agreed arbitration.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>

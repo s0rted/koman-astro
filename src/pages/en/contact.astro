@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { ContactPage } from '../../components/pages/contact-page';
+import { t } from '../../i18n/utils';
+
+const locale = 'en';
+
+const dict = {
+  title: t(locale, 'ContactPage.title'),
+  subtitle: t(locale, 'ContactPage.subtitle'),
+  description: t(locale, 'ContactPage.description'),
+  info: {
+    email: t(locale, 'ContactPage.info.email'),
+    whatsapp: t(locale, 'ContactPage.info.whatsapp'),
+    location: t(locale, 'ContactPage.info.location'),
+  },
+  form: {
+    title: t(locale, 'ContactPage.form.title'),
+    name: t(locale, 'ContactPage.form.name'),
+    email: t(locale, 'ContactPage.form.email'),
+    message: t(locale, 'ContactPage.form.message'),
+    placeholderName: t(locale, 'ContactPage.form.placeholderName'),
+    placeholderEmail: t(locale, 'ContactPage.form.placeholderEmail'),
+    placeholderMessage: t(locale, 'ContactPage.form.placeholderMessage'),
+    submit: t(locale, 'ContactPage.form.submit'),
+  },
+};
+---
+
+<Layout title="Contact Us | Komani Lake Tours" description={dict.description} locale={locale}>
+  <ContactPage client:load dict={dict} />
+</Layout>

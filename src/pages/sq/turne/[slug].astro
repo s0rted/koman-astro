@@ -1,0 +1,153 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { TourHero } from '../../../components/sections/tour-hero';
+import { TourGallery } from '../../../components/sections/tour-gallery';
+import { BookingSidebar } from '../../../components/booking/booking-sidebar';
+import { RelatedTours } from '../../../components/sections/related-tours';
+import { MobileBookingBar } from '../../../components/booking/mobile-booking-bar';
+import { RevealOnScroll } from '../../../components/animations/reveal-on-scroll';
+import { TourJsonLd } from '../../../components/seo/tour-json-ld';
+import { Check, Info } from 'lucide-react';
+import { TOURS } from '../../../lib/tours';
+import { getMessages, t, tRaw } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  return TOURS.map((tour) => ({
+    params: { slug: tour.slug },
+    props: { tour },
+  }));
+}
+
+const { slug } = Astro.params;
+const { tour } = Astro.props;
+const locale = 'sq';
+const messages = getMessages(locale);
+
+const title = t(locale, `ToursData.${tour.slug}.title`);
+const description = t(locale, `ToursData.${tour.slug}.description`);
+const category = t(locale, `ToursData.${tour.slug}.category`);
+const duration = t(locale, `ToursData.${tour.slug}.duration`);
+const inclusions = tRaw(locale, `ToursData.${tour.slug}.inclusions`) as string[];
+const itinerary = tRaw(locale, `ToursData.${tour.slug}.itinerary`) as { time: string; activity: string }[];
+
+const metaTitle = `${title} | Nga €${tour.price}`;
+const metaDesc = `${description} Kohëzgjatja: ${duration}. Rezervoni aventurën tuaj ${title} me Mario Mollën.`;
+const canonical = `https://komanlake.com/sq/turne/${slug}`;
+
+// Localized UI strings
+const ui = {
+  overview: t(locale, 'SingleTour.overview'),
+  included: t(locale, 'SingleTour.included'),
+  journey: t(locale, 'SingleTour.journey'),
+  noteTitle: t(locale, 'SingleTour.notes.title'),
+  noteText: t(locale, 'SingleTour.notes.text'),
+};
+---
+
+<Layout title={metaTitle} description={metaDesc} locale={locale} ogImage={tour.banner}>
+  <TourJsonLd tour={tour} url={canonical} client:visible />
+
+  <main class="flex min-h-screen flex-col bg-white">
+    <TourHero
+      title={title}
+      category={category}
+      duration={duration}
+      bannerImg={tour.banner}
+      client:load
+    />
+
+    <section class="py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="grid lg:grid-cols-3 gap-16 items-start">
+          {/* Left Column: Details */}
+          <div class="lg:col-span-2 space-y-16">
+            {/* Description */}
+            <RevealOnScroll direction="up" client:visible>
+              <h2 class="font-heading text-3xl font-bold text-slate-900 mb-6">
+                {ui.overview}
+              </h2>
+              <p class="text-xl text-slate-600 leading-relaxed">
+                {description}
+              </p>
+            </RevealOnScroll>
+
+            {/* Inclusions */}
+            <RevealOnScroll direction="up" client:visible>
+              <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100">
+                <h3 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                  <div class="bg-primary/10 p-2 rounded-xl">
+                    <Check className="w-5 h-5 text-primary" />
+                  </div>
+                  {ui.included}
+                </h3>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  {inclusions.map((item) => (
+                    <div class="flex items-center gap-3 text-slate-600">
+                      <div class="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span class="text-sm font-medium">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* Itinerary */}
+            <RevealOnScroll direction="up" client:visible>
+              <h3 class="text-3xl font-bold text-slate-900 mb-10 font-heading">
+                {ui.journey}
+              </h3>
+              <div class="space-y-0 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
+                {itinerary.map((step) => (
+                  <div class="relative pl-12 pb-12 last:pb-0 group">
+                    <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-white border-4 border-slate-100 group-hover:border-primary transition-colors z-10" />
+                    <span class="block text-primary font-bold text-sm uppercase tracking-widest mb-2">
+                      {step.time}
+                    </span>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">
+                      {step.activity}
+                    </h4>
+                  </div>
+                ))}
+              </div>
+            </RevealOnScroll>
+
+            {/* Gallery */}
+            <TourGallery images={tour.gallery} client:visible />
+
+            {/* Notes */}
+            <div class="bg-amber-50 p-6 rounded-2xl border border-amber-100 flex gap-4">
+              <Info className="w-6 h-6 text-amber-500 shrink-0 mt-1" />
+              <p class="text-sm text-amber-900/70 leading-relaxed italic">
+                <span class="font-bold">{ui.noteTitle}</span> {ui.noteText}
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Sticky Sidebar */}
+          <div class="relative">
+            <BookingSidebar
+              price={tour.price}
+              currency={tour.currency}
+              tourSlug={tour.slug}
+              messages={messages}
+              locale={locale}
+              client:load
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <RelatedTours currentSlug={tour.slug} messages={messages} locale={locale} client:visible />
+
+    <MobileBookingBar
+      price={tour.price}
+      currency={tour.currency}
+      title={title}
+      tourSlug={tour.slug}
+      messages={messages}
+      locale={locale}
+      client:load
+    />
+  </main>
+</Layout>

@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { GalleryPage } from '../../components/pages/gallery-page';
+import { t } from '../../i18n/utils';
+
+const locale = 'sq';
+const title = t(locale, 'Gallery.title');
+const subtitle = t(locale, 'Gallery.subtitle');
+---
+
+<Layout title={`${title} | Komani Lake Tours`} description={subtitle} locale={locale}>
+  <GalleryPage client:visible title={title} subtitle={subtitle} locale={locale} />
+</Layout>

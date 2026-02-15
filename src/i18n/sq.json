@@ -1,0 +1,636 @@
+{
+    "Index": {
+        "title": "Fjordi i Ballkanit",
+        "description": "Përjetoni Liqenin e mrekullueshëm të Komanit dhe Lumin e Shalës me pionierët origjinalë vendas."
+    },
+    "Booking": {
+        "selectExperience": "Zgjidh Eksperiencën",
+        "pickDate": "Zgjidh datën",
+        "guests": "Vizitorë",
+        "guestSingular": "Person",
+        "guestPlural": "Persona",
+        "findSpace": "Gjej Vend",
+        "estimatedTotal": "Total i parashikuar",
+        "whatsIncluded": "Çfarë përfshihet",
+        "duration": "Kohëzgjatja",
+        "summary": "Përmbledhje",
+        "requestQuote": "Kërko ofertë",
+        "checkAvailability": "Shiko disponueshmërinë",
+        "addons": "Përmirësoni Udhëtimin",
+        "transfer": "Transfertë Shkodër - Valbonë",
+        "transferDesc": "Ne kujdesemi për transportin (+€30p)",
+        "kayak": "Qira Kajaku",
+        "kayakDesc": "Eksploroni cepat e fshehur (+€20/orë)",
+        "ferry": "Biletë Trageti",
+        "ferryDesc": "Përfshin kalimin me traget (+€10p)",
+        "addExtraDay": "Shto një ditë shtesë (+€30p)",
+        "addExtraDayDesc": "Zgjatni qëndrimin në 3 Ditë",
+        "adults": "Të Rritur",
+        "children": "Fëmijë (4-12)",
+        "seniors": "Të Moshuar (65+)",
+        "discount": "30% ULJE",
+        "contact": "Të dhënat e Kontaktit",
+        "fullName": "Emri i Plotë",
+        "email": "Adresa Email",
+        "phone": "Numri i Telefonit (me kodin e shtetit)",
+        "specialRequests": "Kërkesa të Veçanta",
+        "placeholderLocation": "Emri juaj",
+        "placeholderEmail": "john@shembull.com",
+        "placeholderPhone": "+355 69 XX XX XXX",
+        "placeholderSpecial": "Vendi i marrjes, kufizime dietike, ose preferenca data...",
+        "submit": "Kërko Rezervim",
+        "submitting": "Po përpunohet...",
+        "successTitle": "Kërkesa u Dërgua!",
+        "successMessage": "Faleminderit {name}. Kemi marrë kërkesën tuaj për {tour}. Do t'ju kontaktojmë së shpejti në {email} për të konfirmuar detajet.",
+        "noPayment": "Nuk kërkohet pagesë e menjëhershme. Do ta konfirmojmë vendin tuaj manualisht.",
+        "errorCount": "Kërkohet të paktën 1 i rritur."
+    },
+    "Navbar": {
+        "tours": "Turet",
+        "about": "Rreth Nesh",
+        "gallery": "Galeria",
+        "conservation": "Konservimi",
+        "contact": "Kontakti",
+        "bookNow": "Rezervo Turin",
+        "menu": "Menu",
+        "language": "Gjuha"
+    },
+    "TrustBar": {
+        "rating": "Vlerësimi 4.9/5",
+        "reviews": "Bazuar në 127+ vlerësime",
+        "est": "Themeluar më 2010",
+        "pioneer": "Pionier i Liqenit të Komanit",
+        "guests": "15,000+ Mysafirë të Lumtur",
+        "owned": "Pronësi Lokale"
+    },
+    "FeaturedTour": {
+        "bestSeller": "Më i Shituri",
+        "title": "Liqeni i Komanit",
+        "subtitle": "Eksperienca e Turit me Anije",
+        "description": "Navigoni nëpër 'Fjordet e Ballkanit' për një udhëtim të paharrueshëm 11-orësh. Duke u nisur çdo ditë nga Shkodra, ky tur gjithëpërfshirës ju çon nëpër Luginën madhështore të Mollës, me ndalesa për not, kajak dhe një drekë tradicionale në një fshat të izoluar buzë lumit.",
+        "duration": "11 Orë",
+        "durationLabel": "Kohëzgjatja",
+        "lunch": "Drekë e përfshirë",
+        "lunchLabel": "Kuzhinë Lokale",
+        "pricePerPerson": "/ person",
+        "bookTour": "Rezervo këtë Tur"
+    },
+    "Tours": {
+        "title": "Aventurat",
+        "subtitle": "Të Përzgjedhura",
+        "signature": "Eksperienca Të Veçanta",
+        "allAdventures": "Të Gjitha Aventurat",
+        "listingDesc": "Nga lundrimet ditore deri te arratisjet malore. Zgjidhni mënyrën tuaj për të përjetuar zemrën e egër të Shqipërisë.",
+        "customRequest": "Ture private dhe ekspedita në grup ofrohen sipas kërkesës.",
+        "addons": "Shërbime & Transferta",
+        "addonsDesc": "Shërbime thelbësore për të kompletuar udhëtimin tuaj.",
+        "viewDetails": "Shiko Detajet",
+        "pp": "/person",
+        "relatedTitle": "Ju Mund të",
+        "relatedEnjoy": "Shijoni"
+    },
+    "WhyChooseUs": {
+        "title": "Pse të Udhëtoni",
+        "subtitle": "Me Ne?",
+        "description": "Ne nuk ofrojmë vetëm ture; ne ofrojmë një lidhje me zemrën e egër të Shqipërisë, të udhëhequr nga njerëzit që e njohin atë më së miri.",
+        "usp1": {
+            "title": "Pionierët Origjinalë",
+            "description": "Themeluar nga Mario Molla, udhërrëfyesi i parë që solli turizmin në Liqenin e Komanit. Njohuritë tona janë të rrënjosura në breza të trashëgimisë lokale."
+        },
+        "usp2": {
+            "title": "Udhëtim Eko-Ndërgjegjshëm",
+            "description": "Ne udhëheqim përpjekjet për pastrimin e liqenit dhe promovojmë turizmin e qëndrueshëm. Çdo rezervim mbështet ruajtjen e 'Fjordit të Ballkanit'."
+        },
+        "usp3": {
+            "title": "Siguria dhe Besueshmëria",
+            "description": "Kapitenë të certifikuar, mjete lundrimi plotësisht të siguruara dhe pajisje moderne sigurie. Siguria juaj është prioriteti ynë absolut."
+        },
+        "usp4": {
+            "title": "Hospitaliteti Autentik",
+            "description": "Qëndroni në shtëpi tradicionale malore (Kulla) dhe hani ushqim organik të përgatitur nga familjet lokale. Përjetoni Shqipërinë e vërtetë."
+        }
+    },
+    "AboutParallax": {
+        "badge": "Pionier i Eko-Turizmit",
+        "title": "Njihuni me Mario Mollën",
+        "subtitle": "Roja i Liqenit",
+        "quote": "\"Kam lindur në këta male dhe e kam kaluar jetën duke lundruar në këto ujëra. Misioni im nuk është vetëm t'ju tregoj liqenin, por ta mbroj atë.\"",
+        "cta": "Lexo Historinë Tonë"
+    },
+    "AboutPage": {
+        "header": {
+            "badge": "Historia Jonë",
+            "title": "Pionierët e",
+            "subtitle": "Ballkanit të Egër"
+        },
+        "narrative": {
+            "title": "Gjithçka nisi me një varkë të vetme druri në vitin 2010",
+            "p1": "Shumë kohë përpara se Liqeni i Komanit të ishte në listën e çdo udhëtari, Mario Molla navigonte në këto ujëra si peshkatar dhe udhërrëfyes vendas. Lindur dhe rritur në malet rrethuese, ai pa bukurinë e paprekur të fjordeve dhe nevojën për një mënyrë të qëndrueshme për t'i ndarë ato me botën.",
+            "p2": "Shumica e operatorëve e shohin Komanin si një pikë tranziti. Ne e shohim atë si një ekosistem të gjallë. Në vitin 2010, ne nisëm Komani Lake Tours me një qëllim: të mbrojmë mjedisin duke ofruar përvoja autentike, të udhëhequra nga vendasit, që kontribuojnë drejtpërdrejt në komunitetet tona malore.",
+            "p3": "Familja Molla ka jetuar pranë këtyre ujërave për breza me radhë. Lidhja jonë e thellë me tokën celebrohet përmes traditave tona lokale dhe trashëgimisë kristiane, me mbledhje komuniteti pothuajse çdo muaj."
+        },
+        "values": {
+            "conservation": {
+                "title": "Konservimi",
+                "text": "Ne udhëheqim projekte sezonale për pastrimin e liqenit dhe promovojmë turizmin 'pa gjurmë'."
+            },
+            "heritage": {
+                "title": "Trashëgimia",
+                "text": "Çdo udhërrëfyes është një vendas nga fshatrat e liqenit, duke ruajtur historinë tonë gojore."
+            },
+            "community": {
+                "title": "Komuniteti",
+                "text": "100% e furnizimeve dhe ushqimeve tona vijnë nga shtëpitë e fermave malore."
+            },
+            "integrity": {
+                "title": "Integriteti",
+                "text": "Çmime të ndershme, siguri e certifikuar dhe përvoja origjinale lokale."
+            }
+        }
+    },
+    "Gallery": {
+        "title": "Një Udhëtim Vizual",
+        "subtitle": "Zbuloni 'Tajlandën e Shqipërisë'. Çdo cep i Liqenit të Komanit dhe Lumit të Shalës tregon një histori të natyrës së egër dhe trashëgimisë së lashtë.",
+        "followInstagram": "Na ndiqni në Instagram",
+        "viewFullGallery": "Shiko Galerinë e Plotë"
+    },
+    "Testimonials": {
+        "title": "Tregime nga",
+        "subtitle": "Mysafirët Tanë",
+        "description": "Bashkohuni me mijëra udhëtarë që kanë zbuluar magjinë e Liqenit të Komanit me ne."
+    },
+    "Faq": {
+        "title": "Pyetje të",
+        "subtitle": "Shpeshta",
+        "description": "Gjithçka që duhet të dini përpara se të lundroni.",
+        "q1": {
+            "q": "Nga niset trageti?",
+            "a": "Trageti niset nga Terminali i Komanit. Ne rekomandojmë të mbërrini të paktën 30 minuta para nisjes. Nëse po udhëtoni nga Shkodra, llogaritni rreth 2 orë udhëtim pasi rruga mund të jetë dredha-dredha."
+        },
+        "q2": {
+            "q": "A mund ta marr makinën në traget?",
+            "a": "Po, trageti ynë 'Berisha' pranon makina, kamperë dhe motoçikleta. Sidoqoftë, hapësira është e kufizuar, ndaj rekomandohet rezervimi paraprak, veçanërisht në sezonin e lartë (korrik-gusht)."
+        },
+        "q3": {
+            "q": "A është dreka e përfshirë në turet me anije?",
+            "a": "Po! Turet tona ditore me anije përfshijnë një drekë tradicionale në një bujtinë lokale buzë lumit, me peshk të freskët, bukë shtëpie dhe djathë vendas."
+        },
+        "q4": {
+            "q": "Si bëhet pagesa?",
+            "a": "Aktualisht, ne pranojmë para në dorë (Euro ose LEK) pas mbërritjes. Ne po punojmë për integrimin e pagesave online së shpejti. Ju do të merrni një vauçer konfirmimi me email pas rezervimit."
+        },
+        "q5": {
+            "q": "A është udhëtimi i përshtatshëm për fëmijë?",
+            "a": "Absolutisht! Lundrimi me anije është i qetë dhe i sigurt. Ne ofrojmë jelekë shpëtimi për të gjitha moshat. Lumi i Shalës është gjithashtu i qetë dhe i përsosur për familjet."
+        }
+    },
+    "ConservationPage": {
+        "hero": {
+            "badge": "E Ardhmja e Qëndrueshme",
+            "title": "Mbrojtësit e",
+            "subtitle": "Fjordit.",
+            "description": "Ne nuk mbledhim vetëm plastikën. Ne po ndërtojmë një kulturë të ruajtjes për ekosistemin e Lumit të Shalës dhe Liqenit të Komanit."
+        },
+        "mission": {
+            "quote": "\"Natyra nuk është një mall.<br />Ajo është shtëpia jonë.\"",
+            "description": "Që nga viti 2010, Komani Lake Tours ka udhëhequr iniciativën për të mbajtur ujërat tona të pastra. Në një rajon ku menaxhimi i mbetjeve është një sfidë në zhvillim, ne marrim përsipër të kryejmë pastrime të përditshme, të edukojmë vizitorët dhe të mbështesim familjet lokale për të ruajtur stilet e jetesës tradicionale dhe me ndikim të ulët."
+        },
+        "statistics": {
+            "zeroTrace": {
+                "title": "Politika 'Pa Gjurmë'",
+                "text": "Ne marrim mbrapsht gjithçka që sjellim me vete. Anijet tona janë të pajisura me kosha për ndarjen e mbetjeve dhe ne mbledhim në mënyrë aktive mbetjet lundruese gjatë çdo turi."
+            },
+            "community": {
+                "title": "Fuqizimi i Komunitetit",
+                "text": "Ne punësojmë 100% udhërrëfyes dhe kapitenë vendas. Bileta juaj mbështet drejtpërdrejt familjet në fshatrat e thella të Dukagjinit që mbështeten te turizmi i qëndrueshëm."
+            },
+            "preservation": {
+                "title": "Ruajtja Kulturore",
+                "text": "Ne restaurojmë shtëpitë tradicionale të gurit \"Kulla\" dhe mbajmë gjallë rrugët e lashta detare, duke siguruar që historia e liqenit të ruhet me rreptësi."
+            }
+        },
+        "cta": {
+            "title": "Bashkohuni në Pastrimin Tonë të Radhës",
+            "description": "Ne organizojmë ekspedita mujore pastrimi me vullnetarë. Bashkohuni me ne për një tur falas në shkëmbim të një dore ndihmë.",
+            "button": "Vullnetarizoni me Ne"
+        },
+        "gallery": {
+            "fullscreen": "Shiko në Ekran të Plotë",
+            "img1": "Vullnetarët e komunitetit duke punuar së bashku për të ruajtur bukurinë e liqenit.",
+            "img2": "Mbledhja e mbetjeve lundruese për të siguruar një ekosistem pa gjurmë.",
+            "img3": "Udhërrëfyesi vendas duke përdorur një rrjetë për të ndihmuar në mbajtjen e ujërave të pastër.",
+            "img4": "Vizitorët e turit duke punuar së bashku për të ndihmuar në pastrimin e liqenit.",
+            "img5": "Udhërrëfyesi i turit duke përdorur një rrjetë për të mbledhur disa mbetje nga liqeni.",
+            "img6": "Ujëra të kthjellët kristal të mbrojtur nga praktikat e turizmit të qëndrueshëm.",
+            "img7": "Një vizitor i turit duke ndihmuar në mbrojtjen e biodiversitetit të luginës së Lumit të Shalës.",
+            "img8": "Peizazhi natyror mahnitës i Alpeve Shqiptare.",
+            "img9": "Reflektime të qeta në sipërfaqen e pasqyruar të liqenit."
+        },
+        "video": {
+            "title": "Lajme 2016: Pastrimi pas Stuhisë — Kur Shirat e Rrëmbyeshëm Sfiduan Ujërat Tona"
+        }
+    },
+    "FinalCTA": {
+        "badge": "EKSELENCË LOKALE · E QËNDRUESHME · QË NGA 2010",
+        "title": "Gati për një",
+        "subtitle": "Aventurë?",
+        "description": "Bashkohuni me pionierët origjinalë dhe zbuloni shpirtin e Alpeve Shqiptare.",
+        "bookNow": "Rezervo Turin Tani",
+        "contactUs": "Na Kontaktoni në WhatsApp"
+    },
+    "ContactPage": {
+        "title": "Na",
+        "subtitle": "Kontaktoni.",
+        "description": "Keni pyetje rreth transfereve, tureve private apo qëndrimeve lokale? Ne jemi këtu për t'ju ndihmuar të planifikoni udhëtimin perfekt.",
+        "info": {
+            "email": "Na Shkruani",
+            "whatsapp": "WhatsApp",
+            "location": "Lokacioni"
+        },
+        "form": {
+            "title": "Dërgoni një Mesazh",
+            "name": "Emri",
+            "email": "Email",
+            "message": "Mesazhi",
+            "placeholderName": "Emri juaj",
+            "placeholderEmail": "Email-i juaj",
+            "placeholderMessage": "Si mund t'ju ndihmojmë?",
+            "submit": "Dërgo Kërkesën"
+        }
+    },
+    "WhatsApp": {
+        "tooltip": "Bisedoni me ne menjëherë!",
+        "badge": "1"
+    },
+    "Footer": {
+        "experiences": "Eksperiencat",
+        "company": "Kompania",
+        "connect": "Na Kontaktoni",
+        "story": "Përjetoni bukurinë madhështore të fjordeve të Shqipërisë me pionierët origjinalë vendas.",
+        "rights": "Të gjitha të drejtat e rezervuara.",
+        "madeWith": "Punuar me",
+        "byGuards": "nga Rojet e Liqenit."
+    },
+    "SingleTour": {
+        "overview": "Përmbledhje",
+        "included": "Çfarë Përfshihet",
+        "journey": "Udhëtimi",
+        "notes": {
+            "title": "Shënim:",
+            "text": "Moti në Liqenin e Komanit mund të ndryshojë shpejt. Ne rekomandojmë të merrni një xhaketë të lehtë edhe në verë. Para në dorë (EUR/LEK) kërkohen për shpenzime shtesë personale gjatë udhëtimit."
+        },
+        "sidebar": {
+            "perPerson": "/ person",
+            "bestPrice": "Çmimi më i Mirë i Garantuar",
+            "instant": "Konfirmim i menjëhershëm me email",
+            "skipLine": "Anashkaloni radhën në Terminalin e Komanit",
+            "trusted": "Besuar nga 15,000+ udhëtarë",
+            "bookNow": "Rezervo këtë Eksperiencë",
+            "contactQuote": "Na Kontaktoni për Çmimin",
+            "noFees": "Pa tarifa të fshehura · Anulim falas deri në 48 orë"
+        },
+        "mobile": {
+            "bookNow": "Rezervo Tani",
+            "contactUs": "Na Kontaktoni"
+        }
+    },
+    "Common": {
+        "bookNow": "Rezervo",
+        "contactUs": "Na Kontaktoni",
+        "perPerson": "për person",
+        "duration": "Kohëzgjatja",
+        "included": "Përfshirë",
+        "viewTour": "Shiko Turin"
+    },
+    "ToursData": {
+        "boat-tour": {
+            "title": "Tur me Anije në Liqenin e Komanit",
+            "description": "Ture ditore të organizuara me anije tradicionale. Nisja çdo ditë nga pikat tona në Shkodër në orën 7:00. Turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1.5 orë drejt luginës së Mollës dhe lumit. Ndalesë për drekë në fshat. Kohë e lirë për eksplorim, kajak, ecje, not dhe peshkim deri në orën 15:00. Kthimi me anije për në Shkodër. Mbërritja në Shkodër rreth orës 18:00.",
+            "category": "Aventurë Ditore",
+            "duration": "11 Orë",
+            "price": "5,700",
+            "priceEur": "54",
+            "transfersIncluded": "Transferta vajtje-ardhje nga Shkodra të përfshira",
+            "summary": "11 Orë · Transferta, Ture me Anije, Kafe & Snack të përfshira",
+            "inclusions": [
+                "Transferta vajtje-ardhje nga Shkodra",
+                "Ture me anije tradicionale",
+                "Kafe dhe snacks (meze)",
+                "Drekë në fshat",
+                "Kajak dhe Not",
+                "Ecje dhe Peshkim"
+            ],
+            "itinerary": [
+                {
+                    "time": "07:00 PD",
+                    "activity": "Nisja çdo ditë nga pikat tona në Shkodër"
+                },
+                {
+                    "time": "09:00 PD",
+                    "activity": "Fillimi i turit me anije nga Komani"
+                },
+                {
+                    "time": "10:30 PD",
+                    "activity": "Mbërritja në Luginën e Mollës"
+                },
+                {
+                    "time": "12:30 MD",
+                    "activity": "Ndalesa për drekë në fshat"
+                },
+                {
+                    "time": "01:30 MD",
+                    "activity": "Kohë e lirë (kajak, ecje, not, peshkim)"
+                },
+                {
+                    "time": "03:00 MD",
+                    "activity": "Fillimi i udhëtimit të kthimit"
+                },
+                {
+                    "time": "06:00 MD",
+                    "activity": "Mbërritja përsëri në Shkodër"
+                }
+            ]
+        },
+        "shkoder-valbona": {
+            "title": "Transfertë Shkodër - Valbonë",
+            "description": "Transformoni tranzitin tuaj në një aventurë. Shërbimi ynë i përditshëm Shkodër-Valbonë kombinon efikasitetin e një transferimi direkt me bukurinë mahnitëse të tragetit të Liqenit të Komanit. Ideale për alpinistët dhe eksploruesit, kjo rrugë ofron hyrjen më spektakolare në Alpet Shqiptare, duke ju rrethuar me shkëmbinj të lartë dhe ujëra të kristalta.",
+            "category": "Transfertë",
+            "duration": "6 Orë",
+            "price": "3,200",
+            "summary": "6 Orë · Transferta ditore vajtje-ardhje të përfshira",
+            "inclusions": [
+                "Transferta ditore Shkodër-Valbonë",
+                "Udhëtim me traget në Liqenin e Komanit",
+                "Logjistikë pa mundim"
+            ],
+            "itinerary": [
+                {
+                    "time": "06:30 PD",
+                    "activity": "Marrja në Shkodër"
+                },
+                {
+                    "time": "09:00 PD",
+                    "activity": "Nisja e tragetit nga Komani"
+                },
+                {
+                    "time": "11:30 PD",
+                    "activity": "Mbërritja e tragetit në Fierzë"
+                },
+                {
+                    "time": "01:00 MD",
+                    "activity": "Mbërritja në Valbonë"
+                }
+            ]
+        },
+        "local-experience": {
+            "title": "Eksperienca Lokale",
+            "description": "Eksplorim lokal për 2 ose 3 ditë. Zbuloni fshatra të vjetër, kuzhinën lokale, shtigjet e vjetra dhe gjurmët e ADN-së së paraardhësve — një jetë e vështirë e skalitur në Kullat e vjetra të ndërtuara me saktësi të lartë. Eksperiencë e ecjes në maja rreth 1250m mbi nivelin e detit. Shëtitjet me mushka dhe ditët e peshkimit janë gjithashtu të organizueshme.",
+            "category": "Zhytje Disaditore",
+            "duration": "2 ose 3 Ditë",
+            "price": "10,600",
+            "price3Days": "13,800",
+            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Transferta, Ushqim, Akomodim të përfshira",
+            "inclusions": [
+                "Akomodim në Kulla tradicionale",
+                "Transferta të përfshira",
+                "Të gjitha vaktet (Ushqim Bio)",
+                "Ecje në majat e maleve (1250m)",
+                "Eksplorim i fshatit dhe traditave",
+                "Opsionale: Shëtitje me mushka & Peshkim"
+            ],
+            "itinerary": [
+                {
+                    "time": "Dita 1",
+                    "activity": "Mirëseardhja në fshat, darkë tradicionale & folklor"
+                },
+                {
+                    "time": "Dita 2",
+                    "activity": "Ecje në majë (1250m) & eksplorim alpin"
+                },
+                {
+                    "time": "Dita 3",
+                    "activity": "Shtigjet e trashëgimisë, peshkim & lamtumirë"
+                }
+            ]
+        },
+        "kayak-rental": {
+            "title": "Aventurë me Kajak & Solo",
+            "description": "Merrni me qira një kajak dhe eksploroni qetësisht cepat e fshehur të Lumit të Shalës me ritmin tuaj. Zbuloni plazhe sekrete të aksesueshme vetëm me mjete të vogla lundrimi, vozitni nëpër fjordet e heshtura dhe gjeni copëzën tuaj private të parajsës.",
+            "category": "Aventurë",
+            "duration": "Qira / Orë",
+            "summary": "Kohë Fleksibël · Pajisje Profesionale · Hartat & Siguria e përfshirë",
+            "inclusions": [
+                "Marrje me qira e kajakut cilësor",
+                "Lopatë & Jelek shpëtimi",
+                "Udhëzime sigurie",
+                "Harta e vendeve më të mira",
+                "Vendi për ruajtjen e sendeve"
+            ],
+            "itinerary": [
+                {
+                    "time": "Fleksibël",
+                    "activity": "Marrja në Blini Park ose Lumin e Shalës"
+                },
+                {
+                    "time": "Kohëzgjatja",
+                    "activity": "Qira me orë ose ditë të plotë"
+                }
+            ]
+        },
+        "helicopter-tour": {
+            "title": "Kruiz Qiellor me Helikopter",
+            "description": "Në bashkëpunim me Viva Air Albania. Fluturoni nga Tirana drejt Alpeve, duke fluturuar mbi Rivierën, kanionet dhe Liqenin e Komanit. Ndalesë opsionale për drekë në Lumin e Shalës.",
+            "category": "Premium",
+            "duration": "Fleksibël",
+            "summary": "Fleksibël · Tur Ajror Privat · Pamjet e Rivierës & Alpeve",
+            "inclusions": [
+                "Nisja nga Heliporti i Tiranës",
+                "Tur ajror i Rivierës & Alpeve",
+                "Fluturim mbi Liqenin e Komanit",
+                "Ndalesë opsionale për drekë",
+                "Pilot profesionist"
+            ],
+            "itinerary": [
+                {
+                    "time": "TBD",
+                    "activity": "Nisja nga Heliporti i Tiranës"
+                },
+                {
+                    "time": "Fluturimi",
+                    "activity": "Fluturim panoramik mbi Alpe & Liqen"
+                },
+                {
+                    "time": "Ulja",
+                    "activity": "Ulje opsionale në Lumin e Shalës"
+                },
+                {
+                    "time": "Kthimi",
+                    "activity": "Fluturim kthimi në Tiranë"
+                }
+            ]
+        },
+        "custom-tour": {
+            "title": "Tur i Personalizuar",
+            "description": "Personalizoni aventurën tuaj. Anije private, itinerar specifik ose event special - ne e realizojmë.",
+            "category": "Private",
+            "duration": "Fleksibël",
+            "summary": "Itinerar i Personalizuar · Anije & Guidë Private · Eksperiencë e Veçantë",
+            "inclusions": [
+                "Udhërrëfyes privat i specializuar",
+                "Itinerar i personalizuar",
+                "Kohëzgjatje fleksibël",
+                "Transport privat",
+                "Eksperiencë e personalizuar"
+            ],
+            "itinerary": [
+                {
+                    "time": "Sipas kërkesës",
+                    "activity": "Zgjedhja juaj e nisjes dhe destinacioneve"
+                }
+            ]
+        }
+    },
+    "Legal": {
+        "privacy": "Politika e Privatësisë",
+        "terms": "Termat dhe Kushtet",
+        "cookies": "Politika e Kukive",
+        "privacyTitle": "Politika e Privatësisë",
+        "termsTitle": "Termat dhe Kushtet",
+        "lastUpdated": "Përditësuar së Fundmi",
+        "privacyDescription": "Si i trajtojmë ne të dhënat tuaja dhe si e mbrojmë privatësinë tuaj.",
+        "termsDescription": "Rregullat dhe kushtet e shërbimeve tona."
+    },
+    "CookieBanner": {
+        "title": "Ne vlerësojmë privatësinë tuaj",
+        "description": "Ne përdorim kuki për të përmirësuar përvojën tuaj të shfletimit dhe për të analizuar trafikun tonë. Duke klikuar \"Prano\", ju jepni pëlqimin për përdorimin tonë të kukive.",
+        "accept": "Prano të Gjitha",
+        "acceptNecessary": "Vetëm të Detyrueshmet",
+        "saveSelections": "Ruaj Zgjedhjet",
+        "analytical": "Kukit Analitik",
+        "analyticalDesc": "Na ndihmojnë të kuptojmë si e përdorin vizitorët faqen.",
+        "marketing": "Kukit e Marketingut",
+        "marketingDesc": "Përdoren për oferta të personalizuara dhe media sociale.",
+        "decline": "Refuzo",
+        "manage": "Menaxho",
+        "privacyLink": "Politika e Privatësisë"
+    },
+    "Reviews": [
+        {
+            "name": "Miri D",
+            "origin": "Anëtar i Tripadvisor",
+            "date": "Gus 2018",
+            "type": "Çifte",
+            "title": "Wow Wow Wow!!",
+            "text": "Një nga pikat tona kryesore në Shqipëri. E jashtëzakonshme! Ne shkuam me kompaninë turistike të Mario Molla... Rezervuam turin ECO i cili përfshinte marrjen dhe dërgimin përsëri në Shkodër, një drekë, 2 pika noti, udhëtimin me varkë. Ne shijuam çdo sekondë të tij. Peizazhi është thjesht magjik. Sigurohuni të shkoni gjatë javës, sepse është shumë i populluar në fundjavë.",
+            "stars": 5
+        },
+        {
+            "name": "John B",
+            "origin": "Toronto, Kanada",
+            "date": "Kor 2017",
+            "type": "Familje",
+            "title": "Një vend i bukur - një përvojë interesante",
+            "text": "Vendosëm të rezervonim turin tonë me Mario Mollën. Familja e Marios ka jetuar në këtë zonë prej brezash dhe është vërtet e apasionuar pas rajonit. Për 35 euro Mario do të organizojë marrjen në qendër të Shkodrës dhe do t'ju dërgojë në liqen dhe mbrapsht plus një ekskursion katër orësh. Dreka është e përfshirë dhe ofrohet në shtëpinë e një familjeje me një pamje të mrekullueshme të liqenit... qengj në skarë, salçiçe në skarë, djathë shtëpie, sallatë dhe të gjithë rakinë.",
+            "stars": 4
+        },
+        {
+            "name": "JSLsc",
+            "origin": "Columbia, Karolina e Jugut",
+            "date": "Kor 2016",
+            "type": "Solo",
+            "title": "Një mënyrë shumë efikase për të udhëtuar",
+            "text": "Udhëtova nga Shkodra në Valbonë përmes tragetit të Liqenit të Komanit. Varka ishte e rehatshme dhe pamjet ishin të mrekullueshme. Përdora Turin me Varkë të Mario Mollës i cili ishte tepër efikas. Ata u organizuan për të më marrë në hotelin tim në Shkodër... Ishte e lehtë, e këndshme dhe çmimi ishte shumë i arsyeshëm. Unë rekomandoj shumë si Liqenin e Komanit ashtu edhe Turet me Varkë të Mario Mollës.",
+            "stars": 5
+        },
+        {
+            "name": "Helena L",
+            "origin": "Bruksel, Belgjikë",
+            "date": "Gus 2015",
+            "type": "Solo",
+            "title": "Liqeni i Komanit - Mario Molla",
+            "text": "Vend i mrekullueshëm! Udhëtimi me varkë ishte i këndshëm. Ushqim shumë i mirë dhe morëm një mikpritje shumë të ngrohtë nga stafi.",
+            "stars": 5
+        },
+        {
+            "name": "arniearn",
+            "origin": "Anëtar i Tripadvisor",
+            "date": "Tet 2015",
+            "type": "Solo",
+            "title": "Një udhëtim vërtet i këndshëm - një pikë kryesore e Ballkanit",
+            "text": "Turi i drejtuar nga Mario Molla ishte i shkëlqyeshëm, megjithatë, duke përfshirë një ndalesë në shtëpinë e familjes në liqen për drekë. Shumë i rekomanduar! Udhëtimi nga Shkodra zgjati dy orë në çdo drejtim në disa rrugë mjaft të këqija, por ia vlejti.",
+            "stars": 5
+        },
+        {
+            "name": "Shaun R",
+            "origin": "Singapor, Singapor",
+            "date": "Sht 2015",
+            "type": "Çifte",
+            "title": "Peizazh i mrekullueshëm",
+            "text": "Ajo që ishte e mirë ishin kodrat e mahnitshme, pasqyrimet dhe dreka lokale. Na pëlqeu noti në lumë dhe jashtë pontonit nga dreka jonë lokale. Në përgjithësi, cilësia e peizazhit peshonte më shumë se pikat negative dhe unë do ta rekomandoja udhëtimin.",
+            "stars": 4
+        },
+        {
+            "name": "PAULLFWOOD",
+            "origin": "Kejp Taun, Afrika e Jugut",
+            "date": "Kor 2015",
+            "type": "Çifte",
+            "title": "Një udhëtim shumë i mirë me varkë/traget",
+            "text": "Mario Molla duket se është i vetmi person që organizon cilindo nga turet e ndryshme të Liqenit të Komanit... Ne e përdorëm atë për turin tonë dhe gjithçka shkoi sipas planit. Ishte një ditë shumë e bukur dhe ia vlente udhëtimi.",
+            "stars": 5
+        },
+        {
+            "name": "Nancy V",
+            "origin": "Bredene, Belgjikë",
+            "date": "Maj 2015",
+            "type": "Çifte",
+            "title": "Si të udhëtoni drejt dhe nga Liqeni i Komanit",
+            "text": "VËRTET IA VLEN të bësh këtë udhëtim !!!! Ka një tur privat me varkë me Mario Mollën. Mario Molla ofron gjithashtu transport të mëtejshëm.",
+            "stars": 5
+        },
+        {
+            "name": "tadejkirincic",
+            "origin": "Murska Sobota, Slloveni",
+            "date": "Kor 2014",
+            "type": "Solo",
+            "title": "Udhëtim i mrekullueshëm dhe i paharrueshëm me varkë",
+            "text": "Natyra dhe malet që rrethojnë liqenin are vërtet të bukura... Shkova në udhëtimin me varkë me Mario Mollën, i cili ishte i organizuar mirë. Ne morëm një mollë dhe një birrë si mëngjes. Udhëtimi me varkë me të kushtoi 20 EUR (përfshirë motorin).",
+            "stars": 5
+        },
+        {
+            "name": "Jethro672",
+            "origin": "Anëtar i Tripadvisor",
+            "date": "Maj 2015",
+            "type": "Solo",
+            "title": "Spektakolare - një nga pikat kryesore",
+            "text": "Kjo ishte padyshim një pikë kryesore me 5 yje. Bukuria natyrore, ngjyrat, gjeologjia dhe qetësia... Bëra një udhëtim me Mario Mollën nga Shkodra. Ndaluam në një restorant në anën tjetër të digës - i cili ishte i shkëlqyer.",
+            "stars": 5
+        },
+        {
+            "name": "Alex D",
+            "origin": "Londër, Mbretëria e Bashkuar",
+            "date": "Gus 2014",
+            "type": "Miq",
+            "title": "Tur fantastik i Liqenit të Komanit",
+            "text": "Kërkoni në Google 'Mario Molla' për detaje. Peizazhe të mahnitshme, shërbim i shkëlqyeshëm. Patëm një udhëtim të këndshëm përgjatë vendit ku çahet lumi - ndaluam në shtëpinë e familjes së Marios (çfarë lokacioni në liqen!) për petulla dhe një bisedë me familjen e tij. Shumë i rekomanduar!",
+            "stars": 5
+        },
+        {
+            "name": "Tiruva",
+            "origin": "Budapest, Hungari",
+            "date": "Prill 2014",
+            "type": "Miq",
+            "title": "Tur me varkë në Liqenin e Komanit",
+            "text": "Shkuam atje me Mario Mollën i cili organizon udhëtime me varkë në liqen. Ai është vërtet ndihmues dhe përpiqet të bëjë gjithçka që të keni një udhëtim perfekt me varkë. Ishte përvoja jonë më e mirë në Shqipëri deri më tani. Do të kthehesha gjithmonë dhe do ta bëja përsëri!",
+            "stars": 5
+        },
+        {
+            "name": "Paul H",
+            "origin": "Reading, Mbretëria e Bashkuar",
+            "date": "Maj 2014",
+            "type": "Çifte",
+            "title": "Liqeni i Komanit magjepsës",
+            "text": "Mario Molla është një sipërmarrës lokal që ofron një alternativë ndihmuese dhe miqësore ndaj tragetit publik dhe do të organizojë marrjen nga Shkodra dhe udhëtimin e mëtejshëm nga Fierza si pjesë e 'paketës' së tij.",
+            "stars": 5
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { ConservationPage } from '../../components/pages/conservation-page';
+import { t } from '../../i18n/utils';
+
+const locale = 'en';
+
+const dict = {
+  hero: {
+    badge: t(locale, 'ConservationPage.hero.badge'),
+    title: t(locale, 'ConservationPage.hero.title'),
+    subtitle: t(locale, 'ConservationPage.hero.subtitle'),
+    description: t(locale, 'ConservationPage.hero.description'),
+  },
+  mission: {
+    quote: t(locale, 'ConservationPage.mission.quote'),
+    description: t(locale, 'ConservationPage.mission.description'),
+  },
+  gallery: {
+    img1: t(locale, 'ConservationPage.gallery.img1'),
+    img2: t(locale, 'ConservationPage.gallery.img2'),
+    img3: t(locale, 'ConservationPage.gallery.img3'),
+    img4: t(locale, 'ConservationPage.gallery.img4'),
+    img5: t(locale, 'ConservationPage.gallery.img5'),
+    img6: t(locale, 'ConservationPage.gallery.img6'),
+    img7: t(locale, 'ConservationPage.gallery.img7'),
+    img8: t(locale, 'ConservationPage.gallery.img8'),
+    img9: t(locale, 'ConservationPage.gallery.img9'),
+    fullscreen: t(locale, 'ConservationPage.gallery.fullscreen'),
+  },
+  video: {
+    title: t(locale, 'ConservationPage.video.title'),
+  },
+  statistics: {
+    zeroTrace: {
+      title: t(locale, 'ConservationPage.statistics.zeroTrace.title'),
+      text: t(locale, 'ConservationPage.statistics.zeroTrace.text'),
+    },
+    community: {
+      title: t(locale, 'ConservationPage.statistics.community.title'),
+      text: t(locale, 'ConservationPage.statistics.community.text'),
+    },
+    preservation: {
+      title: t(locale, 'ConservationPage.statistics.preservation.title'),
+      text: t(locale, 'ConservationPage.statistics.preservation.text'),
+    },
+  },
+  cta: {
+    title: t(locale, 'ConservationPage.cta.title'),
+    description: t(locale, 'ConservationPage.cta.description'),
+    button: t(locale, 'ConservationPage.cta.button'),
+  },
+};
+
+const title = "Conservation | Komani Lake Tours";
+const description = "Sustainable Future. Guardians of the Fjord. We are building a culture of preservation for the Shala River and Komani Lake.";
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <ConservationPage client:load dict={dict} />
+</Layout>

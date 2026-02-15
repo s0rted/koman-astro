@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { BookingForm } from '../../components/booking/booking-form';
+import { RevealOnScroll } from '../../components/animations/reveal-on-scroll';
+import { TOURS } from '../../lib/tours';
+import { getMessages, t } from '../../i18n/utils';
+import { parseISO, isValid } from 'date-fns';
+
+const locale = 'sq';
+const messages = getMessages(locale);
+
+const tourSlug = Astro.url.searchParams.get("tour") || "boat-tour";
+const guestsParam = Astro.url.searchParams.get("guests") || "2";
+const rawDate = Astro.url.searchParams.get("date");
+
+let date: Date | undefined = undefined;
+if (rawDate) {
+    const parsed = parseISO(rawDate);
+    if (isValid(parsed)) date = parsed;
+}
+
+const initialValues = {
+    tour: tourSlug,
+    adults: parseInt(guestsParam, 10) || 2,
+    date
+};
+
+const selectedTourData = TOURS.find(t => t.slug === tourSlug);
+
+const title = t(locale, 'Booking.pageTitle') === 'Booking.pageTitle' ? 'Rezervoni Turin Tuaj | Komani Lake Tours' : t(locale, 'Booking.pageTitle');
+const description = t(locale, 'Booking.pageDesc') === 'Booking.pageDesc' ? 'Përfundoni rezervimin tuaj për një përvojë të paharrueshme në Liqenin e Komanit.' : t(locale, 'Booking.pageDesc');
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <main class="min-h-screen bg-slate-50 pt-32 pb-24">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="max-w-4xl mx-auto">
+        <RevealOnScroll className="mb-12 text-center" client:load>
+          <h1 class="font-heading text-4xl md:text-6xl font-bold text-slate-900 mb-4 text-balance">
+            {t(locale, 'Booking.finishTitle')} <span class="text-primary">{t(locale, 'Booking.booking')}</span>
+          </h1>
+          <p class="text-slate-500 text-lg text-pretty">
+            {t(locale, 'Booking.oneStepAway').replace('{tour}', selectedTourData?.title || "Liqenin e Komanit")}
+          </p>
+        </RevealOnScroll>
+
+        <BookingForm 
+            client:load 
+            initialValues={initialValues} 
+            messages={messages} 
+            locale={locale} 
+        />
+
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            t(locale, 'Booking.badges.season'),
+            t(locale, 'Booking.badges.guides'),
+            t(locale, 'Booking.badges.eco'),
+            t(locale, 'Booking.badges.secure')
+          ].map((badge) => (
+            <div class="py-3 px-4 bg-white rounded-xl border border-slate-100 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
+              {badge}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,636 @@
+{
+    "Index": {
+        "title": "The Fjord of the Balkans",
+        "description": "Experience the majestic Komani Lake and Shala River with the original local pioneers."
+    },
+    "Booking": {
+        "selectExperience": "Select Experience",
+        "pickDate": "Pick a date",
+        "guests": "Guests",
+        "guestSingular": "Guest",
+        "guestPlural": "Guests",
+        "findSpace": "Find Space",
+        "estimatedTotal": "Estimated Total",
+        "whatsIncluded": "What's Included",
+        "duration": "Duration",
+        "summary": "Summary",
+        "requestQuote": "Request Quote",
+        "checkAvailability": "Check Availability",
+        "addons": "Enhance Your Trip",
+        "transfer": "Shkoder - Valbona Transfer",
+        "transferDesc": "We handle your transport (+€30pp)",
+        "kayak": "Kayak Rental",
+        "kayakDesc": "Explore hidden corners (+€20/hr)",
+        "ferry": "Ferry Ticket",
+        "ferryDesc": "Include ferry crossing (+€10pp)",
+        "addExtraDay": "Add Extra Day (+€30pp)",
+        "addExtraDayDesc": "Extend stay to 3 Days",
+        "adults": "Adults",
+        "children": "Children (4-12)",
+        "seniors": "Seniors (65+)",
+        "discount": "30% OFF",
+        "contact": "Contact Details",
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number (with country code)",
+        "specialRequests": "Special Requests",
+        "placeholderLocation": "John Doe",
+        "placeholderEmail": "john@example.com",
+        "placeholderPhone": "+355 69 XX XX XXX",
+        "placeholderSpecial": "Pick-up location, dietary restrictions, or date preferences...",
+        "submit": "Request Booking",
+        "submitting": "Processing...",
+        "successTitle": "Request Sent!",
+        "successMessage": "Thanks {name}. We've received your request for the {tour}. We'll contact you shortly at {email} to confirm details.",
+        "noPayment": "No immediate payment required. We will confirm your slot manually.",
+        "errorCount": "At least 1 adult is required."
+    },
+    "Navbar": {
+        "tours": "Tours",
+        "about": "About",
+        "gallery": "Gallery",
+        "conservation": "Conservation",
+        "contact": "Contact",
+        "bookNow": "Book Tour",
+        "menu": "Menu",
+        "language": "Language"
+    },
+    "TrustBar": {
+        "rating": "4.9/5 Rating",
+        "reviews": "Based on 127+ reviews",
+        "est": "Est. 2010",
+        "pioneer": "Koman Lake Pioneer",
+        "guests": "15,000+ Happy Guests",
+        "owned": "Locally Owned"
+    },
+    "FeaturedTour": {
+        "bestSeller": "Best Seller",
+        "title": "The Komani Lake",
+        "subtitle": "Boat Tour Experience",
+        "description": "Sail through the 'Fjords of the Balkans' for an unforgettable 11-hour journey. Departing daily from Shkoder, this all-inclusive tour takes you through the majestic Molla Valley, with stops for swimming, kayaking, and a traditional lunch at a secluded riverside village.",
+        "duration": "11 Hours",
+        "durationLabel": "Duration",
+        "lunch": "Lunch Inc.",
+        "lunchLabel": "Local Cuisine",
+        "pricePerPerson": "/ person",
+        "bookTour": "Book This Tour"
+    },
+    "Tours": {
+        "title": "Curated",
+        "subtitle": "Adventures",
+        "signature": "Signature Adventures",
+        "allAdventures": "All Adventures",
+        "listingDesc": "From daily boat crossings to immersive mountain retreats. Choose your way to experience the wild heart of Albania.",
+        "customRequest": "Custom group tours and private expeditions available upon request.",
+        "addons": "Services & Transfers",
+        "addonsDesc": "Essential services to complete your journey.",
+        "viewDetails": "View Details",
+        "pp": "/pp",
+        "relatedTitle": "You Might Also",
+        "relatedEnjoy": "Enjoy"
+    },
+    "WhyChooseUs": {
+        "title": "Why Journey",
+        "subtitle": "With Us?",
+        "description": "We don't just provide tours; we offer a connection to the wild heart of Albania, led by the people who know it best.",
+        "usp1": {
+            "title": "The Original Pioneers",
+            "description": "Founded by Mario Molla, the first guide to bring tourism to Komani Lake. Our knowledge is rooted in generations of local heritage."
+        },
+        "usp2": {
+            "title": "Eco-Conscious Travel",
+            "description": "We lead lake cleanup efforts and promote sustainable tourism. Every booking supports the conservation of the 'Fjord of the Balkans'."
+        },
+        "usp3": {
+            "title": "Safety & Reliability",
+            "description": "Certified captains, fully insured vessels, and modern safety gear. Your safety is our absolute priority on every journey."
+        },
+        "usp4": {
+            "title": "Authentic Hospitality",
+            "description": "Stay in traditional mountain homes (Kullas) and eat organic food prepared by local families. Experience the real Albania."
+        }
+    },
+    "AboutParallax": {
+        "badge": "Eco-Tourism Pioneer",
+        "title": "Meet Mario Molla",
+        "subtitle": "Guardian of the Lake",
+        "quote": "\"I was born in these mountains, and I've spent my life navigating these waters. My mission isn't just to show you the lake, but to protect it.\"",
+        "cta": "Read Our Story"
+    },
+    "AboutPage": {
+        "header": {
+            "badge": "Our Story",
+            "title": "Pioneers of the",
+            "subtitle": "Wild Balkans"
+        },
+        "narrative": {
+            "title": "It started with a single wooden boat in 2010",
+            "p1": "Long before Komani Lake was on every traveler's bucket list, Mario Molla was navigating these waters as a local fisherman and guide. Born and raised in the surrounding mountains, he saw the untapped beauty of the fjords and the need for a sustainable way to share them with the world.",
+            "p2": "Most operators view Komani as a transit point. We view it as a living ecosystem. In 2010, we launched Komani Lake Tours with one goal: to protect the environment while providing authentic, local-led experiences that contribute directly to our mountain communities.",
+            "p3": "The Molla family has lived by these waters for generations. Our deep connection to the land is celebrated through our local traditions and Christian heritage, with community gatherings almost every month."
+        },
+        "values": {
+            "conservation": {
+                "title": "Conservation",
+                "text": "We lead seasonal lake cleanup projects and promote 'zero-trace' tourism."
+            },
+            "heritage": {
+                "title": "Heritage",
+                "text": "Every guide is a local from the lake's villages, preserving our oral history."
+            },
+            "community": {
+                "title": "Community",
+                "text": "100% of our supplies and food are sourced from mountain farmhouses."
+            },
+            "integrity": {
+                "title": "Integrity",
+                "text": "Honest pricing, certified safety, and the original local experience."
+            }
+        }
+    },
+    "Gallery": {
+        "title": "A Visual Journey",
+        "subtitle": "Discover the 'Thailand of Albania'. Every corner of Koman Lake and Shala River tells a story of wild nature and ancient heritage.",
+        "followInstagram": "Follow on Instagram",
+        "viewFullGallery": "View Full Gallery"
+    },
+    "Testimonials": {
+        "title": "Stories from",
+        "subtitle": "Our Guests",
+        "description": "Join thousands of travelers who have discovered the magic of Komani Lake with us."
+    },
+    "Faq": {
+        "title": "Common",
+        "subtitle": "Questions",
+        "description": "Everything you need to know before you sail.",
+        "q1": {
+            "q": "Where does the ferry depart from?",
+            "a": "The ferry departs from the Koman Terminal. We recommend arriving at least 30 minutes before departure. If you are driving from Shkoder, allow about 2 hours for the drive as the road can be winding."
+        },
+        "q2": {
+            "q": "Can I bring my car on the ferry?",
+            "a": "Yes, our ferry 'Berisha' accommodates cars, campers, and motorcycles. However, space is limited, so advanced booking is highly recommended, especially in high season (July-August)."
+        },
+        "q3": {
+            "q": "Is lunch included in the boat tours?",
+            "a": "Yes! Our daily boat tours include a traditional lunch at a local guesthouse by the river, featuring fresh fish, homemade bread, and local cheese."
+        },
+        "q4": {
+            "q": "How do I pay?",
+            "a": "Currently, we accept cash (Euro or LEK) upon arrival. We are working on integrating online payments soon. You will receive a confirmation voucher via email after booking."
+        },
+        "q5": {
+            "q": "Is the trip suitable for children?",
+            "a": "Absolutely! The boat ride is smooth and safe. We provide life jackets for all ages. The Shala River is also calm and perfect for families."
+        }
+    },
+    "ConservationPage": {
+        "hero": {
+            "badge": "Sustainable Future",
+            "title": "Guardians of",
+            "subtitle": "The Fjord.",
+            "description": "We don't just clear the plastic. We are building a culture of preservation for the Shala River and Komani Lake ecosystem."
+        },
+        "mission": {
+            "quote": "\"Nature is not a commodity. It is our home.\"",
+            "description": "Since 2010, Komani Lake Tours has led the initiative to keep our waters clean. In a region where waste management is a developing challenge, we take it upon ourselves to perform daily cleanups, educate visitors, and support local families to maintain traditional, low-impact lifestyles."
+        },
+        "statistics": {
+            "zeroTrace": {
+                "title": "Zero Trace Policy",
+                "text": "We carry out everything we bring in. Our boats are equipped with waste separation bins, and we actively collect floating debris during every tour."
+            },
+            "community": {
+                "title": "Community Empowerment",
+                "text": "We employ 100% local guides and captains. Your ticket directly supports families in the remote villages of Dukagjin who rely on sustainable tourism."
+            },
+            "preservation": {
+                "title": "Cultural Preservation",
+                "text": "We restore traditional \"Kulla\" stone houses and keep ancient maritime routes alive, ensuring the history of the lake is strictly preserved."
+            }
+        },
+        "cta": {
+            "title": "Join Our Next Cleanup",
+            "description": "We organize monthly volunteer cleanup expeditions. Join us for a free tour in exchange for a helping hand.",
+            "button": "Volunteer With Us"
+        },
+        "gallery": {
+            "fullscreen": "View Fullscreen",
+            "img1": "Community volunteers working together to preserve the lake's beauty.",
+            "img2": "Collecting floating debris to ensure a zero-trace ecosystem.",
+            "img3": "Local guide using a net to help keep the waters pristine.",
+            "img4": "Tour guests working together to help clean up the lake",
+            "img5": "Tour guide using a net to gather some debris from the lake.",
+            "img6": "Crystal clear waters protected by sustainable tourism practices.",
+            "img7": "A tour guest helping to protect the biodiversity of the Shala River valley.",
+            "img8": "The breathtaking natural landscape of the Albanian Alps.",
+            "img9": "Serene reflections on the mirrored surface of the lake."
+        },
+        "video": {
+            "title": "2016 News: Storm Debris Cleanup — When Heavy Rains Tested Our Waters"
+        }
+    },
+    "FinalCTA": {
+        "badge": "LOCAL EXCELLENCE · SUSTAINABLE · SINCE 2010",
+        "title": "Ready for an",
+        "subtitle": "Adventure?",
+        "description": "Join the original pioneers and discover the soul of the Albanian Alps.",
+        "bookNow": "Book Your Tour Now",
+        "contactUs": "Contact Us on WhatsApp"
+    },
+    "ContactPage": {
+        "title": "Get in",
+        "subtitle": "Touch.",
+        "description": "Have questions about transfers, private tours, or local stays? We're here to help you plan the perfect journey.",
+        "info": {
+            "email": "Email Us",
+            "whatsapp": "WhatsApp",
+            "location": "Location"
+        },
+        "form": {
+            "title": "Send a Message",
+            "name": "Name",
+            "email": "Email",
+            "message": "Message",
+            "placeholderName": "Your name",
+            "placeholderEmail": "Your email",
+            "placeholderMessage": "How can we help?",
+            "submit": "Send Inquiry"
+        }
+    },
+    "WhatsApp": {
+        "tooltip": "Chat with us instantly!",
+        "badge": "1"
+    },
+    "Footer": {
+        "experiences": "Experiences",
+        "company": "Company",
+        "connect": "Connect With Us",
+        "story": "Experience the majestic beauty of Albania's fjords with the original local pioneers.",
+        "rights": "All rights reserved.",
+        "madeWith": "Made with",
+        "byGuards": "by the Lake Guards."
+    },
+    "SingleTour": {
+        "overview": "Overview",
+        "included": "What's Included",
+        "journey": "The Journey",
+        "notes": {
+            "title": "Note:",
+            "text": "Komani Lake weather can change quickly. We recommend bringing a light jacket even in summer. Cash (EUR/LEK) is required for additional personal expenses during the trip."
+        },
+        "sidebar": {
+            "perPerson": "/ person",
+            "bestPrice": "Best Price Guaranteed",
+            "instant": "Instant confirmation via email",
+            "skipLine": "Skip the line at Koman Terminal",
+            "trusted": "Trusted by 15,000+ travelers",
+            "bookNow": "Book This Experience",
+            "contactQuote": "Contact for Quote",
+            "noFees": "No hidden fees · Free cancellation up to 48h"
+        },
+        "mobile": {
+            "bookNow": "Book Now",
+            "contactUs": "Contact Us"
+        }
+    },
+    "Common": {
+        "bookNow": "Book Now",
+        "contactUs": "Contact Us",
+        "perPerson": "per person",
+        "duration": "Duration",
+        "included": "Included",
+        "viewTour": "View Tour"
+    },
+    "ToursData": {
+        "boat-tour": {
+            "title": "Komani Lake Boat Tour",
+            "description": "Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break at village. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
+            "category": "Full Day Adventure",
+            "duration": "11 Hours",
+            "price": "54",
+            "priceLek": "5,700",
+            "transfersIncluded": "Round-trip Shkoder transfers included",
+            "summary": "11 Hours · Transfers, Boat Tours, Coffee Break & Snack included",
+            "inclusions": [
+                "Round-trip Transfers from Shkoder",
+                "Traditional Boat Tours",
+                "Coffee Break & Snack",
+                "Local Village Lunch",
+                "Kayaking & Swimming",
+                "Trekking & Fishing"
+            ],
+            "itinerary": [
+                {
+                    "time": "07:00 AM",
+                    "activity": "Departing daily from our spots in Shkoder"
+                },
+                {
+                    "time": "09:00 AM",
+                    "activity": "Boat tour starts from Koman"
+                },
+                {
+                    "time": "10:30 AM",
+                    "activity": "Arrival at Molla Valley"
+                },
+                {
+                    "time": "12:30 PM",
+                    "activity": "Lunch break at village"
+                },
+                {
+                    "time": "01:30 PM",
+                    "activity": "Free time (kayaking, trekking, swimming, fishing)"
+                },
+                {
+                    "time": "03:00 PM",
+                    "activity": "Return journey begins"
+                },
+                {
+                    "time": "06:00 PM",
+                    "activity": "Arrival back in Shkoder"
+                }
+            ]
+        },
+        "shkoder-valbona": {
+            "title": "Shkoder - Valbona Transfer",
+            "description": "Transform your transit into an adventure. Our daily Shkoder-Valbona service combines the efficiency of a direct transfer with the breathtaking beauty of the Komani Lake ferry. Ideal for hikers and explorers, this route offers the most spectacular introduction to the Albanian Alps, surrounding you with towering cliffs and crystal-clear waters.",
+            "category": "Transfer",
+            "duration": "6 Hours",
+            "price": "30",
+            "summary": "6 Hours · Daily round-trip transfers included",
+            "inclusions": [
+                "Daily Shkoder to Valbona Transfers",
+                "Komani Lake Ferry Trip",
+                "Hassle-free Logistics"
+            ],
+            "itinerary": [
+                {
+                    "time": "06:30 AM",
+                    "activity": "Pickup in Shkoder"
+                },
+                {
+                    "time": "09:00 AM",
+                    "activity": "Ferry departure from Koman"
+                },
+                {
+                    "time": "11:30 AM",
+                    "activity": "Ferry arrival in Fierza"
+                },
+                {
+                    "time": "01:00 PM",
+                    "activity": "Arrival in Valbona"
+                }
+            ]
+        },
+        "local-experience": {
+            "title": "The Local Experience",
+            "description": "Local exploring for 2 or 3 days. Discover old villages, local cuisine, old tracks and traces of ancestry DNA — a hard life sculpted in the old Kullas built with high precision. Experience peak hikes about 1250m above sea level. Mule riding and fishing days are also arrangeable.",
+            "category": "Multi-Day Immersion",
+            "duration": "2 or 3 Days",
+            "price": "100",
+            "price3Days": "130",
+            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · Transfers, Meals, Accommodation included",
+            "inclusions": [
+                "Heritage Kulla Accommodation",
+                "Transfers Included",
+                "All Meals (Organic Local Cuisine)",
+                "Guided Peak Hikes (1250m)",
+                "Village Exploration & Traditions",
+                "Optional: Mule Riding & Fishing"
+            ],
+            "itinerary": [
+                {
+                    "time": "Day 1",
+                    "activity": "Village welcome, traditional dinner & folklore"
+                },
+                {
+                    "time": "Day 2",
+                    "activity": "Summit hike (1250m) & alpine exploration"
+                },
+                {
+                    "time": "Day 3",
+                    "activity": "Heritage tracks, fishing & farewell"
+                }
+            ]
+        },
+        "kayak-rental": {
+            "title": "Kayak & Solo Adventure",
+            "description": "Rent a kayak and explore the hidden corners of the Shala River at your own pace. Discover secret beaches accessible only by small boats, paddle through the silent fjords, and find your own private slice of paradise.",
+            "category": "Adventure",
+            "duration": "Rent / Hour",
+            "summary": "Flexible Timing · Professional Gear · Maps & Safety Briefing included",
+            "inclusions": [
+                "High-quality Kayak rental",
+                "Paddle & Life jacket",
+                "Safety briefing",
+                "Map of best spots",
+                "Storage for belongings"
+            ],
+            "itinerary": [
+                {
+                    "time": "Flexible",
+                    "activity": "Pick up at Blini Park or Shala River"
+                },
+                {
+                    "time": "Duration",
+                    "activity": "Rent by hour or full day"
+                }
+            ]
+        },
+        "helicopter-tour": {
+            "title": "Helicopter Sky Cruise",
+            "description": "In collaboration with Viva Air Albania. Fly from Tirana to the Alps, soaring over the Riviera, canyons, and Komani Lake. Optional lunch stop at Shala River.",
+            "category": "Premium",
+            "duration": "Flexible",
+            "summary": "Flexible · Private Aerial Tour · Riviera & Alps views included",
+            "inclusions": [
+                "Tirana Heliport departure",
+                "Aerial tour of Riviera & Alps",
+                "Komani Lake flyover",
+                "Optional lunch stop",
+                "Professional pilot"
+            ],
+            "itinerary": [
+                {
+                    "time": "TBD",
+                    "activity": "Departure from Tirana Heliport"
+                },
+                {
+                    "time": "Flight",
+                    "activity": "Scenic flight over Alps & Lake"
+                },
+                {
+                    "time": "Land",
+                    "activity": "Optional landing at Shala River"
+                },
+                {
+                    "time": "Return",
+                    "activity": "Flight back to Tirana"
+                }
+            ]
+        },
+        "custom-tour": {
+            "title": "Custom Tour",
+            "description": "Tailor your own adventure. Private boat, specific route, or special event - we make it happen.",
+            "category": "Private",
+            "duration": "Flexible",
+            "summary": "Tailored Itinerary · Private Boat & Guide · Custom Experience",
+            "inclusions": [
+                "Private specialized guide",
+                "Customized itinerary",
+                "Flexible timing",
+                "Private transportation",
+                "Personalized experience"
+            ],
+            "itinerary": [
+                {
+                    "time": "Custom",
+                    "activity": "Your choice of departure and destinations"
+                }
+            ]
+        }
+    },
+    "Legal": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "cookies": "Cookie Policy",
+        "privacyTitle": "Privacy Policy",
+        "termsTitle": "Terms & Conditions",
+        "lastUpdated": "Last Updated",
+        "privacyDescription": "How we handle your data and protect your privacy.",
+        "termsDescription": "The rules and conditions of our services."
+    },
+    "CookieBanner": {
+        "title": "We value your privacy",
+        "description": "We use cookies to enhance your browsing experience and analyze our traffic. By clicking \"Accept\", you consent to our use of cookies.",
+        "accept": "Accept All",
+        "acceptNecessary": "Necessary Only",
+        "saveSelections": "Save Selections",
+        "analytical": "Analytical Cookies",
+        "analyticalDesc": "Help us understand how guests use our site.",
+        "marketing": "Marketing Cookies",
+        "marketingDesc": "Used for tailored offers and social media sharing.",
+        "decline": "Decline",
+        "manage": "Manage",
+        "privacyLink": "Privacy Policy"
+    },
+    "Reviews": [
+        {
+            "name": "Miri D",
+            "origin": "Tripadvisor Member",
+            "date": "Aug 2018",
+            "type": "Couples",
+            "title": "Wow Wow Wow!!",
+            "text": "One of our highlights in Albania. Outstanding! We went by the tour company of Mario Molla... We booked the ECO tour which included a pick up and drive back to Shkoder, a lunch, 2 swimming spots, the boat ride. We enjoyed every second of it. The scenery is just magical. Make sure to go under the week, because its very crowded on weekends.",
+            "stars": 5
+        },
+        {
+            "name": "John B",
+            "origin": "Toronto, Canada",
+            "date": "Jul 2017",
+            "type": "Family",
+            "title": "A beautiful place - an interesting experience",
+            "text": "We decided to book our tour with Mario Molla. Mario's family has lived in the area for generations and is truly passionate for the region. For 35 euros Mario will arrange for pick up in downtown Shkoder and get you to the lake and back plus a four hour excursion. Lunch is included and is provided at a family's home with a great view of the lake... grilled lamb, grilled sausages, home-made cheese, salad and all the rakia.",
+            "stars": 4
+        },
+        {
+            "name": "JSLsc",
+            "origin": "Columbia, South Carolina",
+            "date": "Jul 2016",
+            "type": "Solo",
+            "title": "A very efficient way to travel",
+            "text": "I travelled from Shkodra to Valbona by way of the Lake Komani ferry. The boat was comfortable and the views were amazing. I used Mario Molla Boat Tours which was unbelievably efficient. They arranged to pick me up at my hotel in Shkodra... It was easy, enjoyable and the price was very reasonable. I highly recommend both Komani Lake and Mario Molla Boat Tours.",
+            "stars": 5
+        },
+        {
+            "name": "Helena L",
+            "origin": "Brussels, Belgium",
+            "date": "Aug 2015",
+            "type": "Solo",
+            "title": "Komani Lake - Mario Molla",
+            "text": "Wonderful place! The boat trip was delightful. Very good food and received a very warm welcome by the staff.",
+            "stars": 5
+        },
+        {
+            "name": "arniearn",
+            "origin": "Tripadvisor Member",
+            "date": "Oct 2015",
+            "type": "Solo",
+            "title": "A really nice trip - a highlight of the Balkans",
+            "text": "The tour run by Mario Molla was awesome, however, including a stop at the family house on the lake for lunch. Highly recommended! The ride from Shkoder took two hours each way on some pretty bad roads, but it was worth it.",
+            "stars": 5
+        },
+        {
+            "name": "Shaun R",
+            "origin": "Singapore, Singapore",
+            "date": "Sep 2015",
+            "type": "Couples",
+            "title": "Amazing Scenery",
+            "text": "What was good was the amazing hills, reflections and the local lunch. We loved swimming up the river and off the pontoon from our local lunch. All in all, the quality of the scenery out weighed the bad points and I would be recommending the trip.",
+            "stars": 4
+        },
+        {
+            "name": "PAULLFWOOD",
+            "origin": "Cape Town, South Africa",
+            "date": "Jul 2015",
+            "type": "Couples",
+            "title": "A very nice boat/ferry trip",
+            "text": "Mario Molla seems to be the only person who organises any of the various Lake Koman... We used him for our tour and everything went according to plan. It was a very nice day and well worth the trip.",
+            "stars": 5
+        },
+        {
+            "name": "Nancy V",
+            "origin": "Bredene, Belgium",
+            "date": "May 2015",
+            "type": "Couples",
+            "title": "How to travel to/from Koman Lake",
+            "text": "It's REALLY WORTH doing this trip !!!! There is a private boat tour with Mario Molla. Mario Molla also offers further transport.",
+            "stars": 5
+        },
+        {
+            "name": "tadejkirincic",
+            "origin": "Murska Sobota, Slovenia",
+            "date": "Jul 2014",
+            "type": "Solo",
+            "title": "Awesome and unforgettable boat trip",
+            "text": "Nature and mountains surrounding the lake are really beautiful... I went on the boat trip with Mario Molla, which was well organised. We got an apple and a beer as a breakfast. Boat trip with him costed 20 EUR (motorcycle included).",
+            "stars": 5
+        },
+        {
+            "name": "Jethro672",
+            "origin": "Tripadvisor Member",
+            "date": "May 2015",
+            "type": "Solo",
+            "title": "Spectacular - one of the highlights",
+            "text": "This was certainly a 5 star highlight. The natural beauty, colours, geology and peacefulness... I took a trip with Mario Molla from Shkoder. We stopped at a restaurant on the other side of the dam - which was excellent.",
+            "stars": 5
+        },
+        {
+            "name": "Alex D",
+            "origin": "London, United Kingdom",
+            "date": "Aug 2014",
+            "type": "Friends",
+            "title": "Fantastic tour of Lake Koman",
+            "text": "Google 'Mario Molla' for details. Amazing views, great service. Had a lovely ride along to where the river splits off - stopped at Mario's family home (what a location on the lake!) for pancakes and a chat with his family. Highly recommended!",
+            "stars": 5
+        },
+        {
+            "name": "Tiruva",
+            "origin": "Budapest, Hungary",
+            "date": "Apr 2014",
+            "type": "Friends",
+            "title": "Boat tour on Komani Lake",
+            "text": "We went there with Mario Molla who organizes boat trips on the lake. He is really helpful and tries to do everything that you have a perfect boat trip. It was our best experience in Albania so far. I would always come back and do it again!",
+            "stars": 5
+        },
+        {
+            "name": "Paul H",
+            "origin": "Reading, United Kingdom",
+            "date": "May 2014",
+            "type": "Couples",
+            "title": "Captivating Lake Komani",
+            "text": "Mario Molla is a local entrepreneur offering a helpful and friendly alternative to the public ferry and will organise pick up from Shkodra and onward travel from Fierze as part of his 'package'.",
+            "stars": 5
+        }
+    ]
+}
