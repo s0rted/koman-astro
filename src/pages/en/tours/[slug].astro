@@ -32,7 +32,8 @@ const itinerary = tRaw(locale, `ToursData.${tour.slug}.itinerary`) as { time: st
 
 const metaTitle = `${title} | From €${tour.price}`;
 const metaDesc = `${description} Duration: ${duration}. Book your ${title} adventure with Mario Molla.`;
-const canonical = `https://komanlake.com/en/tours/${slug}`;
+const siteUrl = 'https://koman-astro.pages.dev';
+const canonical = `${siteUrl}/en/tours/${slug}`;
 ---
 
 <Layout title={metaTitle} description={metaDesc} locale={locale} ogImage={tour.banner}>

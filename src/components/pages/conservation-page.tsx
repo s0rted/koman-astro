@@ -229,7 +229,7 @@ export function ConservationPage({ dict }: ConservationPageProps) {
                             {dict.cta.description}
                         </p>
                         <a
-                            href="mailto:contact@komanlake.com"
+                            href="mailto:contact@koman-astro.pages.dev"
                             className="inline-block bg-white text-emerald-900 hover:bg-emerald-50 px-10 py-5 rounded-full font-bold text-lg transition-colors scale-100 hover:scale-105"
                         >
                             {dict.cta.button}

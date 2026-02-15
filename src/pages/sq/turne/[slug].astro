@@ -32,7 +32,8 @@ const itinerary = tRaw(locale, `ToursData.${tour.slug}.itinerary`) as { time: st
 
 const metaTitle = `${title} | Nga €${tour.price}`;
 const metaDesc = `${description} Kohëzgjatja: ${duration}. Rezervoni aventurën tuaj ${title} me Mario Mollën.`;
-const canonical = `https://komanlake.com/sq/turne/${slug}`;
+const siteUrl = 'https://koman-astro.pages.dev';
+const canonical = `${siteUrl}/sq/turne/${slug}`;
 
 // Localized UI strings
 const ui = {
