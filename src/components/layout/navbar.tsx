@@ -146,13 +146,13 @@ function NavbarContent({ pathname }: { pathname: string }) {
                 <div className="flex justify-between items-center mb-6 lg:mb-12 shrink-0">
                     <div className="flex items-center gap-2">
                         <div className="bg-white w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center shadow-md overflow-hidden shrink-0 aspect-square">
-                            <img src="/images/logo.svg" alt="Logo" className="w-full h-full object-cover scale-[1.1]" />
+                            <img src="/images/logo-icon.webp" alt="Logo" className="w-full h-full object-cover scale-[1.1]" />
                         </div>
                         <span className="font-heading text-lg font-bold text-slate-900">KOMAN LAKE TOURS</span>
                     </div>
                     <button
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="p-2 bg-slate-100 rounded-full"
+                        className="p-2 bg-slate-200 rounded-full"
                         aria-label={t('closeMenu') || 'Close menu'}
                     >
                         <X className="w-6 h-6 text-slate-900" />

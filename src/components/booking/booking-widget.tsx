@@ -67,7 +67,7 @@ function BookingWidgetContent() {
 
     // Refined "Thin Bar" aesthetics
     const segmentBase = "flex flex-col items-start justify-center h-full px-5 hover:bg-slate-50 transition-all cursor-pointer select-none";
-    const labelBase = "text-[9px] uppercase tracking-[0.15em] text-slate-600 font-bold mb-0.5 pointer-events-none";
+    const labelBase = "text-[9px] uppercase tracking-[0.15em] text-slate-700 font-bold mb-0.5 pointer-events-none";
     const valueBase = "font-bold text-slate-900 text-[13px] md:text-sm truncate w-full pointer-events-none leading-none";
 
     return (
@@ -98,7 +98,7 @@ function BookingWidgetContent() {
                                 >
                                     <div className="flex flex-col">
                                         <span className="font-bold text-slate-900">{td(`${tourItem.slug}.title`)}</span>
-                                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">
+                                        <span className="text-[10px] text-slate-600 font-bold uppercase tracking-wider mt-0.5">
                                             {tourItem.price !== "Call" && tourItem.price !== "Contact"
                                                 ? `${tourItem.price}${tourItem.currency} ${tc('perPerson')}`
                                                 : tourItem.price}
@@ -181,7 +181,7 @@ function BookingWidgetContent() {
                             <span>{t('findSpace')}</span>
                         </div>
                         {totalPrice !== null && (
-                            <span className="text-[10px] uppercase font-bold opacity-90 mt-0.5 tracking-tighter">
+                            <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter">
                                 {locale === 'sq'
                                     ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek Total`
                                     : `€${totalPrice} Total`}

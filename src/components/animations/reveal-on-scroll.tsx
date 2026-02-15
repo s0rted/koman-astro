@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useAnimation, Variant } from "framer-motion";
+import { motion, useInView, useAnimation, type Variant } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -35,14 +35,12 @@ export function RevealOnScroll({
             y: direction === "up" ? 40 : direction === "down" ? -40 : 0,
             x: direction === "left" ? 40 : direction === "right" ? -40 : 0,
             scale: 0.95,
-            filter: "blur(10px)"
         },
         visible: {
             opacity: 1,
             y: 0,
             x: 0,
             scale: 1,
-            filter: "blur(0px)",
             transition: {
                 duration: 0.7,
                 ease: [0.21, 0.47, 0.32, 0.98],

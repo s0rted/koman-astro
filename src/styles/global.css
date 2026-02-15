@@ -50,7 +50,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.20 0.04 250);
 
-  --primary: oklch(0.65 0.16 175);
+  --primary: oklch(0.55 0.16 175);
   /* lake-turquoise - darkened for better contrast */
   --primary-foreground: oklch(0.985 0.005 240);
 

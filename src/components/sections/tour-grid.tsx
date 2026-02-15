@@ -60,6 +60,7 @@ function TourGridContent() {
                             >
                                 {tour.webmSrc && <source src={tour.webmSrc} type="video/webm" />}
                                 {tour.mp4Src && <source src={tour.mp4Src} type="video/mp4" />}
+                                <track kind="captions" label={`Preview of ${tour.slug}`} src="" />
                             </video>
                         ) : (
                             <img
@@ -178,6 +179,7 @@ function TourGridContent() {
                                 {helicopter.mp4Src ? (
                                     <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60 group-hover:opacity-70 transition-opacity duration-700">
                                         <source src={helicopter.mp4Src} type="video/mp4" />
+                                        <track kind="captions" label="Helicopter tour preview" src="" />
                                     </video>
                                 ) : (
                                     <img src={helicopter.image} alt="Helicopter" className="w-full h-full object-cover opacity-60" />
