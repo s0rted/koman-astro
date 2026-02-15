@@ -8,6 +8,7 @@ interface HeroVideoProps {
     videoSrc?: string; // @deprecated use mp4Src instead
     mp4Src?: string;
     webmSrc?: string;
+    mobileMp4Src?: string;
     posterSrc?: string;
     headline: string;
     subheadline: string;
@@ -18,6 +19,7 @@ export function HeroVideo({
     videoSrc = "/videos/hero-banner.mp4",
     mp4Src,
     webmSrc,
+    mobileMp4Src,
     posterSrc = "/images/hero-poster.webp",
     headline,
     subheadline,
@@ -55,6 +57,7 @@ export function HeroVideo({
                     preload="auto"
                     className="h-full w-full object-cover"
                 >
+                    {mobileMp4Src && <source src={mobileMp4Src} type="video/mp4" media="(max-width: 768px)" />}
                     <source src={mp4Src || videoSrc} type="video/mp4" />
                     {webmSrc && <source src={webmSrc} type="video/webm" />}
                     <track kind="captions" label="Background visuals of Komani Lake" src="" />

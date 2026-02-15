@@ -30,7 +30,7 @@ function TrustBarContent() {
                             <Star className="h-6 w-6 text-primary fill-primary/20" />
                             <div className="text-left">
                                 <div className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('rating')}</div>
-                                <p className="text-slate-500 text-xs md:text-sm">{t('reviews')}</p>
+                                <p className="text-slate-600 text-xs md:text-sm font-medium">{t('reviews')}</p>
                             </div>
                         </div>
                     </RevealOnScroll>
@@ -40,7 +40,7 @@ function TrustBarContent() {
                             <ShieldCheck className="h-6 w-6 text-primary" />
                             <div className="text-left">
                                 <div className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('est')}</div>
-                                <p className="text-slate-500 text-xs md:text-sm">{t('pioneer')}</p>
+                                <p className="text-slate-600 text-xs md:text-sm font-medium">{t('pioneer')}</p>
                             </div>
                         </div>
                     </RevealOnScroll>
@@ -50,7 +50,7 @@ function TrustBarContent() {
                             <Users className="h-6 w-6 text-primary" />
                             <div className="text-left">
                                 <div className="font-bold text-slate-900 text-sm md:text-base leading-tight">{t('guests')}</div>
-                                <p className="text-slate-500 text-xs md:text-sm">{t('owned')}</p>
+                                <p className="text-slate-600 text-xs md:text-sm font-medium">{t('owned')}</p>
                             </div>
                         </div>
                     </RevealOnScroll>

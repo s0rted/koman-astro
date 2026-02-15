@@ -67,7 +67,7 @@ function BookingWidgetContent() {
 
     // Refined "Thin Bar" aesthetics
     const segmentBase = "flex flex-col items-start justify-center h-full px-5 hover:bg-slate-50 transition-all cursor-pointer select-none";
-    const labelBase = "text-[9px] uppercase tracking-[0.15em] text-slate-700 font-bold mb-0.5 pointer-events-none";
+    const labelBase = "text-[9px] uppercase tracking-[0.15em] text-slate-900 font-black mb-0.5 pointer-events-none";
     const valueBase = "font-bold text-slate-900 text-[13px] md:text-sm truncate w-full pointer-events-none leading-none";
 
     return (

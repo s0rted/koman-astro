@@ -65,8 +65,12 @@ function TourGridContent() {
                         ) : (
                             <img
                                 src={tour.image}
+                                srcSet={`${tour.image.replace('.webp', '-mid.webp')} 600w, ${tour.image} 800w`}
+                                sizes="(max-width: 768px) 100vw, 33vw"
                                 alt={td(`${tour.slug}.title`)}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                loading={priority ? "eager" : "lazy"}
+                                decoding="async"
                             />
                         )}
 

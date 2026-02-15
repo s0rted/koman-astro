@@ -28,7 +28,7 @@ function AboutParallaxContent() {
             {/* Parallax Background (Simulated with fixed attachment for now) */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-fixed bg-center opacity-40"
-                style={{ backgroundImage: "url('/albums/optimized/DSC_0510.webp')" }} // Corrected from placeholder
+                style={{ backgroundImage: "url('/albums/optimized/DSC_0510-mid.webp')" }} // Used smaller version
             />
 
             <div className="container relative z-10 mx-auto px-4 md:px-6">

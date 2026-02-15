@@ -35,7 +35,7 @@ function FeaturedTourContent() {
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500 z-10" />
                             <img
                                 src="/images/tours/boat-featured.webp"
-                                srcSet="/images/tours/boat-featured-small.webp 400w, /images/tours/boat-featured.webp 800w"
+                                srcSet="/images/tours/boat-featured-small.webp 400w, /images/tours/boat-featured-mid.webp 600w, /images/tours/boat-featured.webp 800w"
                                 sizes="(max-width: 768px) 100vw, 800px"
                                 alt="Boat on Komani Lake"
                                 className="object-cover w-full h-full relative z-0"

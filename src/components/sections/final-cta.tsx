@@ -42,9 +42,9 @@ function FinalCTAContent() {
                         </span>
                         <h2 className="font-heading text-6xl md:text-8xl font-bold text-white mb-8 leading-none">
                             {t('title')} <br />
-                            <span className="text-white/40">{t('subtitle')}</span>
+                            <span className="text-slate-500">{t('subtitle')}</span>
                         </h2>
-                        <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
                             {t('description')}
                         </p>
                     </RevealOnScroll>
