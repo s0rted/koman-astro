@@ -17,6 +17,8 @@ import { useTranslations, useLocale } from "@/i18n/react-context";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { I18nProvider } from "@/i18n/react-context";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
 interface BookingFormProps {
     initialValues: Partial<BookingValues>;
@@ -269,7 +271,40 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             </Badge>
                         )}
                     </div>
-                    <p className="text-slate-400 text-sm px-2">{format(form.getValues('date'), 'MMMM do, yyyy')}</p>
+
+                    <FormField
+                        control={form.control}
+                        name="date"
+                        render={({ field }) => (
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        className={cn(
+                                            "justify-start text-left font-normal p-0 h-auto hover:bg-white/10 px-2 rounded-lg text-slate-400 group",
+                                            !field.value && "text-muted-foreground"
+                                        )}
+                                    >
+                                        <CalendarIcon className="mr-2 h-4 w-4 group-hover:text-white" />
+                                        <span className="group-hover:text-white transition-colors">
+                                            {field.value ? format(field.value, 'MMMM do, yyyy') : <span>Pick a date</span>}
+                                        </span>
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0 border-slate-200" align="start">
+                                    <Calendar
+                                        mode="single"
+                                        selected={field.value}
+                                        onSelect={field.onChange}
+                                        disabled={(date) =>
+                                            date < new Date(new Date().setHours(0, 0, 0, 0))
+                                        }
+                                        initialFocus
+                                    />
+                                </PopoverContent>
+                            </Popover>
+                        )}
+                    />
                 </div>
                 <div className="text-right">
                     <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Total</p>

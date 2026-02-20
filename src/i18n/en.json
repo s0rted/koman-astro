@@ -41,7 +41,7 @@
         "phone": "Phone Number (with country code)",
         "specialRequests": "Special Requests",
         "placeholderLocation": "John Doe",
-        "placeholderEmail": "mariomolla@outlook.com",
+        "placeholderEmail": "johndoe@acme.com",
         "placeholderPhone": "+355 69 XX XX XXX",
         "placeholderSpecial": "Pick-up location, dietary restrictions, or date preferences...",
         "submit": "Request Booking",
