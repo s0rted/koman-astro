@@ -272,39 +272,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         )}
                     </div>
 
-                    <FormField
-                        control={form.control}
-                        name="date"
-                        render={({ field }) => (
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        className={cn(
-                                            "justify-start text-left font-normal p-0 h-auto hover:bg-white/10 px-2 rounded-lg text-slate-400 group",
-                                            !field.value && "text-muted-foreground"
-                                        )}
-                                    >
-                                        <CalendarIcon className="mr-2 h-4 w-4 group-hover:text-white" />
-                                        <span className="group-hover:text-white transition-colors">
-                                            {field.value ? format(field.value, 'MMMM do, yyyy') : <span>Pick a date</span>}
-                                        </span>
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0 border-slate-200" align="start">
-                                    <Calendar
-                                        mode="single"
-                                        selected={field.value}
-                                        onSelect={field.onChange}
-                                        disabled={(date) =>
-                                            date < new Date(new Date().setHours(0, 0, 0, 0))
-                                        }
-                                        initialFocus
-                                    />
-                                </PopoverContent>
-                            </Popover>
-                        )}
-                    />
+                    <div className="flex items-center gap-2 px-2">
+                        <CalendarIcon className="h-4 w-4 text-slate-400" />
+                        <p className="text-slate-400 text-sm font-medium">
+                            {form.getValues('date') ? format(form.getValues('date'), 'MMMM do, yyyy') : 'Pick a date'}
+                        </p>
+                    </div>
                 </div>
                 <div className="text-right">
                     <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Total</p>
@@ -365,9 +338,39 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             <div className="p-8 md:p-12">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+                        {/* Step 1: Date */}
                         <div className="space-y-6 pb-8 border-b border-slate-100">
                             <h4 className="font-bold text-slate-900 flex items-center gap-2">
                                 <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                                {t('selectDate')}
+                            </h4>
+                            <FormField
+                                control={form.control}
+                                name="date"
+                                render={({ field }) => (
+                                    <FormItem className="flex flex-col items-center sm:items-start">
+                                        <div className="bg-slate-50/50 rounded-2xl p-4 border border-slate-100 w-full sm:w-auto shadow-sm">
+                                            <Calendar
+                                                mode="single"
+                                                selected={field.value}
+                                                onSelect={field.onChange}
+                                                disabled={(date) =>
+                                                    date < new Date(new Date().setHours(0, 0, 0, 0))
+                                                }
+                                                className="rounded-md"
+                                                initialFocus
+                                            />
+                                        </div>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
+                        {/* Step 2: Guests */}
+                        <div className="space-y-6 pb-8 border-b border-slate-100">
+                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
                                 {t('guests')}
                             </h4>
 
@@ -428,7 +431,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
                         <div className="space-y-6 pb-8 border-b border-slate-100">
                             <h4 className="font-bold text-slate-900 flex items-center gap-2">
-                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
                                 {t('addons')}
                             </h4>
 
@@ -517,9 +520,9 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             </div>
                         </div>
 
-                        <div className="space-y-6">
+                        <div className="space-y-6 pb-8 border-b border-slate-100">
                             <h4 className="font-bold text-slate-900 flex items-center gap-2">
-                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
                                 {t('contact')}
                             </h4>
 
@@ -593,7 +596,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
                         <div className="space-y-6">
                             <h4 className="font-bold text-slate-900 flex items-center gap-2">
-                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
                                 {t('paymentMethod')}
                             </h4>
 
