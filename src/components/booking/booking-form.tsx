@@ -107,11 +107,78 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     }, [countAdults, countChildren, countSeniors, hasTransfer, hasKayak, hasFerry, hasExtraDay, selectedTour, selectedTourSlug, isTransferIncluded]);
 
+    const paymentMethod = form.watch("paymentMethod");
+
+    const buildBookingSummary = (data: BookingValues) => {
+        const tourName = selectedTour?.title || data.tour;
+        const dateStr = data.date ? format(data.date, "PPP") : "Not specified";
+        const totalGuests = data.adults + (data.children || 0) + (data.seniors || 0);
+        const addons = [
+            data.addTransfer && "Transfer",
+            data.addKayak && "Kayak Rental",
+            data.addFerry && "Ferry Ticket",
+            data.addExtraDay && "Extra Day",
+        ].filter(Boolean).join(", ") || "None";
+
+        return {
+            tourName,
+            dateStr,
+            totalGuests,
+            addons,
+            subject: `New Booking Request: ${tourName} — ${data.name}`,
+            body: [
+                `NEW BOOKING REQUEST`,
+                ``,
+                `Tour: ${tourName}`,
+                `Date: ${dateStr}`,
+                `Guests: ${data.adults} adults, ${data.children || 0} children, ${data.seniors || 0} seniors (${totalGuests} total)`,
+                `Add-ons: ${addons}`,
+                `Estimated Total: €${totalPrice.toFixed(0)}`,
+                `Payment: Pay in Person`,
+                ``,
+                `CONTACT DETAILS`,
+                `Name: ${data.name}`,
+                `Email: ${data.email}`,
+                `Phone: ${data.phone}`,
+                data.specialRequests ? `Special Requests: ${data.specialRequests}` : ``,
+            ].filter(Boolean).join("\n"),
+        };
+    };
+
     const onSubmit = async (data: BookingValues) => {
         setIsSubmitting(true);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setIsSubmitting(false);
-        setIsSuccess(true);
+
+        if (data.paymentMethod === "payNow") {
+            // === PAYPAL FLOW: Redirect to PayPal checkout ===
+            const tourName = selectedTour?.title || data.tour;
+            const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)`);
+            const amount = totalPrice.toFixed(2);
+            const returnUrl = encodeURIComponent(window.location.origin + `/${locale}/book?success=true&tour=${data.tour}`);
+            const cancelUrl = encodeURIComponent(window.location.origin + `/${locale === 'en' ? 'en/book' : 'sq/rezervo'}?tour=${data.tour}`);
+
+            const paypalUrl = `https://www.paypal.com/cgi-bin/webscr`
+                + `?cmd=_xclick`
+                + `&business=mariomolla%40outlook.com`
+                + `&item_name=${itemName}`
+                + `&amount=${amount}`
+                + `&currency_code=EUR`
+                + `&no_shipping=1`
+                + `&return=${returnUrl}`
+                + `&cancel_return=${cancelUrl}`;
+
+            window.location.href = paypalUrl;
+            // Don't setIsSubmitting(false) — page is redirecting
+        } else {
+            // === RESERVATION FLOW: Send email to Mario, show confirmation ===
+            const { subject, body } = buildBookingSummary(data);
+            const mailtoUrl = `mailto:mariomolla@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoUrl, "_blank");
+
+            // Brief delay to let the mailto open
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+            setIsSubmitting(false);
+            setIsSuccess(true);
+        }
     };
 
     const handleGuestChange = (type: "adults" | "children" | "seniors", operation: "add" | "sub") => {
@@ -138,28 +205,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 <div className="bg-slate-50 p-6 rounded-2xl max-w-sm mx-auto border border-slate-100">
                     <p className="text-sm text-slate-500 mb-2">{t('estimatedTotal')}</p>
                     <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
+                    <p className="text-xs text-slate-400 mt-2">{t('noPayment')}</p>
                 </div>
-
-                {form.getValues('paymentMethod') === 'payNow' && (
-                    <div className="bg-primary/5 p-6 rounded-2xl max-w-sm mx-auto border border-primary/20 space-y-3">
-                        <div className="flex justify-center">
-                            <CreditCard className="w-8 h-8 text-primary" />
-                        </div>
-                        <p className="text-sm font-bold text-slate-900">
-                            {locale === 'en'
-                                ? "Complete Payment via PayPal"
-                                : "Përfundoni Pagesën përmes PayPal"}
-                        </p>
-                        <p className="text-xs text-slate-600">
-                            {locale === 'en'
-                                ? "Please send the total amount to our PayPal email to confirm your slot:"
-                                : "Ju lutemi dërgoni shumën totale në emailin tonë të PayPal për të konfirmuar vendin tuaj:"}
-                        </p>
-                        <p className="text-base font-bold text-primary select-all">mariomolla@outlook.com</p>
-                    </div>
-                )}
                 <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
-                    Return Home
+                    {locale === 'en' ? 'Return Home' : 'Kthehu në Faqe'}
                 </Button>
             </div>
         );
@@ -546,11 +595,36 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             />
                         </div>
 
-                        <div className="pt-4">
-                            <Button type="submit" className="w-full h-14 rounded-2xl bg-primary text-white font-bold" disabled={isSubmitting}>
-                                {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : t('submit')}
-                            </Button>
-                            <p className="text-center text-xs text-slate-400 mt-4">{t('noPayment')}</p>
+                        <div className="pt-4 space-y-3">
+                            {paymentMethod === 'payNow' ? (
+                                <>
+                                    <Button type="submit" className="w-full h-14 rounded-2xl bg-[#0070ba] hover:bg-[#005ea6] text-white font-bold text-base gap-2" disabled={isSubmitting}>
+                                        {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : (
+                                            <>
+                                                <CreditCard className="w-5 h-5" />
+                                                {t('payNow')} — €{totalPrice.toFixed(0)}
+                                            </>
+                                        )}
+                                    </Button>
+                                    <p className="text-center text-xs text-slate-400">
+                                        {locale === 'en'
+                                            ? "You will be redirected to PayPal to complete your payment."
+                                            : "Do të ridrejtoheni në PayPal për të përfunduar pagesën."}
+                                    </p>
+                                </>
+                            ) : (
+                                <>
+                                    <Button type="submit" className="w-full h-14 rounded-2xl bg-primary text-white font-bold" disabled={isSubmitting}>
+                                        {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : (
+                                            <>
+                                                <Wallet className="w-5 h-5 mr-2" />
+                                                {t('submit')}
+                                            </>
+                                        )}
+                                    </Button>
+                                    <p className="text-center text-xs text-slate-400">{t('noPayment')}</p>
+                                </>
+                            )}
                         </div>
                     </form>
                 </Form>
