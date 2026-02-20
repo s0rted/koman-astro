@@ -348,8 +348,8 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                 control={form.control}
                                 name="date"
                                 render={({ field }) => (
-                                    <FormItem className="flex flex-col items-center sm:items-start">
-                                        <div className="bg-slate-50/50 rounded-2xl p-4 border border-slate-100 w-full sm:w-auto shadow-sm">
+                                    <FormItem className="flex flex-col items-center">
+                                        <div className="bg-slate-50/50 rounded-2xl p-4 border border-slate-100 w-full sm:w-auto shadow-sm flex justify-center">
                                             <Calendar
                                                 mode="single"
                                                 selected={field.value}
