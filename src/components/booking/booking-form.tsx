@@ -39,7 +39,16 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const locale = useLocale();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [isPaypalSuccess, setIsPaypalSuccess] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('success') === 'true') {
+            setIsSuccess(true);
+            setIsPaypalSuccess(true);
+        }
+    }, []);
 
     const form = useForm<BookingValues>({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -203,20 +212,32 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 <div className="flex justify-center">
                     <CheckCircle2 className="w-20 h-20 text-primary animate-in zoom-in duration-500" />
                 </div>
-                <h2 className="text-4xl font-bold text-slate-900">{t('successTitle')}</h2>
-                <p className="text-slate-500 max-w-md mx-auto">
-                    {t('successMessage', {
-                        name: form.getValues('name'),
-                        tour: getLocalizedTourName(),
-                        email: form.getValues('email')
-                    })}
-                </p>
-                <div className="bg-slate-50 p-6 rounded-2xl max-w-sm mx-auto border border-slate-100">
-                    <p className="text-sm text-slate-500 mb-2">{t('estimatedTotal')}</p>
-                    <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
-                    <p className="text-xs text-slate-400 mt-2">{t('noPayment')}</p>
+                <h2 className="text-4xl font-bold text-slate-900">
+                    {isPaypalSuccess ? t('paypalSuccessTitle') : t('successTitle')}
+                </h2>
+                <div className="text-slate-500 max-w-md mx-auto">
+                    {isPaypalSuccess ? (
+                        <p>{t('paypalSuccessMessage')}</p>
+                    ) : (
+                        <p>
+                            {t('successMessage', {
+                                name: form.getValues('name'),
+                                tour: getLocalizedTourName(),
+                                email: form.getValues('email')
+                            })}
+                        </p>
+                    )}
                 </div>
-                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
+
+                {!isPaypalSuccess && (
+                    <div className="bg-slate-50 p-6 rounded-2xl max-w-sm mx-auto border border-slate-100">
+                        <p className="text-sm text-slate-500 mb-2">{t('estimatedTotal')}</p>
+                        <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
+                        <p className="text-xs text-slate-400 mt-2">{t('noPayment')}</p>
+                    </div>
+                )}
+
+                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full h-12 px-8">
                     {locale === 'en' ? 'Return Home' : 'Kthehu në Faqe'}
                 </Button>
             </div>

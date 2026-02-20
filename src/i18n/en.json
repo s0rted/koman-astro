@@ -48,6 +48,8 @@
         "submitting": "Processing...",
         "successTitle": "Request Sent!",
         "successMessage": "Thanks {name}. We've received your request for the {tour}. We'll contact you shortly at {email} to confirm details.",
+        "paypalSuccessTitle": "Payment Confirmed!",
+        "paypalSuccessMessage": "Thank you for your booking! Your payment was successful and your spot is secured. We will send you a final confirmation email shortly.",
         "noPayment": "No immediate payment required. We will confirm your slot manually.",
         "errorCount": "At least 1 adult is required.",
         "pageTitle": "Book Your Tour | Komani Lake Tours",
