@@ -81,8 +81,8 @@ export const TOURS: Tour[] = [
             { time: "01:00 PM", activity: "Arrival in Valbona" }
         ],
         gallery: [],
-        image: "/images/tours/shkoder-valbona-featured.webp",
-        banner: "/images/tours/shkoder-valbona-hero.webp",
+        image: "/images/tours/shkoder-valbona.webp",
+        banner: "/images/tours/shkoder-valbona.webp",
         category: "Transfer"
     },
     {
