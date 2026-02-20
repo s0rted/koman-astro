@@ -10,9 +10,39 @@ export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'da
     const toggleLanguage = (newLocale: "en" | "sq") => {
         if (newLocale === locale) return;
         const currentPath = window.location.pathname;
-        // Swap locale prefix: /en/... → /sq/... or vice versa
-        const newPath = currentPath.replace(/^\/(en|sq)/, `/${newLocale}`);
         const search = window.location.search;
+
+        const PATHNAMES: Record<string, Record<string, string>> = {
+            '/': { en: '', sq: '' },
+            '/about': { en: '/about', sq: '/rreth-nesh' },
+            '/gallery': { en: '/gallery', sq: '/galeria' },
+            '/conservation': { en: '/conservation', sq: '/konservimi' },
+            '/contact': { en: '/contact', sq: '/kontakt' },
+            '/tours': { en: '/tours', sq: '/turne' },
+            '/book': { en: '/book', sq: '/rezervo' },
+            '/privacy': { en: '/privacy', sq: '/politika-e-privatise' },
+            '/terms': { en: '/terms', sq: '/termat-dhe-kushtet' },
+        };
+
+        // 1. Identify current base path by checking localized versions
+        let basePath = '/';
+        for (const [key, map] of Object.entries(PATHNAMES)) {
+            if (currentPath === `/${locale}${map[locale]}` || currentPath === `/${locale}${map[locale]}/`) {
+                basePath = key;
+                break;
+            }
+        }
+
+        // 2. Build new path
+        let newPath = `/${newLocale}${PATHNAMES[basePath]?.[newLocale] ?? basePath}`;
+
+        // 3. Handle tour detail pages (/en/tours/[slug] -> /sq/turne/[slug])
+        if (currentPath.includes('/tours/') || currentPath.includes('/turne/')) {
+            const slug = currentPath.split('/').pop();
+            const tourBase = newLocale === 'sq' ? '/turne' : '/tours';
+            newPath = `/${newLocale}${tourBase}/${slug}`;
+        }
+
         window.location.href = `${newPath}${search}`;
     };
 

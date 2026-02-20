@@ -24,6 +24,14 @@ export function Link({ href, children, ...props }: any) {
             localizedPath = '/rreth-nesh';
         } else if (path === '/gallery') {
             localizedPath = '/galeria';
+        } else if (path === '/book') {
+            localizedPath = '/rezervo';
+        } else if (path === '/conservation') {
+            localizedPath = '/konservimi';
+        } else if (path === '/privacy') {
+            localizedPath = '/politika-e-privatise';
+        } else if (path === '/terms') {
+            localizedPath = '/termat-dhe-kushtet';
         }
 
         if (!localizedPath.startsWith('/sq') && !localizedPath.startsWith('http')) {
