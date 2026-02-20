@@ -3,7 +3,7 @@ import { Calendar, UserCheck, Leaf, ShieldCheck } from 'lucide-react';
 import { useTranslations } from '@/i18n/react-context';
 
 export const BookingBadges: React.FC = () => {
-    const t = useTranslations('Booking.badges');
+    const t = useTranslations('Booking');
 
     const badges = [
         { key: 'season', icon: Calendar },
@@ -25,7 +25,7 @@ export const BookingBadges: React.FC = () => {
                             <Icon className="w-5 h-5" />
                         </div>
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] group-hover:text-slate-600 transition-colors">
-                            {t(badge.key)}
+                            {t(`badges.${badge.key}`)}
                         </span>
                     </div>
                 );

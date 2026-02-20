@@ -95,14 +95,14 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
 
                 <Link href={{ pathname: '/book', query: { tour: tourSlug } }} className="w-full">
                     <MagneticButton className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-xl shadow-primary/20">
-                        {isCallPrice ? t('contactQuote') : t('bookNow')}
+                        {isCallPrice ? t('contactQuote') : useTranslations('Common')('bookNow')}
                     </MagneticButton>
                 </Link>
             </CardContent>
 
             <CardFooter className="bg-slate-50 p-6 flex justify-center border-t border-slate-100">
                 <p className="text-xs text-slate-400 font-medium italic">
-                    {t('noFees')}
+                    {useTranslations('Booking')('noPayment')}
                 </p>
             </CardFooter>
         </Card>

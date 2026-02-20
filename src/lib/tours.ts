@@ -46,7 +46,7 @@ export const TOURS: Tour[] = [
             "/albums/optimized/IMG_6309.webp",
             "/albums/optimized/IMG_6350.webp",
             "/albums/optimized/IMG_2977.webp",
-            "/albums/optimized/IMG_6080.webp",
+            "/albums/optimized/IMG_6080new.webp",
             "/albums/optimized/DSC_0499.webp",
             "/albums/optimized/DSC_0447.webp",
             "/albums/optimized/IMG_20230718_083740134.webp",
@@ -81,8 +81,8 @@ export const TOURS: Tour[] = [
             { time: "01:00 PM", activity: "Arrival in Valbona" }
         ],
         gallery: [],
-        image: "/images/tours/shkoder-valbona.webp",
-        banner: "/images/tours/shkoder-valbona.webp",
+        image: "/images/tours/shkoder-valbona-featured.webp",
+        banner: "/images/tours/shkoder-valbona-hero.webp",
         category: "Transfer"
     },
     {

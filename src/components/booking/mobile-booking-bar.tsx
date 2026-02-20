@@ -85,7 +85,7 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
                         size="lg"
                         className="rounded-xl px-8 font-bold bg-primary text-white shadow-lg shadow-primary/20"
                     >
-                        {isCallPrice ? t('contactUs') : t('bookNow')}
+                        {isCallPrice ? t('contactUs') : useTranslations('Common')('bookNow')}
                     </Button>
                 </Link>
             </div>
