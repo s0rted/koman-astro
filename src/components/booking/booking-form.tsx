@@ -109,8 +109,17 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     const paymentMethod = form.watch("paymentMethod");
 
+    const getLocalizedTourName = () => {
+        const slug = selectedTourSlug;
+        const translated = td(`${slug}.title`);
+        // If translation returns the key itself, fall back to TOURS data
+        return translated !== `${slug}.title` ? translated : (selectedTour?.title || slug);
+    };
+
+    const bookingPagePath = locale === 'en' ? 'en/book' : 'sq/rezervo';
+
     const buildBookingSummary = (data: BookingValues) => {
-        const tourName = selectedTour?.title || data.tour;
+        const tourName = getLocalizedTourName();
         const dateStr = data.date ? format(data.date, "PPP") : "Not specified";
         const totalGuests = data.adults + (data.children || 0) + (data.seniors || 0);
         const addons = [
@@ -150,11 +159,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
         if (data.paymentMethod === "payNow") {
             // === PAYPAL FLOW: Redirect to PayPal checkout ===
-            const tourName = selectedTour?.title || data.tour;
+            const tourName = getLocalizedTourName();
             const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)`);
             const amount = totalPrice.toFixed(2);
-            const returnUrl = encodeURIComponent(window.location.origin + `/${locale}/book?success=true&tour=${data.tour}`);
-            const cancelUrl = encodeURIComponent(window.location.origin + `/${locale === 'en' ? 'en/book' : 'sq/rezervo'}?tour=${data.tour}`);
+            const returnUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?success=true&tour=${data.tour}`);
+            const cancelUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?tour=${data.tour}`);
 
             const paypalUrl = `https://www.paypal.com/cgi-bin/webscr`
                 + `?cmd=_xclick`
@@ -198,7 +207,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 <p className="text-slate-500 max-w-md mx-auto">
                     {t('successMessage', {
                         name: form.getValues('name'),
-                        tour: selectedTour?.title || form.getValues('tour'),
+                        tour: getLocalizedTourName(),
                         email: form.getValues('email')
                     })}
                 </p>
