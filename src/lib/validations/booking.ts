@@ -2,10 +2,10 @@ import * as z from "zod";
 
 export const bookingSchema = z.object({
     tour: z.string({
-        error: "Please select a tour.",
+        required_error: "Please select a tour.",
     }),
     date: z.date({
-        error: "Please select a date.",
+        required_error: "Please select a date.",
     }),
     adults: z.coerce.number().min(1, "At least 1 adult is required."),
     children: z.coerce.number().optional().default(0),
@@ -18,6 +18,7 @@ export const bookingSchema = z.object({
     email: z.string().email("Invalid email address."),
     phone: z.string().min(8, "Please enter a valid phone number (including country code)."),
     specialRequests: z.string().optional(),
+    paymentMethod: z.enum(["payNow", "payInPerson"]).default("payInPerson"),
 });
 
 export type BookingValues = z.infer<typeof bookingSchema>;

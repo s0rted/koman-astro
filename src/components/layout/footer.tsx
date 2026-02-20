@@ -98,7 +98,7 @@ function FooterContent() {
                             </div>
                             <div className="flex items-center gap-3">
                                 <Mail className="w-4 h-4 text-primary" />
-                                <span>info@koman-astro.pages.dev</span>
+                                <span>mariomolla@outlook.com</span>
                             </div>
                         </div>
                     </div>

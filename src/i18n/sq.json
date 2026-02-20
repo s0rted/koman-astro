@@ -41,7 +41,7 @@
         "phone": "Numri i Telefonit (me kodin e shtetit)",
         "specialRequests": "Kërkesa të Veçanta",
         "placeholderLocation": "Emri juaj",
-        "placeholderEmail": "john@shembull.com",
+        "placeholderEmail": "mariomolla@outlook.com",
         "placeholderPhone": "+355 69 XX XX XXX",
         "placeholderSpecial": "Vendi i marrjes, kufizime dietike, ose preferenca data...",
         "submit": "Kërko Rezervim",
@@ -49,7 +49,23 @@
         "successTitle": "Kërkesa u Dërgua!",
         "successMessage": "Faleminderit {name}. Kemi marrë kërkesën tuaj për {tour}. Do t'ju kontaktojmë së shpejti në {email} për të konfirmuar detajet.",
         "noPayment": "Nuk kërkohet pagesë e menjëhershme. Do ta konfirmojmë vendin tuaj manualisht.",
-        "errorCount": "Kërkohet të paktën 1 i rritur."
+        "errorCount": "Kërkohet të paktën 1 i rritur.",
+        "pageTitle": "Rezervo Turin Tuaj | Komani Lake Tours",
+        "pageDesc": "Përfundoni rezervimin tuaj për një eksperiencë të paharrueshme në Liqenin e Komanit.",
+        "finishTitle": "Përfundoni",
+        "booking": "Rezervimin",
+        "oneStepAway": "Jeni vetëm një hap larg aventurës tuaj {tour}.",
+        "badges": {
+            "season": "Ture Sezonale",
+            "guides": "Udhërrëfyes Ekspertë",
+            "eco": "Eko-Miqësor",
+            "secure": "Rezervim i Sigurt"
+        },
+        "paymentMethod": "Metoda e Pagesës",
+        "payNow": "Paguaj Tani me PayPal",
+        "payInPerson": "Paguaj në Person (Cash)",
+        "payNowDesc": "Paguani depozitën ose shumën e plotë përmes PayPal për të siguruar vendin tuaj menjëherë.",
+        "payInPersonDesc": "Paguani në person pas mbërritjes në liqen."
     },
     "Navbar": {
         "tours": "Turet",
@@ -259,7 +275,7 @@
             "email": "Email",
             "message": "Mesazhi",
             "placeholderName": "Emri juaj",
-            "placeholderEmail": "Email-i juaj",
+            "placeholderEmail": "mariomolla@outlook.com",
             "placeholderMessage": "Si mund t'ju ndihmojmë?",
             "submit": "Dërgo Kërkesën"
         }
@@ -291,7 +307,7 @@
             "instant": "Konfirmim i menjëhershëm me email",
             "skipLine": "Anashkaloni radhën në Terminalin e Komanit",
             "trusted": "Besuar nga 15,000+ udhëtarë",
-            "bookNow": "Rezervo këtë Eksperiencë",
+            "bookNow": "Rezervo Tani",
             "contactQuote": "Na Kontaktoni për Çmimin",
             "noFees": "Pa tarifa të fshehura · Anulim falas deri në 48 orë"
         },

@@ -75,7 +75,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
             >
                 <div className="container mx-auto flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
+                    <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group">
                         <div className="bg-white w-10 h-10 rounded-full shadow-md group-hover:scale-110 transition-transform flex items-center justify-center border border-slate-100/50 overflow-hidden shrink-0 aspect-square">
                             <img
                                 src="/images/logo-icon.svg"
@@ -84,7 +84,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
                             />
                         </div>
                         <span className={cn(
-                            "font-heading text-lg lg:text-xl font-bold tracking-tight transition-colors",
+                            "font-heading text-sm sm:text-lg lg:text-xl font-bold tracking-tight transition-colors whitespace-nowrap",
                             isScrolled || isLightPage ? "text-slate-900" : "text-white"
                         )}>
                             KOMAN LAKE TOURS

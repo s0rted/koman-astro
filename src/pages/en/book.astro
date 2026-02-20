@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { BookingForm } from '../../components/booking/booking-form';
+import { BookingBadges } from '../../components/booking/booking-badges';
+import { I18nProvider } from '../../i18n/react-context';
 import { RevealOnScroll } from '../../components/animations/reveal-on-scroll';
 import { TOURS } from '../../lib/tours';
 import { getMessages, t } from '../../i18n/utils';
@@ -51,18 +53,9 @@ const description = t(locale, 'Booking.pageDesc') === 'Booking.pageDesc' ? 'Fini
             locale={locale} 
         />
 
-        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            t(locale, 'Booking.badges.season'),
-            t(locale, 'Booking.badges.guides'),
-            t(locale, 'Booking.badges.eco'),
-            t(locale, 'Booking.badges.secure')
-          ].map((badge) => (
-            <div class="py-3 px-4 bg-white rounded-xl border border-slate-100 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
-              {badge}
-            </div>
-          ))}
-        </div>
+        <I18nProvider messages={messages} locale={locale} client:load>
+          <BookingBadges client:load />
+        </I18nProvider>
       </div>
     </div>
   </main>

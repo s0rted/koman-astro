@@ -7,7 +7,7 @@ Disallow: /api/
 Disallow: /_next/
 
 # Sitemap location
-Sitemap: https://komanlake.com/sitemap.xml
+Sitemap: https://koman-astro.pages.dev/sitemap.xml
 
 # Crawl-delay for politeness (optional)
 Crawl-delay: 1

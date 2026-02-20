@@ -32,7 +32,15 @@ export function useLocale() {
 /** Drop-in replacement for next-intl's useTranslations */
 export function useTranslations(namespace?: string) {
     const { messages } = useContext(I18nContext);
-    const base = namespace ? messages?.[namespace] : messages;
+
+    // Resolve base namespace by traversing dot notation
+    let base = messages;
+    if (namespace) {
+        const nsKeys = namespace.split('.');
+        for (const k of nsKeys) {
+            base = base?.[k];
+        }
+    }
 
     const translate = useCallback(
         (key: string, values?: Record<string, any>): string => {

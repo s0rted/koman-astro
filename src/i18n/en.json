@@ -41,7 +41,7 @@
         "phone": "Phone Number (with country code)",
         "specialRequests": "Special Requests",
         "placeholderLocation": "John Doe",
-        "placeholderEmail": "john@example.com",
+        "placeholderEmail": "mariomolla@outlook.com",
         "placeholderPhone": "+355 69 XX XX XXX",
         "placeholderSpecial": "Pick-up location, dietary restrictions, or date preferences...",
         "submit": "Request Booking",
@@ -49,7 +49,23 @@
         "successTitle": "Request Sent!",
         "successMessage": "Thanks {name}. We've received your request for the {tour}. We'll contact you shortly at {email} to confirm details.",
         "noPayment": "No immediate payment required. We will confirm your slot manually.",
-        "errorCount": "At least 1 adult is required."
+        "errorCount": "At least 1 adult is required.",
+        "pageTitle": "Book Your Tour | Komani Lake Tours",
+        "pageDesc": "Finish your booking for a memorable experience at Koman Lake.",
+        "finishTitle": "Finish Your",
+        "booking": "Booking",
+        "oneStepAway": "You are just one step away from your {tour} adventure.",
+        "badges": {
+            "season": "Seasonal Tours",
+            "guides": "Expert Guides",
+            "eco": "Eco-Friendly",
+            "secure": "Secure Booking"
+        },
+        "paymentMethod": "Payment Method",
+        "payNow": "Pay Now with PayPal",
+        "payInPerson": "Pay in Person (Cash)",
+        "payNowDesc": "Pay the deposit or full amount via PayPal to secure your spot instantly.",
+        "payInPersonDesc": "Pay in person upon arrival at the lake."
     },
     "Navbar": {
         "tours": "Tours",
@@ -259,7 +275,7 @@
             "email": "Email",
             "message": "Message",
             "placeholderName": "Your name",
-            "placeholderEmail": "Your email",
+            "placeholderEmail": "mariomolla@outlook.com",
             "placeholderMessage": "How can we help?",
             "submit": "Send Inquiry"
         }
@@ -291,7 +307,7 @@
             "instant": "Instant confirmation via email",
             "skipLine": "Skip the line at Koman Terminal",
             "trusted": "Trusted by 15,000+ travelers",
-            "bookNow": "Book This Experience",
+            "bookNow": "Book Now",
             "contactQuote": "Contact for Quote",
             "noFees": "No hidden fees · Free cancellation up to 48h"
         },

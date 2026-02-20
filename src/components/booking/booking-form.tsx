@@ -7,9 +7,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { useTranslations, useLocale } from "@/i18n/react-context";
@@ -56,6 +57,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             email: "",
             phone: "",
             specialRequests: "",
+            paymentMethod: "payInPerson" as const,
         },
     });
 
@@ -137,6 +139,25 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     <p className="text-sm text-slate-500 mb-2">{t('estimatedTotal')}</p>
                     <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
                 </div>
+
+                {form.getValues('paymentMethod') === 'payNow' && (
+                    <div className="bg-primary/5 p-6 rounded-2xl max-w-sm mx-auto border border-primary/20 space-y-3">
+                        <div className="flex justify-center">
+                            <CreditCard className="w-8 h-8 text-primary" />
+                        </div>
+                        <p className="text-sm font-bold text-slate-900">
+                            {locale === 'en'
+                                ? "Complete Payment via PayPal"
+                                : "Përfundoni Pagesën përmes PayPal"}
+                        </p>
+                        <p className="text-xs text-slate-600">
+                            {locale === 'en'
+                                ? "Please send the total amount to our PayPal email to confirm your slot:"
+                                : "Ju lutemi dërgoni shumën totale në emailin tonë të PayPal për të konfirmuar vendin tuaj:"}
+                        </p>
+                        <p className="text-base font-bold text-primary select-all">mariomolla@outlook.com</p>
+                    </div>
+                )}
                 <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
                     Return Home
                 </Button>
@@ -456,6 +477,75 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             />
                         </div>
 
+                        <div className="space-y-6">
+                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                                <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                                {t('paymentMethod')}
+                            </h4>
+
+                            <FormField
+                                control={form.control}
+                                name="paymentMethod"
+                                render={({ field }) => (
+                                    <div className="grid gap-4">
+                                        <div
+                                            className={cn(
+                                                "flex flex-row items-center justify-between rounded-xl border p-4 cursor-pointer transition-all",
+                                                field.value === 'payNow' ? "border-primary bg-primary/5 shadow-md" : "bg-slate-50/50 border-slate-100"
+                                            )}
+                                            onClick={() => field.onChange('payNow')}
+                                        >
+                                            <div className="flex gap-4 items-center">
+                                                <div className={cn(
+                                                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
+                                                    field.value === 'payNow' ? "bg-primary text-white" : "bg-white text-slate-400 border border-slate-100"
+                                                )}>
+                                                    <CreditCard className="w-5 h-5" />
+                                                </div>
+                                                <div className="space-y-0.5">
+                                                    <p className="text-base font-bold text-slate-800">{t('payNow')}</p>
+                                                    <p className="text-[12px] text-slate-500 font-medium leading-tight">{t('payNowDesc')}</p>
+                                                </div>
+                                            </div>
+                                            <div className={cn(
+                                                "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors",
+                                                field.value === 'payNow' ? "border-primary bg-primary" : "border-slate-200"
+                                            )}>
+                                                {field.value === 'payNow' && <div className="w-2 h-2 rounded-full bg-white" />}
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            className={cn(
+                                                "flex flex-row items-center justify-between rounded-xl border p-4 cursor-pointer transition-all",
+                                                field.value === 'payInPerson' ? "border-primary bg-primary/5 shadow-md" : "bg-slate-50/50 border-slate-100"
+                                            )}
+                                            onClick={() => field.onChange('payInPerson')}
+                                        >
+                                            <div className="flex gap-4 items-center">
+                                                <div className={cn(
+                                                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0",
+                                                    field.value === 'payInPerson' ? "bg-primary text-white" : "bg-white text-slate-400 border border-slate-100"
+                                                )}>
+                                                    <Wallet className="w-5 h-5" />
+                                                </div>
+                                                <div className="space-y-0.5">
+                                                    <p className="text-base font-bold text-slate-800">{t('payInPerson')}</p>
+                                                    <p className="text-[12px] text-slate-500 font-medium leading-tight">{t('payInPersonDesc')}</p>
+                                                </div>
+                                            </div>
+                                            <div className={cn(
+                                                "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors",
+                                                field.value === 'payInPerson' ? "border-primary bg-primary" : "border-slate-200"
+                                            )}>
+                                                {field.value === 'payInPerson' && <div className="w-2 h-2 rounded-full bg-white" />}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            />
+                        </div>
+
                         <div className="pt-4">
                             <Button type="submit" className="w-full h-14 rounded-2xl bg-primary text-white font-bold" disabled={isSubmitting}>
                                 {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : t('submit')}
@@ -465,6 +555,6 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     </form>
                 </Form>
             </div>
-        </div>
+        </div >
     );
 }

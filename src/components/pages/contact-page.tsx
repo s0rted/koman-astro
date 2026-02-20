@@ -62,7 +62,7 @@ export function ContactPage({ dict }: ContactPageProps) {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-slate-900 mb-1">{dict.info.email}</h4>
-                                    <p className="text-slate-500">info@koman-astro.pages.dev</p>
+                                    <p className="text-slate-500">mariomolla@outlook.com</p>
                                 </div>
                             </RevealOnScroll>
 

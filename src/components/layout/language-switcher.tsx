@@ -24,7 +24,7 @@ export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'da
                     <button
                         key={lang}
                         onClick={() => toggleLanguage(lang)}
-                        className="relative px-5 py-2 rounded-full transition-all duration-300 outline-none group"
+                        className="relative px-3 md:px-5 py-1.5 md:py-2 rounded-full transition-all duration-300 outline-none group"
                     >
                         <AnimatePresence>
                             {isActive && (
@@ -51,7 +51,7 @@ export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'da
                         )}
 
                         <span className={cn(
-                            "relative z-10 text-[16px] font-bold tracking-tight transition-colors duration-300",
+                            "relative z-10 text-sm md:text-base font-bold tracking-tight transition-colors duration-300",
                             isActive
                                 ? (variant === 'light' ? "text-white" : "text-slate-900")
                                 : (variant === 'light' ? "text-slate-400 group-hover:text-slate-900" : "text-white/40 group-hover:text-white")
