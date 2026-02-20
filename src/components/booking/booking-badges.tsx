@@ -2,8 +2,13 @@ import React from 'react';
 import { Calendar, UserCheck, Leaf, ShieldCheck } from 'lucide-react';
 import { useTranslations } from '@/i18n/react-context';
 
-export const BookingBadges: React.FC = () => {
-    const t = useTranslations('Booking');
+interface BookingBadgesProps {
+    t?: (key: string) => string;
+}
+
+export const BookingBadges: React.FC<BookingBadgesProps> = ({ t: propT }) => {
+    const internalT = useTranslations('Booking');
+    const t = propT || internalT;
 
     const badges = [
         { key: 'season', icon: Calendar },
@@ -16,6 +21,8 @@ export const BookingBadges: React.FC = () => {
         <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
             {badges.map((badge) => {
                 const Icon = badge.icon;
+                const label = propT ? propT(`badges.${badge.key}`) : t(`badges.${badge.key}`);
+
                 return (
                     <div
                         key={badge.key}
@@ -25,7 +32,7 @@ export const BookingBadges: React.FC = () => {
                             <Icon className="w-5 h-5" />
                         </div>
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] group-hover:text-slate-600 transition-colors">
-                            {t(`badges.${badge.key}`)}
+                            {label}
                         </span>
                     </div>
                 );

@@ -52,10 +52,6 @@ const description = t(locale, 'Booking.pageDesc') === 'Booking.pageDesc' ? 'Për
             messages={messages} 
             locale={locale} 
         />
-
-        <I18nProvider messages={messages} locale={locale} client:load>
-          <BookingBadges client:load />
-        </I18nProvider>
       </div>
     </div>
   </main>

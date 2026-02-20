@@ -19,6 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { I18nProvider } from "@/i18n/react-context";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { BookingBadges } from "@/components/booking/booking-badges";
 
 interface BookingFormProps {
     initialValues: Partial<BookingValues>;
@@ -693,6 +694,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     <p className="text-center text-xs text-slate-400">{t('noPayment')}</p>
                                 </>
                             )}
+                        </div>
+
+                        {/* Integration of Booking Badges at the bottom of the form island */}
+                        <div className="pt-8 border-t border-slate-100">
+                            <BookingBadges t={t} />
                         </div>
                     </form>
                 </Form>
