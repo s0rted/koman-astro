@@ -90,7 +90,7 @@ export function FaqJsonLd() {
         },
         {
             question: "What is included in the boat tour price?",
-            answer: "The €54 boat tour includes return transfers from Shkoder, traditional boat sailing, full lunch at a riverside village, kayak access, coffee & snacks, and a local guide."
+            answer: "The €54 boat tour includes return transfers from Shkoder, traditional boat sailing, kayak access, and a local guide. Food and beverages are not included."
         },
         {
             question: "Is swimming possible at Komani Lake?",

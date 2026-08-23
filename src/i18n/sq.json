@@ -92,11 +92,11 @@
         "bestSeller": "Më i Shituri",
         "title": "Liqeni i Komanit",
         "subtitle": "Eksperienca e Turit me Anije",
-        "description": "Navigoni nëpër 'Fjordet e Ballkanit' për një udhëtim të paharrueshëm 11-orësh. Duke u nisur çdo ditë nga Shkodra, ky tur gjithëpërfshirës ju çon nëpër Luginën madhështore të Mollës, me ndalesa për not, kajak dhe një drekë tradicionale në një fshat të izoluar buzë lumit.",
+        "description": "Navigoni nëpër 'Fjordet e Ballkanit' për një udhëtim të paharrueshëm 11-orësh. Duke u nisur çdo ditë nga Shkodra, ky tur ju çon nëpër Luginën madhështore të Mollës, me ndalesa për not, kajak dhe një ndalesë për drekë (ushqimi dhe pijet nuk përfshihen).",
         "duration": "11 Orë",
         "durationLabel": "Kohëzgjatja",
-        "lunch": "Drekë e përfshirë",
-        "lunchLabel": "Kuzhinë Lokale",
+        "lunch": "Ndalesë për Drekë",
+        "lunchLabel": "Ushqimi/Pijet Nuk Përfshihen",
         "pricePerPerson": "/ person",
         "bookTour": "Rezervo këtë Tur"
     },
@@ -197,8 +197,8 @@
             "a": "Po, trageti ynë 'Berisha' pranon makina, kamperë dhe motoçikleta. Sidoqoftë, hapësira është e kufizuar, ndaj rekomandohet rezervimi paraprak, veçanërisht në sezonin e lartë (korrik-gusht)."
         },
         "q3": {
-            "q": "A është dreka e përfshirë në turet me anije?",
-            "a": "Po! Turet tona ditore me anije përfshijnë një drekë tradicionale në një bujtinë lokale buzë lumit, me peshk të freskët, bukë shtëpie dhe djathë vendas."
+            "q": "A është i përfshirë ushqimi apo dreka në tur?",
+            "a": "Jo, ushqimi dhe pijet nuk janë të përfshira në çmimin e turit. Gjatë turit do të bëjmë një ndalesë për drekë, prandaj ju lutemi merrni ushqimet dhe pijet tuaja me vete ose blini në vend."
         },
         "q4": {
             "q": "Si bëhet pagesa?",
@@ -330,18 +330,17 @@
     "ToursData": {
         "boat-tour": {
             "title": "Tur me Anije në Liqenin e Komanit",
-            "description": "Ture ditore të organizuara me anije tradicionale. Nisja çdo ditë nga pikat tona në Shkodër në orën 7:00. Turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1.5 orë drejt luginës së Mollës dhe lumit. Ndalesë për drekë në fshat. Kohë e lirë për eksplorim, kajak, ecje, not dhe peshkim deri në orën 15:00. Kthimi me anije për në Shkodër. Mbërritja në Shkodër rreth orës 18:00.",
+            "description": "Ture ditore të organizuara me anije tradicionale. Nisja çdo ditë nga pikat tona në Shkodër në orën 7:00. Turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1.5 orë drejt luginës së Mollës dhe lumit. Ndalesë për drekë. Kohë e lirë për eksplorim, kajak, ecje, not dhe peshkim deri në orën 15:00. Kthimi me anije për në Shkodër. Mbërritja në Shkodër rreth orës 18:00.",
             "category": "Aventurë Ditore",
             "duration": "11 Orë",
             "price": "5,700",
             "priceEur": "54",
             "transfersIncluded": "Transferta vajtje-ardhje nga Shkodra të përfshira",
-            "summary": "11 Orë · Transferta, Ture me Anije, Kafe & Snack të përfshira",
+            "summary": "11 Orë · Transferta & Tur me Anije të përfshira",
             "inclusions": [
                 "Transferta vajtje-ardhje nga Shkodra",
                 "Ture me anije tradicionale",
-                "Kafe dhe snacks (meze)",
-                "Drekë në fshat",
+                "Ndalesë për Drekë (Ushqimi/Pijet Nuk Përfshihen)",
                 "Kajak dhe Not",
                 "Ecje dhe Peshkim"
             ],
@@ -360,7 +359,7 @@
                 },
                 {
                     "time": "12:30 MD",
-                    "activity": "Ndalesa për drekë në fshat"
+                    "activity": "Ndalesë për drekë"
                 },
                 {
                     "time": "01:30 MD",

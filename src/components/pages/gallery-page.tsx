@@ -13,7 +13,7 @@ interface Photo {
 
 const PHOTOS_EN: Photo[] = [
     { src: "/albums/optimized/DSC_0447.webp", alt: "Tour boat navigating the towering limestone cliffs of Koman Lake, often called the 'Thailand of Albania'." },
-    { src: "/albums/optimized/IMG_3101.webp", alt: "Travelers enjoying a traditional fresh lunch at a secluded guesthouse on the banks of Koman Lake." },
+    { src: "/albums/optimized/IMG_3101.webp", alt: "Travelers enjoying a break at a guesthouse on the banks of Koman Lake." },
     { src: "/albums/optimized/IMG_0878.webp", alt: "Tour guests taking a break to enjoy a refreshing swim in Koman Lake with a stunning view of the mountains." },
     { src: "/albums/optimized/DSC_0516.webp", alt: "Crystal-clear turquoise waters at the confluence of the Shala River and Koman Lake." },
     { src: "/albums/optimized/IMG_3085.webp", alt: "Tour Guests hiking along the scenic mountain trails overlooking the Komani Lake reservoir." },
@@ -49,7 +49,7 @@ const PHOTOS_EN: Photo[] = [
     { src: "/albums/optimized/DSC_0452.webp", alt: "Intricate erosion patterns in the canyon walls revealing centuries of geological history." },
     { src: "/albums/optimized/DSC_0541.webp", alt: "The Komani Lake ferry terminal and dam, the starting point of the journey." },
     { src: "/albums/optimized/DSC_0483.webp", alt: "Hardy endemic vegetation clinging to the sheer vertical rock faces of the canyons." },
-    { src: "/albums/optimized/IMG_0516.webp", alt: "Group lunch at a traditional guesthouse shaded by grapevines." },
+    { src: "/albums/optimized/IMG_0516.webp", alt: "Group break at a traditional guesthouse shaded by grapevines." },
     { src: "/albums/optimized/IMG_3030.webp", alt: "Local fisherman casting a net into the turquoise waters of the Koman Lake." },
     { src: "/albums/optimized/DSC_0510.webp", alt: "A serene moment of symmetry where the river reflects the green mountains perfectly." },
     { src: "/albums/optimized/IMG_6348.webp", alt: "The white wake of the boat cutting through the deep canyon waters." },
@@ -68,7 +68,7 @@ const PHOTOS_EN: Photo[] = [
 
 const ALTS_SQ: Record<string, string> = {
     "/albums/optimized/DSC_0447.webp": "Anija turistike duke lundruar midis shkëmbinjve të lartë gëlqerorë të Liqenit të Komanit, i quajtur shpesh 'Tajlanda e Shqipërisë'.",
-    "/albums/optimized/IMG_3101.webp": "Udhëtarët duke shijuar një drekë të freskët tradicionale në një bujtinë të izoluar në bregun e Liqenit të Komanit.",
+    "/albums/optimized/IMG_3101.webp": "Udhëtarët duke shijuar një pushim në një bujtinë në bregun e Liqenit të Komanit.",
     "/albums/optimized/IMG_0878.webp": "Mysafirët e turit duke bërë një pushim për të shijuar një not freskues në Liqenin e Komanit.",
     "/albums/optimized/DSC_0516.webp": "Ujërat e kristalta bruz në bashkimin e Lumit të Shalës dhe Liqenit të Komanit.",
     "/albums/optimized/IMG_3085.webp": "Mysafirët e turit duke ecur nëpër shtigjet piktoreske malore me pamje nga Liqeni i Komanit.",

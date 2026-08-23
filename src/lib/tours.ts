@@ -24,20 +24,20 @@ export const TOURS: Tour[] = [
         price: "54",
         currency: "€",
         duration: "11 Hours",
-        description: "Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley, taste authentic village cuisine by the riverside, and immerse yourself in nature with kayaking, trekking, and swimming. This isn't just a tour; it's a sensory awakening.",
+        description: "Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley and immerse yourself in nature with kayaking, trekking, and swimming. This isn't just a tour; it's a sensory awakening.",
         inclusions: [
             "Seamless transfers from Shkoder",
             "Traditional boat navigation",
-            "Authentic village lunch",
+            "Scheduled lunch stop (Food/drinks not included)",
             "Kayaking, trekking & swimming",
-            "Coffee & scenic breaks",
+            "Scenic stops & free time",
             "Expert local guidance"
         ],
         itinerary: [
             { time: "07:00 AM", activity: "Departing daily from our spots in Shkoder" },
             { time: "09:00 AM", activity: "Boat tour starts" },
             { time: "10:30 AM", activity: "Arrival at Molla valley and river" },
-            { time: "12:30 PM", activity: "Lunch break at village" },
+            { time: "12:30 PM", activity: "Lunch break" },
             { time: "01:30 PM", activity: "Free time (kayaking, trekking, swimming, fishing)" },
             { time: "03:00 PM", activity: "Return journey begins" },
             { time: "06:00 PM", activity: "Arrival in Shkoder" }

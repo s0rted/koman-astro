@@ -92,11 +92,11 @@
         "bestSeller": "Best Seller",
         "title": "The Komani Lake",
         "subtitle": "Boat Tour Experience",
-        "description": "Sail through the 'Fjords of the Balkans' for an unforgettable 11-hour journey. Departing daily from Shkoder, this all-inclusive tour takes you through the majestic Molla Valley, with stops for swimming, kayaking, and a traditional lunch at a secluded riverside village.",
+        "description": "Sail through the 'Fjords of the Balkans' for an unforgettable 11-hour journey. Departing daily from Shkoder, this tour takes you through the majestic Molla Valley, with stops for swimming, kayaking, and a lunch break (food and drinks are not included).",
         "duration": "11 Hours",
         "durationLabel": "Duration",
-        "lunch": "Lunch Inc.",
-        "lunchLabel": "Local Cuisine",
+        "lunch": "Lunch Stop",
+        "lunchLabel": "Food & Drinks Not Included",
         "pricePerPerson": "/ person",
         "bookTour": "Book This Tour"
     },
@@ -197,8 +197,8 @@
             "a": "Yes, our ferry 'Berisha' accommodates cars, campers, and motorcycles. However, space is limited, so advanced booking is highly recommended, especially in high season (July-August)."
         },
         "q3": {
-            "q": "Is lunch included in the boat tours?",
-            "a": "Yes! Our daily boat tours include a traditional lunch at a local guesthouse by the river, featuring fresh fish, homemade bread, and local cheese."
+            "q": "Is food or lunch included in the boat tour?",
+            "a": "No, food and drinks are not included in the tour price. We will make a stop for lunch during the tour, so please bring your own food and beverages or purchase them on-site."
         },
         "q4": {
             "q": "How do I pay?",
@@ -330,18 +330,17 @@
     "ToursData": {
         "boat-tour": {
             "title": "Komani Lake Boat Tour",
-            "description": "Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break at village. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
+            "description": "Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
             "category": "Full Day Adventure",
             "duration": "11 Hours",
             "price": "54",
             "priceLek": "5,700",
             "transfersIncluded": "Round-trip Shkoder transfers included",
-            "summary": "11 Hours · Transfers, Boat Tours, Coffee Break & Snack included",
+            "summary": "11 Hours · Transfers & Boat Tour included",
             "inclusions": [
                 "Round-trip Transfers from Shkoder",
                 "Traditional Boat Tours",
-                "Coffee Break & Snack",
-                "Local Village Lunch",
+                "Scheduled Lunch Stop (Food/Drinks Not Included)",
                 "Kayaking & Swimming",
                 "Trekking & Fishing"
             ],
@@ -360,7 +359,7 @@
                 },
                 {
                     "time": "12:30 PM",
-                    "activity": "Lunch break at village"
+                    "activity": "Lunch break"
                 },
                 {
                     "time": "01:30 PM",
