@@ -22,7 +22,7 @@ export function SeasonBanner({ messages, locale }: { messages?: any; locale?: st
 function SeasonBannerContent() {
     const t = useTranslations("SeasonBanner");
     // Rendered in the static HTML; hidden on hydration if previously dismissed.
-    // The banner sits below the hero (off-screen on load), so there is no visible flash.
+    // Sits at the top of the hero, just under the navbar.
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
@@ -53,38 +53,32 @@ function SeasonBannerContent() {
     const rest = prefix ? full.slice(idx + 2) : full;
 
     return (
-        <div
-            className={cn(
-                "relative z-20 w-full border-y border-emerald-900/10",
-                "bg-gradient-to-r from-emerald-950 via-teal-900 to-emerald-950 text-white"
-            )}
-            role="region"
-            aria-label={t("region")}
-        >
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="flex items-center justify-between gap-3 py-2.5 md:py-3">
-                    <Link
-                        href="/autumn-winter"
-                        className="group flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3 hover:opacity-95 transition-opacity"
-                    >
-                        <span className="hidden sm:inline-flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-white/10 border border-white/15">
-                            <Leaf className="w-4 h-4 text-emerald-300" />
-                        </span>
-                        <span className="min-w-0 text-[13px] sm:text-sm font-medium leading-snug">
-                            {prefix && <span className="font-bold text-emerald-200">{prefix}: </span>}
-                            <span className="text-white/95">{rest}</span>
-                        </span>
-                        <ArrowRight className="hidden md:block w-4 h-4 shrink-0 text-emerald-300 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                    <button
-                        type="button"
-                        onClick={dismiss}
-                        aria-label={t("dismiss")}
-                        className="shrink-0 p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-                    >
-                        <X className="w-4 h-4" />
-                    </button>
-                </div>
+        <div className="flex w-full justify-center px-2" role="region" aria-label={t("region")}>
+            <div
+                className={cn(
+                    "inline-flex max-w-full items-center gap-1 rounded-full pl-3 pr-1 py-1 sm:pl-4",
+                    "bg-emerald-950/55 backdrop-blur-md border border-white/20 shadow-lg text-white"
+                )}
+            >
+                <Link
+                    href="/autumn-winter"
+                    className="group flex min-w-0 items-center gap-2 py-1 hover:opacity-95 transition-opacity"
+                >
+                    <Leaf className="hidden sm:block w-4 h-4 shrink-0 text-emerald-300" />
+                    <span className="min-w-0 text-[13px] sm:text-sm font-medium leading-snug text-left">
+                        {prefix && <span className="font-bold text-emerald-200">{prefix}: </span>}
+                        <span className="text-white/95 underline-offset-2 group-hover:underline">{rest}</span>
+                    </span>
+                    <ArrowRight className="w-4 h-4 shrink-0 text-emerald-300 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+                <button
+                    type="button"
+                    onClick={dismiss}
+                    aria-label={t("dismiss")}
+                    className="shrink-0 ml-1 p-1.5 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                    <X className="w-4 h-4" />
+                </button>
             </div>
         </div>
     );
