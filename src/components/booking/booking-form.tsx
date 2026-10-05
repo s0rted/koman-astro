@@ -477,7 +477,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         <div className="rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-950" role="status">
                             <p className="font-bold uppercase tracking-wide text-[11px] text-sky-800 mb-1">{summer('badge')}</p>
                             <p className="leading-relaxed">
-                                {selectedTourSlug === 'boat-tour' ? summer('bookingNotice') : summer('bookingNoticeFerry')}{' '}
+                                {selectedTourSlug === 'boat-tour'
+                                    ? summer('bookingNotice')
+                                    : selectedTourSlug === 'shkoder-valbona'
+                                        ? summer('bookingNoticeFerry')
+                                        : summer('bookingNoticeGeneric')}{' '}
                                 <a href={locale === 'sq' ? '/sq/vjeshte-dimer/' : '/en/autumn-winter/'} className="font-bold text-primary underline underline-offset-2">
                                     {summer('link')}
                                 </a>

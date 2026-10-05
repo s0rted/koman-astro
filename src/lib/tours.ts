@@ -189,10 +189,11 @@ export function getTourBySlug(slug: string) {
 }
 
 
-/** Boat tours / Komani Lake ferry transfer only — kayak, helicopter, local & custom are year-round. */
+/** May–October: boat tour, ferry transfer, local experience. Kayak, helicopter & custom are year-round. */
 export const SEASONAL_TOUR_SLUGS = [
     "boat-tour",
     "shkoder-valbona",
+    "local-experience",
 ] as const;
 
 export function isSeasonalTour(slug: string | undefined | null): boolean {
