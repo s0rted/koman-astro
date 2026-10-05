@@ -65,7 +65,7 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
                         {(tourSlug === 'boat-tour' || tourSlug === 'local-experience') && (
                             <div className="flex items-center gap-1 bg-primary/10 px-1.5 py-0.5 rounded text-[9px] font-bold text-primary uppercase tracking-tight leading-none whitespace-nowrap w-fit">
                                 <Bus className="w-2.5 h-2.5" />
-                                <span>Includes Transfer</span>
+                                <span>{t('includesTransfer')}</span>
                             </div>
                         )}
                     </div>

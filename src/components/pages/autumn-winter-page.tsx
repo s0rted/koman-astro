@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { RevealOnScroll } from "@/components/animations/reveal-on-scroll";
 import { MagneticButton } from "@/components/ui/magnetic-button";
-import { Link } from "@/i18n/routing";
+import { localizeHref } from "@/i18n/paths";
 import {
     Leaf,
     Ship,
@@ -45,6 +45,7 @@ export interface AutumnWinterDictionary {
         contact: string;
         whatsappMessage: string;
     };
+    alts?: Partial<Record<"boat" | "hiking" | "fishing" | "rakia" | "guesthouse" | "mornings", string>>;
 }
 
 const WHATSAPP_NUMBER = "355682022686";
@@ -59,7 +60,9 @@ const IMAGES = {
     mornings: "/albums/optimized/DSC_0524.webp",
 };
 
-export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
+export function AutumnWinterPage({ dict, locale }: { dict: AutumnWinterDictionary; locale: "en" | "sq" }) {
+    // No I18nProvider here, so build the localized contact URL explicitly.
+    const contactHref = localizeHref("/contact", locale);
     const openWhatsApp = () => {
         const message = encodeURIComponent(dict.cta.whatsappMessage);
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
@@ -104,7 +107,7 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                 title={dict.boat.title}
                 text={dict.boat.text}
                 image={IMAGES.boat}
-                imageAlt="Boat on Komani Lake"
+                imageAlt={dict.alts?.boat ?? "Boat on Komani Lake"}
                 reverse={false}
             />
 
@@ -114,7 +117,7 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                 title={dict.hiking.title}
                 text={dict.hiking.text}
                 image={IMAGES.hiking}
-                imageAlt="Nature trails near Komani Lake"
+                imageAlt={dict.alts?.hiking ?? "Nature trails near Komani Lake"}
                 reverse
                 muted
             />
@@ -125,7 +128,7 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                 title={dict.fishing.title}
                 text={dict.fishing.text}
                 image={IMAGES.fishing}
-                imageAlt="Local experience on the lake"
+                imageAlt={dict.alts?.fishing ?? "Local experience on the lake"}
                 reverse={false}
             />
 
@@ -135,7 +138,7 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                 title={dict.rakia.title}
                 text={dict.rakia.text}
                 image={IMAGES.rakia}
-                imageAlt="Local hospitality"
+                imageAlt={dict.alts?.rakia ?? "Local hospitality"}
                 reverse
                 muted
             />
@@ -148,7 +151,7 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                             <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl relative group">
                                 <img
                                     src={IMAGES.guesthouse}
-                                    alt="Guesthouse stay"
+                                    alt={dict.alts?.guesthouse ?? "Guesthouse stay"}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                             </div>
@@ -201,7 +204,7 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                             <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl relative group">
                                 <img
                                     src={IMAGES.mornings}
-                                    alt="Quiet morning landscape"
+                                    alt={dict.alts?.mornings ?? "Quiet morning landscape"}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                             </div>
@@ -255,12 +258,12 @@ export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {
                                     <MessageCircle className="w-5 h-5" />
                                     {dict.cta.whatsapp}
                                 </button>
-                                <Link href="/contact">
+                                <a href={contactHref}>
                                     <MagneticButton className="h-14 md:h-16 px-8 md:px-10 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-base md:text-lg flex items-center gap-3 border border-white/10 transition-all">
                                         {dict.cta.contact}
                                         <ArrowRight className="w-5 h-5" />
                                     </MagneticButton>
-                                </Link>
+                                </a>
                             </div>
                         </RevealOnScroll>
                     </div>

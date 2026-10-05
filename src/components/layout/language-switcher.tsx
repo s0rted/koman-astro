@@ -3,63 +3,37 @@
 import { useLocale } from '@/i18n/react-context';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { alternateLocalePath } from '@/i18n/paths';
 
-export function LanguageSwitcher({ variant = 'dark' }: { variant?: 'light' | 'dark' }) {
+export function LanguageSwitcher({ variant = 'dark', layoutId = 'lang-active-bg' }: { variant?: 'light' | 'dark'; layoutId?: string }) {
     const locale = useLocale();
 
     const toggleLanguage = (newLocale: "en" | "sq") => {
         if (newLocale === locale) return;
-        const currentPath = window.location.pathname;
-        const search = window.location.search;
-
-        const PATHNAMES: Record<string, Record<string, string>> = {
-            '/': { en: '', sq: '' },
-            '/about': { en: '/about', sq: '/rreth-nesh' },
-            '/gallery': { en: '/gallery', sq: '/galeria' },
-            '/conservation': { en: '/conservation', sq: '/konservimi' },
-            '/contact': { en: '/contact', sq: '/kontakt' },
-            '/tours': { en: '/tours', sq: '/turne' },
-            '/book': { en: '/book', sq: '/rezervo' },
-            '/privacy': { en: '/privacy', sq: '/politika-e-privatise' },
-            '/terms': { en: '/terms', sq: '/termat-dhe-kushtet' },
-        };
-
-        // 1. Identify current base path by checking localized versions
-        let basePath = '/';
-        for (const [key, map] of Object.entries(PATHNAMES)) {
-            if (currentPath === `/${locale}${map[locale]}` || currentPath === `/${locale}${map[locale]}/`) {
-                basePath = key;
-                break;
-            }
-        }
-
-        // 2. Build new path
-        let newPath = `/${newLocale}${PATHNAMES[basePath]?.[newLocale] ?? basePath}`;
-
-        // 3. Handle tour detail pages (/en/tours/[slug] -> /sq/turne/[slug])
-        if (currentPath.includes('/tours/') || currentPath.includes('/turne/')) {
-            const slug = currentPath.split('/').pop();
-            const tourBase = newLocale === 'sq' ? '/turne' : '/tours';
-            newPath = `/${newLocale}${tourBase}/${slug}`;
-        }
-
-        window.location.href = `${newPath}${search}`;
+        const { pathname, search, hash } = window.location;
+        // Same mapping as the hreflang tags (src/i18n/paths.ts), so every page
+        // switches to its real counterpart (incl. tour slugs and trailing slashes).
+        const target = alternateLocalePath(pathname, newLocale);
+        window.location.href = `${target}${search}${hash}`;
     };
 
     return (
-        <div className="flex items-center gap-1 md:gap-2">
+        <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
             {(['en', 'sq'] as const).map((lang) => {
                 const isActive = locale === lang;
                 return (
                     <button
                         key={lang}
                         onClick={() => toggleLanguage(lang)}
-                        className="relative px-3 md:px-5 py-1.5 md:py-2 rounded-full transition-all duration-300 outline-none group"
+                        type="button"
+                        aria-label={lang === "en" ? "English" : "Shqip"}
+                        aria-pressed={isActive}
+                        className="relative px-2 sm:px-3 md:px-5 py-1.5 md:py-2 rounded-full transition-all duration-300 outline-none group"
                     >
                         <AnimatePresence>
                             {isActive && (
                                 <motion.div
-                                    layoutId="lang-active-bg"
+                                    layoutId={layoutId}
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}

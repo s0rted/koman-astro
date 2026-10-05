@@ -207,12 +207,12 @@ function TourGridContent() {
                                 </div>
                                 <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 min-w-[300px]">
                                     <div className="text-white text-center mb-6">
-                                        <p className="text-sm uppercase tracking-widest opacity-70">Starting From</p>
-                                        <p className="text-4xl font-bold">Call for Price</p>
+                                        <p className="text-sm uppercase tracking-widest opacity-70">{t('startingFrom')}</p>
+                                        <p className="text-4xl font-bold">{t('callForPrice')}</p>
                                     </div>
                                     <Link href={{ pathname: '/tours/[slug]', params: { slug: helicopter.slug } }} className="w-full block">
                                         <Button size="lg" className="w-full bg-white text-slate-900 hover:bg-slate-100 font-bold h-14 rounded-xl">
-                                            View Details
+                                            {t('viewDetails')}
                                         </Button>
                                     </Link>
                                 </div>

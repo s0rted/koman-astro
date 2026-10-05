@@ -68,7 +68,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
         <>
             <nav
                 className={cn(
-                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 md:px-8",
+                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-3 sm:px-4 md:px-8",
                     isScrolled || isLightPage
                         ? "py-2 lg:py-4 bg-white z-[60] shadow-sm border-b border-slate-100"
                         : "py-4 lg:py-6 bg-transparent"
@@ -85,7 +85,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
                             />
                         </div>
                         <span className={cn(
-                            "font-heading text-sm sm:text-lg lg:text-xl font-bold tracking-tight transition-colors whitespace-nowrap",
+                            "font-heading text-[13px] min-[400px]:text-sm sm:text-lg lg:text-xl font-bold tracking-tight transition-colors whitespace-nowrap",
                             isScrolled || isLightPage ? "text-slate-900" : "text-white"
                         )}>
                             KOMAN LAKE TOURS
@@ -109,7 +109,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex items-center gap-3 md:gap-4">
+                    <div className="flex items-center gap-1 sm:gap-3 md:gap-4">
                         <LanguageSwitcher variant={isScrolled || isLightPage ? 'light' : 'dark'} />
 
                         <div className="hidden md:block">
@@ -127,7 +127,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
 
                         <button
                             className={cn(
-                                "p-2 lg:hidden",
+                                "p-1.5 sm:p-2 lg:hidden",
                                 isScrolled || isLightPage ? "text-slate-900" : "text-white"
                             )}
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -178,6 +178,10 @@ function NavbarContent({ pathname }: { pathname: string }) {
                 </div>
 
                 <div className="mt-auto pt-4 lg:pt-8 border-t border-slate-100 space-y-4 lg:space-y-6 shrink-0">
+                    <div className="flex items-center justify-between" data-mobile-lang-switcher>
+                        <span className="text-sm font-bold uppercase tracking-wide text-slate-500">{t('language')}</span>
+                        <LanguageSwitcher variant="light" layoutId="lang-active-bg-mobile" />
+                    </div>
                     <Link href="/book" onClick={() => setIsMobileMenuOpen(false)}>
                         <Button className="w-full h-12 lg:h-16 rounded-xl lg:rounded-2xl text-lg lg:text-xl font-bold bg-primary text-white shadow-xl shadow-primary/20">
                             {t('bookNow')}

@@ -39,7 +39,8 @@ function WhatsAppFloatContent() {
     // Stop pulsing after first interaction
     const handleClick = () => {
         setIsPulsing(false);
-        const message = encodeURIComponent(DEFAULT_MESSAGE);
+        const msg = t('defaultMessage');
+        const message = encodeURIComponent(msg && msg !== 'defaultMessage' ? msg : DEFAULT_MESSAGE);
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
     };
 
@@ -61,7 +62,7 @@ function WhatsAppFloatContent() {
             {/* Main Button */}
             <button
                 onClick={handleClick}
-                aria-label="Chat on WhatsApp"
+                aria-label={t('tooltip')}
                 className={cn(
                     "group relative flex items-center justify-center w-16 h-16 rounded-xl bg-white border-2 border-white shadow-2xl hover:scale-110 transition-all overflow-hidden",
                     isPulsing && "animate-wa-flash"

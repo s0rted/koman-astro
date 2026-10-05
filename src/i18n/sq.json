@@ -79,7 +79,9 @@
         "bookNow": "Rezervo Turin",
         "menu": "Menu",
         "language": "Gjuha",
-        "autumnWinter": "Vjeshtë & Dimër"
+        "autumnWinter": "Vjeshtë & Dimër",
+        "openMenu": "Hap menunë",
+        "closeMenu": "Mbyll menunë"
     },
     "TrustBar": {
         "rating": "Vlerësimi 4.9/5",
@@ -113,7 +115,9 @@
         "viewDetails": "Shiko Detajet",
         "pp": "/person",
         "relatedTitle": "Ju Mund të",
-        "relatedEnjoy": "Shijoni"
+        "relatedEnjoy": "Shijoni",
+        "startingFrom": "Duke filluar nga",
+        "callForPrice": "Na telefononi për çmimin"
     },
     "WhyChooseUs": {
         "title": "Pse të Udhëtoni",
@@ -286,7 +290,8 @@
     },
     "WhatsApp": {
         "tooltip": "Bisedoni me ne menjëherë!",
-        "badge": "1"
+        "badge": "1",
+        "defaultMessage": "Përshëndetje! Jam i interesuar të rezervoj një tur në Liqenin e Komanit. Mund të më ndihmoni?"
     },
     "Footer": {
         "experiences": "Eksperiencat",
@@ -317,7 +322,8 @@
         },
         "mobile": {
             "bookNow": "Rezervo Tani",
-            "contactUs": "Na Kontaktoni"
+            "contactUs": "Na Kontaktoni",
+            "includesTransfer": "Përfshin Transferin"
         }
     },
     "Common": {
@@ -537,7 +543,10 @@
         "marketingDesc": "Përdoren për oferta të personalizuara dhe media sociale.",
         "decline": "Refuzo",
         "manage": "Menaxho",
-        "privacyLink": "Politika e Privatësisë"
+        "privacyLink": "Politika e Privatësisë",
+        "chip": "Cilësimet e Privatësisë",
+        "necessary": "Të domosdoshme",
+        "necessaryDesc": "Të nevojshme për funksionimin e faqes."
     },
     "Reviews": [
         {
@@ -660,7 +669,8 @@
     ],
     "SeasonBanner": {
         "text": "E re: Përvojat e Vjeshtës & Dimrit, jetoni si vendasit",
-        "dismiss": "Mbyll njoftimin"
+        "dismiss": "Mbyll njoftimin",
+        "region": "Njoftim stinor"
     },
     "AutumnWinterPage": {
         "metaTitle": "Përvojat e Vjeshtës & Dimrit | Turne Liqeni i Komanit",
@@ -738,6 +748,14 @@
             ],
             "button": "Zbuloni Vjeshtën & Dimrin",
             "imageAlt": "Varkë në Liqenin e Komanit e rrethuar nga malet"
+        },
+        "alts": {
+            "boat": "Varkë në Liqenin e Komanit",
+            "hiking": "Shtigje natyrore pranë Liqenit të Komanit",
+            "fishing": "Përvojë lokale në liqen",
+            "rakia": "Mikpritje vendase",
+            "guesthouse": "Qëndrim në bujtinë",
+            "mornings": "Peizazh i qetë mëngjesi"
         }
     }
 }

@@ -79,7 +79,9 @@
         "bookNow": "Book Tour",
         "menu": "Menu",
         "language": "Language",
-        "autumnWinter": "Autumn & Winter"
+        "autumnWinter": "Autumn & Winter",
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu"
     },
     "TrustBar": {
         "rating": "4.9/5 Rating",
@@ -113,7 +115,9 @@
         "viewDetails": "View Details",
         "pp": "/pp",
         "relatedTitle": "You Might Also",
-        "relatedEnjoy": "Enjoy"
+        "relatedEnjoy": "Enjoy",
+        "startingFrom": "Starting From",
+        "callForPrice": "Call for Price"
     },
     "WhyChooseUs": {
         "title": "Why Journey",
@@ -286,7 +290,8 @@
     },
     "WhatsApp": {
         "tooltip": "Chat with us instantly!",
-        "badge": "1"
+        "badge": "1",
+        "defaultMessage": "Hi! I'm interested in booking a Komani Lake tour. Can you help me?"
     },
     "Footer": {
         "experiences": "Experiences",
@@ -317,7 +322,8 @@
         },
         "mobile": {
             "bookNow": "Book Now",
-            "contactUs": "Contact Us"
+            "contactUs": "Contact Us",
+            "includesTransfer": "Includes Transfer"
         }
     },
     "Common": {
@@ -537,7 +543,10 @@
         "marketingDesc": "Used for tailored offers and social media sharing.",
         "decline": "Decline",
         "manage": "Manage",
-        "privacyLink": "Privacy Policy"
+        "privacyLink": "Privacy Policy",
+        "chip": "Privacy Settings",
+        "necessary": "Necessary",
+        "necessaryDesc": "Required for site to function."
     },
     "Reviews": [
         {
@@ -660,7 +669,8 @@
     ],
     "SeasonBanner": {
         "text": "New: Autumn & Winter experiences, live like a local",
-        "dismiss": "Dismiss announcement"
+        "dismiss": "Dismiss announcement",
+        "region": "Seasonal announcement"
     },
     "AutumnWinterPage": {
         "metaTitle": "Autumn & Winter Experiences | Komani Lake Tours",
@@ -738,6 +748,14 @@
             ],
             "button": "Discover Autumn & Winter",
             "imageAlt": "Boat on Komani Lake surrounded by mountains"
+        },
+        "alts": {
+            "boat": "Boat on Komani Lake",
+            "hiking": "Nature trails near Komani Lake",
+            "fishing": "Local experience on the lake",
+            "rakia": "Local hospitality",
+            "guesthouse": "Guesthouse stay",
+            "mornings": "Quiet morning landscape"
         }
     }
 }

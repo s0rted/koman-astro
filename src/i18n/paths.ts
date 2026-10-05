@@ -29,6 +29,31 @@ export function localizedTourPath(slug: string, locale: string): string {
     return `/${locale}${tourBase}/${slug}`;
 }
 
+/**
+ * Localize an internal, locale-less href used by <Link>.
+ * localizeHref('/about', 'sq') => '/sq/rreth-nesh'
+ * localizeHref('/tours/boat-tour', 'sq') => '/sq/turne/boat-tour'
+ * Hrefs that are external, hash/query-only, or already locale-prefixed are returned unchanged.
+ */
+export function localizeHref(href: string, locale: string): string {
+    if (!href.startsWith('/') || href.startsWith('//')) return href;
+    if (/^\/(en|sq)(\/|$|\?|#)/.test(href)) return href;
+    const m = href.match(/^([^?#]*)(.*)$/);
+    const pathPart = m ? m[1] : href;
+    const suffix = m ? m[2] : '';
+    const trailing = pathPart.length > 1 && pathPart.endsWith('/');
+    const clean = trailing ? pathPart.replace(/\/+$/, '') : pathPart;
+    let out: string;
+    if (clean.startsWith('/tours/')) {
+        out = localizedTourPath(clean.slice('/tours/'.length), locale);
+    } else {
+        out = localizedPath(clean === '' ? '/' : clean, locale);
+    }
+    if (clean === '/' || clean === '') out = `/${locale}/`;
+    else if (trailing) out = `${out}/`;
+    return `${out}${suffix}`;
+}
+
 const SQ_SEGMENT_TO_KEY: Record<string, string> = {
     'rreth-nesh': '/about',
     'galeria': '/gallery',

@@ -1,9 +1,15 @@
 import { useLocale } from './react-context';
+import { localizeHref } from './paths';
 
+/**
+ * Locale-aware anchor. Accepts a locale-less internal path ('/about', '/tours/boat-tour')
+ * or an object { pathname, params? } and maps it via the shared table in paths.ts,
+ * so links, the language switcher and hreflang all use the same slugs.
+ */
 export function Link({ href, children, ...props }: any) {
-    const locale = useLocale();
+    const locale = useLocale() || 'en';
 
-    let path = typeof href === 'string' ? href : href.pathname;
+    let path: string = typeof href === 'string' ? href : href.pathname;
 
     if (typeof href === 'object' && href.params) {
         Object.entries(href.params).forEach(([key, value]) => {
@@ -11,39 +17,7 @@ export function Link({ href, children, ...props }: any) {
         });
     }
 
-    // Prefix with locale if not already present and not internal link/hash
-    let localizedPath = path;
-    if (locale === 'sq') {
-        if (path.startsWith('/tours/')) {
-            localizedPath = path.replace('/tours/', '/turne/');
-        } else if (path === '/tours') {
-            localizedPath = '/turne';
-        } else if (path === '/contact') {
-            localizedPath = '/kontakt';
-        } else if (path === '/about') {
-            localizedPath = '/rreth-nesh';
-        } else if (path === '/gallery') {
-            localizedPath = '/galeria';
-        } else if (path === '/book') {
-            localizedPath = '/rezervo';
-        } else if (path === '/conservation') {
-            localizedPath = '/konservimi';
-        } else if (path === '/privacy') {
-            localizedPath = '/politika-e-privatise';
-        } else if (path === '/terms') {
-            localizedPath = '/termat-dhe-kushtet';
-        } else if (path === '/autumn-winter') {
-            localizedPath = '/vjeshte-dimer';
-        }
-
-        if (!localizedPath.startsWith('/sq') && !localizedPath.startsWith('http')) {
-            localizedPath = `/sq${localizedPath}`;
-        }
-    } else {
-        if (!localizedPath.startsWith('/en') && !localizedPath.startsWith('http')) {
-            localizedPath = `/en${localizedPath}`;
-        }
-    }
+    const localizedPath = localizeHref(path, locale);
 
     return (
         <a href={localizedPath} {...props}>

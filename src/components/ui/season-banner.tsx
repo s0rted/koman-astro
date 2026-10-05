@@ -59,7 +59,7 @@ function SeasonBannerContent() {
                 "bg-gradient-to-r from-emerald-950 via-teal-900 to-emerald-950 text-white"
             )}
             role="region"
-            aria-label="Seasonal announcement"
+            aria-label={t("region")}
         >
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex items-center justify-between gap-3 py-2.5 md:py-3">
