@@ -6,7 +6,7 @@ import { bookingSchema, type BookingValues } from "@/lib/validations/booking";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { format } from "date-fns";
@@ -81,6 +81,8 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPaypalSuccess, setIsPaypalSuccess] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [showFloatingTotal, setShowFloatingTotal] = useState(true);
+    const submitTotalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -157,6 +159,19 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         setTotalPrice(adultCost + childCost + seniorCost + transferCost + ferryCost + kayakCost);
 
     }, [countAdults, countChildren, countSeniors, hasTransfer, hasKayak, hasFerry, hasExtraDay, selectedTour, selectedTourSlug, isTransferIncluded]);
+
+    useEffect(() => {
+        const node = submitTotalRef.current;
+        if (!node || typeof IntersectionObserver === "undefined") return;
+        // Shrink the bottom of the viewport by the floating bar so the planted
+        // total counts as on-screen before the bar can cover the submit row.
+        const observer = new IntersectionObserver(
+            ([entry]) => setShowFloatingTotal(!entry.isIntersecting),
+            { threshold: 0, rootMargin: "0px 0px -88px 0px" },
+        );
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, []);
 
     const paymentMethod = form.watch("paymentMethod");
 
@@ -700,7 +715,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
 
                         <div className="pt-4 space-y-3">
-                            <div className="flex items-center gap-4">
+                            <div ref={submitTotalRef} className="flex items-center gap-4">
                                 <div className="shrink-0 text-left">
                                     <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Total</p>
                                     <p className="text-2xl font-bold leading-none text-slate-900">{liveTotalLabel}</p>
@@ -745,7 +760,13 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             </div>
         </div>
 
-            <div className="fixed bottom-0 inset-x-0 z-40 border-t border-slate-700/80 bg-slate-900 text-white shadow-[0_-8px_24px_rgba(15,23,42,0.28)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+            <div
+                aria-hidden={!showFloatingTotal}
+                className={cn(
+                    "fixed bottom-0 inset-x-0 z-40 border-t border-slate-700/80 bg-slate-900 text-white shadow-[0_-8px_24px_rgba(15,23,42,0.28)] pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-200",
+                    showFloatingTotal ? "translate-y-0" : "pointer-events-none translate-y-full",
+                )}
+            >
                 <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-3">
                     <div className="min-w-0">
                         <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Total</p>
