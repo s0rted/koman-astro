@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
+import { computeTotal } from "@/lib/pricing";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -58,6 +59,31 @@ function AddonToggle({
     );
 }
 
+const PENDING_BOOKING_KEY = "koman-pending-paypal-booking";
+
+type PaymentState = "idle" | "verifying" | "verified" | "failed";
+
+interface VerifiedPayment {
+    orderId: string;
+    captureId: string;
+    amount: string;
+    currency: string;
+}
+
+interface PendingBooking {
+    tourName: string;
+    dateStr: string;
+    tour: string;
+    adults: number;
+    children: number;
+    seniors: number;
+    addons: string;
+    name: string;
+    email: string;
+    phone: string;
+    specialRequests?: string;
+}
+
 interface BookingFormProps {
     initialValues: Partial<BookingValues>;
 }
@@ -80,6 +106,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPaypalSuccess, setIsPaypalSuccess] = useState(false);
+    const [paymentState, setPaymentState] = useState<PaymentState>("idle");
+    const [paymentError, setPaymentError] = useState<string | null>(null);
+    const [verifiedPayment, setVerifiedPayment] = useState<VerifiedPayment | null>(null);
+    const [pendingBooking, setPendingBooking] = useState<PendingBooking | null>(null);
     const [totalPrice, setTotalPrice] = useState(0);
     const [showFloatingTotal, setShowFloatingTotal] = useState(true);
     const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
@@ -87,12 +117,53 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const submitTotalRef = useRef<HTMLDivElement>(null);
     const floatVisible = showFloatingTotal && !floatDismissed;
 
+    // Returning from PayPal: only claim "paid" after the server has captured
+    // and verified the order (status, currency and server-recomputed amount).
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        if (params.get('success') === 'true') {
-            setIsSuccess(true);
-            setIsPaypalSuccess(true);
-        }
+        const flow = params.get('paypal');
+        const orderId = params.get('token');
+        if (flow !== 'return' || !orderId) return;
+
+        try {
+            const saved = sessionStorage.getItem(PENDING_BOOKING_KEY);
+            if (saved) setPendingBooking(JSON.parse(saved));
+        } catch { /* ignore */ }
+
+        setPaymentState("verifying");
+        (async () => {
+            try {
+                const res = await fetch('/api/paypal/capture-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId }),
+                });
+                const data = await res.json().catch(() => null);
+                if (res.ok && data?.verified === true) {
+                    setVerifiedPayment({
+                        orderId: data.orderId,
+                        captureId: data.captureId,
+                        amount: data.amount,
+                        currency: data.currency,
+                    });
+                    setPaymentState("verified");
+                    setIsPaypalSuccess(true);
+                    setIsSuccess(true);
+                    // Drop ?token so a refresh doesn't re-run capture.
+                    const clean = new URL(window.location.href);
+                    clean.searchParams.delete('token');
+                    clean.searchParams.delete('PayerID');
+                    clean.searchParams.set('paypal', 'paid');
+                    window.history.replaceState(null, '', clean.toString());
+                } else {
+                    setPaymentError(data?.error || 'verification_failed');
+                    setPaymentState("failed");
+                }
+            } catch {
+                setPaymentError('network_error');
+                setPaymentState("failed");
+            }
+        })();
     }, []);
 
     const form = useForm<BookingValues>({
@@ -133,33 +204,18 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     useEffect(() => {
         if (!selectedTour) return;
 
-        let basePrice = Number(selectedTour.price) || 0;
-
-        // Handle Local Experience Extra Day logic (Base 100 -> 130)
-        if (selectedTourSlug === 'local-experience' && hasExtraDay) {
-            basePrice += 30;
-        }
-
-        if (isNaN(basePrice)) {
-            setTotalPrice(0);
-            return;
-        }
-
-        const adultCost = countAdults * basePrice;
-        const discountMult = 0.7;
-        const childCost = countChildren * (basePrice * discountMult);
-        const seniorCost = countSeniors * (basePrice * discountMult);
-
-        const totalGuests = countAdults + countChildren + countSeniors;
-
-        // Transfers are free/included for boat-tour and local-experience
-        const transferCost = (hasTransfer && !isTransferIncluded) ? (30 * totalGuests) : 0;
-        const ferryCost = hasFerry ? (10 * totalGuests) : 0;
-        // Kayak add-on price comes from tours data (kayak-rental)
-        const kayakAddonPrice = Number(TOURS.find((tour) => tour.slug === 'kayak-rental')?.price) || 20;
-        const kayakCost = hasKayak ? (kayakAddonPrice * totalGuests) : 0;
-
-        setTotalPrice(adultCost + childCost + seniorCost + transferCost + ferryCost + kayakCost);
+        // Shared with the PayPal Pages Functions, which recompute this server-side.
+        const total = computeTotal({
+            tour: selectedTourSlug,
+            adults: countAdults,
+            children: countChildren,
+            seniors: countSeniors,
+            addTransfer: hasTransfer,
+            addKayak: hasKayak,
+            addFerry: hasFerry,
+            addExtraDay: hasExtraDay,
+        });
+        setTotalPrice(total ?? 0);
 
     }, [countAdults, countChildren, countSeniors, hasTransfer, hasKayak, hasFerry, hasExtraDay, selectedTour, selectedTourSlug, isTransferIncluded]);
 
@@ -259,30 +315,115 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         };
     };
 
+    const paidEmailUrl = () => {
+        if (!verifiedPayment) return null;
+        const b = pendingBooking;
+        const subject = `PAID Booking: ${b?.tourName || 'Koman Lake tour'}${b?.name ? ` — ${b.name}` : ''}`;
+        const body = [
+            `NEW PAID BOOKING (PayPal, verified by server)`,
+            ``,
+            b ? `Tour: ${b.tourName}` : ``,
+            b ? `Date: ${b.dateStr}` : ``,
+            b ? `Guests: ${b.adults} adults, ${b.children} children, ${b.seniors} seniors` : ``,
+            b ? `Add-ons: ${b.addons}` : ``,
+            `Paid: €${verifiedPayment.amount} ${verifiedPayment.currency}`,
+            `PayPal order: ${verifiedPayment.orderId}`,
+            `PayPal capture: ${verifiedPayment.captureId}`,
+            `(Please confirm the capture ID in the PayPal dashboard.)`,
+            ``,
+            b ? `CONTACT DETAILS` : ``,
+            b ? `Name: ${b.name}` : ``,
+            b ? `Email: ${b.email}` : ``,
+            b ? `Phone: ${b.phone}` : ``,
+            b?.specialRequests ? `Special Requests: ${b.specialRequests}` : ``,
+        ].filter(Boolean).join("\n");
+        return `mailto:mariomolla@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    const paymentErrorText = (code: string | null) => {
+        if (!code) return null;
+        const en = locale !== 'sq';
+        switch (code) {
+            case 'payments_not_configured':
+                return en
+                    ? "Online payment is temporarily unavailable. Your booking has been switched to “Pay in person” — please submit it to reserve your spot."
+                    : "Pagesa online nuk është e disponueshme përkohësisht. Rezervimi juaj u kalua në “Paguaj në person” — dërgojeni për të rezervuar vendin.";
+            case 'not_payable_online':
+                return en
+                    ? "This tour can't be paid online. Please reserve and pay in person, or contact us."
+                    : "Ky tur nuk mund të paguhet online. Ju lutem rezervoni dhe paguani në person, ose na kontaktoni.";
+            case 'payment_declined':
+                return en
+                    ? "PayPal declined the payment. You have not been charged. Please try again or choose “Pay in person”."
+                    : "PayPal e refuzoi pagesën. Nuk jeni tarifuar. Provoni përsëri ose zgjidhni “Paguaj në person”.";
+            case 'payment_pending':
+                return en
+                    ? "PayPal reports your payment as pending. We will confirm your booking once PayPal completes it."
+                    : "PayPal e raporton pagesën si në pritje. Do ta konfirmojmë rezervimin sapo PayPal ta përfundojë.";
+            default:
+                return en
+                    ? "We couldn't confirm your PayPal payment. If money was taken, contact us with your PayPal receipt; otherwise please try again or choose “Pay in person”."
+                    : "Nuk mundëm ta konfirmojmë pagesën PayPal. Nëse u tërhoqën para, na kontaktoni me faturën PayPal; përndryshe provoni përsëri ose zgjidhni “Paguaj në person”.";
+        }
+    };
+
     const onSubmit = async (data: BookingValues) => {
         setIsSubmitting(true);
 
         if (data.paymentMethod === "payNow") {
-            // === PAYPAL FLOW: Redirect to PayPal checkout ===
-            const tourName = getLocalizedTourName();
-            const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)`);
-            // Same computed total shown in the sticky bar (guests, transfer, kayak, ferry, extra day).
-            const amount = totalPrice.toFixed(2);
-            const returnUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?success=true&tour=${data.tour}`);
-            const cancelUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?tour=${data.tour}`);
+            // === PAYPAL FLOW: server creates the order (amount recomputed server-side) ===
+            setPaymentError(null);
+            const { tourName, dateStr, addons } = buildBookingSummary(data);
+            const pending: PendingBooking = {
+                tourName,
+                dateStr,
+                tour: data.tour,
+                adults: data.adults,
+                children: data.children || 0,
+                seniors: data.seniors || 0,
+                addons,
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                specialRequests: data.specialRequests,
+            };
+            try {
+                sessionStorage.setItem(PENDING_BOOKING_KEY, JSON.stringify(pending));
+            } catch { /* ignore */ }
 
-            const paypalUrl = `https://www.paypal.com/cgi-bin/webscr`
-                + `?cmd=_xclick`
-                + `&business=mariomolla%40outlook.com`
-                + `&item_name=${itemName}`
-                + `&amount=${amount}`
-                + `&currency_code=EUR`
-                + `&no_shipping=1`
-                + `&return=${returnUrl}`
-                + `&cancel_return=${cancelUrl}`;
-
-            window.location.href = paypalUrl;
-            // Don't setIsSubmitting(false) — page is redirecting
+            try {
+                const res = await fetch('/api/paypal/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        tour: data.tour,
+                        date: data.date ? format(data.date, 'yyyy-MM-dd') : '',
+                        adults: data.adults,
+                        children: data.children || 0,
+                        seniors: data.seniors || 0,
+                        addTransfer: !!data.addTransfer,
+                        addKayak: !!data.addKayak,
+                        addFerry: !!data.addFerry,
+                        addExtraDay: !!data.addExtraDay,
+                        name: data.name,
+                        locale,
+                    }),
+                });
+                const order = await res.json().catch(() => null);
+                if (res.ok && order?.approveUrl) {
+                    window.location.href = order.approveUrl;
+                    return; // Don't setIsSubmitting(false) — page is redirecting
+                }
+                const code = order?.error || 'paypal_unavailable';
+                if (code === 'payments_not_configured' || code === 'not_payable_online') {
+                    // Fail safe: fall back to "reserve, pay in person".
+                    form.setValue('paymentMethod', 'payInPerson');
+                }
+                setPaymentError(code);
+            } catch {
+                setPaymentError('network_error');
+            }
+            setIsSubmitting(false);
         } else {
             // === RESERVATION FLOW: Send email to Mario, show confirmation ===
             const { subject, body } = buildBookingSummary(data);
@@ -303,7 +444,39 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         form.setValue(type, newVal);
     };
 
+    if (paymentState === "verifying") {
+        return (
+            <div className="text-center py-20 space-y-6">
+                <div className="flex justify-center">
+                    <Loader2 className="w-16 h-16 text-primary animate-spin" />
+                </div>
+                <p className="text-slate-500">
+                    {locale === 'sq' ? 'Duke verifikuar pagesën tuaj PayPal…' : 'Verifying your PayPal payment…'}
+                </p>
+            </div>
+        );
+    }
+
+    if (paymentState === "failed") {
+        return (
+            <div className="text-center py-20 space-y-6">
+                <h2 className="text-3xl font-bold text-slate-900">
+                    {locale === 'sq' ? 'Pagesa nuk u konfirmua' : 'Payment not confirmed'}
+                </h2>
+                <p className="text-slate-500 max-w-md mx-auto">{paymentErrorText(paymentError)}</p>
+                <Button
+                    onClick={() => { window.location.href = `/${bookingPagePath}`; }}
+                    variant="outline"
+                    className="rounded-full h-12 px-8"
+                >
+                    {locale === 'sq' ? 'Kthehu te rezervimi' : 'Back to booking'}
+                </Button>
+            </div>
+        );
+    }
+
     if (isSuccess) {
+        const paidMailto = isPaypalSuccess ? paidEmailUrl() : null;
         return (
             <div className="text-center py-20 space-y-6">
                 <div className="flex justify-center">
@@ -325,6 +498,21 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </p>
                     )}
                 </div>
+
+                {isPaypalSuccess && verifiedPayment && (
+                    <div className="bg-slate-50 p-6 rounded-2xl max-w-sm mx-auto border border-slate-100 space-y-3">
+                        <p className="text-3xl font-bold text-primary">€{verifiedPayment.amount}</p>
+                        <p className="text-xs text-slate-400 break-all">PayPal ref: {verifiedPayment.captureId}</p>
+                        {paidMailto && (
+                            <Button asChild className="rounded-full h-11 px-6 gap-2">
+                                <a href={paidMailto}>
+                                    <Mail className="w-4 h-4" />
+                                    {locale === 'sq' ? 'Dërgo detajet e rezervimit' : 'Send booking details'}
+                                </a>
+                            </Button>
+                        )}
+                    </div>
+                )}
 
                 {!isPaypalSuccess && (
                     <div className="bg-slate-50 p-6 rounded-2xl max-w-sm mx-auto border border-slate-100">
@@ -775,6 +963,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     )}
                                 </div>
                             </div>
+                            {paymentError && (
+                                <p role="alert" className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-center text-sm text-amber-800">
+                                    {paymentErrorText(paymentError)}
+                                </p>
+                            )}
                             <p className="text-center text-xs text-slate-400">
                                 {paymentMethod === 'payNow'
                                     ? (locale === 'en'
