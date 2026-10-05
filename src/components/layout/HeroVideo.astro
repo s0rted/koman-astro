@@ -41,9 +41,9 @@ const {
     </div>
 
     {/* Content */}
-    <div class="relative z-20 h-full flex flex-col items-center px-4 pt-20 pb-12 md:pt-24 md:pb-20 text-center text-white sm:px-6 lg:px-8">
+    <div class:list={["relative z-20 h-full flex flex-col items-center px-4 pt-20 md:pt-24 md:pb-20 text-center text-white sm:px-6 lg:px-8", Astro.slots.has("top") ? "pb-3" : "pb-12"]}>
         <div class="w-full max-w-6xl mx-auto space-y-8 md:space-y-10 flex-grow flex flex-col justify-center">
-            {Astro.slots.has('top') && <div class="w-full pt-4 md:pt-6"><slot name="top" /></div>}
+            {Astro.slots.has('top') && <div class="w-full mb-3 md:mb-10 md:pt-6"><slot name="top" /></div>}
             <div class="space-y-3 md:space-y-4 max-w-5xl mx-auto">
                 <div class="w-full">
                     <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight drop-shadow-2xl text-center leading-[1.1] md:leading-tight">

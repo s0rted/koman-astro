@@ -669,6 +669,7 @@
     ],
     "SeasonBanner": {
         "text": "E re: Përvojat e Vjeshtës & Dimrit, jetoni si vendasit",
+        "short": "E re: Përvojat e Vjeshtës & Dimrit",
         "dismiss": "Mbyll njoftimin",
         "region": "Njoftim stinor"
     },

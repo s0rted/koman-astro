@@ -669,6 +669,7 @@
     ],
     "SeasonBanner": {
         "text": "New: Autumn & Winter experiences, live like a local",
+        "short": "New: Autumn & Winter experiences",
         "dismiss": "Dismiss announcement",
         "region": "Seasonal announcement"
     },
