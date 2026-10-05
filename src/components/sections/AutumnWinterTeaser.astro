@@ -17,7 +17,7 @@ const pageHref = locale === 'sq' ? '/sq/vjeshte-dimer/' : '/en/autumn-winter/';
 const waHref = `https://wa.me/355682022686?text=${encodeURIComponent(page.cta?.whatsappMessage ?? '')}`;
 ---
 
-<section id="autumn-winter" class="py-24 bg-white overflow-hidden border-b border-slate-100" aria-labelledby="autumn-winter-teaser-title">
+<section id="autumn-winter" class="py-16 md:py-24 bg-white overflow-hidden border-b border-slate-100" aria-labelledby="autumn-winter-teaser-title">
     <div class="container mx-auto px-4 md:px-6">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
 
@@ -36,11 +36,11 @@ const waHref = `https://wa.me/355682022686?text=${encodeURIComponent(page.cta?.w
                         class="object-cover w-full h-full"
                     />
                 </div>
-                <div class="absolute -bottom-6 -left-6 w-3/4 h-3/4 border-2 border-primary/20 rounded-3xl -z-10"></div>
+                <div class="hidden sm:block absolute -bottom-6 -left-6 w-3/4 h-3/4 border-2 border-primary/20 rounded-3xl -z-10"></div>
             </div>
 
             {/* Content */}
-            <div class="space-y-8 lg:order-1">
+            <div class="space-y-6 md:space-y-8 lg:order-1">
                 <div>
                     <span class="inline-flex items-center gap-2 rounded-md bg-emerald-100 text-emerald-900 px-3 py-1 text-sm font-bold uppercase tracking-wide">
                         <Leaf className="w-4 h-4" />
@@ -56,11 +56,11 @@ const waHref = `https://wa.me/355682022686?text=${encodeURIComponent(page.cta?.w
                     {page.hero?.description}
                 </p>
 
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                     {highlights.map((h, i) => {
                         const Icon = icons[i] ?? Leaf;
                         return (
-                            <li class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <li class="flex items-start gap-3 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100">
                                 <Icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                                 <div>
                                     <span class="block font-bold text-slate-900 leading-snug">{h.title}</span>
@@ -71,10 +71,10 @@ const waHref = `https://wa.me/355682022686?text=${encodeURIComponent(page.cta?.w
                     })}
                 </ul>
 
-                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 pt-2">
                     <a
                         href={pageHref}
-                        class="inline-flex items-center justify-center gap-2 h-12 rounded-full px-8 text-lg font-bold bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-primary/40 transition-all"
+                        class="inline-flex items-center justify-center gap-2 h-12 rounded-full px-6 sm:px-8 lg:px-6 text-base sm:text-lg lg:text-base font-bold whitespace-nowrap bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-primary/40 transition-all"
                     >
                         {teaser.button}
                         <ArrowRight className="w-5 h-5" />
@@ -83,7 +83,7 @@ const waHref = `https://wa.me/355682022686?text=${encodeURIComponent(page.cta?.w
                         href={waHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center gap-2 h-12 rounded-full px-8 text-base font-bold bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all"
+                        class="inline-flex items-center justify-center gap-2 h-12 rounded-full px-6 sm:px-8 lg:px-6 text-base font-bold whitespace-nowrap bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all"
                     >
                         <MessageCircle className="w-5 h-5 text-[#25D366]" />
                         {page.cta?.whatsapp}
