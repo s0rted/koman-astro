@@ -21,15 +21,17 @@ export function SeasonBanner({ messages, locale }: { messages?: any; locale?: st
 
 function SeasonBannerContent() {
     const t = useTranslations("SeasonBanner");
-    const [visible, setVisible] = useState(false);
+    // Rendered in the static HTML; hidden on hydration if previously dismissed.
+    // The banner sits below the hero (off-screen on load), so there is no visible flash.
+    const [visible, setVisible] = useState(true);
 
     useEffect(() => {
         try {
-            if (localStorage.getItem(STORAGE_KEY) !== "1") {
-                setVisible(true);
+            if (localStorage.getItem(STORAGE_KEY) === "1") {
+                setVisible(false);
             }
         } catch {
-            setVisible(true);
+            /* ignore */
         }
     }, []);
 
