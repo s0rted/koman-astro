@@ -160,6 +160,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     const paymentMethod = form.watch("paymentMethod");
 
+    const liveTotalLabel = isCallPrice
+        ? (locale === 'sq' ? 'Kontakto' : 'Call')
+        : (locale === 'sq'
+            ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
+            : `€${totalPrice.toFixed(0)}`);
+
     const getLocalizedTourName = () => {
         const slug = selectedTourSlug;
         const translated = td(`${slug}.title`);
@@ -694,35 +700,40 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
 
                         <div className="pt-4 space-y-3">
-                            {paymentMethod === 'payNow' ? (
-                                <>
-                                    <Button type="submit" className="w-full h-14 rounded-2xl bg-[#0070ba] hover:bg-[#005ea6] text-white font-bold text-base gap-2" disabled={isSubmitting}>
-                                        {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : (
-                                            <>
-                                                <CreditCard className="w-5 h-5" />
-                                                {t('payNow')} — €{totalPrice.toFixed(0)}
-                                            </>
-                                        )}
-                                    </Button>
-                                    <p className="text-center text-xs text-slate-400">
-                                        {locale === 'en'
-                                            ? "You will be redirected to PayPal to complete your payment."
-                                            : "Do të ridrejtoheni në PayPal për të përfunduar pagesën."}
-                                    </p>
-                                </>
-                            ) : (
-                                <>
-                                    <Button type="submit" className="w-full h-14 rounded-2xl bg-primary text-white font-bold" disabled={isSubmitting}>
-                                        {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : (
-                                            <>
-                                                <Wallet className="w-5 h-5 mr-2" />
-                                                {t('submit')}
-                                            </>
-                                        )}
-                                    </Button>
-                                    <p className="text-center text-xs text-slate-400">{t('noPayment')}</p>
-                                </>
-                            )}
+                            <div className="flex items-center gap-4">
+                                <div className="shrink-0 text-left">
+                                    <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Total</p>
+                                    <p className="text-2xl font-bold leading-none text-slate-900">{liveTotalLabel}</p>
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    {paymentMethod === 'payNow' ? (
+                                        <Button type="submit" className="w-full h-14 rounded-2xl bg-[#0070ba] hover:bg-[#005ea6] text-white font-bold text-base gap-2" disabled={isSubmitting}>
+                                            {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : (
+                                                <>
+                                                    <CreditCard className="w-5 h-5" />
+                                                    {t('payNow')}
+                                                </>
+                                            )}
+                                        </Button>
+                                    ) : (
+                                        <Button type="submit" className="w-full h-14 rounded-2xl bg-primary text-white font-bold" disabled={isSubmitting}>
+                                            {isSubmitting ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : (
+                                                <>
+                                                    <Wallet className="w-5 h-5 mr-2" />
+                                                    {t('submit')}
+                                                </>
+                                            )}
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                            <p className="text-center text-xs text-slate-400">
+                                {paymentMethod === 'payNow'
+                                    ? (locale === 'en'
+                                        ? "You will be redirected to PayPal to complete your payment."
+                                        : "Do të ridrejtoheni në PayPal për të përfunduar pagesën.")
+                                    : t('noPayment')}
+                            </p>
                         </div>
 
                         {/* Integration of Booking Badges at the bottom of the form island */}
