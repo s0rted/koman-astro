@@ -24,7 +24,7 @@ export const TOURS: Tour[] = [
         price: "54",
         currency: "€",
         duration: "11 Hours",
-        description: "Summer-season classic boat tour (not available in autumn/winter). Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley with kayaking, trekking, and swimming.",
+        description: "May–October classic boat tour (not available November–April). Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley with kayaking, trekking, and swimming.",
         inclusions: [
             "Seamless transfers from Shkoder",
             "Traditional boat navigation",
@@ -186,4 +186,19 @@ export const TOURS: Tour[] = [
 
 export function getTourBySlug(slug: string) {
     return TOURS.find((t) => t.slug === slug);
+}
+
+
+/** Tours that run May–October only (custom/bespoke tours are year-round). */
+export const SEASONAL_TOUR_SLUGS = [
+    "boat-tour",
+    "shkoder-valbona",
+    "local-experience",
+    "kayak-rental",
+    "helicopter-tour",
+] as const;
+
+export function isSeasonalTour(slug: string | undefined | null): boolean {
+    if (!slug) return false;
+    return (SEASONAL_TOUR_SLUGS as readonly string[]).includes(slug);
 }

@@ -7,7 +7,7 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import { useTranslations, useLocale } from "@/i18n/react-context";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
-import { EUR_TO_LEK } from "@/lib/tours";
+import { EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
 
 interface BookingSidebarProps {
     price: string;
@@ -46,6 +46,7 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
 
     // Check if this is the boat tour (transfers included)
     const isBoatTour = tourSlug === 'boat-tour';
+    const isSeasonal = isSeasonalTour(tourSlug);
     const transfersIncludedText = isBoatTour ? td('boat-tour.transfersIncluded') : null;
 
     return (
@@ -62,7 +63,7 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
                     {!isCallPrice && <span className="text-white/60">{t('perPerson')}</span>}
                 </div>
                 <div className="mt-3 flex flex-wrap gap-2">
-                    {isBoatTour && (
+                    {isSeasonal && (
                         <Badge className="bg-sky-500/20 text-sky-100 border-sky-400/30 hover:bg-sky-500/30">
                             {summer('badge')}
                         </Badge>
@@ -74,7 +75,7 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
                         </Badge>
                     )}
                 </div>
-                {isBoatTour && (
+                {isSeasonal && (
                     <p className="text-xs text-white/70 mt-3 leading-relaxed">
                         {summer('short')}{' '}
                         <Link href="/autumn-winter" className="text-sky-200 underline underline-offset-2 hover:text-white">

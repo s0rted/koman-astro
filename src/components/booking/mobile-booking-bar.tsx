@@ -7,7 +7,7 @@ import { Calendar, Bus } from "lucide-react";
 
 
 import { Link } from "@/i18n/routing";
-import { EUR_TO_LEK } from "@/lib/tours";
+import { EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
 
 interface MobileBookingBarProps {
     price: string;
@@ -64,7 +64,7 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
                     <div className="flex flex-col gap-1 mb-1">
                         <p className="text-xs text-slate-500 font-medium line-clamp-1">{title}</p>
                         <div className="flex flex-wrap gap-1">
-                            {tourSlug === 'boat-tour' && (
+                            {isSeasonalTour(tourSlug) && (
                                 <div className="flex items-center gap-1 bg-sky-100 px-1.5 py-0.5 rounded text-[9px] font-bold text-sky-900 uppercase tracking-tight leading-none whitespace-nowrap w-fit">
                                     <span>{summer('badge')}</span>
                                 </div>

@@ -111,7 +111,7 @@ export function FaqJsonLd() {
     const faqData = [
         {
             question: "What time do tours depart?",
-            answer: "In summer, the €54 boat tours depart daily from Shkoder at 7:00 AM (boat from Koman terminal at 9:00 AM). This classic boat tour is summer season only; for autumn/winter see https://www.komanlake.com/en/autumn-winter/."
+            answer: "From May to October, the €54 boat tours depart daily from Shkoder at 7:00 AM (boat from Koman terminal at 9:00 AM). This classic boat tour runs May to October only; for November–April see https://www.komanlake.com/en/autumn-winter/."
         },
         {
             question: "What is included in the boat tour price?",
@@ -123,7 +123,7 @@ export function FaqJsonLd() {
         },
         {
             question: "Do you operate in winter?",
-            answer: "The €54 classic boat tour is summer season only and is not available in autumn/winter. Off-season we offer separate Autumn & Winter experiences on request (weather permitting). See https://www.komanlake.com/en/autumn-winter/."
+            answer: "The classic €54 boat tour and our other standard tours run May to October only. From November to April we offer separate Autumn & Winter experiences on request (weather permitting). See https://www.komanlake.com/en/autumn-winter/."
         },
         {
             question: "How do I book a tour?",

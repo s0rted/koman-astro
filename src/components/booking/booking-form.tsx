@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X, Copy, MessageCircle } from "lucide-react";
-import { TOURS, EUR_TO_LEK } from "@/lib/tours";
+import { TOURS, EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -473,11 +473,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
                     </div>
 
-                    {selectedTourSlug === 'boat-tour' && (
+                    {isSeasonalTour(selectedTourSlug) && (
                         <div className="rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-950" role="status">
                             <p className="font-bold uppercase tracking-wide text-[11px] text-sky-800 mb-1">{summer('badge')}</p>
                             <p className="leading-relaxed">
-                                {summer('bookingNotice')}{' '}
+                                {selectedTourSlug === 'boat-tour' ? summer('bookingNotice') : summer('bookingNoticeGeneric')}{' '}
                                 <a href={locale === 'sq' ? '/sq/vjeshte-dimer/' : '/en/autumn-winter/'} className="font-bold text-primary underline underline-offset-2">
                                     {summer('link')}
                                 </a>

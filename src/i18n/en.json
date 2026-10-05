@@ -110,7 +110,7 @@
         "lunchLabel": "Food & Drinks Not Included",
         "pricePerPerson": "/ person",
         "bookTour": "Book This Tour",
-        "summerOnly": "Summer season only — not available in autumn/winter."
+        "summerOnly": "May to October only — not available November to April."
     },
     "Tours": {
         "title": "Curated",
@@ -204,7 +204,7 @@
         "description": "Everything you need to know before you sail.",
         "q1": {
             "q": "Where does the ferry depart from?",
-            "a": "In summer, the €54 boat tours depart daily from Shkoder at 7:00 AM (boat journey from Koman terminal at 9:00 AM). This classic boat tour is summer season only — for autumn and winter, see our Autumn & Winter experiences."
+            "a": "From May to October, the €54 boat tours depart daily from Shkoder at 7:00 AM (boat journey from Koman terminal at 9:00 AM). This classic boat tour runs May to October only — for November to April, see our Autumn & Winter experiences."
         },
         "q2": {
             "q": "Can I bring my car on the ferry?",
@@ -224,7 +224,7 @@
         },
         "q6": {
             "q": "Do you operate in winter?",
-            "a": "The €54 classic boat tour is summer season only and is not available in autumn/winter. Off-season, we offer separate Autumn & Winter experiences (boat trips, hiking, fishing, guesthouse stays) on request and depending on weather."
+            "a": "The classic €54 boat tour and our other standard tours run May to October only. From November to April we offer separate Autumn & Winter experiences (boat trips, hiking, fishing, guesthouse stays) on request and depending on weather."
         },
         "winterLink": "Explore Autumn & Winter"
     },
@@ -339,7 +339,7 @@
             "contactUs": "Contact Us",
             "includesTransfer": "Includes Transfer"
         },
-        "summerOnly": "The €54 Komani Lake boat tour runs in the summer season only and is not offered in autumn or winter."
+        "summerOnly": "This tour runs May to October only and is not offered from November to April."
     },
     "Common": {
         "bookNow": "Book Now",
@@ -352,7 +352,7 @@
     "ToursData": {
         "boat-tour": {
             "title": "Komani Lake Boat Tour",
-            "description": "Summer season only (not available in autumn/winter). Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
+            "description": "May to October only (not available November to April). Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
             "category": "Full Day Adventure",
             "duration": "11 Hours",
             "price": "54",
@@ -396,8 +396,8 @@
                     "activity": "Arrival back in Shkoder"
                 }
             ],
-            "metaDescription": "Summer-only daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours with transfers.",
-            "summerOnly": "Summer season only — not available in autumn/winter."
+            "metaDescription": "May–October daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours with transfers.",
+            "summerOnly": "May to October only — not available November to April."
         },
         "shkoder-valbona": {
             "title": "Shkoder - Valbona Transfer",
@@ -429,7 +429,8 @@
                     "activity": "Arrival in Valbona"
                 }
             ],
-            "metaDescription": "Daily Shkoder–Valbona transfer via the spectacular Komani Lake ferry. Towering cliffs and crystal-clear waters — the most scenic route into the Albanian Alps."
+            "metaDescription": "Daily Shkoder–Valbona transfer via the spectacular Komani Lake ferry. Towering cliffs and crystal-clear waters — the most scenic route into the Albanian Alps.",
+            "summerOnly": "May to October only — not available November to April."
         },
         "local-experience": {
             "title": "The Local Experience",
@@ -461,7 +462,8 @@
                     "activity": "Heritage tracks, fishing & farewell"
                 }
             ],
-            "metaDescription": "Spend 2–3 days living like a local in the Albanian Alps: heritage Kulla stays, organic cuisine, guided peak hikes to 1250m, and optional mule riding or fishing."
+            "metaDescription": "Spend 2–3 days living like a local in the Albanian Alps: heritage Kulla stays, organic cuisine, guided peak hikes to 1250m, and optional mule riding or fishing.",
+            "summerOnly": "May to October only — not available November to April."
         },
         "kayak-rental": {
             "title": "Kayak & Solo Adventure",
@@ -486,7 +488,8 @@
                     "activity": "Rent by hour or full day"
                 }
             ],
-            "metaDescription": "Rent a kayak on the Shala River and explore secret beaches and silent fjords at your own pace. Includes paddle, life jacket, safety briefing and a map of spots."
+            "metaDescription": "Rent a kayak on the Shala River and explore secret beaches and silent fjords at your own pace. Includes paddle, life jacket, safety briefing and a map of spots.",
+            "summerOnly": "May to October only — not available November to April."
         },
         "helicopter-tour": {
             "title": "Helicopter Sky Cruise",
@@ -519,7 +522,8 @@
                     "activity": "Flight back to Tirana"
                 }
             ],
-            "metaDescription": "Helicopter sky cruise with Viva Air Albania from Tirana over the Riviera, canyons and Komani Lake. Flexible timing with an optional lunch stop at Shala River."
+            "metaDescription": "Helicopter sky cruise with Viva Air Albania from Tirana over the Riviera, canyons and Komani Lake. Flexible timing with an optional lunch stop at Shala River.",
+            "summerOnly": "May to October only — not available November to April."
         },
         "custom-tour": {
             "title": "Custom Tour",
@@ -791,10 +795,11 @@
         "contact": "Contact Us"
     },
     "SummerOnly": {
-        "badge": "Summer only",
-        "short": "Summer season only — not available in autumn/winter.",
-        "notice": "The €54 Komani Lake boat tour runs in the summer season only and is not offered in autumn or winter.",
+        "badge": "May to October only",
+        "short": "May to October only — not available November to April.",
+        "notice": "This tour runs May to October only and is not offered from November to April.",
         "link": "See Autumn & Winter experiences",
-        "bookingNotice": "This €54 boat tour is summer season only and is not available in autumn/winter. For off-season trips, see our Autumn & Winter page."
+        "bookingNotice": "This €54 boat tour runs May to October only. For trips from November to April, see our Autumn & Winter page.",
+        "bookingNoticeGeneric": "This tour runs May to October only. For trips from November to April, see our Autumn & Winter page."
     }
 }

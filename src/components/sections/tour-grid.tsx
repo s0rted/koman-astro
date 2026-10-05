@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Clock, MapPin, Star, Bus } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import Image from "@/components/ui/image";
-import { TOURS, type Tour, EUR_TO_LEK } from "@/lib/tours";
+import { TOURS, type Tour, EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
 import { useTranslations, useLocale } from "@/i18n/react-context";
 
 
@@ -134,7 +134,7 @@ function TourGridContent() {
                             <Badge className="font-bold backdrop-blur-md bg-white/90 text-slate-900 border-none px-3 py-1.5 shadow-sm">
                                 {td(`${tour.slug}.category`)}
                             </Badge>
-                            {tour.slug === 'boat-tour' && (
+                            {isSeasonalTour(tour.slug) && (
                                 <Badge className="font-bold backdrop-blur-md bg-sky-500/95 text-white border-none px-3 py-1.5 shadow-sm">
                                     {summer('badge')}
                                 </Badge>
@@ -169,7 +169,7 @@ function TourGridContent() {
                     <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-3">
                         {td(`${tour.slug}.description`)}
                     </p>
-                    {tour.slug === 'boat-tour' && (
+                    {isSeasonalTour(tour.slug) && (
                         <p className="text-xs font-semibold text-sky-900 bg-sky-50 border border-sky-100 rounded-lg px-3 py-2 mb-6">
                             {summer('short')}{' '}
                             <Link href="/autumn-winter" className="text-primary underline underline-offset-2">
@@ -264,7 +264,10 @@ function TourGridContent() {
 
                             <div className="relative z-10 p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
                                 <div className="max-w-xl text-white">
-                                    <Badge className="bg-amber-400 text-amber-950 hover:bg-amber-500 border-none mb-4 font-bold">Premium Experience</Badge>
+                                    <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
+                                        <Badge className="bg-amber-400 text-amber-950 hover:bg-amber-500 border-none font-bold">Premium Experience</Badge>
+                                        <Badge className="bg-sky-500 text-white border-none font-bold">{summer('badge')}</Badge>
+                                    </div>
                                     <Link href={{ pathname: '/tours/[slug]', params: { slug: helicopter.slug } }}>
                                         <h3 className="text-4xl md:text-6xl font-heading font-bold mb-4 hover:text-white/80 transition-colors cursor-pointer">{td(`${helicopter.slug}.title`)}</h3>
                                     </Link>
