@@ -6,7 +6,7 @@ import { bookingSchema, type BookingValues } from "@/lib/validations/booking";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, type MouseEvent } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { format } from "date-fns";
@@ -20,6 +20,43 @@ import { I18nProvider } from "@/i18n/react-context";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { BookingBadges } from "@/components/booking/booking-badges";
+
+function AddonToggle({
+    label,
+    description,
+    checked,
+    onCheckedChange,
+}: {
+    label: string;
+    description: string;
+    checked: boolean;
+    onCheckedChange: (checked: boolean) => void;
+}) {
+    return (
+        <FormItem className="relative rounded-xl border bg-slate-50/50">
+            {/* Row label is a sibling of the checkbox (htmlFor -> checkbox id).
+                One click writes state only through onCheckedChange. No row onClick,
+                so Radix's bubble-input synthetic click cannot flip it again. */}
+            <FormLabel className="flex cursor-pointer flex-row items-center justify-between gap-4 p-4">
+                <span className="space-y-0.5">
+                    <span className="block text-base font-bold text-slate-800">{label}</span>
+                    <span className="block text-[13px] font-medium text-slate-500">{description}</span>
+                </span>
+                <span className="h-6 w-6 shrink-0" aria-hidden="true" />
+            </FormLabel>
+            <div className="absolute right-4 top-1/2 z-10 -translate-y-1/2">
+                <FormControl>
+                    <Checkbox
+                        checked={checked}
+                        onCheckedChange={(value) => onCheckedChange(value === true)}
+                        onClick={(event) => event.stopPropagation()}
+                        className="w-6 h-6"
+                    />
+                </FormControl>
+            </div>
+        </FormItem>
+    );
+}
 
 interface BookingFormProps {
     initialValues: Partial<BookingValues>;
@@ -175,6 +212,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             // === PAYPAL FLOW: Redirect to PayPal checkout ===
             const tourName = getLocalizedTourName();
             const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)`);
+            // Same computed total shown in the sticky bar (guests, transfer, kayak, ferry, extra day).
             const amount = totalPrice.toFixed(2);
             const returnUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?success=true&tour=${data.tour}`);
             const cancelUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?tour=${data.tour}`);
@@ -202,18 +240,6 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             setIsSubmitting(false);
             setIsSuccess(true);
         }
-    };
-
-    // Radix Checkbox, when inside a form, mirrors `checked` onto a hidden input
-    // and dispatches a synthetic click for that update. The row onClick used to
-    // handle that click too, flipping the add-on again and looping (React #185).
-    const toggleAddonFromRow = (
-        event: MouseEvent,
-        onChange: (value: boolean) => void,
-        checked: boolean | undefined,
-    ) => {
-        if (!event.nativeEvent.isTrusted) return;
-        onChange(!checked);
     };
 
     const handleGuestChange = (type: "adults" | "children" | "seniors", operation: "add" | "sub") => {
@@ -262,6 +288,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     }
 
     return (
+        <>
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
             {/* Live Price Header */}
             <div className="bg-slate-900 text-white p-6 md:px-12 flex justify-between items-center sticky top-0 md:relative z-10">
@@ -350,7 +377,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 </div>
             </div>
 
-            <div className="p-8 md:p-12">
+            <div className="p-8 md:p-12 pb-28 md:pb-32">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
                         {/* Step 1: Date */}
@@ -457,20 +484,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         control={form.control}
                                         name="addExtraDay"
                                         render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
-                                                <div className="space-y-0.5">
-                                                    <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('addExtraDay')}</FormLabel>
-                                                    <p className="text-[13px] text-slate-500 font-medium">{t('addExtraDayDesc')}</p>
-                                                </div>
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={!!field.value}
-                                                        onCheckedChange={(checked) => field.onChange(checked === true)}
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        className="w-6 h-6"
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
+                                            <AddonToggle
+                                                label={t('addExtraDay')}
+                                                description={t('addExtraDayDesc')}
+                                                checked={!!field.value}
+                                                onCheckedChange={(checked) => field.onChange(checked)}
+                                            />
                                         )}
                                     />
                                 )}
@@ -480,20 +499,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         control={form.control}
                                         name="addTransfer"
                                         render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
-                                                <div className="space-y-0.5">
-                                                    <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('transfer')}</FormLabel>
-                                                    <p className="text-[13px] text-slate-500 font-medium">{t('transferDesc')}</p>
-                                                </div>
-                                                <FormControl>
-                                                    <Checkbox
-                                                        checked={!!field.value}
-                                                        onCheckedChange={(checked) => field.onChange(checked === true)}
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        className="w-6 h-6"
-                                                    />
-                                                </FormControl>
-                                            </FormItem>
+                                            <AddonToggle
+                                                label={t('transfer')}
+                                                description={t('transferDesc')}
+                                                checked={!!field.value}
+                                                onCheckedChange={(checked) => field.onChange(checked)}
+                                            />
                                         )}
                                     />
                                 ) : (
@@ -515,20 +526,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     control={form.control}
                                     name="addKayak"
                                     render={({ field }) => (
-                                        <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
-                                            <div className="space-y-0.5">
-                                                <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('kayak')}</FormLabel>
-                                                <p className="text-[13px] text-slate-500 font-medium">{t('kayakDesc')}</p>
-                                            </div>
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={!!field.value}
-                                                    onCheckedChange={(checked) => field.onChange(checked === true)}
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    className="w-6 h-6"
-                                                />
-                                            </FormControl>
-                                        </FormItem>
+                                        <AddonToggle
+                                            label={t('kayak')}
+                                            description={t('kayakDesc')}
+                                            checked={!!field.value}
+                                            onCheckedChange={(checked) => field.onChange(checked)}
+                                        />
                                     )}
                                 />
 
@@ -536,20 +539,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     control={form.control}
                                     name="addFerry"
                                     render={({ field }) => (
-                                        <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
-                                            <div className="space-y-0.5">
-                                                <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('ferry')}</FormLabel>
-                                                <p className="text-[13px] text-slate-500 font-medium">{t('ferryDesc')}</p>
-                                            </div>
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={!!field.value}
-                                                    onCheckedChange={(checked) => field.onChange(checked === true)}
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    className="w-6 h-6"
-                                                />
-                                            </FormControl>
-                                        </FormItem>
+                                        <AddonToggle
+                                            label={t('ferry')}
+                                            description={t('ferryDesc')}
+                                            checked={!!field.value}
+                                            onCheckedChange={(checked) => field.onChange(checked)}
+                                        />
                                     )}
                                 />
                             </div>
@@ -737,6 +732,23 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     </form>
                 </Form>
             </div>
-        </div >
+        </div>
+
+            <div className="fixed bottom-0 inset-x-0 z-40 border-t border-slate-700/80 bg-slate-900 text-white shadow-[0_-8px_24px_rgba(15,23,42,0.28)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+                <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-3">
+                    <div className="min-w-0">
+                        <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Total</p>
+                        <p className="text-xs text-slate-400 truncate">{getLocalizedTourName()}</p>
+                    </div>
+                    <p className="text-2xl font-bold leading-none shrink-0">
+                        {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
+                            locale === 'sq'
+                                ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
+                                : `€${totalPrice.toFixed(0)}`
+                        )}
+                    </p>
+                </div>
+            </div>
+        </>
     );
 }
