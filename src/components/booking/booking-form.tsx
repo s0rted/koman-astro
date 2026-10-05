@@ -6,7 +6,7 @@ import { bookingSchema, type BookingValues } from "@/lib/validations/booking";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { format } from "date-fns";
@@ -202,6 +202,18 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             setIsSubmitting(false);
             setIsSuccess(true);
         }
+    };
+
+    // Radix Checkbox, when inside a form, mirrors `checked` onto a hidden input
+    // and dispatches a synthetic click for that update. The row onClick used to
+    // handle that click too, flipping the add-on again and looping (React #185).
+    const toggleAddonFromRow = (
+        event: MouseEvent,
+        onChange: (value: boolean) => void,
+        checked: boolean | undefined,
+    ) => {
+        if (!event.nativeEvent.isTrusted) return;
+        onChange(!checked);
     };
 
     const handleGuestChange = (type: "adults" | "children" | "seniors", operation: "add" | "sub") => {
@@ -445,7 +457,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         control={form.control}
                                         name="addExtraDay"
                                         render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
+                                            <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
                                                 <div className="space-y-0.5">
                                                     <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('addExtraDay')}</FormLabel>
                                                     <p className="text-[13px] text-slate-500 font-medium">{t('addExtraDayDesc')}</p>
@@ -468,7 +480,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         control={form.control}
                                         name="addTransfer"
                                         render={({ field }) => (
-                                            <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
+                                            <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
                                                 <div className="space-y-0.5">
                                                     <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('transfer')}</FormLabel>
                                                     <p className="text-[13px] text-slate-500 font-medium">{t('transferDesc')}</p>
@@ -503,7 +515,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     control={form.control}
                                     name="addKayak"
                                     render={({ field }) => (
-                                        <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
+                                        <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
                                             <div className="space-y-0.5">
                                                 <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('kayak')}</FormLabel>
                                                 <p className="text-[13px] text-slate-500 font-medium">{t('kayakDesc')}</p>
@@ -524,7 +536,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     control={form.control}
                                     name="addFerry"
                                     render={({ field }) => (
-                                        <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
+                                        <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={(event) => toggleAddonFromRow(event, field.onChange, field.value)}>
                                             <div className="space-y-0.5">
                                                 <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('ferry')}</FormLabel>
                                                 <p className="text-[13px] text-slate-500 font-medium">{t('ferryDesc')}</p>
