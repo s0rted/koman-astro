@@ -5,7 +5,7 @@ import {
     json, parseBooking, sameOrigin, tourTitle, type Env,
 } from "./_paypal";
 
-const BOOKING_PATHS: Record<string, string> = { en: "/en/book", sq: "/sq/rezervo" };
+const BOOKING_PATHS: Record<string, string> = { en: "/en/book/", sq: "/sq/rezervo/" };
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     if (!sameOrigin(request)) return json({ error: "forbidden" }, 403);
