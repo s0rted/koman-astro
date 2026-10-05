@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { AutumnWinterPage } from '../../components/pages/autumn-winter-page';
+import { t, tRaw } from '../../i18n/utils';
+
+const locale = 'sq';
+
+const dict = {
+  hero: {
+    badge: t(locale, 'AutumnWinterPage.hero.badge'),
+    title: t(locale, 'AutumnWinterPage.hero.title'),
+    subtitle: t(locale, 'AutumnWinterPage.hero.subtitle'),
+    description: t(locale, 'AutumnWinterPage.hero.description'),
+  },
+  boat: {
+    title: t(locale, 'AutumnWinterPage.boat.title'),
+    text: t(locale, 'AutumnWinterPage.boat.text'),
+  },
+  hiking: {
+    title: t(locale, 'AutumnWinterPage.hiking.title'),
+    text: t(locale, 'AutumnWinterPage.hiking.text'),
+  },
+  fishing: {
+    title: t(locale, 'AutumnWinterPage.fishing.title'),
+    text: t(locale, 'AutumnWinterPage.fishing.text'),
+  },
+  rakia: {
+    title: t(locale, 'AutumnWinterPage.rakia.title'),
+    text: t(locale, 'AutumnWinterPage.rakia.text'),
+  },
+  guesthouse: {
+    title: t(locale, 'AutumnWinterPage.guesthouse.title'),
+    text: t(locale, 'AutumnWinterPage.guesthouse.text'),
+    guestsTitle: t(locale, 'AutumnWinterPage.guesthouse.guestsTitle'),
+    guests: tRaw(locale, 'AutumnWinterPage.guesthouse.guests') as string[],
+  },
+  mornings: {
+    title: t(locale, 'AutumnWinterPage.mornings.title'),
+    p1: t(locale, 'AutumnWinterPage.mornings.p1'),
+    p2: t(locale, 'AutumnWinterPage.mornings.p2'),
+  },
+  closing: {
+    title: t(locale, 'AutumnWinterPage.closing.title'),
+    p1: t(locale, 'AutumnWinterPage.closing.p1'),
+    p2: t(locale, 'AutumnWinterPage.closing.p2'),
+  },
+  cta: {
+    title: t(locale, 'AutumnWinterPage.cta.title'),
+    description: t(locale, 'AutumnWinterPage.cta.description'),
+    whatsapp: t(locale, 'AutumnWinterPage.cta.whatsapp'),
+    contact: t(locale, 'AutumnWinterPage.cta.contact'),
+    whatsappMessage: t(locale, 'AutumnWinterPage.cta.whatsappMessage'),
+  },
+};
+
+const title = t(locale, 'AutumnWinterPage.metaTitle');
+const description = t(locale, 'AutumnWinterPage.metaDescription');
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <AutumnWinterPage client:load dict={dict} />
+</Layout>

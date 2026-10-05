@@ -57,6 +57,7 @@ function NavbarContent({ pathname }: { pathname: string }) {
 
     const NAV_LINKS = [
         { label: t('tours'), href: '/tours' as const },
+        { label: t('autumnWinter'), href: '/autumn-winter' as const },
         { label: t('about'), href: '/about' as const },
         { label: t('gallery'), href: '/gallery' as const },
         { label: t('conservation'), href: '/conservation' as const },

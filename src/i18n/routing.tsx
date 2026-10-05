@@ -32,6 +32,8 @@ export function Link({ href, children, ...props }: any) {
             localizedPath = '/politika-e-privatise';
         } else if (path === '/terms') {
             localizedPath = '/termat-dhe-kushtet';
+        } else if (path === '/autumn-winter') {
+            localizedPath = '/vjeshte-dimer';
         }
 
         if (!localizedPath.startsWith('/sq') && !localizedPath.startsWith('http')) {

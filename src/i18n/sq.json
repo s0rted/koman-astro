@@ -78,7 +78,8 @@
         "contact": "Kontakti",
         "bookNow": "Rezervo Turin",
         "menu": "Menu",
-        "language": "Gjuha"
+        "language": "Gjuha",
+        "autumnWinter": "Vjeshtë & Dimër"
     },
     "TrustBar": {
         "rating": "Vlerësimi 4.9/5",
@@ -656,5 +657,64 @@
             "text": "Mario Molla është një sipërmarrës lokal që ofron një alternativë ndihmuese dhe miqësore ndaj tragetit publik dhe do të organizojë marrjen nga Shkodra dhe udhëtimin e mëtejshëm nga Fierza si pjesë e 'paketës' së tij.",
             "stars": 5
         }
-    ]
+    ],
+    "SeasonBanner": {
+        "text": "E re: Përvojat e Vjeshtës & Dimrit, jetoni si vendasit",
+        "cta": "Eksploro",
+        "dismiss": "Mbyll njoftimin"
+    },
+    "AutumnWinterPage": {
+        "metaTitle": "Përvojat e Vjeshtës & Dimrit | Turne Liqeni i Komanit",
+        "metaDescription": "Ngadalësoni ritmin dhe jetoni si vendasit. Udhëtime me varkë, ecje, peshkim tradicional, raki shtëpie dhe qëndrim në bujtinë gjatë vjeshtës dhe dimrit në Liqenin e Komanit.",
+        "hero": {
+            "badge": "Përvoja Stinore",
+            "title": "Përjetoni Vjeshtën & Dimrin",
+            "subtitle": "Si Vendasit",
+            "description": "Kur turmat e verës largohen, rajoni ynë zbulon anën e tij më autentike dhe paqësore. Vjeshta dhe dimri ju ftojnë të ngadalësoni ritmin, të lidheni me natyrën dhe të përjetoni traditat lokale që janë trashëguar ndër breza."
+        },
+        "boat": {
+            "title": "Zbuloni Bukurinë e Stinës",
+            "text": "Bashkohuni me ne për udhëtime të paharrueshme me varkë nëpër ujëra të qeta të rrethuara nga peizazhe stinore mahnitëse. Ngjyrat e arta të vjeshtës dhe atmosfera e qetë e dimrit krijojnë ambientin e përsosur për të eksploruar bregun, gjiret e fshehura dhe vendet tradicionale të peshkimit."
+        },
+        "hiking": {
+            "title": "Ecje në Natyrë të Paprekur",
+            "text": "Përjetoni bukurinë e fushave dhe maleve në ecje të guiduara përmes shtigjeve piktoreske, pyjeve dhe pikave panoramike. Temperaturat më të freskëta e bëjnë vjeshtën dhe dimrin ideale për ecje, duke ju lejuar të shijoni plotësisht bukurinë natyrore dhe rrethinën e qetë."
+        },
+        "fishing": {
+            "title": "Peshkim Tradicional me Rrjeta",
+            "text": "Hyni në jetën e përditshme të peshkatarëve lokalë dhe mësoni artin tradicional të peshkimit me rrjeta. Kjo përvojë praktike ofron një vështrim unik në një mënyrë jete që mbetet e lidhur thellësisht me detin dhe trashëgiminë lokale."
+        },
+        "rakia": {
+            "title": "Koha e Rakisë: Një Shije e Mikpritjes",
+            "text": "Asnjë përvojë lokale nuk është e plotë pa ndarë një gotë raki shtëpie. Mblidhuni rreth tryezës, shijoni histori lokale, meze tradicionale dhe mikpritjen e ngrohtë që përcakton kulturën tonë. Është një moment i thjeshtë por i paharrueshëm që bashkon njerëzit."
+        },
+        "guesthouse": {
+            "title": "Qëndroni në Bujtinën Tonë",
+            "text": "Zgjatni përvojën tuaj me një qëndrim në bujtinën tonë të rehatshme. Larg zhurmës dhe stresit të jetës së përditshme, do të gjeni rehati, ngrohtësi dhe mikpritje të sinqertë.",
+            "guestsTitle": "Mysafirët tanë gëzojnë:",
+            "guests": [
+                "Akomodim të rehatshëm në një ambient të qetë",
+                "Vakte tradicionale shtëpie të përgatitura me përbërës të freskët lokalë",
+                "Specialitete stinore të frymëzuara nga recetat lokale",
+                "Atmosferë të relaksuar dhe mikpritëse"
+            ]
+        },
+        "mornings": {
+            "title": "Mëngjese të Ngadalta & Shije Lokale",
+            "p1": "Zgjoni pa nxitim. Shijoni një mëngjes të ngadaltë me djathëra lokalë, bukë të freskët, reçel shtëpie, produkte stinore dhe kafe të sapopërgatitur, duke shijuar bukurinë e qetë të peizazhit përreth.",
+            "p2": "Këtu, mëngjeset janë për t'u shijuar, bisedat janë pa nxitim, dhe çdo vakt është pjesë e përvojës."
+        },
+        "closing": {
+            "title": "Jetoni Si Vendasit",
+            "p1": "Qoftë se vini për një arratisje fundjavore apo një qëndrim më të gjatë, përvojat tona të vjeshtës dhe dimrit ofrojnë mundësinë për të zbuluar tradita autentike lokale, natyrë, ushqim të shkëlqyer dhe momente kuptimplota.",
+            "p2": "Ejani si vizitorë dhe largohuni me kujtime, miqësi dhe një lidhje të vërtetë me vendin dhe njerëzit e tij."
+        },
+        "cta": {
+            "title": "Gati të përjetoni vjeshtën & dimrin me ne?",
+            "description": "Na tregoni çfarë keni ndërmend — do t'ju ndihmojmë të planifikoni një qëndrim që ndihet lokal, i qetë dhe i paharrueshëm.",
+            "whatsapp": "Pyetni në WhatsApp",
+            "contact": "Faqja e kontaktit",
+            "whatsappMessage": "Përshëndetje! Jam i interesuar për përvojat tuaja të Vjeshtës & Dimrit. Mund të më ndihmoni të planifikoj një vizitë?"
+        }
+    }
 }

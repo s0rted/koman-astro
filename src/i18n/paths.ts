@@ -8,6 +8,7 @@ const PATHNAMES: Record<string, Record<string, string>> = {
     '/book': { en: '/book', sq: '/rezervo' },
     '/privacy': { en: '/privacy', sq: '/politika-e-privatise' },
     '/terms': { en: '/terms', sq: '/termat-dhe-kushtet' },
+    '/autumn-winter': { en: '/autumn-winter', sq: '/vjeshte-dimer' },
 };
 
 /**
@@ -37,6 +38,7 @@ const SQ_SEGMENT_TO_KEY: Record<string, string> = {
     'rezervo': '/book',
     'politika-e-privatise': '/privacy',
     'termat-dhe-kushtet': '/terms',
+    'vjeshte-dimer': '/autumn-winter',
 };
 
 const EN_SEGMENT_TO_KEY: Record<string, string> = {
@@ -48,6 +50,7 @@ const EN_SEGMENT_TO_KEY: Record<string, string> = {
     'book': '/book',
     'privacy': '/privacy',
     'terms': '/terms',
+    'autumn-winter': '/autumn-winter',
 };
 
 /**

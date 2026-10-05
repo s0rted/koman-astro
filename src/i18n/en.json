@@ -78,7 +78,8 @@
         "contact": "Contact",
         "bookNow": "Book Tour",
         "menu": "Menu",
-        "language": "Language"
+        "language": "Language",
+        "autumnWinter": "Autumn & Winter"
     },
     "TrustBar": {
         "rating": "4.9/5 Rating",
@@ -656,5 +657,64 @@
             "text": "Mario Molla is a local entrepreneur offering a helpful and friendly alternative to the public ferry and will organise pick up from Shkodra and onward travel from Fierze as part of his 'package'.",
             "stars": 5
         }
-    ]
+    ],
+    "SeasonBanner": {
+        "text": "New: Autumn & Winter experiences, live like a local",
+        "cta": "Explore",
+        "dismiss": "Dismiss announcement"
+    },
+    "AutumnWinterPage": {
+        "metaTitle": "Autumn & Winter Experiences | Komani Lake Tours",
+        "metaDescription": "Slow down and live like a local. Boat trips, hiking, traditional fishing, homemade rakia, and cozy guesthouse stays through autumn and winter at Komani Lake.",
+        "hero": {
+            "badge": "Seasonal Experiences",
+            "title": "Experience Autumn & Winter",
+            "subtitle": "Like a Local",
+            "description": "When the summer crowds fade away, our region reveals its most authentic and peaceful side. Autumn and winter invite you to slow down, connect with nature, and experience local traditions that have been passed down through generations."
+        },
+        "boat": {
+            "title": "Discover the Beauty of the Season",
+            "text": "Join us for unforgettable boat trips across calm waters surrounded by breathtaking seasonal landscapes. The golden colors of autumn and the tranquil atmosphere of winter create the perfect setting for exploring the coastline, hidden bays, and traditional fishing spots."
+        },
+        "hiking": {
+            "title": "Hiking Through Untouched Nature",
+            "text": "Experience the beauty of the countryside on guided hikes through scenic trails, forests, and panoramic viewpoints. The cooler temperatures make autumn and winter ideal for walking, allowing you to fully enjoy the natural beauty and peaceful surroundings."
+        },
+        "fishing": {
+            "title": "Traditional Fishing with Nets",
+            "text": "Step into the daily life of local fishermen and learn the traditional art of fishing with nets. This hands-on experience offers a unique glimpse into a way of life that remains deeply connected to the sea and local heritage."
+        },
+        "rakia": {
+            "title": "Rakia Time: A Taste of Hospitality",
+            "text": "No local experience is complete without sharing a glass of homemade rakia. Gather around the table, enjoy local stories, traditional snacks, and the warm hospitality that defines our culture. It is a simple yet memorable moment that brings people together."
+        },
+        "guesthouse": {
+            "title": "Stay at Our Guesthouse",
+            "text": "Extend your experience with a stay in our cozy guesthouse. Far from the noise and stress of everyday life, you will find comfort, warmth, and genuine hospitality.",
+            "guestsTitle": "Our guests enjoy:",
+            "guests": [
+                "Comfortable accommodation in a peaceful setting",
+                "Traditional homemade meals prepared with fresh local ingredients",
+                "Seasonal specialties inspired by local recipes",
+                "A relaxed and welcoming atmosphere"
+            ]
+        },
+        "mornings": {
+            "title": "Slow Mornings & Local Flavours",
+            "p1": "Wake up without rushing. Enjoy a slow breakfast featuring local cheeses, fresh bread, homemade jams, seasonal products, and freshly brewed coffee while taking in the quiet beauty of the surrounding landscape.",
+            "p2": "Here, mornings are meant to be savored, conversations are unhurried, and every meal is part of the experience."
+        },
+        "closing": {
+            "title": "Live Like a Local",
+            "p1": "Whether you come for a weekend escape or a longer stay, our autumn and winter experiences offer the opportunity to discover authentic local traditions, nature, great food, and meaningful moments.",
+            "p2": "Come as a visitor and leave with memories, friendships, and a true connection to the place and its people."
+        },
+        "cta": {
+            "title": "Ready to experience autumn & winter with us?",
+            "description": "Tell us what you have in mind — we will help you plan a stay that feels local, slow, and memorable.",
+            "whatsapp": "Inquire on WhatsApp",
+            "contact": "Contact page",
+            "whatsappMessage": "Hi! I'm interested in your Autumn & Winter experiences. Can you help me plan a visit?"
+        }
+    }
 }

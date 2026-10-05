@@ -68,6 +68,7 @@ function FooterContent() {
                         <div className="font-bold text-white mb-6 uppercase tracking-wider text-xs">{t('experiences')}</div>
                         <ul className="space-y-4 text-sm">
                             <li><Link href="/tours" className="hover:text-primary transition-colors">{n('tours')}</Link></li>
+                            <li><Link href="/autumn-winter" className="hover:text-primary transition-colors">{n('autumnWinter')}</Link></li>
                             <li><Link href="/about" className="hover:text-primary transition-colors">{n('about')}</Link></li>
                             <li><Link href="/conservation" className="hover:text-primary transition-colors">{n('conservation')}</Link></li>
                         </ul>
