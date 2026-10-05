@@ -54,7 +54,9 @@ function FooterContent() {
                                 <Instagram className="w-5 h-5" />
                             </a>
                             <a
-                                href="#"
+                                href="https://www.facebook.com/share/1dCYFoauaa/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 aria-label="Follow us on Facebook"
                                 className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                             >

@@ -26,7 +26,7 @@
         "transfer": "Shkoder - Valbona Transfer",
         "transferDesc": "We handle your transport (+€30pp)",
         "kayak": "Kayak Rental",
-        "kayakDesc": "Explore hidden corners (+€20/hr)",
+        "kayakDesc": "Explore hidden corners (+€20 per person)",
         "ferry": "Ferry Ticket",
         "ferryDesc": "Include ferry crossing (+€10pp)",
         "addExtraDay": "Add Extra Day (+€30pp)",
@@ -68,7 +68,15 @@
         "payNow": "Pay Now with PayPal",
         "payInPerson": "Pay in Person (Cash)",
         "payNowDesc": "Pay the deposit or full amount via PayPal to secure your spot instantly.",
-        "payInPersonDesc": "Pay in person upon arrival at the lake."
+        "payInPersonDesc": "Pay in person upon arrival at the lake.",
+        "sendStepTitle": "Almost done: send your request",
+        "sendStepMessage": "Your booking isn't submitted yet. Send the summary below via WhatsApp or email so we can confirm your spot.",
+        "sendWhatsApp": "Send via WhatsApp",
+        "sendEmail": "Send via Email",
+        "copySummary": "Copy summary",
+        "copiedSummary": "Copied!",
+        "editBooking": "Edit booking details",
+        "sendStepNote": "We only receive your request after you send it."
     },
     "Navbar": {
         "tours": "Tours",
@@ -212,7 +220,12 @@
         "q5": {
             "q": "Is the trip suitable for children?",
             "a": "Absolutely! The boat ride is smooth and safe. We provide life jackets for all ages. The Shala River is also calm and perfect for families."
-        }
+        },
+        "q6": {
+            "q": "Do you operate in winter?",
+            "a": "Our main season runs from March to November. Winter tours are available on request and depend on weather — see our Autumn & Winter page for seasonal experiences."
+        },
+        "winterLink": "Explore Autumn & Winter"
     },
     "ConservationPage": {
         "hero": {
@@ -380,7 +393,8 @@
                     "time": "06:00 PM",
                     "activity": "Arrival back in Shkoder"
                 }
-            ]
+            ],
+            "metaDescription": "Daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours with transfers included."
         },
         "shkoder-valbona": {
             "title": "Shkoder - Valbona Transfer",
@@ -411,7 +425,8 @@
                     "time": "01:00 PM",
                     "activity": "Arrival in Valbona"
                 }
-            ]
+            ],
+            "metaDescription": "Daily Shkoder–Valbona transfer via the spectacular Komani Lake ferry. Towering cliffs and crystal-clear waters — the most scenic route into the Albanian Alps."
         },
         "local-experience": {
             "title": "The Local Experience",
@@ -442,7 +457,8 @@
                     "time": "Day 3",
                     "activity": "Heritage tracks, fishing & farewell"
                 }
-            ]
+            ],
+            "metaDescription": "Spend 2–3 days living like a local in the Albanian Alps: heritage Kulla stays, organic cuisine, guided peak hikes to 1250m, and optional mule riding or fishing."
         },
         "kayak-rental": {
             "title": "Kayak & Solo Adventure",
@@ -466,7 +482,8 @@
                     "time": "Duration",
                     "activity": "Rent by hour or full day"
                 }
-            ]
+            ],
+            "metaDescription": "Rent a kayak on the Shala River and explore secret beaches and silent fjords at your own pace. Includes paddle, life jacket, safety briefing and a map of spots."
         },
         "helicopter-tour": {
             "title": "Helicopter Sky Cruise",
@@ -498,7 +515,8 @@
                     "time": "Return",
                     "activity": "Flight back to Tirana"
                 }
-            ]
+            ],
+            "metaDescription": "Helicopter sky cruise with Viva Air Albania from Tirana over the Riviera, canyons and Komani Lake. Flexible timing with an optional lunch stop at Shala River."
         },
         "custom-tour": {
             "title": "Custom Tour",
@@ -518,7 +536,8 @@
                     "time": "Custom",
                     "activity": "Your choice of departure and destinations"
                 }
-            ]
+            ],
+            "metaDescription": "Design a private Komani Lake adventure — custom boat route, flexible timing or a special event with a dedicated local guide. Contact us to tailor every detail."
         }
     },
     "Legal": {
@@ -758,5 +777,14 @@
             "guesthouse": "Guesthouse stay",
             "mornings": "Quiet morning landscape"
         }
+    },
+    "NotFound": {
+        "metaTitle": "Page Not Found | Komani Lake Tours",
+        "metaDescription": "This page could not be found. Explore our Komani Lake boat tours, or get in touch to plan your trip.",
+        "title": "This page sailed away",
+        "description": "The link may be broken or the page may have moved. Head home, browse our tours, or contact us — we're happy to help.",
+        "home": "Back Home",
+        "tours": "View Tours",
+        "contact": "Contact Us"
     }
 }

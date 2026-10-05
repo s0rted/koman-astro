@@ -10,7 +10,13 @@ export default defineConfig({
   site: 'https://www.komanlake.com',
   output: 'static',
   compressHTML: true,
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap({
+    filter: (page) => {
+      // Root `/` is an English alias of `/en/` — keep only localized homes in the sitemap.
+      const url = page.replace(/\/$/, '');
+      return url !== 'https://www.komanlake.com';
+    },
+  })],
   vite: {
     plugins: [tailwindcss()],
     ssr: {

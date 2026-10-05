@@ -50,7 +50,7 @@ export function localizeHref(href: string, locale: string): string {
         out = localizedPath(clean === '' ? '/' : clean, locale);
     }
     if (clean === '/' || clean === '') out = `/${locale}/`;
-    else if (trailing) out = `${out}/`;
+    else if (!out.endsWith('/')) out = `${out}/`;
     return `${out}${suffix}`;
 }
 

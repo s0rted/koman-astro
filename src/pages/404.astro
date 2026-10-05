@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getMessages, t } from '../i18n/utils';
+
+// Cloudflare Pages serves this as 404.html for missing routes.
+// Prefer English copy; language switcher still works via Layout.
+const locale = 'en';
+const messages = getMessages(locale);
+const title = t(locale, 'NotFound.metaTitle');
+const description = t(locale, 'NotFound.metaDescription');
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <main class="flex min-h-screen flex-col items-center justify-center px-4 pt-32 pb-24 bg-white">
+    <div class="max-w-lg text-center space-y-6">
+      <p class="text-sm font-bold uppercase tracking-[0.2em] text-primary">404</p>
+      <h1 class="font-heading text-4xl md:text-5xl font-bold text-slate-900 text-balance">
+        {t(locale, 'NotFound.title')}
+      </h1>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        {t(locale, 'NotFound.description')}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+        <a
+          href="/en/"
+          class="inline-flex items-center justify-center rounded-full bg-primary text-white font-bold h-12 px-8 hover:bg-primary/90 transition-colors"
+        >
+          {t(locale, 'NotFound.home')}
+        </a>
+        <a
+          href="/en/tours/"
+          class="inline-flex items-center justify-center rounded-full border border-slate-200 text-slate-900 font-bold h-12 px-8 hover:bg-slate-50 transition-colors"
+        >
+          {t(locale, 'NotFound.tours')}
+        </a>
+        <a
+          href="/en/contact/"
+          class="inline-flex items-center justify-center rounded-full border border-slate-200 text-slate-900 font-bold h-12 px-8 hover:bg-slate-50 transition-colors"
+        >
+          {t(locale, 'NotFound.contact')}
+        </a>
+      </div>
+      <p class="text-sm text-slate-500 pt-4">
+        <a href="/sq/" class="underline hover:text-primary transition-colors">Shqip</a>
+        {' · '}
+        <a href="/en/" class="underline hover:text-primary transition-colors">English</a>
+      </p>
+    </div>
+  </main>
+</Layout>

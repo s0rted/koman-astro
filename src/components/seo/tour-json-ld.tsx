@@ -5,8 +5,12 @@ interface TourJsonLdProps {
     url: string;
 }
 
+function isNumericPrice(price: string): boolean {
+    return price !== "Call" && price !== "Contact" && !Number.isNaN(Number(price));
+}
+
 export function TourJsonLd({ tour, url }: TourJsonLdProps) {
-    const tourProductSchema = {
+    const tourProductSchema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "Product",
         "name": tour.title,
@@ -16,7 +20,12 @@ export function TourJsonLd({ tour, url }: TourJsonLdProps) {
             "@type": "Brand",
             "name": "Komani Lake Tours"
         },
-        "offers": {
+        // Re-add aggregateRating only with a verifiable public source (e.g. Google/TripAdvisor).
+        // Previous values (4.9 / 127) had no citable origin and were removed.
+    };
+
+    if (isNumericPrice(tour.price)) {
+        tourProductSchema.offers = {
             "@type": "Offer",
             "url": url,
             "priceCurrency": "EUR",
@@ -28,17 +37,10 @@ export function TourJsonLd({ tour, url }: TourJsonLdProps) {
                 "name": "Komani Lake Tours",
                 "url": "https://www.komanlake.com"
             }
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "127",
-            "bestRating": "5",
-            "worstRating": "1"
-        }
-    };
+        };
+    }
 
-    const tripSchema = {
+    const tripSchema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "TouristTrip",
         "name": tour.title,
@@ -60,13 +62,16 @@ export function TourJsonLd({ tour, url }: TourJsonLdProps) {
                 "@type": "Person",
                 "name": "Mario Molla"
             }
-        },
-        "offers": {
+        }
+    };
+
+    if (isNumericPrice(tour.price)) {
+        tripSchema.offers = {
             "@type": "Offer",
             "price": tour.price,
             "priceCurrency": "EUR"
-        }
-    };
+        };
+    }
 
     const graphSchema = {
         "@context": "https://schema.org",
@@ -98,7 +103,7 @@ export function FaqJsonLd() {
         },
         {
             question: "Do you operate in winter?",
-            answer: "Our main season runs from March to November. Winter tours are available on request but depend on weather conditions."
+            answer: "Our main season runs from March to November. Winter tours are available on request but depend on weather conditions. See https://www.komanlake.com/en/autumn-winter/ for seasonal experiences."
         },
         {
             question: "How do I book a tour?",
@@ -127,55 +132,9 @@ export function FaqJsonLd() {
     );
 }
 
-// Review aggregate schema
+// Business review aggregate removed — no verifiable public source for invented reviews
+// (e.g. 'Sarah Jenkins', 'Marco Rossi') or aggregateRating 4.9/127.
+// Re-add only when backed by a real Google/TripAdvisor (or similar) listing.
 export function ReviewJsonLd() {
-    const reviewSchema = {
-        "@context": "https://schema.org",
-        "@type": "TravelAgency",
-        "name": "Komani Lake Tours",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "127",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
-        "review": [
-            {
-                "@type": "Review",
-                "author": {
-                    "@type": "Person",
-                    "name": "Sarah Jenkins"
-                },
-                "datePublished": "2026-01-15",
-                "reviewBody": "Absolutely magical! Mario and his team made this the highlight of our Albania trip. The fjords are breathtaking.",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5",
-                    "bestRating": "5"
-                }
-            },
-            {
-                "@type": "Review",
-                "author": {
-                    "@type": "Person",
-                    "name": "Marco Rossi"
-                },
-                "datePublished": "2026-01-10",
-                "reviewBody": "Professional service from start to finish. The Shala River is like Thailand but in Europe!",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5",
-                    "bestRating": "5"
-                }
-            }
-        ]
-    };
-
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
-        />
-    );
+    return null;
 }

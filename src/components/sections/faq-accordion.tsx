@@ -7,7 +7,8 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { RevealOnScroll } from "@/components/animations/reveal-on-scroll";
-import { useTranslations } from "@/i18n/react-context";
+import { useTranslations, useLocale } from "@/i18n/react-context";
+import { Link } from "@/i18n/routing";
 
 import { I18nProvider } from "@/i18n/react-context";
 
@@ -24,6 +25,7 @@ export function FaqAccordion({ messages, locale }: { messages?: any; locale?: st
 
 function FaqAccordionContent() {
     const t = useTranslations('Faq');
+    const locale = useLocale();
 
     const FAQS = [
         {
@@ -45,6 +47,12 @@ function FaqAccordionContent() {
         {
             question: t('q5.q'),
             answer: t('q5.a')
+        },
+        {
+            question: t('q6.q'),
+            answer: t('q6.a'),
+            linkHref: '/autumn-winter' as const,
+            linkLabel: t('winterLink'),
         }
     ];
 
@@ -68,7 +76,17 @@ function FaqAccordionContent() {
                                     {faq.question}
                                 </AccordionTrigger>
                                 <AccordionContent className="text-slate-600 leading-relaxed text-base">
-                                    {faq.answer}
+                                    <p>{faq.answer}</p>
+                                    {'linkHref' in faq && faq.linkHref && (
+                                        <p className="mt-3">
+                                            <Link
+                                                href={faq.linkHref}
+                                                className="text-primary font-bold hover:underline"
+                                            >
+                                                {faq.linkLabel}
+                                            </Link>
+                                        </p>
+                                    )}
                                 </AccordionContent>
                             </AccordionItem>
                         ))}

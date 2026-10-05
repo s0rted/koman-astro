@@ -30,8 +30,9 @@ const duration = t(locale, `ToursData.${tour.slug}.duration`);
 const inclusions = tRaw(locale, `ToursData.${tour.slug}.inclusions`) as string[];
 const itinerary = tRaw(locale, `ToursData.${tour.slug}.itinerary`) as { time: string; activity: string }[];
 
-const metaTitle = `${title} | From €${tour.price}`;
-const metaDesc = `${description} Duration: ${duration}. Book your ${title} adventure with Mario Molla.`;
+const isNumericPrice = tour.price !== 'Call' && tour.price !== 'Contact' && !Number.isNaN(Number(tour.price));
+const metaTitle = isNumericPrice ? `${title} | From €${tour.price}` : `${title} | Komani Lake Tours`;
+const metaDesc = t(locale, `ToursData.${tour.slug}.metaDescription`);
 const siteUrl = 'https://www.komanlake.com';
 const canonical = `${siteUrl}/en/tours/${slug}`;
 ---

@@ -26,7 +26,7 @@
         "transfer": "Transfertë Shkodër - Valbonë",
         "transferDesc": "Ne kujdesemi për transportin (+€30p)",
         "kayak": "Qira Kajaku",
-        "kayakDesc": "Eksploroni cepat e fshehur (+€20/orë)",
+        "kayakDesc": "Eksploro qoshet e fshehura (+€20 për person)",
         "ferry": "Biletë Trageti",
         "ferryDesc": "Përfshin kalimin me traget (+€10p)",
         "addExtraDay": "Shto një ditë shtesë (+€30p)",
@@ -68,7 +68,15 @@
         "payNow": "Paguaj Tani me PayPal",
         "payInPerson": "Paguaj në Person (Cash)",
         "payNowDesc": "Paguani depozitën ose shumën e plotë përmes PayPal për të siguruar vendin tuaj menjëherë.",
-        "payInPersonDesc": "Paguani në person pas mbërritjes në liqen."
+        "payInPersonDesc": "Paguani në person pas mbërritjes në liqen.",
+        "sendStepTitle": "Gati: dërgo kërkesën",
+        "sendStepMessage": "Rezervimi nuk është dërguar ende. Dërgo përmbledhjen më poshtë në WhatsApp ose email që të konfirmojmë vendin tuaj.",
+        "sendWhatsApp": "Dërgo në WhatsApp",
+        "sendEmail": "Dërgo me Email",
+        "copySummary": "Kopjo përmbledhjen",
+        "copiedSummary": "U kopjua!",
+        "editBooking": "Ndrysho detajet",
+        "sendStepNote": "Ne e marrim kërkesën vetëm pasi ta dërgoni."
     },
     "Navbar": {
         "tours": "Turet",
@@ -212,7 +220,12 @@
         "q5": {
             "q": "A është udhëtimi i përshtatshëm për fëmijë?",
             "a": "Absolutisht! Lundrimi me anije është i qetë dhe i sigurt. Ne ofrojmë jelekë shpëtimi për të gjitha moshat. Lumi i Shalës është gjithashtu i qetë dhe i përsosur për familjet."
-        }
+        },
+        "q6": {
+            "q": "A operoni në dimër?",
+            "a": "Sezoni kryesor zgjat nga marsi deri në nëntor. Turnet dimërore ofrohen me kërkesë dhe varen nga moti — shihni faqen Vjeshtë & Dimër për përvojat sezonale."
+        },
+        "winterLink": "Eksploro Vjeshtën & Dimrin"
     },
     "ConservationPage": {
         "hero": {
@@ -380,7 +393,8 @@
                     "time": "06:00 MD",
                     "activity": "Mbërritja përsëri në Shkodër"
                 }
-            ]
+            ],
+            "metaDescription": "Tur ditor me varkë në Liqenin e Komanit nga Shkodra: lundroni në fjordet drejt Luginës së Mollës për not, kajak dhe kohë të lirë. 11 orë me transferta."
         },
         "shkoder-valbona": {
             "title": "Transfertë Shkodër - Valbonë",
@@ -411,7 +425,8 @@
                     "time": "01:00 MD",
                     "activity": "Mbërritja në Valbonë"
                 }
-            ]
+            ],
+            "metaDescription": "Transfer Shkodër–Valbonë përmes tragetit të Liqenit të Komanit. Itinerar ditor piktoresk mes shkëmbinjve dhe ujërave të kthjellëta — ideal për hikera."
         },
         "local-experience": {
             "title": "Eksperienca Lokale",
@@ -442,7 +457,8 @@
                     "time": "Dita 3",
                     "activity": "Shtigjet e trashëgimisë, peshkim & lamtumirë"
                 }
-            ]
+            ],
+            "metaDescription": "Qëndrim lokal 2–3 ditë në Alpet Shqiptare: akomodim në Kulla, kuzhinë lokale, hikë të guiduara deri në 1250m, plus kalërim me mushka dhe peshkim opsional."
         },
         "kayak-rental": {
             "title": "Aventurë me Kajak & Solo",
@@ -466,7 +482,8 @@
                     "time": "Kohëzgjatja",
                     "activity": "Qira me orë ose ditë të plotë"
                 }
-            ]
+            ],
+            "metaDescription": "Merr me qira një kajak në Lumin e Shalës dhe eksploro plazhe të fshehura e fjorde të qeta me ritmin tënd. Përfshin padël, jelek dhe udhëzim sigurie."
         },
         "helicopter-tour": {
             "title": "Kruiz Qiellor me Helikopter",
@@ -498,7 +515,8 @@
                     "time": "Kthimi",
                     "activity": "Fluturim kthimi në Tiranë"
                 }
-            ]
+            ],
+            "metaDescription": "Tur me helikopter me Viva Air Albania: nga Tirana në Alpe mbi Rivierën, kanionet dhe Liqenin e Komanit. Ndalesë opsionale për drekë në Lumin e Shalës."
         },
         "custom-tour": {
             "title": "Tur i Personalizuar",
@@ -518,7 +536,8 @@
                     "time": "Sipas kërkesës",
                     "activity": "Zgjedhja juaj e nisjes dhe destinacioneve"
                 }
-            ]
+            ],
+            "metaDescription": "Planifiko një përvojë private në Liqenin e Komanit — itinerar me varkë, orar dhe ngjarje speciale me guidë lokale. Na kontaktoni për ta personalizuar."
         }
     },
     "Legal": {
@@ -758,5 +777,14 @@
             "guesthouse": "Qëndrim në bujtinë",
             "mornings": "Peizazh i qetë mëngjesi"
         }
+    },
+    "NotFound": {
+        "metaTitle": "Faqja nuk u gjet | Turne Liqeni i Komanit",
+        "metaDescription": "Kjo faqe nuk u gjet. Shikoni turnet tona në Liqenin e Komanit, ose na kontaktoni për të planifikuar udhëtimin tuaj.",
+        "title": "Kjo faqe u zhduk",
+        "description": "Lidhja mund të jetë e thyer ose faqja është zhvendosur. Kthehuni në fillim, shikoni turnet, ose na kontaktoni — jemi këtu për t'ju ndihmuar.",
+        "home": "Kreu",
+        "tours": "Shiko Turnet",
+        "contact": "Na Kontaktoni"
     }
 }

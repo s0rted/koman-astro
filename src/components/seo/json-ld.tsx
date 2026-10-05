@@ -20,6 +20,10 @@ export function JsonLd() {
             "latitude": 42.1090,
             "longitude": 19.8258
         },
+        "sameAs": [
+            "https://www.instagram.com/molla_mario/",
+            "https://www.facebook.com/share/1dCYFoauaa/"
+        ],
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": [
