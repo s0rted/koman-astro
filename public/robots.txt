@@ -2,12 +2,8 @@
 User-agent: *
 Allow: /
 
-# Disallow admin and API routes
-Disallow: /api/
-Disallow: /_next/
-
 # Sitemap location
-Sitemap: https://koman-astro.pages.dev/sitemap.xml
+Sitemap: https://www.komanlake.com/sitemap.xml
 
 # Crawl-delay for politeness (optional)
 Crawl-delay: 1

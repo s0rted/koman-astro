@@ -6,6 +6,7 @@ import { Footer } from '../components/layout/footer';
 import { WhatsAppFloat } from '../components/ui/whatsapp-float';
 import { CookieBanner } from '../components/ui/cookie-banner';
 import { JsonLd } from '../components/seo/json-ld';
+import { alternateLocalePath } from '../i18n/paths';
 
 interface Props {
 	title: string;
@@ -16,9 +17,13 @@ interface Props {
 
 const { title, description, locale, ogImage } = Astro.props;
 const messages = getMessages(locale);
-const siteUrl = 'https://koman-astro.pages.dev';
+const siteUrl = 'https://www.komanlake.com';
 const ogImageUrl = `${siteUrl}/og-image.jpg`;
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' || Astro.url.pathname === '/sq/';
+const pathname = Astro.url.pathname;
+const hreflangEn = siteUrl + alternateLocalePath(pathname, 'en');
+const hreflangSq = siteUrl + alternateLocalePath(pathname, 'sq');
+const hreflangDefault = hreflangEn;
 ---
 
 <!doctype html>
@@ -32,9 +37,9 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/en/' |
 		<meta name="description" content={description || "Experience the breathtaking Komani Lake and Shala River with our guided boat tours."} />
 
 		<link rel="canonical" href={siteUrl + Astro.url.pathname} />
-		<link rel="alternate" hreflang="en" href={siteUrl + "/en/"} />
-		<link rel="alternate" hreflang="sq" href={siteUrl + "/sq/"} />
-		<link rel="alternate" hreflang="x-default" href={siteUrl + "/en/"} />
+		<link rel="alternate" hreflang="en" href={hreflangEn} />
+		<link rel="alternate" hreflang="sq" href={hreflangSq} />
+		<link rel="alternate" hreflang="x-default" href={hreflangDefault} />
 
 		{isHomePage && (
 			<link rel="preload" href="/images/hero-poster-mobile.webp" as="image" fetchpriority="high" media="(max-width: 768px)" />

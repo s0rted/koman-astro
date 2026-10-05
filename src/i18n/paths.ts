@@ -27,3 +27,72 @@ export function localizedTourPath(slug: string, locale: string): string {
     const tourBase = locale === 'sq' ? '/turne' : '/tours';
     return `/${locale}${tourBase}/${slug}`;
 }
+
+const SQ_SEGMENT_TO_KEY: Record<string, string> = {
+    'rreth-nesh': '/about',
+    'galeria': '/gallery',
+    'konservimi': '/conservation',
+    'kontakt': '/contact',
+    'turne': '/tours',
+    'rezervo': '/book',
+    'politika-e-privatise': '/privacy',
+    'termat-dhe-kushtet': '/terms',
+};
+
+const EN_SEGMENT_TO_KEY: Record<string, string> = {
+    'about': '/about',
+    'gallery': '/gallery',
+    'conservation': '/conservation',
+    'contact': '/contact',
+    'tours': '/tours',
+    'book': '/book',
+    'privacy': '/privacy',
+    'terms': '/terms',
+};
+
+/**
+ * Map the current localized pathname to the equivalent path in another locale.
+ * alternateLocalePath('/en/tours/boat-tour/', 'sq') => '/sq/turne/boat-tour/'
+ */
+export function alternateLocalePath(pathname: string, targetLocale: 'en' | 'sq'): string {
+    const hasTrailingSlash = pathname.endsWith('/');
+    const normalized = pathname.replace(/\/+$/, '') || '/';
+    const match = normalized.match(/^\/(en|sq)(\/.*)?$/);
+
+    if (!match) {
+        const fallback = `/${targetLocale}/`;
+        return fallback;
+    }
+
+    const currentLocale = match[1] as 'en' | 'sq';
+    const rest = match[2] || '';
+    const segments = rest.split('/').filter(Boolean);
+
+    if (segments.length === 0) {
+        return hasTrailingSlash || pathname.endsWith('/') ? `/${targetLocale}/` : `/${targetLocale}`;
+    }
+
+    const first = segments[0];
+    const map = currentLocale === 'sq' ? SQ_SEGMENT_TO_KEY : EN_SEGMENT_TO_KEY;
+    const logicalBase = map[first] ?? `/${first}`;
+
+    if (logicalBase === '/tours' && segments.length > 1) {
+        const slug = segments.slice(1).join('/');
+        const path = localizedTourPath(slug, targetLocale);
+        return hasTrailingSlash ? `${path}/` : path;
+    }
+
+    if (segments.length > 1) {
+        const remainder = segments.slice(1).join('/');
+        const path = localizedPath(`${logicalBase}/${remainder}`, targetLocale);
+        return hasTrailingSlash ? `${path}/` : path;
+    }
+
+    const path = localizedPath(logicalBase, targetLocale);
+    // localizedPath('/', ...) is not used here; for home we already returned.
+    // Prefer trailing slash when the current URL had one (Astro static pages).
+    if (hasTrailingSlash && !path.endsWith('/')) {
+        return `${path}/`;
+    }
+    return path;
+}

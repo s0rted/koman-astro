@@ -11,7 +11,7 @@ export function TourJsonLd({ tour, url }: TourJsonLdProps) {
         "@type": "Product",
         "name": tour.title,
         "description": tour.description,
-        "image": `https://koman-astro.pages.dev${tour.banner}`,
+        "image": `https://www.komanlake.com${tour.banner}`,
         "brand": {
             "@type": "Brand",
             "name": "Komani Lake Tours"
@@ -26,7 +26,7 @@ export function TourJsonLd({ tour, url }: TourJsonLdProps) {
             "seller": {
                 "@type": "TravelAgency",
                 "name": "Komani Lake Tours",
-                "url": "https://koman-astro.pages.dev"
+                "url": "https://www.komanlake.com"
             }
         },
         "aggregateRating": {

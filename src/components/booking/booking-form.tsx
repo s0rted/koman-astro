@@ -113,7 +113,9 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         // Transfers are free/included for boat-tour and local-experience
         const transferCost = (hasTransfer && !isTransferIncluded) ? (30 * totalGuests) : 0;
         const ferryCost = hasFerry ? (10 * totalGuests) : 0;
-        const kayakCost = hasKayak ? (20 * totalGuests) : 0;
+        // Kayak add-on price comes from tours data (kayak-rental)
+        const kayakAddonPrice = Number(TOURS.find((tour) => tour.slug === 'kayak-rental')?.price) || 20;
+        const kayakCost = hasKayak ? (kayakAddonPrice * totalGuests) : 0;
 
         setTotalPrice(adultCost + childCost + seniorCost + transferCost + ferryCost + kayakCost);
 
@@ -445,11 +447,16 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         render={({ field }) => (
                                             <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
                                                 <div className="space-y-0.5">
-                                                    <FormLabel className="text-base font-bold text-slate-800">{t('addExtraDay')}</FormLabel>
+                                                    <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('addExtraDay')}</FormLabel>
                                                     <p className="text-[13px] text-slate-500 font-medium">{t('addExtraDayDesc')}</p>
                                                 </div>
                                                 <FormControl>
-                                                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-6 h-6" />
+                                                    <Checkbox
+                                                        checked={!!field.value}
+                                                        onCheckedChange={(checked) => field.onChange(checked === true)}
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="w-6 h-6"
+                                                    />
                                                 </FormControl>
                                             </FormItem>
                                         )}
@@ -463,11 +470,16 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         render={({ field }) => (
                                             <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
                                                 <div className="space-y-0.5">
-                                                    <FormLabel className="text-base font-bold text-slate-800">{t('transfer')}</FormLabel>
+                                                    <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('transfer')}</FormLabel>
                                                     <p className="text-[13px] text-slate-500 font-medium">{t('transferDesc')}</p>
                                                 </div>
                                                 <FormControl>
-                                                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-6 h-6" />
+                                                    <Checkbox
+                                                        checked={!!field.value}
+                                                        onCheckedChange={(checked) => field.onChange(checked === true)}
+                                                        onClick={(e) => e.stopPropagation()}
+                                                        className="w-6 h-6"
+                                                    />
                                                 </FormControl>
                                             </FormItem>
                                         )}
@@ -493,11 +505,16 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     render={({ field }) => (
                                         <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
                                             <div className="space-y-0.5">
-                                                <FormLabel className="text-base font-bold text-slate-800">{t('kayak')}</FormLabel>
+                                                <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('kayak')}</FormLabel>
                                                 <p className="text-[13px] text-slate-500 font-medium">{t('kayakDesc')}</p>
                                             </div>
                                             <FormControl>
-                                                <Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-6 h-6" />
+                                                <Checkbox
+                                                    checked={!!field.value}
+                                                    onCheckedChange={(checked) => field.onChange(checked === true)}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="w-6 h-6"
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
@@ -509,11 +526,16 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     render={({ field }) => (
                                         <FormItem className="flex flex-row items-center justify-between rounded-xl border p-4 bg-slate-50/50 cursor-pointer" onClick={() => field.onChange(!field.value)}>
                                             <div className="space-y-0.5">
-                                                <FormLabel className="text-base font-bold text-slate-800">{t('ferry')}</FormLabel>
+                                                <FormLabel className="text-base font-bold text-slate-800" onClick={(e) => e.preventDefault()}>{t('ferry')}</FormLabel>
                                                 <p className="text-[13px] text-slate-500 font-medium">{t('ferryDesc')}</p>
                                             </div>
                                             <FormControl>
-                                                <Checkbox checked={field.value} onCheckedChange={field.onChange} className="w-6 h-6" />
+                                                <Checkbox
+                                                    checked={!!field.value}
+                                                    onCheckedChange={(checked) => field.onChange(checked === true)}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="w-6 h-6"
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
