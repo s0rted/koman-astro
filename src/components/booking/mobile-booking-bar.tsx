@@ -32,6 +32,7 @@ export function MobileBookingBar({ messages, locale, ...props }: MobileBookingBa
 function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBookingBarProps) {
     const t = useTranslations('SingleTour.mobile');
     const ts = useTranslations('SingleTour.sidebar');
+    const summer = useTranslations('SummerOnly');
     const locale = useLocale();
     const [isVisible, setIsVisible] = useState(false);
 
@@ -62,12 +63,19 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
                 <div className="flex-1">
                     <div className="flex flex-col gap-1 mb-1">
                         <p className="text-xs text-slate-500 font-medium line-clamp-1">{title}</p>
-                        {(tourSlug === 'boat-tour' || tourSlug === 'local-experience') && (
-                            <div className="flex items-center gap-1 bg-primary/10 px-1.5 py-0.5 rounded text-[9px] font-bold text-primary uppercase tracking-tight leading-none whitespace-nowrap w-fit">
-                                <Bus className="w-2.5 h-2.5" />
-                                <span>{t('includesTransfer')}</span>
-                            </div>
-                        )}
+                        <div className="flex flex-wrap gap-1">
+                            {tourSlug === 'boat-tour' && (
+                                <div className="flex items-center gap-1 bg-sky-100 px-1.5 py-0.5 rounded text-[9px] font-bold text-sky-900 uppercase tracking-tight leading-none whitespace-nowrap w-fit">
+                                    <span>{summer('badge')}</span>
+                                </div>
+                            )}
+                            {(tourSlug === 'boat-tour' || tourSlug === 'local-experience') && (
+                                <div className="flex items-center gap-1 bg-primary/10 px-1.5 py-0.5 rounded text-[9px] font-bold text-primary uppercase tracking-tight leading-none whitespace-nowrap w-fit">
+                                    <Bus className="w-2.5 h-2.5" />
+                                    <span>{t('includesTransfer')}</span>
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div className="flex items-baseline gap-1">
                         <span className="text-xl font-bold text-slate-900">
