@@ -56,7 +56,7 @@ const IMAGES = {
     fishing: "/images/tours/local-experience.webp",
     rakia: "/albums/optimized/DSC_0505.webp",
     guesthouse: "/albums/optimized/DSC_0510.webp",
-    mornings: "/albums/optimized/DSC_0374.webp",
+    mornings: "/albums/optimized/DSC_0524.webp",
 };
 
 export function AutumnWinterPage({ dict }: { dict: AutumnWinterDictionary }) {

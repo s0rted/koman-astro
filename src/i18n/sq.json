@@ -660,7 +660,6 @@
     ],
     "SeasonBanner": {
         "text": "E re: Përvojat e Vjeshtës & Dimrit, jetoni si vendasit",
-        "cta": "Eksploro",
         "dismiss": "Mbyll njoftimin"
     },
     "AutumnWinterPage": {
@@ -715,6 +714,30 @@
             "whatsapp": "Pyetni në WhatsApp",
             "contact": "Faqja e kontaktit",
             "whatsappMessage": "Përshëndetje! Jam i interesuar për përvojat tuaja të Vjeshtës & Dimrit. Mund të më ndihmoni të planifikoj një vizitë?"
+        },
+        "teaser": {
+            "title": "Përjetoni Vjeshtën & Dimrin",
+            "subtitle": "Si Vendasit",
+            "highlights": [
+                {
+                    "title": "Udhëtime me Varkë",
+                    "text": "Ujëra të qeta të rrethuara nga peizazhe stinore mahnitëse."
+                },
+                {
+                    "title": "Ecje në Natyrë",
+                    "text": "Shtigje piktoreske, pyje dhe pika panoramike."
+                },
+                {
+                    "title": "Peshkim Tradicional me Rrjeta",
+                    "text": "Mësoni artin tradicional të peshkimit me rrjeta."
+                },
+                {
+                    "title": "Koha e Rakisë",
+                    "text": "Ndani një gotë raki shtëpie dhe histori lokale."
+                }
+            ],
+            "button": "Zbuloni Vjeshtën & Dimrin",
+            "imageAlt": "Varkë në Liqenin e Komanit e rrethuar nga malet"
         }
     }
 }

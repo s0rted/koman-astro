@@ -660,7 +660,6 @@
     ],
     "SeasonBanner": {
         "text": "New: Autumn & Winter experiences, live like a local",
-        "cta": "Explore",
         "dismiss": "Dismiss announcement"
     },
     "AutumnWinterPage": {
@@ -715,6 +714,30 @@
             "whatsapp": "Inquire on WhatsApp",
             "contact": "Contact page",
             "whatsappMessage": "Hi! I'm interested in your Autumn & Winter experiences. Can you help me plan a visit?"
+        },
+        "teaser": {
+            "title": "Experience Autumn & Winter",
+            "subtitle": "Like a Local",
+            "highlights": [
+                {
+                    "title": "Boat Trips",
+                    "text": "Calm waters surrounded by breathtaking seasonal landscapes."
+                },
+                {
+                    "title": "Hiking",
+                    "text": "Scenic trails, forests, and panoramic viewpoints."
+                },
+                {
+                    "title": "Traditional Fishing with Nets",
+                    "text": "Learn the traditional art of fishing with nets."
+                },
+                {
+                    "title": "Rakia Time",
+                    "text": "Share a glass of homemade rakia and local stories."
+                }
+            ],
+            "button": "Discover Autumn & Winter",
+            "imageAlt": "Boat on Komani Lake surrounded by mountains"
         }
     }
 }

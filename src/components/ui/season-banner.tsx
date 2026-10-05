@@ -46,6 +46,12 @@ function SeasonBannerContent() {
 
     if (!visible) return null;
 
+    // Highlight the short "New:" / "E re:" prefix without a separate label.
+    const full = t("text");
+    const idx = full.indexOf(": ");
+    const prefix = idx > 0 && idx < 12 ? full.slice(0, idx) : "";
+    const rest = prefix ? full.slice(idx + 2) : full;
+
     return (
         <div
             className={cn(
@@ -65,8 +71,8 @@ function SeasonBannerContent() {
                             <Leaf className="w-4 h-4 text-emerald-300" />
                         </span>
                         <span className="min-w-0 text-[13px] sm:text-sm font-medium leading-snug">
-                            <span className="font-bold text-emerald-200">{t("cta")}: </span>
-                            <span className="text-white/95">{t("text")}</span>
+                            {prefix && <span className="font-bold text-emerald-200">{prefix}: </span>}
+                            <span className="text-white/95">{rest}</span>
                         </span>
                         <ArrowRight className="hidden md:block w-4 h-4 shrink-0 text-emerald-300 group-hover:translate-x-0.5 transition-transform" />
                     </Link>

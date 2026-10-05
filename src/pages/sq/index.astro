@@ -11,6 +11,7 @@ import { Testimonials } from '../../components/sections/testimonials';
 import { FaqAccordion } from '../../components/sections/faq-accordion';
 import { FinalCTA } from '../../components/sections/final-cta';
 import { AboutParallax } from '../../components/sections/about-parallax';
+import AutumnWinterTeaser from '../../components/sections/AutumnWinterTeaser.astro';
 import { SeasonBanner } from '../../components/ui/season-banner';
 import { t, getMessages } from '../../i18n/utils';
 import { FaqJsonLd, ReviewJsonLd } from '../../components/seo/tour-json-ld';
@@ -42,6 +43,7 @@ const subheadline = t(locale, 'Index.description');
     <SeasonBanner client:idle messages={messages} locale={locale} />
     <TrustBar messages={messages} locale={locale} />
     <FeaturedTour client:visible messages={messages} locale={locale} />
+    <AutumnWinterTeaser messages={messages} locale={locale} />
     <TourGrid client:visible messages={messages} locale={locale} />
     <WhyChooseUs client:visible messages={messages} locale={locale} />
     <GalleryTeaser client:visible messages={messages} locale={locale} />

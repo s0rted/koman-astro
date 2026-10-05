@@ -1,0 +1,96 @@
+---
+// Static (zero-JS) homepage teaser for the Autumn & Winter page.
+import { Leaf, Ship, Mountain, Fish, Wine, ArrowRight, MessageCircle } from 'lucide-react';
+
+interface Props {
+    messages: any;
+    locale: 'en' | 'sq';
+}
+
+const { messages, locale } = Astro.props;
+const page = messages?.AutumnWinterPage ?? {};
+const teaser = page.teaser ?? {};
+const highlights: { title: string; text: string }[] = teaser.highlights ?? [];
+const icons = [Ship, Mountain, Fish, Wine];
+
+const pageHref = locale === 'sq' ? '/sq/vjeshte-dimer/' : '/en/autumn-winter/';
+const waHref = `https://wa.me/355682022686?text=${encodeURIComponent(page.cta?.whatsappMessage ?? '')}`;
+---
+
+<section id="autumn-winter" class="py-24 bg-white overflow-hidden border-b border-slate-100" aria-labelledby="autumn-winter-teaser-title">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* Image (right on desktop, first on mobile) */}
+            <div class="relative isolate lg:order-2">
+                <div class="aspect-[4/3] relative rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
+                    <img
+                        src="/images/seasonal/autumn-winter-teaser.webp"
+                        srcset="/images/seasonal/autumn-winter-teaser-small.webp 400w, /images/seasonal/autumn-winter-teaser-mid.webp 600w, /images/seasonal/autumn-winter-teaser.webp 1000w"
+                        sizes="(max-width: 1024px) 100vw, 600px"
+                        alt={teaser.imageAlt}
+                        width="1000"
+                        height="664"
+                        loading="lazy"
+                        decoding="async"
+                        class="object-cover w-full h-full"
+                    />
+                </div>
+                <div class="absolute -bottom-6 -left-6 w-3/4 h-3/4 border-2 border-primary/20 rounded-3xl -z-10"></div>
+            </div>
+
+            {/* Content */}
+            <div class="space-y-8 lg:order-1">
+                <div>
+                    <span class="inline-flex items-center gap-2 rounded-md bg-emerald-100 text-emerald-900 px-3 py-1 text-sm font-bold uppercase tracking-wide">
+                        <Leaf className="w-4 h-4" />
+                        {page.hero?.badge}
+                    </span>
+                    <h2 id="autumn-winter-teaser-title" class="mt-4 font-heading text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+                        {teaser.title} <br />
+                        <span class="text-primary">{teaser.subtitle}</span>
+                    </h2>
+                </div>
+
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    {page.hero?.description}
+                </p>
+
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {highlights.map((h, i) => {
+                        const Icon = icons[i] ?? Leaf;
+                        return (
+                            <li class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                <Icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                                <div>
+                                    <span class="block font-bold text-slate-900 leading-snug">{h.title}</span>
+                                    <span class="text-sm text-slate-500 leading-snug">{h.text}</span>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a
+                        href={pageHref}
+                        class="inline-flex items-center justify-center gap-2 h-12 rounded-full px-8 text-lg font-bold bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-primary/40 transition-all"
+                    >
+                        {teaser.button}
+                        <ArrowRight className="w-5 h-5" />
+                    </a>
+                    <a
+                        href={waHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center gap-2 h-12 rounded-full px-8 text-base font-bold bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 transition-all"
+                    >
+                        <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                        {page.cta?.whatsapp}
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
