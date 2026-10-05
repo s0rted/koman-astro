@@ -39,6 +39,10 @@ function Calendar({
         className
       )}
       captionLayout={captionLayout}
+      labels={{
+        labelPrevious: (month) => `Previous month${month ? `: ${month.toLocaleString("default", { month: "long", year: "numeric" })}` : ""}`,
+        labelNext: (month) => `Next month${month ? `: ${month.toLocaleString("default", { month: "long", year: "numeric" })}` : ""}`,
+      }}
       formatters={{
         formatMonthDropdown: (date) =>
           date.toLocaleString("default", { month: "short" }),

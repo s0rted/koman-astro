@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { RevealOnScroll } from "@/components/animations/reveal-on-scroll";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,65 @@ export function TourGrid({ messages, locale }: { messages?: Record<string, any>;
         );
     }
     return <TourGridContent />;
+}
+
+
+function LazyTourVideo({ mp4Src, webmSrc, poster, title }: { mp4Src?: string; webmSrc?: string; poster: string; title: string }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const mq = window.matchMedia("(max-width: 768px)");
+        const update = () => setIsMobile(mq.matches);
+        update();
+        mq.addEventListener("change", update);
+        return () => mq.removeEventListener("change", update);
+    }, []);
+
+    useEffect(() => {
+        const el = videoRef.current;
+        if (!el || isMobile || typeof IntersectionObserver === "undefined") return;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    el.play().catch(() => {});
+                } else {
+                    el.pause();
+                }
+            },
+            { rootMargin: "100px", threshold: 0.25 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [isMobile]);
+
+    if (isMobile) {
+        return (
+            <img
+                src={poster}
+                alt={title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+            />
+        );
+    }
+
+    return (
+        <video
+            ref={videoRef}
+            loop
+            muted
+            playsInline
+            preload="none"
+            poster={poster}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        >
+            {webmSrc && <source src={webmSrc} type="video/webm" />}
+            {mp4Src && <source src={mp4Src} type="video/mp4" />}
+            <track kind="captions" label={`Preview of ${title}`} src="" />
+        </video>
+    );
 }
 
 function TourGridContent() {
@@ -51,17 +111,12 @@ function TourGridContent() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-60" />
 
                         {tour.mp4Src || tour.webmSrc ? (
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            >
-                                {tour.webmSrc && <source src={tour.webmSrc} type="video/webm" />}
-                                {tour.mp4Src && <source src={tour.mp4Src} type="video/mp4" />}
-                                <track kind="captions" label={`Preview of ${tour.slug}`} src="" />
-                            </video>
+                            <LazyTourVideo
+                                mp4Src={tour.mp4Src}
+                                webmSrc={tour.webmSrc}
+                                poster={tour.image}
+                                title={td(`${tour.slug}.title`)}
+                            />
                         ) : (
                             <img
                                 src={tour.image}
@@ -180,14 +235,17 @@ function TourGridContent() {
                     <RevealOnScroll>
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 group">
                             <div className="absolute inset-0 z-0">
-                                {helicopter.mp4Src ? (
-                                    <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60 group-hover:opacity-70 transition-opacity duration-700">
-                                        <source src={helicopter.mp4Src} type="video/mp4" />
-                                        <track kind="captions" label="Helicopter tour preview" src="" />
-                                    </video>
-                                ) : (
-                                    <img src={helicopter.image} alt="Helicopter" className="w-full h-full object-cover opacity-60" />
-                                )}
+                                <div className="absolute inset-0 opacity-60 group-hover:opacity-70 transition-opacity duration-700">
+                                    {helicopter.mp4Src ? (
+                                        <LazyTourVideo
+                                            mp4Src={helicopter.mp4Src}
+                                            poster={helicopter.image}
+                                            title={td(`${helicopter.slug}.title`)}
+                                        />
+                                    ) : (
+                                        <img src={helicopter.image} alt="Helicopter" className="w-full h-full object-cover" />
+                                    )}
+                                </div>
                             </div>
 
                             <div className="relative z-10 p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">

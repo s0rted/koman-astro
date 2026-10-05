@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
-import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X, Copy, MessageCircle } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -80,6 +80,8 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPaypalSuccess, setIsPaypalSuccess] = useState(false);
+    const [pendingSend, setPendingSend] = useState<{ subject: string; body: string; mailtoUrl: string; whatsappUrl: string } | null>(null);
+    const [copied, setCopied] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
     const [showFloatingTotal, setShowFloatingTotal] = useState(true);
     const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
@@ -284,13 +286,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             window.location.href = paypalUrl;
             // Don't setIsSubmitting(false) — page is redirecting
         } else {
-            // === RESERVATION FLOW: Send email to Mario, show confirmation ===
+            // === RESERVATION FLOW: show send-step (do NOT claim received) ===
             const { subject, body } = buildBookingSummary(data);
             const mailtoUrl = `mailto:mariomolla@outlook.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(mailtoUrl, "_blank");
-
-            // Brief delay to let the mailto open
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            const whatsappUrl = `https://wa.me/355682022686?text=${encodeURIComponent(body)}`;
+            setPendingSend({ subject, body, mailtoUrl, whatsappUrl });
             setIsSubmitting(false);
             setIsSuccess(true);
         }
@@ -303,40 +303,98 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         form.setValue(type, newVal);
     };
 
-    if (isSuccess) {
+    if (isSuccess && isPaypalSuccess) {
         return (
             <div className="text-center py-20 space-y-6">
                 <div className="flex justify-center">
                     <CheckCircle2 className="w-20 h-20 text-primary animate-in zoom-in duration-500" />
                 </div>
-                <h2 className="text-4xl font-bold text-slate-900">
-                    {isPaypalSuccess ? t('paypalSuccessTitle') : t('successTitle')}
-                </h2>
+                <h2 className="text-4xl font-bold text-slate-900">{t('paypalSuccessTitle')}</h2>
                 <div className="text-slate-500 max-w-md mx-auto">
-                    {isPaypalSuccess ? (
-                        <p>{t('paypalSuccessMessage')}</p>
-                    ) : (
-                        <p>
-                            {t('successMessage', {
-                                name: form.getValues('name'),
-                                tour: getLocalizedTourName(),
-                                email: form.getValues('email')
-                            })}
-                        </p>
-                    )}
+                    <p>{t('paypalSuccessMessage')}</p>
                 </div>
-
-                {!isPaypalSuccess && (
-                    <div className="bg-slate-50 p-6 rounded-2xl max-w-sm mx-auto border border-slate-100">
-                        <p className="text-sm text-slate-500 mb-2">{t('estimatedTotal')}</p>
-                        <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
-                        <p className="text-xs text-slate-400 mt-2">{t('noPayment')}</p>
-                    </div>
-                )}
-
-                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full h-12 px-8">
+                <Button onClick={() => window.location.href = "/en/"} variant="outline" className="rounded-full h-12 px-8">
                     {locale === 'en' ? 'Return Home' : 'Kthehu në Faqe'}
                 </Button>
+            </div>
+        );
+    }
+
+    if (isSuccess && pendingSend) {
+        const copySummary = async () => {
+            try {
+                await navigator.clipboard.writeText(pendingSend.body);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            } catch {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = pendingSend.body;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            }
+        };
+
+        return (
+            <div className="text-center py-12 md:py-16 space-y-6 px-4">
+                <div className="flex justify-center">
+                    <MessageSquare className="w-16 h-16 text-primary" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900">{t('sendStepTitle')}</h2>
+                <p className="text-slate-600 max-w-lg mx-auto leading-relaxed">{t('sendStepMessage')}</p>
+                <p className="text-sm font-medium text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-4 py-2 max-w-md mx-auto">
+                    {t('sendStepNote')}
+                </p>
+
+                <div className="bg-slate-50 p-6 rounded-2xl max-w-md mx-auto border border-slate-100 text-left space-y-2">
+                    <p className="text-sm text-slate-500">{t('estimatedTotal')}</p>
+                    <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
+                    <pre className="text-xs text-slate-600 whitespace-pre-wrap font-sans bg-white rounded-xl p-4 border border-slate-100 max-h-48 overflow-auto">
+{pendingSend.body}
+                    </pre>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+                    <a
+                        href={pendingSend.whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] text-white font-bold h-14 px-8 text-base shadow-lg hover:brightness-95 transition-all"
+                    >
+                        <MessageCircle className="w-5 h-5" />
+                        {t('sendWhatsApp')}
+                    </a>
+                    <a
+                        href={pendingSend.mailtoUrl}
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 text-white font-bold h-14 px-8 text-base shadow-lg hover:bg-slate-800 transition-all"
+                    >
+                        <Mail className="w-5 h-5" />
+                        {t('sendEmail')}
+                    </a>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Button type="button" variant="outline" className="rounded-full h-12 px-6" onClick={copySummary}>
+                        <Copy className="w-4 h-4 mr-2" />
+                        {copied ? t('copiedSummary') : t('copySummary')}
+                    </Button>
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        className="rounded-full h-12 px-6"
+                        onClick={() => {
+                            setIsSuccess(false);
+                            setPendingSend(null);
+                            setCopied(false);
+                        }}
+                    >
+                        {t('editBooking')}
+                    </Button>
+                </div>
             </div>
         );
     }
@@ -349,7 +407,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
                         <Select value={selectedTourSlug} onValueChange={(value) => form.setValue("tour", value)}>
-                            <SelectTrigger className="bg-transparent border-none text-white font-heading font-bold text-lg md:text-xl p-0 h-auto focus:ring-0 focus:ring-offset-0 shadow-none hover:bg-white/10 px-2 rounded-lg transition-colors w-fit gap-2">
+                            <SelectTrigger aria-label={t("selectExperience")} className="bg-transparent border-none text-white font-heading font-bold text-lg md:text-xl p-0 h-auto focus:ring-0 focus:ring-offset-0 shadow-none hover:bg-white/10 px-2 rounded-lg transition-colors w-fit gap-2">
                                 <SelectValue placeholder="Select a tour" />
                             </SelectTrigger>
                             <SelectContent>
@@ -371,7 +429,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     <div className="flex items-center gap-2 px-2">
                         <CalendarIcon className="h-4 w-4 text-slate-400" />
                         <p className="text-slate-400 text-sm font-medium">
-                            {form.getValues('date') ? format(form.getValues('date'), 'MMMM do, yyyy') : 'Pick a date'}
+                            {form.getValues('date') ? format(form.getValues('date'), 'MMMM do, yyyy') : t('pickDate')}
                         </p>
                     </div>
                 </div>
@@ -396,7 +454,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                 <Clock className="w-5 h-5" />
                             </div>
                             <div>
-                                <span className="block text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-0.5">{t('duration')}</span>
+                                <span className="block text-[10px] uppercase font-bold tracking-widest text-slate-600 mb-0.5">{t('duration')}</span>
                                 <p className="text-sm font-bold text-slate-900 leading-none">
                                     {selectedTour && td(`${selectedTour.slug}.duration`)}
                                 </p>
@@ -407,7 +465,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         <div className="block md:hidden h-px w-full bg-slate-100" />
 
                         <div className="flex-1">
-                            <span className="block text-[10px] uppercase font-bold tracking-widest text-slate-400 mb-0.5">{t('summary')}</span>
+                            <span className="block text-[10px] uppercase font-bold tracking-widest text-slate-600 mb-0.5">{t('summary')}</span>
                             <p className="text-sm text-slate-600 font-medium italic leading-relaxed">
                                 {selectedTour && td(`${selectedTour.slug}.summary`)}
                             </p>
@@ -436,10 +494,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
                         {/* Step 1: Date */}
                         <div className="space-y-6 pb-8 border-b border-slate-100">
-                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                            <h2 className="font-bold text-slate-900 flex items-center gap-2 text-lg">
                                 <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
                                 {t('selectDate')}
-                            </h4>
+                            </h2>
                             <FormField
                                 control={form.control}
                                 name="date"
@@ -465,22 +523,22 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
                         {/* Step 2: Guests */}
                         <div className="space-y-6 pb-8 border-b border-slate-100">
-                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                            <h2 className="font-bold text-slate-900 flex items-center gap-2 text-lg">
                                 <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
                                 {t('guests')}
-                            </h4>
+                            </h2>
 
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="font-bold text-slate-700">{t('adults')}</p>
-                                    <p className="text-xs text-slate-400">13+ years</p>
+                                    <p className="text-xs text-slate-600">13+ years</p>
                                 </div>
                                 <div className="flex items-center gap-4 bg-slate-50 rounded-full p-1 border border-slate-100">
-                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => handleGuestChange("adults", "sub")}>
+                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" aria-label={locale === "sq" ? "Ul të rriturit" : "Decrease adults"} onClick={() => handleGuestChange("adults", "sub")}>
                                         <Minus className="w-4 h-4 text-slate-600" />
                                     </Button>
                                     <span className="font-bold w-4 text-center">{countAdults}</span>
-                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => handleGuestChange("adults", "add")}>
+                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" aria-label={locale === "sq" ? "Shto të rritur" : "Increase adults"} onClick={() => handleGuestChange("adults", "add")}>
                                         <Plus className="w-4 h-4 text-slate-600" />
                                     </Button>
                                 </div>
@@ -492,14 +550,14 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         <p className="font-bold text-slate-700">{t('children')}</p>
                                         <Badge className="bg-amber-100 text-amber-700 border-0 text-[10px]">{t('discount')}</Badge>
                                     </div>
-                                    <p className="text-xs text-slate-400">4-12 years</p>
+                                    <p className="text-xs text-slate-600">4-12 years</p>
                                 </div>
                                 <div className="flex items-center gap-4 bg-slate-50 rounded-full p-1 border border-slate-100">
-                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => handleGuestChange("children", "sub")}>
+                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" aria-label={locale === "sq" ? "Ul fëmijët" : "Decrease children"} onClick={() => handleGuestChange("children", "sub")}>
                                         <Minus className="w-4 h-4 text-slate-600" />
                                     </Button>
                                     <span className="font-bold w-4 text-center">{countChildren}</span>
-                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => handleGuestChange("children", "add")}>
+                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" aria-label={locale === "sq" ? "Shto fëmijë" : "Increase children"} onClick={() => handleGuestChange("children", "add")}>
                                         <Plus className="w-4 h-4 text-slate-600" />
                                     </Button>
                                 </div>
@@ -511,14 +569,14 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                         <p className="font-bold text-slate-700">{t('seniors')}</p>
                                         <Badge className="bg-amber-100 text-amber-700 border-0 text-[10px]">{t('discount')}</Badge>
                                     </div>
-                                    <p className="text-xs text-slate-400">65+ years</p>
+                                    <p className="text-xs text-slate-600">65+ years</p>
                                 </div>
                                 <div className="flex items-center gap-4 bg-slate-50 rounded-full p-1 border border-slate-100">
-                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => handleGuestChange("seniors", "sub")}>
+                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" aria-label={locale === "sq" ? "Ul të moshuarit" : "Decrease seniors"} onClick={() => handleGuestChange("seniors", "sub")}>
                                         <Minus className="w-4 h-4 text-slate-600" />
                                     </Button>
                                     <span className="font-bold w-4 text-center">{countSeniors}</span>
-                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => handleGuestChange("seniors", "add")}>
+                                    <Button type="button" variant="ghost" size="icon" className="h-8 w-8 rounded-full" aria-label={locale === "sq" ? "Shto të moshuar" : "Increase seniors"} onClick={() => handleGuestChange("seniors", "add")}>
                                         <Plus className="w-4 h-4 text-slate-600" />
                                     </Button>
                                 </div>
@@ -526,10 +584,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
 
                         <div className="space-y-6 pb-8 border-b border-slate-100">
-                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                            <h2 className="font-bold text-slate-900 flex items-center gap-2 text-lg">
                                 <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
                                 {t('addons')}
-                            </h4>
+                            </h2>
 
                             <div className="grid gap-4">
 
@@ -605,10 +663,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
 
                         <div className="space-y-6 pb-8 border-b border-slate-100">
-                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                            <h2 className="font-bold text-slate-900 flex items-center gap-2 text-lg">
                                 <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
                                 {t('contact')}
-                            </h4>
+                            </h2>
 
                             <div className="grid md:grid-cols-2 gap-6">
                                 <FormField
@@ -679,10 +737,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
 
                         <div className="space-y-6">
-                            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+                            <h2 className="font-bold text-slate-900 flex items-center gap-2 text-lg">
                                 <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
                                 {t('paymentMethod')}
-                            </h4>
+                            </h2>
 
                             <FormField
                                 control={form.control}
@@ -750,7 +808,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         <div className="pt-4 space-y-3">
                             <div ref={submitTotalRef} className="flex items-center gap-4">
                                 <div className="shrink-0 text-left">
-                                    <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Total</p>
+                                    <p className="text-[10px] uppercase tracking-wider font-bold text-slate-600">Total</p>
                                     <p className="text-2xl font-bold leading-none text-slate-900">{liveTotalLabel}</p>
                                 </div>
                                 <div className="min-w-0 flex-1">
@@ -775,7 +833,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     )}
                                 </div>
                             </div>
-                            <p className="text-center text-xs text-slate-400">
+                            <p className="text-center text-xs text-slate-600">
                                 {paymentMethod === 'payNow'
                                     ? (locale === 'en'
                                         ? "You will be redirected to PayPal to complete your payment."

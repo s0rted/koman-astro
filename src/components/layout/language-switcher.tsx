@@ -26,7 +26,7 @@ export function LanguageSwitcher({ variant = 'dark', layoutId = 'lang-active-bg'
                         key={lang}
                         onClick={() => toggleLanguage(lang)}
                         type="button"
-                        aria-label={lang === "en" ? "English" : "Shqip"}
+                        aria-label={lang === "en" ? "EN" : "SQ"}
                         aria-pressed={isActive}
                         className="relative px-2 sm:px-3 md:px-5 py-1.5 md:py-2 rounded-full transition-all duration-300 outline-none group"
                     >
@@ -58,7 +58,7 @@ export function LanguageSwitcher({ variant = 'dark', layoutId = 'lang-active-bg'
                             "relative z-10 text-sm md:text-base font-bold tracking-tight transition-colors duration-300",
                             isActive
                                 ? (variant === 'light' ? "text-white" : "text-slate-900")
-                                : (variant === 'light' ? "text-slate-400 group-hover:text-slate-900" : "text-white/40 group-hover:text-white")
+                                : (variant === 'light' ? "text-slate-600 group-hover:text-slate-900" : "text-white/70 group-hover:text-white")
                         )}>
                             {lang.toUpperCase()}
                         </span>

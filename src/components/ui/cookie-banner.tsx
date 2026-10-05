@@ -23,6 +23,7 @@ export function CookieBanner({ messages, locale }: { messages?: any; locale?: st
 function CookieBannerContent() {
     const [isVisible, setIsVisible] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [heroWidgetInView, setHeroWidgetInView] = useState(false);
     const [selections, setSelections] = useState({
         analytical: true,
         marketing: false
@@ -38,13 +39,27 @@ function CookieBannerContent() {
         }
     }, []);
 
-    // Same-tab listeners do not see localStorage writes. Publish visibility so
-    // the booking total can drop into this spot when the chip is saved or dismissed.
+    // On home, the cookie chip overlaps the hero booking widget on small phones.
+    // Hide the chip while that widget is on screen; restore when it scrolls away.
+    useEffect(() => {
+        const el = document.querySelector("[data-hero-booking-widget]");
+        if (!el || typeof IntersectionObserver === "undefined") return;
+        const observer = new IntersectionObserver(
+            ([entry]) => setHeroWidgetInView(entry.isIntersecting),
+            { threshold: 0.15 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    // Publish the *rendered* chip visibility so the booking float bubble can
+    // share the bottom-left space without fighting a hidden banner.
+    const chipShown = isVisible && !(heroWidgetInView && !isExpanded);
     useEffect(() => {
         const w = window as Window & { __komanCookieBannerVisible?: boolean };
-        w.__komanCookieBannerVisible = isVisible;
-        window.dispatchEvent(new CustomEvent("koman:cookie-banner", { detail: { visible: isVisible } }));
-    }, [isVisible]);
+        w.__komanCookieBannerVisible = chipShown;
+        window.dispatchEvent(new CustomEvent("koman:cookie-banner", { detail: { visible: chipShown } }));
+    }, [chipShown]);
 
     const handleSave = (type: "all" | "necessary" | "custom") => {
         let consentData;
@@ -66,7 +81,7 @@ function CookieBannerContent() {
 
     return (
         <AnimatePresence>
-            {isVisible && (
+            {isVisible && (chipShown || isExpanded) && (
                 <motion.div
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}

@@ -140,13 +140,16 @@ export function GalleryPage({ title, subtitle, locale }: GalleryPageProps) {
                                 <div className="absolute inset-0 bg-slate-950/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
 
                                 <img
-                                    src={photo.src}
+                                    src={photo.src.replace(/\.webp$/, "-800w.webp")}
+                                    srcSet={`${photo.src.replace(/\.webp$/, "-800w.webp")} 800w, ${photo.src} 1600w`}
+                                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                     alt={photo.alt}
+                                    loading="lazy"
+                                    decoding="async"
                                     className={cn(
                                         "absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105",
                                         photo.src.includes("IMG_2977") && "-rotate-90"
                                     )}
-                                // Removed Next.js Image props, using regular img
                                 />
                             </RevealOnScroll>
                         </div>

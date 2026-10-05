@@ -71,7 +71,7 @@ function BookingWidgetContent() {
     const valueBase = "font-bold text-slate-900 text-[13px] md:text-sm truncate w-full pointer-events-none leading-none";
 
     return (
-        <div className="w-full max-w-4xl mx-auto px-4 mt-8">
+        <div data-hero-booking-widget className="w-full max-w-4xl mx-auto px-4 mt-8">
             <div className="bg-white rounded-2xl md:rounded-full shadow-[0_25px_50px_-12px_rgba(0,0,0,0.3)] flex flex-col md:flex-row items-stretch border border-slate-100 p-1.5 gap-1.5 md:h-16 relative z-50">
 
                 {/* 1. Tour Type */}
@@ -117,13 +117,13 @@ function BookingWidgetContent() {
                     <Popover>
                         <PopoverTrigger asChild>
                             <button
-                                aria-label={t('pickDate')}
+                                type="button"
                                 className={cn(segmentBase, "w-full h-12 md:h-full rounded-xl md:rounded-none flex flex-row items-center gap-3 px-4 md:px-5 group/date")}
                             >
                                 <CalendarIcon className="h-4 w-4 text-primary shrink-0 opacity-80" />
                                 <div className="flex-1 flex flex-col items-start overflow-hidden text-left">
                                     <span className={labelBase}>{t('pickDate')}</span>
-                                    <div className={cn(valueBase, !date && "text-slate-300 font-medium")}>
+                                    <div className={cn(valueBase, !date && "text-slate-500 font-medium")}>
                                         {date ? format(date, "MMM d, yyyy") : t('pickDate')}
                                     </div>
                                 </div>
