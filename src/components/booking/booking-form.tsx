@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
-import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X } from "lucide-react";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -82,7 +82,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const [isPaypalSuccess, setIsPaypalSuccess] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
     const [showFloatingTotal, setShowFloatingTotal] = useState(true);
+    const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
+    const [floatDismissed, setFloatDismissed] = useState(false);
     const submitTotalRef = useRef<HTMLDivElement>(null);
+    const floatVisible = showFloatingTotal && !floatDismissed;
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -161,19 +164,47 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     }, [countAdults, countChildren, countSeniors, hasTransfer, hasKayak, hasFerry, hasExtraDay, selectedTour, selectedTourSlug, isTransferIncluded]);
 
     useEffect(() => {
+        const readBanner = () => {
+            const w = window as Window & { __komanCookieBannerVisible?: boolean };
+            // Undefined until the banner mounts. It stays hidden for 1.5s and
+            // whenever cookie-consent is already stored, so default to hidden.
+            setCookieBannerVisible(w.__komanCookieBannerVisible === true);
+        };
+        const onBanner = (event: Event) => {
+            const visible = Boolean((event as CustomEvent<{ visible?: boolean }>).detail?.visible);
+            setCookieBannerVisible(visible);
+        };
+        const onStorage = (event: StorageEvent) => {
+            if (event.key === "cookie-consent") setCookieBannerVisible(!event.newValue);
+        };
+        readBanner();
+        setFloatDismissed(sessionStorage.getItem("booking-float-dismissed") === "1");
+        window.addEventListener("koman:cookie-banner", onBanner);
+        window.addEventListener("storage", onStorage);
+        return () => {
+            window.removeEventListener("koman:cookie-banner", onBanner);
+            window.removeEventListener("storage", onStorage);
+        };
+    }, []);
+
+    const dismissFloatingTotal = () => {
+        sessionStorage.setItem("booking-float-dismissed", "1");
+        setFloatDismissed(true);
+    };
+
+    useEffect(() => {
         const node = submitTotalRef.current;
         if (!node || typeof IntersectionObserver === "undefined") return;
-        // The floating total is a bottom-left bubble (bottom-28 ≈ 112px, plus
-        // its own height) stacked above the cookie chip. Shrink the viewport
-        // by that band so the planted total counts as on-screen before the
-        // bubble can cover it, then the bubble docks away.
+        // Above the cookie chip the bubble occupies ~112px + its height.
+        // Once the chip is gone it sits at bottom-6, so the covered band is shorter.
+        const covered = cookieBannerVisible ? 176 : 96;
         const observer = new IntersectionObserver(
             ([entry]) => setShowFloatingTotal(!entry.isIntersecting),
-            { threshold: 0, rootMargin: "0px 0px -176px 0px" },
+            { threshold: 0, rootMargin: `0px 0px -${covered}px 0px` },
         );
         observer.observe(node);
         return () => observer.disconnect();
-    }, []);
+    }, [cookieBannerVisible]);
 
     const paymentMethod = form.watch("paymentMethod");
 
@@ -763,12 +794,21 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         </div>
 
             <div
-                aria-hidden={!showFloatingTotal}
+                aria-hidden={!floatVisible}
                 className={cn(
-                    "fixed left-6 bottom-28 z-40 w-max max-w-[min(18rem,calc(100%-8rem))] rounded-2xl border border-white/10 bg-slate-900/80 text-white shadow-lg backdrop-blur-md px-4 py-2.5 transition-all duration-200",
-                    showFloatingTotal ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[calc(100%+8rem)] opacity-0",
+                    "fixed left-6 z-40 w-max max-w-[min(18rem,calc(100%-8rem))] rounded-2xl border border-white/10 bg-slate-900/80 text-white shadow-lg backdrop-blur-md pl-4 pr-8 py-2.5 transition-all duration-200",
+                    cookieBannerVisible ? "bottom-28" : "bottom-6",
+                    floatVisible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[calc(100%+8rem)] opacity-0",
                 )}
             >
+                <button
+                    type="button"
+                    onClick={dismissFloatingTotal}
+                    aria-label={locale === 'sq' ? 'Mbyll totalin' : 'Close total'}
+                    className="absolute right-1.5 top-1.5 rounded-md p-1 text-slate-300 hover:bg-white/10 hover:text-white"
+                >
+                    <X className="h-3.5 w-3.5" />
+                </button>
                 <p className="text-[10px] uppercase tracking-wider font-bold text-slate-300">Total</p>
                 <p className="text-xs text-slate-300 truncate">{getLocalizedTourName()}</p>
                 <p className="text-xl font-bold leading-none mt-1">

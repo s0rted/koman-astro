@@ -38,6 +38,14 @@ function CookieBannerContent() {
         }
     }, []);
 
+    // Same-tab listeners do not see localStorage writes. Publish visibility so
+    // the booking total can drop into this spot when the chip is saved or dismissed.
+    useEffect(() => {
+        const w = window as Window & { __komanCookieBannerVisible?: boolean };
+        w.__komanCookieBannerVisible = isVisible;
+        window.dispatchEvent(new CustomEvent("koman:cookie-banner", { detail: { visible: isVisible } }));
+    }, [isVisible]);
+
     const handleSave = (type: "all" | "necessary" | "custom") => {
         let consentData;
         if (type === "all") {
