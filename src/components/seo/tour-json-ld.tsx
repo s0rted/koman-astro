@@ -9,6 +9,27 @@ function isNumericPrice(price: string): boolean {
     return price !== "Call" && price !== "Contact" && !Number.isNaN(Number(price));
 }
 
+/**
+ * Verified public ratings for "Komani Lake Ferry" (Google Business / Places):
+ * - Google: 4.5/5 from 359 reviews (exa.ai Places snapshot for SH25 4013, Koman;
+ *   coords ~42.1088,19.8265). Cross-checked via aggregators citing the same listing
+ *   (~360–361 reviews / 4.5). Maps search:
+ *   https://www.google.com/maps/search/?api=1&query=Komani+Lake+Ferry+SH25+4013+Albania
+ * TripAdvisor: no listing exactly titled "Komani Lake Ferry" found. Closest:
+ * - "Komani Lake" attraction: 3.6/5 (155) —
+ *   https://www.tripadvisor.com/Attraction_Review-g2284133-d8720833-Reviews-Komani_Lake-Koman_Shkoder_County.html
+ * - "Alpin Ferry": 4.4/5 (20) —
+ *   https://www.tripadvisor.com/Attraction_Review-g2284133-d8124567-Reviews-Alpin_Ferry-Koman_Shkoder_County.html
+ * Prefer Google when scores differ; do not invent named Review objects.
+ */
+const KOMANI_LAKE_FERRY_AGGREGATE = {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "359",
+    "bestRating": "5",
+    "worstRating": "1",
+} as const;
+
 export function TourJsonLd({ tour, url }: TourJsonLdProps) {
     const tourProductSchema: Record<string, unknown> = {
         "@context": "https://schema.org",
@@ -20,8 +41,7 @@ export function TourJsonLd({ tour, url }: TourJsonLdProps) {
             "@type": "Brand",
             "name": "Komani Lake Tours"
         },
-        // Re-add aggregateRating only with a verifiable public source (e.g. Google/TripAdvisor).
-        // Previous values (4.9 / 127) had no citable origin and were removed.
+        "aggregateRating": { ...KOMANI_LAKE_FERRY_AGGREGATE },
     };
 
     if (isNumericPrice(tour.price)) {
@@ -132,9 +152,20 @@ export function FaqJsonLd() {
     );
 }
 
-// Business review aggregate removed — no verifiable public source for invented reviews
-// (e.g. 'Sarah Jenkins', 'Marco Rossi') or aggregateRating 4.9/127.
-// Re-add only when backed by a real Google/TripAdvisor (or similar) listing.
+/** Agency-level aggregateRating only — no invented Review authors. See sources above. */
 export function ReviewJsonLd() {
-    return null;
+    const reviewSchema = {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Komani Lake Tours",
+        "url": "https://www.komanlake.com",
+        "aggregateRating": { ...KOMANI_LAKE_FERRY_AGGREGATE },
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+        />
+    );
 }
