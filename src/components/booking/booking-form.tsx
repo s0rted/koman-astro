@@ -163,11 +163,13 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     useEffect(() => {
         const node = submitTotalRef.current;
         if (!node || typeof IntersectionObserver === "undefined") return;
-        // Shrink the bottom of the viewport by the floating bar so the planted
-        // total counts as on-screen before the bar can cover the submit row.
+        // The floating total is a bottom-left bubble (bottom-28 ≈ 112px, plus
+        // its own height) stacked above the cookie chip. Shrink the viewport
+        // by that band so the planted total counts as on-screen before the
+        // bubble can cover it, then the bubble docks away.
         const observer = new IntersectionObserver(
             ([entry]) => setShowFloatingTotal(!entry.isIntersecting),
-            { threshold: 0, rootMargin: "0px 0px -88px 0px" },
+            { threshold: 0, rootMargin: "0px 0px -176px 0px" },
         );
         observer.observe(node);
         return () => observer.disconnect();
@@ -763,23 +765,19 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             <div
                 aria-hidden={!showFloatingTotal}
                 className={cn(
-                    "fixed bottom-0 inset-x-0 z-40 border-t border-slate-700/80 bg-slate-900 text-white shadow-[0_-8px_24px_rgba(15,23,42,0.28)] pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-200",
-                    showFloatingTotal ? "translate-y-0" : "pointer-events-none translate-y-full",
+                    "fixed left-6 bottom-28 z-40 w-max max-w-[min(18rem,calc(100%-8rem))] rounded-2xl border border-white/10 bg-slate-900/80 text-white shadow-lg backdrop-blur-md px-4 py-2.5 transition-all duration-200",
+                    showFloatingTotal ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[calc(100%+8rem)] opacity-0",
                 )}
             >
-                <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-3">
-                    <div className="min-w-0">
-                        <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Total</p>
-                        <p className="text-xs text-slate-400 truncate">{getLocalizedTourName()}</p>
-                    </div>
-                    <p className="text-2xl font-bold leading-none shrink-0">
-                        {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
-                            locale === 'sq'
-                                ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
-                                : `€${totalPrice.toFixed(0)}`
-                        )}
-                    </p>
-                </div>
+                <p className="text-[10px] uppercase tracking-wider font-bold text-slate-300">Total</p>
+                <p className="text-xs text-slate-300 truncate">{getLocalizedTourName()}</p>
+                <p className="text-xl font-bold leading-none mt-1">
+                    {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
+                        locale === 'sq'
+                            ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
+                            : `€${totalPrice.toFixed(0)}`
+                    )}
+                </p>
             </div>
         </>
     );
