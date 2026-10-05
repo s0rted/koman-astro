@@ -24,7 +24,7 @@ export const TOURS: Tour[] = [
         price: "54",
         currency: "€",
         duration: "11 Hours",
-        description: "Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley and immerse yourself in nature with kayaking, trekking, and swimming. This isn't just a tour; it's a sensory awakening.",
+        description: "Summer-season classic boat tour (not available in autumn/winter). Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley with kayaking, trekking, and swimming.",
         inclusions: [
             "Seamless transfers from Shkoder",
             "Traditional boat navigation",

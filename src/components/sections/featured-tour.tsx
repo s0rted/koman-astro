@@ -22,6 +22,7 @@ export function FeaturedTour({ messages, locale }: { messages?: Record<string, a
 
 function FeaturedTourContent() {
     const t = useTranslations('FeaturedTour');
+    const summer = useTranslations('SummerOnly');
     const locale = useLocale();
 
     return (
@@ -48,9 +49,14 @@ function FeaturedTourContent() {
                     {/* Content Side */}
                     <div className="space-y-8">
                         <RevealOnScroll direction="up" delay={0.1}>
-                            <Badge className="bg-amber-400 text-slate-900 hover:bg-amber-500 px-3 py-1 text-sm font-bold uppercase tracking-wide">
-                                {t('bestSeller')}
-                            </Badge>
+                            <div className="flex flex-wrap gap-2">
+                                <Badge className="bg-amber-400 text-slate-900 hover:bg-amber-500 px-3 py-1 text-sm font-bold uppercase tracking-wide">
+                                    {t('bestSeller')}
+                                </Badge>
+                                <Badge className="bg-sky-100 text-sky-900 border border-sky-200 px-3 py-1 text-sm font-bold uppercase tracking-wide">
+                                    {summer('badge')}
+                                </Badge>
+                            </div>
                             <h2 className="mt-4 font-heading text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
                                 {t('title')} <br />
                                 <span className="text-primary">{t('subtitle')}</span>
@@ -60,6 +66,12 @@ function FeaturedTourContent() {
                         <RevealOnScroll direction="up" delay={0.2}>
                             <p className="text-lg text-slate-600 leading-relaxed">
                                 {t('description')}
+                            </p>
+                            <p className="mt-4 text-sm font-medium text-sky-900 bg-sky-50 border border-sky-100 rounded-xl px-4 py-3">
+                                {summer('short')}{' '}
+                                <Link href="/autumn-winter" className="font-bold text-primary underline underline-offset-2 hover:no-underline">
+                                    {summer('link')}
+                                </Link>
                             </p>
                         </RevealOnScroll>
 

@@ -33,6 +33,10 @@ const itinerary = tRaw(locale, `ToursData.${tour.slug}.itinerary`) as { time: st
 const isNumericPrice = tour.price !== 'Call' && tour.price !== 'Contact' && !Number.isNaN(Number(tour.price));
 const metaTitle = isNumericPrice ? `${title} | From €${tour.price}` : `${title} | Komani Lake Tours`;
 const metaDesc = t(locale, `ToursData.${tour.slug}.metaDescription`);
+const isBoatTour = tour.slug === 'boat-tour';
+const summerOnlyNotice = isBoatTour ? t(locale, 'SummerOnly.notice') : '';
+const summerOnlyLink = isBoatTour ? t(locale, 'SummerOnly.link') : '';
+const autumnHref = locale === 'sq' ? '/sq/vjeshte-dimer/' : '/en/autumn-winter/';
 const siteUrl = 'https://www.komanlake.com';
 const canonical = `${siteUrl}/en/tours/${slug}`;
 ---
@@ -62,6 +66,14 @@ const canonical = `${siteUrl}/en/tours/${slug}`;
               <p class="text-xl text-slate-600 leading-relaxed">
                 {description}
               </p>
+              {isBoatTour && (
+                <p class="mt-6 text-sm md:text-base font-medium text-sky-900 bg-sky-50 border border-sky-100 rounded-2xl px-5 py-4">
+                  {summerOnlyNotice}{' '}
+                  <a href={autumnHref} class="font-bold text-primary underline underline-offset-2 hover:no-underline">
+                    {summerOnlyLink}
+                  </a>
+                </p>
+              )}
             </RevealOnScroll>
 
             {/* Inclusions */}

@@ -33,6 +33,7 @@ export function BookingSidebar({ messages, locale, ...props }: BookingSidebarPro
 function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProps) {
     const t = useTranslations('SingleTour.sidebar');
     const td = useTranslations('ToursData');
+    const summer = useTranslations('SummerOnly');
     const locale = useLocale();
     const isCallPrice = price === "Call" || price === "Contact" || isNaN(Number(price));
 
@@ -60,11 +61,26 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
                     </span>
                     {!isCallPrice && <span className="text-white/60">{t('perPerson')}</span>}
                 </div>
-                {isBoatTour && transfersIncludedText && (
-                    <Badge className="mt-3 bg-primary/20 text-primary border-primary/30 hover:bg-primary/30">
-                        <Bus className="w-3 h-3 mr-1" />
-                        {transfersIncludedText}
-                    </Badge>
+                <div className="mt-3 flex flex-wrap gap-2">
+                    {isBoatTour && (
+                        <Badge className="bg-sky-500/20 text-sky-100 border-sky-400/30 hover:bg-sky-500/30">
+                            {summer('badge')}
+                        </Badge>
+                    )}
+                    {isBoatTour && transfersIncludedText && (
+                        <Badge className="bg-primary/20 text-primary border-primary/30 hover:bg-primary/30">
+                            <Bus className="w-3 h-3 mr-1" />
+                            {transfersIncludedText}
+                        </Badge>
+                    )}
+                </div>
+                {isBoatTour && (
+                    <p className="text-xs text-white/70 mt-3 leading-relaxed">
+                        {summer('short')}{' '}
+                        <Link href="/autumn-winter" className="text-sky-200 underline underline-offset-2 hover:text-white">
+                            {summer('link')}
+                        </Link>
+                    </p>
                 )}
                 <p className="text-white/40 text-xs mt-2 uppercase tracking-widest font-bold">
                     {t('bestPrice')}

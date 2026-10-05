@@ -76,6 +76,7 @@ export function BookingForm({ messages, locale, ...props }: BookingFormProps & {
 function BookingFormContent({ initialValues }: BookingFormProps) {
     const t = useTranslations('Booking');
     const td = useTranslations('ToursData');
+    const summer = useTranslations('SummerOnly');
     const locale = useLocale();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -471,6 +472,18 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             </p>
                         </div>
                     </div>
+
+                    {selectedTourSlug === 'boat-tour' && (
+                        <div className="rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-950" role="status">
+                            <p className="font-bold uppercase tracking-wide text-[11px] text-sky-800 mb-1">{summer('badge')}</p>
+                            <p className="leading-relaxed">
+                                {summer('bookingNotice')}{' '}
+                                <a href={locale === 'sq' ? '/sq/vjeshte-dimer/' : '/en/autumn-winter/'} className="font-bold text-primary underline underline-offset-2">
+                                    {summer('link')}
+                                </a>
+                            </p>
+                        </div>
+                    )}
 
                     <div className="space-y-4">
                         <div className="flex items-center gap-2">

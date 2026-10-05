@@ -87,6 +87,7 @@ function LazyTourVideo({ mp4Src, webmSrc, poster, title }: { mp4Src?: string; we
 function TourGridContent() {
     const t = useTranslations('Tours');
     const td = useTranslations('ToursData');
+    const summer = useTranslations('SummerOnly');
     const locale = useLocale();
 
     // Categorize Tours
@@ -129,10 +130,15 @@ function TourGridContent() {
                             />
                         )}
 
-                        <div className="absolute top-4 right-4 z-20">
+                        <div className="absolute top-4 right-4 z-20 flex flex-col items-end gap-2">
                             <Badge className="font-bold backdrop-blur-md bg-white/90 text-slate-900 border-none px-3 py-1.5 shadow-sm">
                                 {td(`${tour.slug}.category`)}
                             </Badge>
+                            {tour.slug === 'boat-tour' && (
+                                <Badge className="font-bold backdrop-blur-md bg-sky-500/95 text-white border-none px-3 py-1.5 shadow-sm">
+                                    {summer('badge')}
+                                </Badge>
+                            )}
                         </div>
 
                         <div className="absolute bottom-4 left-4 z-20 text-white">
@@ -160,9 +166,17 @@ function TourGridContent() {
                         </Link>
                     </div>
 
-                    <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-6">
+                    <p className="text-slate-600 leading-relaxed text-sm md:text-base mb-3">
                         {td(`${tour.slug}.description`)}
                     </p>
+                    {tour.slug === 'boat-tour' && (
+                        <p className="text-xs font-semibold text-sky-900 bg-sky-50 border border-sky-100 rounded-lg px-3 py-2 mb-6">
+                            {summer('short')}{' '}
+                            <Link href="/autumn-winter" className="text-primary underline underline-offset-2">
+                                {summer('link')}
+                            </Link>
+                        </p>
+                    )}
 
                     <div className="flex items-center justify-between pt-4 border-t border-slate-50 mt-auto">
                         <div className="flex flex-col">

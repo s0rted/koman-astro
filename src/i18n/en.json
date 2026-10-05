@@ -109,7 +109,8 @@
         "lunch": "Lunch Stop",
         "lunchLabel": "Food & Drinks Not Included",
         "pricePerPerson": "/ person",
-        "bookTour": "Book This Tour"
+        "bookTour": "Book This Tour",
+        "summerOnly": "Summer season only — not available in autumn/winter."
     },
     "Tours": {
         "title": "Curated",
@@ -203,7 +204,7 @@
         "description": "Everything you need to know before you sail.",
         "q1": {
             "q": "Where does the ferry depart from?",
-            "a": "The ferry departs from the Koman Terminal. We recommend arriving at least 30 minutes before departure. If you are driving from Shkoder, allow about 2 hours for the drive as the road can be winding."
+            "a": "In summer, the €54 boat tours depart daily from Shkoder at 7:00 AM (boat journey from Koman terminal at 9:00 AM). This classic boat tour is summer season only — for autumn and winter, see our Autumn & Winter experiences."
         },
         "q2": {
             "q": "Can I bring my car on the ferry?",
@@ -223,7 +224,7 @@
         },
         "q6": {
             "q": "Do you operate in winter?",
-            "a": "Our main season runs from March to November. Winter tours are available on request and depend on weather — see our Autumn & Winter page for seasonal experiences."
+            "a": "The €54 classic boat tour is summer season only and is not available in autumn/winter. Off-season, we offer separate Autumn & Winter experiences (boat trips, hiking, fishing, guesthouse stays) on request and depending on weather."
         },
         "winterLink": "Explore Autumn & Winter"
     },
@@ -337,7 +338,8 @@
             "bookNow": "Book Now",
             "contactUs": "Contact Us",
             "includesTransfer": "Includes Transfer"
-        }
+        },
+        "summerOnly": "The €54 Komani Lake boat tour runs in the summer season only and is not offered in autumn or winter."
     },
     "Common": {
         "bookNow": "Book Now",
@@ -350,7 +352,7 @@
     "ToursData": {
         "boat-tour": {
             "title": "Komani Lake Boat Tour",
-            "description": "Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
+            "description": "Summer season only (not available in autumn/winter). Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
             "category": "Full Day Adventure",
             "duration": "11 Hours",
             "price": "54",
@@ -394,7 +396,8 @@
                     "activity": "Arrival back in Shkoder"
                 }
             ],
-            "metaDescription": "Daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours with transfers included."
+            "metaDescription": "Summer-only daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours with transfers.",
+            "summerOnly": "Summer season only — not available in autumn/winter."
         },
         "shkoder-valbona": {
             "title": "Shkoder - Valbona Transfer",
@@ -786,5 +789,12 @@
         "home": "Back Home",
         "tours": "View Tours",
         "contact": "Contact Us"
+    },
+    "SummerOnly": {
+        "badge": "Summer only",
+        "short": "Summer season only — not available in autumn/winter.",
+        "notice": "The €54 Komani Lake boat tour runs in the summer season only and is not offered in autumn or winter.",
+        "link": "See Autumn & Winter experiences",
+        "bookingNotice": "This €54 boat tour is summer season only and is not available in autumn/winter. For off-season trips, see our Autumn & Winter page."
     }
 }
