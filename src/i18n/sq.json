@@ -224,7 +224,7 @@
         },
         "q6": {
             "q": "A operoni në dimër?",
-            "a": "Turi klasik me varkë €54 dhe turnet tona standarde ofrohen vetëm nga maji deri në tetor. Nga nëntori deri në prill ofrojmë përvoja të ndara Vjeshtë & Dimër (lundrime, hikë, peshkim, qëndrime në bujtina) me kërkesë dhe sipas motit."
+            "a": "Turnet me varkë dhe transferi Shkodër–Valbonë (trageti) ofrohen vetëm nga maji deri në tetor. Qiraja e kajakut, turnet me helikopter, përvoja lokale dhe turnet e personalizuara janë të disponueshme gjatë gjithë vitit. Nga nëntori deri në prill ofrojmë edhe përvoja të ndara Vjeshtë & Dimër me kërkesë (sipas motit)."
         },
         "winterLink": "Eksploro Vjeshtën & Dimrin"
     },
@@ -462,8 +462,7 @@
                     "activity": "Shtigjet e trashëgimisë, peshkim & lamtumirë"
                 }
             ],
-            "metaDescription": "Qëndrim lokal 2–3 ditë në Alpet Shqiptare: akomodim në Kulla, kuzhinë lokale, hikë të guiduara deri në 1250m, plus kalërim me mushka dhe peshkim opsional.",
-            "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
+            "metaDescription": "Qëndrim lokal 2–3 ditë në Alpet Shqiptare: akomodim në Kulla, kuzhinë lokale, hikë të guiduara deri në 1250m, plus kalërim me mushka dhe peshkim opsional."
         },
         "kayak-rental": {
             "title": "Aventurë me Kajak & Solo",
@@ -488,8 +487,7 @@
                     "activity": "Qira me orë ose ditë të plotë"
                 }
             ],
-            "metaDescription": "Merr me qira një kajak në Lumin e Shalës dhe eksploro plazhe të fshehura e fjorde të qeta me ritmin tënd. Përfshin padël, jelek dhe udhëzim sigurie.",
-            "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
+            "metaDescription": "Merr me qira një kajak në Lumin e Shalës dhe eksploro plazhe të fshehura e fjorde të qeta me ritmin tënd. Përfshin padël, jelek dhe udhëzim sigurie."
         },
         "helicopter-tour": {
             "title": "Kruiz Qiellor me Helikopter",
@@ -522,8 +520,7 @@
                     "activity": "Fluturim kthimi në Tiranë"
                 }
             ],
-            "metaDescription": "Tur me helikopter me Viva Air Albania: nga Tirana në Alpe mbi Rivierën, kanionet dhe Liqenin e Komanit. Ndalesë opsionale për drekë në Lumin e Shalës.",
-            "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
+            "metaDescription": "Tur me helikopter me Viva Air Albania: nga Tirana në Alpe mbi Rivierën, kanionet dhe Liqenin e Komanit. Ndalesë opsionale për drekë në Lumin e Shalës."
         },
         "custom-tour": {
             "title": "Tur i Personalizuar",
@@ -800,6 +797,7 @@
         "notice": "Ky tur ofrohet vetëm nga maji deri në tetor dhe nuk është i disponueshëm nga nëntori deri në prill.",
         "link": "Shiko përvojat Vjeshtë & Dimër",
         "bookingNotice": "Ky tur me varkë €54 ofrohet vetëm nga maji deri në tetor. Për udhëtime nga nëntori deri në prill, shihni faqen Vjeshtë & Dimër.",
-        "bookingNoticeGeneric": "Ky tur ofrohet vetëm nga maji deri në tetor. Për udhëtime nga nëntori deri në prill, shihni faqen Vjeshtë & Dimër."
+        "bookingNoticeGeneric": "Ky transfer Shkodër–Valbonë (trageti i Liqenit të Komanit) ofrohet vetëm nga maji deri në tetor. Për udhëtime nga nëntori deri në prill, shihni faqen Vjeshtë & Dimër.",
+        "bookingNoticeFerry": "Ky transfer Shkodër–Valbonë (trageti i Liqenit të Komanit) ofrohet vetëm nga maji deri në tetor. Për udhëtime nga nëntori deri në prill, shihni faqen Vjeshtë & Dimër."
     }
 }

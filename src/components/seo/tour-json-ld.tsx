@@ -123,7 +123,7 @@ export function FaqJsonLd() {
         },
         {
             question: "Do you operate in winter?",
-            answer: "The classic €54 boat tour and our other standard tours run May to October only. From November to April we offer separate Autumn & Winter experiences on request (weather permitting). See https://www.komanlake.com/en/autumn-winter/."
+            answer: "Our boat tours and the Shkoder–Valbona ferry transfer run May to October only. Kayak rental, helicopter tours, the local experience, and custom tours are available year-round. From November to April we also offer separate Autumn & Winter experiences on request (weather permitting). See https://www.komanlake.com/en/autumn-winter/."
         },
         {
             question: "How do I book a tour?",

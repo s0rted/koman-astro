@@ -264,10 +264,7 @@ function TourGridContent() {
 
                             <div className="relative z-10 p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
                                 <div className="max-w-xl text-white">
-                                    <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
-                                        <Badge className="bg-amber-400 text-amber-950 hover:bg-amber-500 border-none font-bold">Premium Experience</Badge>
-                                        <Badge className="bg-sky-500 text-white border-none font-bold">{summer('badge')}</Badge>
-                                    </div>
+                                    <Badge className="bg-amber-400 text-amber-950 hover:bg-amber-500 border-none mb-4 font-bold">Premium Experience</Badge>
                                     <Link href={{ pathname: '/tours/[slug]', params: { slug: helicopter.slug } }}>
                                         <h3 className="text-4xl md:text-6xl font-heading font-bold mb-4 hover:text-white/80 transition-colors cursor-pointer">{td(`${helicopter.slug}.title`)}</h3>
                                     </Link>
