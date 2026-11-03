@@ -47,7 +47,7 @@ function WhatsAppFloatContent() {
     return (
         <div
             className={cn(
-                "fixed bottom-6 right-6 z-50 transition-all duration-500",
+                "fixed bottom-32 right-6 z-50 md:bottom-6 transition-all duration-500",
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
             )}
         >

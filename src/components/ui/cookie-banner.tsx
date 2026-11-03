@@ -86,7 +86,7 @@ function CookieBannerContent() {
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -100, opacity: 0 }}
-                    className="fixed bottom-6 left-6 z-[100] pointer-events-none"
+                    className="fixed bottom-32 left-6 z-[100] pointer-events-none md:bottom-6"
                 >
                     <div className="flex items-end">
                         {!isExpanded ? (
