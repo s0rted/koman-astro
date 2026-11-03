@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { useTranslations, useLocale } from '@/i18n/react-context';
 import { localizedPath } from "@/i18n/paths";
-import { TOURS, EUR_TO_LEK } from "@/lib/tours";
+import { TOURS } from "@/lib/tours";
 import { formatLek } from "@/lib/format";
-import { getPromo, applyEarlyBird } from "@/config/promo";
+import { getPromo } from "@/config/promo";
+import { buildLineItems, priceBooking } from "@/lib/booking-pricing";
 import {
     Popover,
     PopoverContent,
@@ -53,22 +54,24 @@ function BookingWidgetContent() {
 
     const selectedTourData = TOURS.find(t => t.slug === tour);
 
-    const calculatePrice = () => {
-        if (!selectedTourData) return null;
-        if (selectedTourData.price === "Call" || selectedTourData.price === "Contact") return null;
-
-        const priceValue = parseInt(selectedTourData.price);
-        if (isNaN(priceValue)) return null;
-
-        const guestCount = guests === '9+' ? 9 : parseInt(guests);
-        return priceValue * guestCount;
-    };
-
-    const totalPrice = calculatePrice();
+    const guestCount = guests === '9+' ? 9 : (parseInt(guests) || 0);
+    // Shared pricing pipeline: tour line only (the widget selects no add-ons)
+    // with every guest as an adult. Null for "Call"/"Contact" tours.
+    const lines = selectedTourData
+        ? buildLineItems({
+            tourSlug: selectedTourData.slug,
+            tourPrice: selectedTourData.price,
+            adults: guestCount,
+            children: 0,
+            seniors: 0,
+            selected: {},
+        })
+        : [];
+    const hasPrice = lines.length > 0;
     // Early-bird promo derived from watched state (tour/guests/date); neutral
     // (no discount, no UI) until `now` is set after mount.
     const promo = now ? getPromo(now, date ?? null) : null;
-    const pricing = applyEarlyBird(totalPrice ?? 0, promo ?? { bookingOpen: false, applies: false, percent: 0, bookByDay: 0, bookByMonth: 0, bookByYear: 0, seasonYear: 0 });
+    const priced = priceBooking(lines, promo);
 
     const handleSearch = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -193,25 +196,25 @@ function BookingWidgetContent() {
                             <Search className="h-4 w-4 stroke-[3px]" />
                             <span>{t('findSpace')}</span>
                         </div>
-                        {totalPrice !== null && (
+                        {hasPrice && (
                             promo?.applies ? (
                                 <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter flex items-baseline gap-1.5 justify-center whitespace-nowrap">
                                     <span className="line-through opacity-60 normal-case">
                                         {locale === 'sq'
-                                            ? `${formatLek(totalPrice)} Lek`
-                                            : `€${totalPrice}`}
+                                            ? `${formatLek(priced.regular)} Lek`
+                                            : `€${priced.regular}`}
                                     </span>
                                     <span className="normal-case">
                                         {locale === 'sq'
-                                            ? `${formatLek(pricing.final)} Lek Total`
-                                            : `€${pricing.final} Total`}
+                                            ? `${formatLek(priced.final)} Lek Total`
+                                            : `€${priced.final} Total`}
                                     </span>
                                 </span>
                             ) : (
                                 <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter">
                                     {locale === 'sq'
-                                        ? `${formatLek(totalPrice)} Lek Total`
-                                        : `€${totalPrice} Total`}
+                                        ? `${formatLek(priced.final)} Lek Total`
+                                        : `€${priced.final} Total`}
                                 </span>
                             )
                         )}

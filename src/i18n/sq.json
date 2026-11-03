@@ -26,12 +26,12 @@
         "checkAvailability": "Shiko disponueshmërinë",
         "addons": "Përmirësoni Udhëtimin",
         "transfer": "Transfertë Shkodër - Valbonë",
-        "transferDesc": "Ne kujdesemi për transportin (+€30p)",
+        "transferDesc": "Ne kujdesemi për transportin",
         "kayak": "Qira Kajaku",
-        "kayakDesc": "Eksploro qoshet e fshehura (+€20 për person)",
+        "kayakDesc": "Eksploro qoshet e fshehura",
         "ferry": "Biletë Trageti",
-        "ferryDesc": "Përfshin kalimin me traget (+€10p)",
-        "addExtraDay": "Shto një ditë shtesë (+€30p)",
+        "ferryDesc": "Përfshin kalimin me traget",
+        "addExtraDay": "Shto një ditë shtesë",
         "addExtraDayDesc": "Zgjatni qëndrimin në 3 Ditë",
         "selectDate": "Zgjidhni Datën",
         "adults": "Të Rritur",
@@ -78,7 +78,8 @@
         "copySummary": "Kopjo përmbledhjen",
         "copiedSummary": "U kopjua!",
         "editBooking": "Ndrysho detajet",
-        "sendStepNote": "Ne e marrim kërkesën vetëm pasi ta dërgoni."
+        "sendStepNote": "Ne e marrim kërkesën vetëm pasi ta dërgoni.",
+        "priceBreakdown": "Përbërja e çmimit"
     },
     "Navbar": {
         "tours": "Turet",

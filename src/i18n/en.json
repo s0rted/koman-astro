@@ -26,12 +26,12 @@
         "checkAvailability": "Check Availability",
         "addons": "Enhance Your Trip",
         "transfer": "Shkoder - Valbona Transfer",
-        "transferDesc": "We handle your transport (+€30pp)",
+        "transferDesc": "We handle your transport",
         "kayak": "Kayak Rental",
-        "kayakDesc": "Explore hidden corners (+€20 per person)",
+        "kayakDesc": "Explore hidden corners",
         "ferry": "Ferry Ticket",
-        "ferryDesc": "Include ferry crossing (+€10pp)",
-        "addExtraDay": "Add Extra Day (+€30pp)",
+        "ferryDesc": "Include ferry crossing",
+        "addExtraDay": "Add Extra Day",
         "addExtraDayDesc": "Extend stay to 3 Days",
         "selectDate": "Select Date",
         "adults": "Adults",
@@ -78,7 +78,8 @@
         "copySummary": "Copy summary",
         "copiedSummary": "Copied!",
         "editBooking": "Edit booking details",
-        "sendStepNote": "We only receive your request after you send it."
+        "sendStepNote": "We only receive your request after you send it.",
+        "priceBreakdown": "Price breakdown"
     },
     "Navbar": {
         "tours": "Tours",

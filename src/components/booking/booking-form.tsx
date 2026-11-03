@@ -6,11 +6,12 @@ import { bookingSchema, type BookingValues } from "@/lib/validations/booking";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X, Copy, MessageCircle } from "lucide-react";
-import { TOURS, isSeasonalTour, allowsKayakAddon, KAYAK_ADDON_PRICE } from "@/lib/tours";
+import { TOURS, isSeasonalTour } from "@/lib/tours";
 import { formatLek } from "@/lib/format";
-import { getPromo, applyEarlyBird, type EarlyBirdPromo } from "@/config/promo";
+import { getPromo, type EarlyBirdPromo } from "@/config/promo";
+import { BOOKING_ADDONS, buildLineItems, priceBooking, hasFixedPrice, isAddonAvailable, isAddonIncluded, type AddonDef } from "@/lib/booking-pricing";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -26,11 +27,13 @@ import { BookingBadges } from "@/components/booking/booking-badges";
 function AddonToggle({
     label,
     description,
+    price,
     checked,
     onCheckedChange,
 }: {
     label: string;
     description: string;
+    price: ReactNode;
     checked: boolean;
     onCheckedChange: (checked: boolean) => void;
 }) {
@@ -43,6 +46,7 @@ function AddonToggle({
                 <span className="space-y-0.5">
                     <span className="block text-base font-bold text-slate-800">{label}</span>
                     <span className="block text-[13px] font-medium text-slate-500">{description}</span>
+                    <span className="block text-[13px] font-bold text-slate-700">{price}</span>
                 </span>
                 <span className="h-6 w-6 shrink-0" aria-hidden="true" />
             </FormLabel>
@@ -57,6 +61,44 @@ function AddonToggle({
                 </FormControl>
             </div>
         </FormItem>
+    );
+}
+
+/** One row of the compact per-line price breakdown. */
+interface BreakdownRow {
+    key: string;
+    label: string;
+    regular: number;
+    discount: number;
+    final: number;
+}
+
+/** Compact per-line price list: each row struck when the promo discounts it. */
+function PriceBreakdown({ heading, lines, formatAmount }: {
+    heading: string;
+    lines: BreakdownRow[];
+    formatAmount: (amount: number) => string;
+}) {
+    if (lines.length === 0) return null;
+    return (
+        <div className="rounded-xl bg-white border border-slate-100 px-4 py-3 space-y-1.5">
+            <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500">{heading}</p>
+            {lines.map(row => (
+                <div key={row.key} className="flex items-center justify-between gap-3 text-[13px]">
+                    <span className="text-slate-600 font-medium min-w-0 truncate">{row.label}</span>
+                    <span className="shrink-0 font-semibold text-slate-800">
+                        {row.discount > 0 ? (
+                            <>
+                                <span className="line-through text-slate-400 font-normal mr-1.5">{formatAmount(row.regular)}</span>
+                                {formatAmount(row.final)}
+                            </>
+                        ) : (
+                            formatAmount(row.final)
+                        )}
+                    </span>
+                </div>
+            ))}
+        </div>
     );
 }
 
@@ -85,7 +127,6 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const [isPaypalSuccess, setIsPaypalSuccess] = useState(false);
     const [pendingSend, setPendingSend] = useState<{ subject: string; body: string; mailtoUrl: string; whatsappUrl: string } | null>(null);
     const [copied, setCopied] = useState(false);
-    const [totalPrice, setTotalPrice] = useState(0);
     const [showFloatingTotal, setShowFloatingTotal] = useState(true);
     const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
     const [floatDismissed, setFloatDismissed] = useState(false);
@@ -136,7 +177,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     const selectedTourSlug = form.watch("tour");
     const selectedTour = TOURS.find(t => t.slug === selectedTourSlug);
-    const isCallPrice = selectedTour?.price === "Call" || selectedTour?.price === "Contact";
+    const isCallPrice = !hasFixedPrice(selectedTour?.price);
 
     // Set "today" only after mount: during SSR a `new Date()` would freeze the
     // build date into the HTML and trigger React hydration error #418.
@@ -162,53 +203,23 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const countAdults = form.watch("adults");
     const countChildren = form.watch("children") || 0;
     const countSeniors = form.watch("seniors") || 0;
-    const hasTransfer = form.watch("addTransfer");
-    const hasKayak = form.watch("addKayak");
-    const hasFerry = form.watch("addFerry");
+    const watchedForm = form.watch();
 
-    const hasExtraDay = form.watch("addExtraDay");
+    const transferAddon: AddonDef = BOOKING_ADDONS.find(a => a.id === "transfer")!;
 
-    const isTransferIncluded = selectedTourSlug === 'boat-tour' || selectedTourSlug === 'local-experience';
+    const isTransferIncluded = isAddonIncluded(transferAddon, selectedTourSlug);
 
-    // Kayak is an optional add-on on select tours only. If the tour changes to
-    // one that doesn't allow it, clear the checkbox so it isn't priced or submitted.
+    // Generic add-on clearing: when the tour changes to one where an add-on
+    // isn't offered (or is included free), clear its checkbox so it isn't
+    // priced or submitted. Driven by the BOOKING_ADDONS table, not by names.
     useEffect(() => {
-        if (!allowsKayakAddon(selectedTourSlug) && form.getValues("addKayak")) {
-            form.setValue("addKayak", false);
+        for (const addon of BOOKING_ADDONS) {
+            const available = isAddonAvailable(addon, selectedTourSlug) && !isAddonIncluded(addon, selectedTourSlug);
+            if (!available && (form.getValues() as Record<string, unknown>)[addon.field]) {
+                form.setValue(addon.field as keyof BookingValues, false);
+            }
         }
     }, [selectedTourSlug, form]);
-
-    useEffect(() => {
-        if (!selectedTour) return;
-
-        let basePrice = Number(selectedTour.price) || 0;
-
-        // Handle Local Experience Extra Day logic (Base 100 -> 130)
-        if (selectedTourSlug === 'local-experience' && hasExtraDay) {
-            basePrice += 30;
-        }
-
-        if (isNaN(basePrice)) {
-            setTotalPrice(0);
-            return;
-        }
-
-        const adultCost = countAdults * basePrice;
-        const discountMult = 0.7;
-        const childCost = countChildren * (basePrice * discountMult);
-        const seniorCost = countSeniors * (basePrice * discountMult);
-
-        const totalGuests = countAdults + countChildren + countSeniors;
-
-        // Transfers are free/included for boat-tour and local-experience
-        const transferCost = (hasTransfer && !isTransferIncluded) ? (30 * totalGuests) : 0;
-        const ferryCost = hasFerry ? (10 * totalGuests) : 0;
-        // Kayak add-on: fixed price, only allowed on select tours
-        const kayakCost = (hasKayak && allowsKayakAddon(selectedTourSlug)) ? (KAYAK_ADDON_PRICE * totalGuests) : 0;
-
-        setTotalPrice(adultCost + childCost + seniorCost + transferCost + ferryCost + kayakCost);
-
-    }, [countAdults, countChildren, countSeniors, hasTransfer, hasKayak, hasFerry, hasExtraDay, selectedTour, selectedTourSlug, isTransferIncluded]);
 
     useEffect(() => {
         const readBanner = () => {
@@ -255,15 +266,34 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     const paymentMethod = form.watch("paymentMethod");
 
-    // Early-bird promo, derived during render from watched values so it stays
-    // live when date / tour / guests / add-ons change. `now` is client-only,
-    // so during SSR and the first render the promo state is neutral (no UI).
+    // Pricing is derived during render from watched values so it stays live
+    // when date / tour / guests / add-ons change: one line per priced item,
+    // per-line early-bird discount. `now` is client-only, so during SSR and
+    // the first render the promo state is neutral (no UI).
     // "Call"/"Contact" tours have no computed price, so no promo UI for them.
     const watchedDate = form.watch("date");
     const promo: EarlyBirdPromo | null = now && !isCallPrice
         ? getPromo(now, watchedDate)
         : null;
-    const pricing = applyEarlyBird(totalPrice, promo ?? { bookingOpen: false, applies: false, percent: 0, bookByDay: 0, bookByMonth: 0, bookByYear: 0, seasonYear: 0 });
+    // Add-on selection as a plain boolean record keyed by form field name.
+    const selectedAddons: Record<string, boolean | undefined> = {};
+    for (const addon of BOOKING_ADDONS) {
+        selectedAddons[addon.field] = (watchedForm as Record<string, unknown>)[addon.field] === true;
+    }
+    const lines = buildLineItems({
+        tourSlug: selectedTourSlug,
+        tourPrice: selectedTour?.price,
+        adults: countAdults,
+        children: countChildren,
+        seniors: countSeniors,
+        selected: selectedAddons,
+    });
+    const priced = priceBooking(lines, promo);
+    const pricing = {
+        regular: priced.regular,
+        discount: priced.discount,
+        final: priced.final,
+    };
 
     // Regular total in the display currency of the current locale.
     const formatTotal = (amount: number): string =>
@@ -272,8 +302,35 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const liveTotalLabel = isCallPrice
         ? (locale === 'sq' ? 'Kontakto' : 'Call')
         : (locale === 'sq'
-            ? `${formatLek(totalPrice)} Lek`
-            : `€${totalPrice.toFixed(0)}`);
+            ? `${formatLek(priced.final)} Lek`
+            : `€${priced.final.toFixed(0)}`);
+
+    // EUR amount with decimals only when needed: 25 -> "25", 25.5 -> "25.50".
+    const formatEur = (amount: number): string => {
+        const rounded = Math.round(amount * 100) / 100;
+        return Number.isInteger(rounded) ? rounded.toFixed(0) : rounded.toFixed(2);
+    };
+
+    // Per-line amount in the display currency of the current locale.
+    const formatLine = (amount: number): string =>
+        locale === 'sq' ? `${formatLek(Math.round(amount))} Lek` : `€${formatEur(amount)}`;
+
+    // Add-on per-person price from data (not i18n strings), with the promo
+    // discount shown crossed out next to the discounted price when it applies.
+    const addonPriceNode = (addon: AddonDef): ReactNode => {
+        const price = addon.pricePerPerson;
+        const perPerson = locale === 'sq' ? `për person` : `per person`;
+        if (promo?.applies) {
+            const discounted = price * (1 - promo.percent / 100);
+            return (
+                <>
+                    <span className="line-through text-slate-400 mr-1.5">+€{formatEur(price)} {perPerson}</span>
+                    <span className="text-primary">+€{formatEur(discounted)} {perPerson}</span>
+                </>
+            );
+        }
+        return <>+€{formatEur(price)} {perPerson}</>;
+    };
 
     const getLocalizedTourName = () => {
         const slug = selectedTourSlug;
@@ -282,18 +339,31 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         return translated !== `${slug}.title` ? translated : (selectedTour?.title || slug);
     };
 
+    // Guest-count suffix for the tour line of the price breakdown, e.g.
+    // "2 adults, 1 child". Localized via the existing Booking.* keys.
+    const lineGuestsLabel = [
+        `${countAdults} ${t('adults')}`,
+        countChildren > 0 ? `${countChildren} ${t('children')}` : "",
+        countSeniors > 0 ? `${countSeniors} ${t('seniors')}` : "",
+    ].filter(Boolean).join(", ");
+
     const bookingPagePath = locale === 'en' ? 'en/book' : 'sq/rezervo';
 
     const buildBookingSummary = (data: BookingValues) => {
         const tourName = getLocalizedTourName();
         const dateStr = data.date ? format(data.date, "PPP") : "Not specified";
         const totalGuests = data.adults + (data.children || 0) + (data.seniors || 0);
-        const addons = [
-            data.addTransfer && "Transfer",
-            data.addKayak && "Kayak Rental",
-            data.addFerry && "Ferry Ticket",
-            data.addExtraDay && "Extra Day",
-        ].filter(Boolean).join(", ") || "None";
+        // Owner message "Add-ons:" built generically from the priced lines
+        // (selected, available, not included) via their English summaryLabel.
+        const addons = priced.lines
+            .filter(line => line.kind === "addon")
+            .map(line => line.summaryLabel)
+            .join(", ") || "None";
+        const breakdownLines = priced.lines.map(line =>
+            line.discount > 0
+                ? `${line.summaryLabel}: €${formatEur(line.regular)} → €${formatEur(line.final)}`
+                : `${line.summaryLabel}: €${formatEur(line.regular)}`
+        );
 
         return {
             tourName,
@@ -308,13 +378,15 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 `Date: ${dateStr}`,
                 `Guests: ${data.adults} adults, ${data.children || 0} children, ${data.seniors || 0} seniors (${totalGuests} total)`,
                 `Add-ons: ${addons}`,
+                `Price breakdown:`,
+                ...breakdownLines,
                 ...(promo?.applies
                     ? [
-                        `Regular Total: €${pricing.regular.toFixed(0)}`,
-                        `Early-bird discount (−${promo.percent}%): −€${pricing.discount.toFixed(0)}`,
-                        `Final Total: €${pricing.final.toFixed(0)}`,
+                        `Regular Total: €${formatEur(pricing.regular)}`,
+                        `Early-bird discount (−${promo.percent}%): −€${formatEur(pricing.discount)}`,
+                        `Final Total: €${formatEur(pricing.final)}`,
                     ]
-                    : [`Estimated Total: €${totalPrice.toFixed(0)}`]),
+                    : [`Estimated Total: €${formatEur(pricing.final)}`]),
                 `Payment: Pay in Person`,
                 ``,
                 `CONTACT DETAILS`,
@@ -426,7 +498,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                 <span>{formatTotal(pricing.final)}</span>
                             </>
                         ) : (
-                            <span>{formatTotal(totalPrice)}</span>
+                            <span>{formatTotal(pricing.final)}</span>
                         )}
                     </p>
                     {promo?.applies && (
@@ -437,6 +509,19 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             })}
                         </p>
                     )}
+                    <PriceBreakdown
+                        heading={locale === 'sq' ? 'Përbërja e çmimit' : 'Price breakdown'}
+                        lines={priced.lines.map(line => ({
+                            key: line.id,
+                            label: line.kind === 'tour'
+                                ? `${getLocalizedTourName()} — ${lineGuestsLabel}`
+                                : t(line.labelKey),
+                            regular: line.regular,
+                            discount: line.discount,
+                            final: line.final,
+                        }))}
+                        formatAmount={formatLine}
+                    />
                     <pre className="text-xs text-slate-600 whitespace-pre-wrap font-sans bg-white rounded-xl p-4 border border-slate-100 max-h-48 overflow-auto">
 {pendingSend.body}
                     </pre>
@@ -534,8 +619,8 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         <p className="text-3xl md:text-4xl font-bold leading-none">
                             {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
                                 locale === 'sq'
-                                    ? `${formatLek(totalPrice)} Lek`
-                                    : `€${totalPrice.toFixed(0)}`
+                                    ? `${formatLek(priced.final)} Lek`
+                                    : `€${priced.final.toFixed(0)}`
                             )}
                         </p>
                     )}
@@ -711,77 +796,46 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             </h2>
 
                             <div className="grid gap-4">
-
-                                {selectedTourSlug === 'local-experience' && (
-                                    <FormField
-                                        control={form.control}
-                                        name="addExtraDay"
-                                        render={({ field }) => (
-                                            <AddonToggle
-                                                label={t('addExtraDay')}
-                                                description={t('addExtraDayDesc')}
-                                                checked={!!field.value}
-                                                onCheckedChange={(checked) => field.onChange(checked)}
-                                            />
-                                        )}
-                                    />
-                                )}
-
-                                {!isTransferIncluded ? (
-                                    <FormField
-                                        control={form.control}
-                                        name="addTransfer"
-                                        render={({ field }) => (
-                                            <AddonToggle
-                                                label={t('transfer')}
-                                                description={t('transferDesc')}
-                                                checked={!!field.value}
-                                                onCheckedChange={(checked) => field.onChange(checked)}
-                                            />
-                                        )}
-                                    />
-                                ) : (
-                                    <div className="flex flex-row items-center justify-between rounded-xl border border-primary/20 p-4 bg-primary/5">
-                                        <div className="space-y-0.5">
-                                            <p className="text-base font-bold text-primary flex items-center gap-2">
-                                                <Bus className="w-5 h-5" />
-                                                {t('transfer')}
-                                            </p>
-                                            <p className="text-[13px] text-primary/70 font-medium">
-                                                {locale === 'sq' ? 'Transferta nga Shkodra është e përfshirë në çmim!' : 'Shkoder transfer is included in your tour price!'}
-                                            </p>
-                                        </div>
-                                        <Badge className="bg-primary text-white border-none">{locale === 'sq' ? 'E përfshirë' : 'Included'}</Badge>
-                                    </div>
-                                )}
-
-                                {allowsKayakAddon(selectedTourSlug) && (
-                                    <FormField
-                                        control={form.control}
-                                        name="addKayak"
-                                        render={({ field }) => (
-                                            <AddonToggle
-                                                label={t('kayak')}
-                                                description={t('kayakDesc')}
-                                                checked={!!field.value}
-                                                onCheckedChange={(checked) => field.onChange(checked)}
-                                            />
-                                        )}
-                                    />
-                                )}
-
-                                <FormField
-                                    control={form.control}
-                                    name="addFerry"
-                                    render={({ field }) => (
-                                        <AddonToggle
-                                            label={t('ferry')}
-                                            description={t('ferryDesc')}
-                                            checked={!!field.value}
-                                            onCheckedChange={(checked) => field.onChange(checked)}
+                                {/* Add-ons render generically from the BOOKING_ADDONS
+                                    table (display order: extraDay, transfer, kayak,
+                                    ferry). Available ones get a toggle with the price
+                                    from data; included ones get the "Included" box. */}
+                                {BOOKING_ADDONS.map((addon) => {
+                                    if (!isAddonAvailable(addon, selectedTourSlug)) return null;
+                                    const fieldName = addon.field as keyof BookingValues;
+                                    if (isAddonIncluded(addon, selectedTourSlug)) {
+                                        return (
+                                            <div key={addon.id} className="flex flex-row items-center justify-between rounded-xl border border-primary/20 p-4 bg-primary/5">
+                                                <div className="space-y-0.5">
+                                                    <p className="text-base font-bold text-primary flex items-center gap-2">
+                                                        <Bus className="w-5 h-5" />
+                                                        {t(addon.labelKey)}
+                                                    </p>
+                                                    <p className="text-[13px] text-primary/70 font-medium">
+                                                        {locale === 'sq' ? 'Transferta nga Shkodra është e përfshirë në çmim!' : 'Shkoder transfer is included in your tour price!'}
+                                                    </p>
+                                                </div>
+                                                <Badge className="bg-primary text-white border-none">{locale === 'sq' ? 'E përfshirë' : 'Included'}</Badge>
+                                            </div>
+                                        );
+                                    }
+                                    return (
+                                        <FormField
+                                            key={addon.id}
+                                            control={form.control}
+                                            name={fieldName}
+                                            render={({ field }) => (
+                                                <AddonToggle
+                                                    label={t(addon.labelKey)}
+                                                    description={t(addon.descKey)}
+                                                    price={addonPriceNode(addon)}
+                                                    checked={!!field.value}
+                                                    onCheckedChange={(checked) => field.onChange(checked)}
+                                                />
+                                            )}
                                         />
-                                    )}
-                                />
+                                    );
+                                })}
                             </div>
                         </div>
 
@@ -929,6 +983,19 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                         </div>
 
                         <div className="pt-4 space-y-3">
+                            <PriceBreakdown
+                                heading={locale === 'sq' ? 'Përbërja e çmimit' : 'Price breakdown'}
+                                lines={priced.lines.map(line => ({
+                                    key: line.id,
+                                    label: line.kind === 'tour'
+                                        ? `${getLocalizedTourName()} — ${lineGuestsLabel}`
+                                        : t(line.labelKey),
+                                    regular: line.regular,
+                                    discount: line.discount,
+                                    final: line.final,
+                                }))}
+                                formatAmount={formatLine}
+                            />
                             <div ref={submitTotalRef} className="flex items-center gap-4">
                                 <div className="shrink-0 text-left">
                                     <p className="text-[10px] uppercase tracking-wider font-bold text-slate-600">Total</p>
@@ -1013,8 +1080,8 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     <p className="text-xl font-bold leading-none mt-1">
                         {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
                             locale === 'sq'
-                                ? `${formatLek(totalPrice)} Lek`
-                                : `€${totalPrice.toFixed(0)}`
+                                ? `${formatLek(priced.final)} Lek`
+                                : `€${priced.final.toFixed(0)}`
                         )}
                     </p>
                 )}

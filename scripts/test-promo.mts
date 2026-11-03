@@ -1,7 +1,15 @@
-// Tests for the recurring early-bird promo logic (src/config/promo.ts).
+// Tests for the recurring early-bird promo logic (src/config/promo.ts) and
+// the generic booking pricing pipeline (src/lib/booking-pricing.ts).
 // Run directly with Node (TS type stripping): node scripts/test-promo.mts
 import assert from "node:assert/strict";
 import { getPromo, applyEarlyBird } from "../src/config/promo.ts";
+import {
+    buildLineItems,
+    priceBooking,
+    hasFixedPrice,
+    BOOKING_ADDONS,
+    type AddonDef,
+} from "../src/lib/booking-pricing.ts";
 
 // Build a Date from Tirane calendar date/time, independent of the machine's
 // local time zone: pass UTC ms offset for Europe/Tirane (+1, +2 DST).
@@ -124,6 +132,143 @@ check("applyEarlyBird with closed promo -> no discount", () => {
     const r = applyEarlyBird(100, closed);
     assert.equal(r.discount, 0);
     assert.equal(r.final, 100);
+});
+
+// --- Generic per-line pricing (src/lib/booking-pricing.ts) ---
+// now = 2026-11-03 (booking window open), trip 2027-07-15 (season 2027).
+const openRate = { applies: openPromo.applies, percent: openPromo.percent };
+const closedRate = { applies: false, percent: 0 };
+
+// Boat tour (€54), 2 adults + 1 child, kayak + ferry selected.
+check("boat-tour 2A+1C kayak+ferry: per-line discount, totals sum", () => {
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 1,
+        seniors: 0,
+        selected: { addKayak: true, addFerry: true },
+    });
+    // tour: 2*54 + 1*54*0.7 = 145.8; kayak+ferry: flat per person, 3 guests.
+    assert.equal(lines.length, 3);
+    assert.equal(lines[0].regular, 145.8);
+    assert.equal(lines[1].regular, 60);
+    assert.equal(lines[2].regular, 30);
+    const p = priceBooking(lines, openRate);
+    assert.deepEqual(
+        p.lines.map(l => l.discount),
+        p.lines.map(l => Math.round((l.regular * 15) / 100)),
+    );
+    assert.equal(p.discount, p.lines.reduce((s, l) => s + l.discount, 0));
+    assert.equal(p.final, p.regular - p.discount);
+    // Displayed rounded regular minus discount equals displayed rounded final.
+    for (const line of p.lines) {
+        assert.equal(Math.round(line.regular) - line.discount, Math.round(line.final));
+    }
+});
+
+// Local experience (€100), extra day + kayak + transfer: transfer is
+// included on local-experience, so it must NOT appear as a line.
+check("local-experience extraDay+kayak+transfer: transfer omitted, others discounted", () => {
+    const lines = buildLineItems({
+        tourSlug: "local-experience",
+        tourPrice: "100",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addTransfer: true, addKayak: true, addExtraDay: true },
+    });
+    assert.equal(lines.length, 3);
+    assert.ok(!lines.some(l => l.id === "transfer" || l.summaryLabel === "Transfer"));
+    const p = priceBooking(lines, openRate);
+    // tour 200, extra day scales with guest rate (2 adults -> 60), kayak 40.
+    assert.equal(p.regular, 300);
+    assert.equal(p.discount, 45);
+    assert.equal(p.final, 255);
+    assert.ok(p.lines.every(l => l.discount > 0));
+});
+
+// A fake FUTURE add-on injected through the addons param: priced and
+// discounted generically, with no change to the pricing code.
+check("injected fake add-on is priced and discounted generically", () => {
+    const fake: AddonDef = {
+        id: "fakeSnorkel",
+        field: "addFakeSnorkel",
+        labelKey: "fakeSnorkel",
+        descKey: "fakeSnorkelDesc",
+        pricePerPerson: 40,
+        summaryLabel: "Snorkel Set",
+    };
+    const lines = buildLineItems({
+        tourSlug: "shkoder-valbona",
+        tourPrice: "30",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addFakeSnorkel: true },
+        addons: [...BOOKING_ADDONS, fake],
+    });
+    const snorkel = lines.find(l => l.id === "fakeSnorkel");
+    assert.ok(snorkel, "fake add-on line missing");
+    assert.equal(snorkel.regular, 80);
+    const p = priceBooking(lines, openRate);
+    const snorkelPriced = p.lines.find(l => l.id === "fakeSnorkel")!;
+    assert.equal(snorkelPriced.discount, 12);
+    assert.equal(snorkelPriced.final, 68);
+});
+
+// Same booking, non-qualifying trip date: no discount anywhere.
+check("non-qualifying trip 2027-11-01: discount 0 on every line", () => {
+    const closed = getPromo(now, mkTrip(2027, 11, 1));
+    assert.equal(closed.applies, false);
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 1,
+        seniors: 0,
+        selected: { addKayak: true, addFerry: true },
+    });
+    const p = priceBooking(lines, { applies: closed.applies, percent: closed.percent });
+    assert.equal(p.discount, 0);
+    assert.ok(p.lines.every(l => l.discount === 0 && l.final === l.regular));
+    assert.equal(p.final, p.regular);
+});
+
+// hasFixedPrice: generic "Call"/"Contact" replacement.
+check("hasFixedPrice truth table", () => {
+    assert.equal(hasFixedPrice("Call"), false);
+    assert.equal(hasFixedPrice("Contact"), false);
+    assert.equal(hasFixedPrice(0), false);
+    assert.equal(hasFixedPrice(""), false);
+    assert.equal(hasFixedPrice("54"), true);
+    assert.equal(hasFixedPrice(54), true);
+});
+
+// "Call" tours produce no line items at all.
+check("buildLineItems with tourPrice 'Call' -> []", () => {
+    assert.deepEqual(
+        buildLineItems({
+            tourSlug: "helicopter-tour",
+            tourPrice: "Call",
+            adults: 2,
+            children: 0,
+            seniors: 0,
+            selected: { addFerry: true },
+        }),
+        [],
+    );
+    assert.deepEqual(
+        buildLineItems({
+            tourSlug: "custom-tour",
+            tourPrice: "Contact",
+            adults: 4,
+            children: 0,
+            seniors: 0,
+            selected: { addKayak: true },
+        }),
+        [],
+    );
 });
 
 console.log(`\n${count - failures}/${count} passed`);
