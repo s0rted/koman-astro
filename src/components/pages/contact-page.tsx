@@ -95,17 +95,17 @@ export function ContactPage({ dict }: ContactPageProps) {
                             <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-slate-700">{dict.form.name}</label>
-                                        <Input placeholder={dict.form.placeholderName} className="bg-slate-50 border-0 h-12" />
+                                        <label htmlFor="contact-name" className="text-sm font-bold text-slate-700">{dict.form.name}</label>
+                                        <Input id="contact-name" placeholder={dict.form.placeholderName} className="bg-slate-50 border-0 h-12" />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-slate-700">{dict.form.email}</label>
-                                        <Input placeholder={dict.form.placeholderEmail} className="bg-slate-50 border-0 h-12" />
+                                        <label htmlFor="contact-email" className="text-sm font-bold text-slate-700">{dict.form.email}</label>
+                                        <Input id="contact-email" placeholder={dict.form.placeholderEmail} className="bg-slate-50 border-0 h-12" />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-sm font-bold text-slate-700">{dict.form.message}</label>
-                                    <Textarea placeholder={dict.form.placeholderMessage} className="bg-slate-50 border-0 min-h-[150px]" />
+                                    <label htmlFor="contact-message" className="text-sm font-bold text-slate-700">{dict.form.message}</label>
+                                    <Textarea id="contact-message" placeholder={dict.form.placeholderMessage} className="bg-slate-50 border-0 min-h-[150px]" />
                                 </div>
                                 <Button type="submit" className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-white font-bold text-lg shadow-xl shadow-primary/20">
                                     {dict.form.submit}

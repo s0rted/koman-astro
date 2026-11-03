@@ -429,7 +429,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     <div className="flex items-center gap-2">
                         <Select value={selectedTourSlug} onValueChange={(value) => form.setValue("tour", value)}>
                             <SelectTrigger aria-label={t("selectExperience")} className="bg-transparent border-none text-white font-heading font-bold text-lg md:text-xl p-0 h-auto focus:ring-0 focus:ring-offset-0 shadow-none hover:bg-white/10 px-2 rounded-lg transition-colors w-fit gap-2">
-                                <SelectValue placeholder="Select a tour" />
+                                <SelectValue placeholder={t("selectExperience")} />
                             </SelectTrigger>
                             <SelectContent>
                                 {TOURS.map((tour) => (
@@ -720,12 +720,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>{t('fullName')}</FormLabel>
-                                            <FormControl>
-                                                <div className="relative">
-                                                    <UserIcon className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                            <div className="relative">
+                                                <UserIcon className="absolute left-3 top-3 h-4 w-4 text-slate-400 pointer-events-none" />
+                                                <FormControl>
                                                     <Input placeholder={t('placeholderLocation')} className="pl-10 h-11 rounded-xl bg-slate-50/50" {...field} />
-                                                </div>
-                                            </FormControl>
+                                                </FormControl>
+                                            </div>
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -737,12 +737,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>{t('email')}</FormLabel>
-                                            <FormControl>
-                                                <div className="relative">
-                                                    <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                            <div className="relative">
+                                                <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400 pointer-events-none" />
+                                                <FormControl>
                                                     <Input placeholder={t('placeholderEmail')} className="pl-10 h-11 rounded-xl bg-slate-50/50" {...field} />
-                                                </div>
-                                            </FormControl>
+                                                </FormControl>
+                                            </div>
                                             <FormMessage />
                                         </FormItem>
                                     )}
@@ -754,12 +754,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     render={({ field }) => (
                                         <FormItem className="md:col-span-2">
                                             <FormLabel>{t('phone')}</FormLabel>
-                                            <FormControl>
-                                                <div className="relative">
-                                                    <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                            <div className="relative">
+                                                <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400 pointer-events-none" />
+                                                <FormControl>
                                                     <Input placeholder={t('placeholderPhone')} className="pl-10 h-11 rounded-xl bg-slate-50/50" {...field} />
-                                                </div>
-                                            </FormControl>
+                                                </FormControl>
+                                            </div>
                                             <FormMessage />
                                         </FormItem>
                                     )}
