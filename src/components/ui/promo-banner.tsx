@@ -5,7 +5,7 @@ import { Tag, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { I18nProvider, useTranslations } from "@/i18n/react-context";
 import { cn } from "@/lib/utils";
-import { PROMO } from "@/config/promo";
+import { getPromo } from "@/config/promo";
 
 export function PromoBanner({ messages, locale }: { messages?: any; locale?: string }) {
     if (messages && locale) {
@@ -20,17 +20,19 @@ export function PromoBanner({ messages, locale }: { messages?: any; locale?: str
 
 function PromoBannerContent() {
     const t = useTranslations("PromoBanner");
-    // Render nothing on the server and on first client render, so the static
-    // HTML never bakes the date in and there is no hydration mismatch.
-    const [visible, setVisible] = useState(false);
+    // Render nothing on the server and on the first client render, so the
+    // static HTML never bakes a date or promo state in (no hydration mismatch).
+    const [now, setNow] = useState<Date | null>(null);
 
     useEffect(() => {
-        if (PROMO.enabled && new Date() < new Date(PROMO.endDate + "T23:59:59.999")) {
-            setVisible(true);
-        }
+        setNow(new Date());
     }, []);
 
-    if (!visible) return null;
+    // Nothing date-dependent during SSR / first render.
+    if (!now) return null;
+
+    const promo = getPromo(now);
+    if (!promo.bookingOpen) return null;
 
     return (
         <div className="mb-1.5 flex w-full justify-center px-2" role="region" aria-label={t("region")}>
@@ -43,7 +45,12 @@ function PromoBannerContent() {
             >
                 <Tag className="hidden sm:block w-4 h-4 shrink-0" />
                 <span className="min-w-0 text-[13px] sm:text-sm font-semibold leading-snug text-center">
-                    {t("text")}
+                    {t("text", {
+                        day: promo.bookByDay,
+                        year: promo.bookByYear,
+                        percent: promo.percent,
+                        season: promo.seasonYear,
+                    })}
                 </span>
                 <ArrowRight className="hidden sm:block w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </Link>

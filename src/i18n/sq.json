@@ -17,6 +17,8 @@
         "guestPlural": "Persona",
         "findSpace": "Gjej Vend",
         "estimatedTotal": "Total i parashikuar",
+        "earlyBirdLine": "Ofertë e hershme −{percent}% (−{amount})",
+        "earlyBirdHint": "Zgjidhni një datë nga maji deri në tetor {season} për të përfituar zbritjen e hershme {percent}%.",
         "whatsIncluded": "Çfarë përfshihet",
         "duration": "Kohëzgjatja",
         "summary": "Përmbledhje",
@@ -676,7 +678,7 @@
         "region": "Njoftim stinor"
     },
     "PromoBanner": {
-        "text": "Rezervoni çdo tur deri më 28 shkurt dhe kurseni 15%",
+        "text": "Ofertë e hershme: rezervoni deri më {day} shkurt {year} dhe kurseni {percent}% për çdo udhëtim nga maji deri në tetor {season}",
         "region": "Promocion"
     },
     "AutumnWinterPage": {

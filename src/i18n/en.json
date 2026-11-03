@@ -17,6 +17,8 @@
         "guestPlural": "Guests",
         "findSpace": "Find Space",
         "estimatedTotal": "Estimated Total",
+        "earlyBirdLine": "Early-bird −{percent}% (−{amount})",
+        "earlyBirdHint": "Pick a date between May and October {season} to get the early-bird {percent}% discount.",
         "whatsIncluded": "What's Included",
         "duration": "Duration",
         "summary": "Summary",
@@ -676,7 +678,7 @@
         "region": "Seasonal announcement"
     },
     "PromoBanner": {
-        "text": "Book any tour by Feb 28th to save 15%",
+        "text": "Early-bird offer: book by {day} February {year} and save {percent}% on any trip from May to October {season}",
         "region": "Promotion"
     },
     "AutumnWinterPage": {

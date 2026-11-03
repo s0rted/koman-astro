@@ -10,6 +10,7 @@ import { useTranslations, useLocale } from '@/i18n/react-context';
 import { localizedPath } from "@/i18n/paths";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
 import { formatLek } from "@/lib/format";
+import { getPromo, applyEarlyBird } from "@/config/promo";
 import {
     Popover,
     PopoverContent,
@@ -43,6 +44,12 @@ function BookingWidgetContent() {
     const [date, setDate] = React.useState<Date>();
     const [tour, setTour] = React.useState<string>("boat-tour");
     const [guests, setGuests] = React.useState<string>("2");
+    // Client-only "now": nothing date-dependent during SSR / first render.
+    const [now, setNow] = React.useState<Date | null>(null);
+
+    React.useEffect(() => {
+        setNow(new Date());
+    }, []);
 
     const selectedTourData = TOURS.find(t => t.slug === tour);
 
@@ -58,6 +65,10 @@ function BookingWidgetContent() {
     };
 
     const totalPrice = calculatePrice();
+    // Early-bird promo derived from watched state (tour/guests/date); neutral
+    // (no discount, no UI) until `now` is set after mount.
+    const promo = now ? getPromo(now, date ?? null) : null;
+    const pricing = applyEarlyBird(totalPrice ?? 0, promo ?? { bookingOpen: false, applies: false, percent: 0, bookByDay: 0, bookByMonth: 0, bookByYear: 0, seasonYear: 0 });
 
     const handleSearch = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -183,11 +194,26 @@ function BookingWidgetContent() {
                             <span>{t('findSpace')}</span>
                         </div>
                         {totalPrice !== null && (
-                            <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter">
-                                {locale === 'sq'
-                                    ? `${formatLek(totalPrice)} Lek Total`
-                                    : `€${totalPrice} Total`}
-                            </span>
+                            promo?.applies ? (
+                                <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter flex items-baseline gap-1.5 justify-center whitespace-nowrap">
+                                    <span className="line-through opacity-60 normal-case">
+                                        {locale === 'sq'
+                                            ? `${formatLek(totalPrice)} Lek`
+                                            : `€${totalPrice}`}
+                                    </span>
+                                    <span className="normal-case">
+                                        {locale === 'sq'
+                                            ? `${formatLek(pricing.final)} Lek Total`
+                                            : `€${pricing.final} Total`}
+                                    </span>
+                                </span>
+                            ) : (
+                                <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter">
+                                    {locale === 'sq'
+                                        ? `${formatLek(totalPrice)} Lek Total`
+                                        : `€${totalPrice} Total`}
+                                </span>
+                            )
                         )}
                     </button>
                 </div>

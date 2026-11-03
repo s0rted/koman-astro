@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X, Copy, MessageCircle } from "lucide-react";
 import { TOURS, isSeasonalTour, allowsKayakAddon, KAYAK_ADDON_PRICE } from "@/lib/tours";
 import { formatLek } from "@/lib/format";
+import { getPromo, applyEarlyBird, type EarlyBirdPromo } from "@/config/promo";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -88,6 +89,9 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const [showFloatingTotal, setShowFloatingTotal] = useState(true);
     const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
     const [floatDismissed, setFloatDismissed] = useState(false);
+    // Client-only "now": a new Date() during SSR would freeze the build date
+    // into the static HTML (React #418). Null until mounted.
+    const [now, setNow] = useState<Date | null>(null);
     const submitTotalRef = useRef<HTMLDivElement>(null);
     const floatVisible = showFloatingTotal && !floatDismissed;
 
@@ -136,6 +140,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     // Set "today" only after mount: during SSR a `new Date()` would freeze the
     // build date into the HTML and trigger React hydration error #418.
+    useEffect(() => {
+        setNow(new Date());
+    }, []);
+
     useEffect(() => {
         if (!form.getValues("date")) {
             form.setValue("date", new Date(), { shouldDirty: false });
@@ -247,6 +255,18 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     const paymentMethod = form.watch("paymentMethod");
 
+    // Early-bird promo, derived during render from watched values so it stays
+    // live when date / tour / guests / add-ons change. `now` is client-only,
+    // so during SSR and the first render the promo state is neutral (no UI).
+    const promo: EarlyBirdPromo | null = now
+        ? getPromo(now, form.watch("date"))
+        : null;
+    const pricing = applyEarlyBird(totalPrice, promo ?? { bookingOpen: false, applies: false, percent: 0, bookByDay: 0, bookByMonth: 0, bookByYear: 0, seasonYear: 0 });
+
+    // Regular total in the display currency of the current locale.
+    const formatTotal = (amount: number): string =>
+        locale === 'sq' ? `${formatLek(amount)} Lek` : `€${amount.toFixed(0)}`;
+
     const liveTotalLabel = isCallPrice
         ? (locale === 'sq' ? 'Kontakto' : 'Call')
         : (locale === 'sq'
@@ -286,7 +306,13 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 `Date: ${dateStr}`,
                 `Guests: ${data.adults} adults, ${data.children || 0} children, ${data.seniors || 0} seniors (${totalGuests} total)`,
                 `Add-ons: ${addons}`,
-                `Estimated Total: €${totalPrice.toFixed(0)}`,
+                ...(promo?.applies
+                    ? [
+                        `Regular Total: €${pricing.regular.toFixed(0)}`,
+                        `Early-bird discount (−${promo.percent}%): −€${pricing.discount.toFixed(0)}`,
+                        `Final Total: €${pricing.final.toFixed(0)}`,
+                    ]
+                    : [`Estimated Total: €${totalPrice.toFixed(0)}`]),
                 `Payment: Pay in Person`,
                 ``,
                 `CONTACT DETAILS`,
@@ -304,9 +330,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         if (data.paymentMethod === "payNow") {
             // === PAYPAL FLOW: Redirect to PayPal checkout ===
             const tourName = getLocalizedTourName();
-            const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)`);
-            // Same computed total shown in the sticky bar (guests, transfer, kayak, ferry, extra day).
-            const amount = totalPrice.toFixed(2);
+            const earlyBirdSuffix = promo?.applies ? " (early-bird −15%)" : "";
+            const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)${earlyBirdSuffix}`);
+            // Same computed total shown in the sticky bar (guests, transfer,
+            // kayak, ferry, extra day), minus the early-bird discount.
+            const amount = pricing.final.toFixed(2);
             const returnUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?success=true&tour=${data.tour}`);
             const cancelUrl = encodeURIComponent(window.location.origin + `/${bookingPagePath}?tour=${data.tour}`);
 
@@ -389,7 +417,24 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
                 <div className="bg-slate-50 p-6 rounded-2xl max-w-md mx-auto border border-slate-100 text-left space-y-2">
                     <p className="text-sm text-slate-500">{t('estimatedTotal')}</p>
-                    <p className="text-3xl font-bold text-primary">€{totalPrice.toFixed(0)}</p>
+                    <p className="text-3xl font-bold text-primary flex items-baseline gap-2 flex-wrap">
+                        {promo?.applies ? (
+                            <>
+                                <span className="text-base text-slate-400 line-through">{formatTotal(pricing.regular)}</span>
+                                <span>{formatTotal(pricing.final)}</span>
+                            </>
+                        ) : (
+                            <span>{formatTotal(totalPrice)}</span>
+                        )}
+                    </p>
+                    {promo?.applies && (
+                        <p className="text-sm font-semibold text-amber-700">
+                            {t('earlyBirdLine', {
+                                percent: promo.percent,
+                                amount: locale === 'sq' ? `${formatLek(pricing.discount)} Lek` : `€${pricing.discount.toFixed(0)}`,
+                            })}
+                        </p>
+                    )}
                     <pre className="text-xs text-slate-600 whitespace-pre-wrap font-sans bg-white rounded-xl p-4 border border-slate-100 max-h-48 overflow-auto">
 {pendingSend.body}
                     </pre>
@@ -472,13 +517,26 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 </div>
                 <div className="text-right">
                     <p className="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Total</p>
-                    <p className="text-3xl md:text-4xl font-bold leading-none">
-                        {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
-                            locale === 'sq'
-                                ? `${formatLek(totalPrice)} Lek`
-                                : `€${totalPrice.toFixed(0)}`
-                        )}
-                    </p>
+                    {promo?.applies ? (
+                        <>
+                            <p className="text-sm text-slate-400 line-through leading-none mb-0.5">{formatTotal(pricing.regular)}</p>
+                            <p className="text-3xl md:text-4xl font-bold leading-none">{formatTotal(pricing.final)}</p>
+                            <p className="text-xs font-semibold text-amber-300 mt-1">
+                                {t('earlyBirdLine', {
+                                    percent: promo.percent,
+                                    amount: locale === 'sq' ? `${formatLek(pricing.discount)} Lek` : `€${pricing.discount.toFixed(0)}`,
+                                })}
+                            </p>
+                        </>
+                    ) : (
+                        <p className="text-3xl md:text-4xl font-bold leading-none">
+                            {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
+                                locale === 'sq'
+                                    ? `${formatLek(totalPrice)} Lek`
+                                    : `€${totalPrice.toFixed(0)}`
+                            )}
+                        </p>
+                    )}
                 </div>
             </div>
 
@@ -872,7 +930,14 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                             <div ref={submitTotalRef} className="flex items-center gap-4">
                                 <div className="shrink-0 text-left">
                                     <p className="text-[10px] uppercase tracking-wider font-bold text-slate-600">Total</p>
-                                    <p className="text-2xl font-bold leading-none text-slate-900">{liveTotalLabel}</p>
+                                    {promo?.applies ? (
+                                        <>
+                                            <p className="text-sm text-slate-400 line-through leading-none mb-0.5">{formatTotal(pricing.regular)}</p>
+                                            <p className="text-2xl font-bold leading-none text-slate-900">{formatTotal(pricing.final)}</p>
+                                        </>
+                                    ) : (
+                                        <p className="text-2xl font-bold leading-none text-slate-900">{liveTotalLabel}</p>
+                                    )}
                                 </div>
                                 <div className="min-w-0 flex-1">
                                     {paymentMethod === 'payNow' ? (
@@ -896,6 +961,11 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     )}
                                 </div>
                             </div>
+                            {promo?.bookingOpen && !promo?.applies && !isCallPrice && (
+                                <p className="text-center text-xs text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-4 py-2">
+                                    {t('earlyBirdHint', { season: promo.seasonYear, percent: promo.percent })}
+                                </p>
+                            )}
                             <p className="text-center text-xs text-slate-600">
                                 {paymentMethod === 'payNow'
                                     ? (locale === 'en'
@@ -932,13 +1002,20 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 </button>
                 <p className="text-[10px] uppercase tracking-wider font-bold text-slate-300">Total</p>
                 <p className="text-xs text-slate-300 truncate">{getLocalizedTourName()}</p>
-                <p className="text-xl font-bold leading-none mt-1">
-                    {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
-                        locale === 'sq'
-                            ? `${formatLek(totalPrice)} Lek`
-                            : `€${totalPrice.toFixed(0)}`
-                    )}
-                </p>
+                {promo?.applies ? (
+                    <p className="text-xl font-bold leading-none mt-1 flex items-baseline gap-1.5 flex-wrap">
+                        <span className="text-xs font-medium text-slate-400 line-through">{formatTotal(pricing.regular)}</span>
+                        <span>{formatTotal(pricing.final)}</span>
+                    </p>
+                ) : (
+                    <p className="text-xl font-bold leading-none mt-1">
+                        {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
+                            locale === 'sq'
+                                ? `${formatLek(totalPrice)} Lek`
+                                : `€${totalPrice.toFixed(0)}`
+                        )}
+                    </p>
+                )}
             </div>
         </>
     );
