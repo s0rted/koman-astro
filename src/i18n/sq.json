@@ -675,6 +675,10 @@
         "dismiss": "Mbyll njoftimin",
         "region": "Njoftim stinor"
     },
+    "PromoBanner": {
+        "text": "Rezervoni çdo tur deri më 28 shkurt dhe kurseni 15%",
+        "region": "Promocion"
+    },
     "AutumnWinterPage": {
         "metaTitle": "Përvojat e Vjeshtës & Dimrit | Turne Liqeni i Komanit",
         "metaDescription": "Jetoni si vendasit në Liqenin e Komanit këtë vjeshtë e dimër: udhëtime me varkë, ecje, peshkim tradicional, raki shtëpie dhe qëndrim në bujtinë.",

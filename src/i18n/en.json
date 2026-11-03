@@ -675,6 +675,10 @@
         "dismiss": "Dismiss announcement",
         "region": "Seasonal announcement"
     },
+    "PromoBanner": {
+        "text": "Book any tour by Feb 28th to save 15%",
+        "region": "Promotion"
+    },
     "AutumnWinterPage": {
         "metaTitle": "Autumn & Winter Experiences | Komani Lake Tours",
         "metaDescription": "Slow down and live like a local. Boat trips, hiking, traditional fishing, homemade rakia, and cozy guesthouse stays through autumn and winter at Komani Lake.",

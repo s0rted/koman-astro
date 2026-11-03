@@ -13,6 +13,7 @@ import { FinalCTA } from '../components/sections/final-cta';
 import { AboutParallax } from '../components/sections/about-parallax';
 import AutumnWinterTeaser from '../components/sections/AutumnWinterTeaser.astro';
 import { SeasonBanner } from '../components/ui/season-banner';
+import { PromoBanner } from '../components/ui/promo-banner';
 import { t, getMessages } from '../i18n/utils';
 import { FaqJsonLd, ReviewJsonLd } from '../components/seo/tour-json-ld';
 
@@ -36,6 +37,7 @@ const subheadline = t(locale, 'Index.description');
       posterSrc="/images/hero-poster.webp"
       mobilePosterSrc="/images/hero-poster-mobile.webp"
     >
+      <PromoBanner slot="top" client:idle messages={messages} locale={locale} />
       <SeasonBanner slot="top" client:idle messages={messages} locale={locale} />
       <BookingWidget client:load messages={messages} locale={locale} />
     </HeroVideo>
