@@ -93,14 +93,14 @@ function CookieBannerContent() {
                             <motion.button
                                 layoutId="cookie-banner-bg"
                                 onClick={() => setIsExpanded(true)}
-                                className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-2.5 md:p-4 flex items-center gap-2 md:gap-3 group hover:border-primary/50 transition-colors max-w-[12rem] md:max-w-none"
+                                className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-2.5 md:p-4 flex items-center gap-2 md:gap-3 group hover:border-primary/50 transition-colors max-w-[calc(100vw-6rem)] md:max-w-none"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 <div className="bg-primary/10 p-2 rounded-xl shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                                     <Cookie className="w-4 h-4 md:w-5 md:h-5" />
                                 </div>
-                                <span className="text-xs md:text-sm font-bold text-slate-900 pr-2 truncate">
+                                <span className="text-xs md:text-sm max-md:leading-tight text-left font-bold text-slate-900 pr-1 md:pr-2">
                                     {t("chip")}
                                 </span>
                             </motion.button>
