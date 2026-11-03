@@ -60,7 +60,7 @@ function FooterContent() {
                                 href="https://www.instagram.com/molla_mario/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Follow us on Instagram"
+                                aria-label={t('followInstagram')}
                                 className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                             >
                                 <Instagram className="w-5 h-5" />
@@ -69,7 +69,7 @@ function FooterContent() {
                                 href="https://www.facebook.com/share/1dCYFoauaa/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Follow us on Facebook"
+                                aria-label={t('followFacebook')}
                                 className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-all"
                             >
                                 <Facebook className="w-5 h-5" />
