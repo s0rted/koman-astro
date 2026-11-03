@@ -6,7 +6,7 @@
 // pricing logic — everything is driven by the BOOKING_ADDONS table, so a new
 // add-on only needs a new entry (and a boolean form field).
 
-export const CHILD_SENIOR_RATE = 0.7;
+export const CHILD_SENIOR_RATE = 0.8;
 export const KAYAK_ADDON_PRICE = 20;
 export const KAYAK_ADDON_TOURS = ["boat-tour", "custom-tour", "local-experience"] as const;
 

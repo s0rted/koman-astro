@@ -7,6 +7,7 @@ import {
     buildLineItems,
     priceBooking,
     hasFixedPrice,
+    CHILD_SENIOR_RATE,
     BOOKING_ADDONS,
     type AddonDef,
 } from "../src/lib/booking-pricing.ts";
@@ -134,6 +135,24 @@ check("applyEarlyBird with closed promo -> no discount", () => {
     assert.equal(r.final, 100);
 });
 
+// --- Child/senior rate ---
+check("CHILD_SENIOR_RATE is 0.8 (20%)", () => {
+    assert.equal(CHILD_SENIOR_RATE, 0.8);
+});
+check("1 adult + 1 child + 1 senior on 100 tour: tour line 260", () => {
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: 100,
+        adults: 1,
+        children: 1,
+        seniors: 1,
+        selected: {},
+    });
+    assert.equal(lines.length, 1);
+    // 1*100 + 1*100*0.8 + 1*100*0.8 = 260
+    assert.equal(lines[0].regular, 260);
+});
+
 // --- Generic per-line pricing (src/lib/booking-pricing.ts) ---
 // now = 2026-11-03 (booking window open), trip 2027-07-15 (season 2027).
 const openRate = { applies: openPromo.applies, percent: openPromo.percent };
@@ -149,9 +168,9 @@ check("boat-tour 2A+1C kayak+ferry: per-line discount, totals sum", () => {
         seniors: 0,
         selected: { addKayak: true, addFerry: true },
     });
-    // tour: 2*54 + 1*54*0.7 = 145.8; kayak+ferry: flat per person, 3 guests.
+    // tour: 2*54 + 1*54*0.8 = 151.2; kayak+ferry: flat per person, 3 guests.
     assert.equal(lines.length, 3);
-    assert.equal(lines[0].regular, 145.8);
+    assert.equal(lines[0].regular, 151.2);
     assert.equal(lines[1].regular, 60);
     assert.equal(lines[2].regular, 30);
     const p = priceBooking(lines, openRate);
