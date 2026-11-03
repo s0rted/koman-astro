@@ -224,7 +224,7 @@
         },
         "q6": {
             "q": "A operoni në dimër?",
-            "a": "Turnet me varkë, transferi Shkodër–Valbonë (trageti) dhe Përvoja Lokale ofrohen vetëm nga maji deri në tetor. Qiraja e kajakut, turnet me helikopter dhe turnet e personalizuara janë të disponueshme gjatë gjithë vitit. Nga nëntori deri në prill ofrojmë edhe përvoja të ndara Vjeshtë & Dimër me kërkesë (sipas motit)."
+            "a": "Turnet me varkë, transferi Shkodër–Valbonë (trageti) dhe Përvoja Lokale ofrohen vetëm nga maji deri në tetor. Turnet me helikopter dhe turnet e personalizuara janë të disponueshme gjatë gjithë vitit, ndërsa kajaku mund të shtohet si opsion shtesë në turnet me varkë. Nga nëntori deri në prill ofrojmë edhe përvoja të ndara Vjeshtë & Dimër me kërkesë (sipas motit)."
         },
         "winterLink": "Eksploro Vjeshtën & Dimrin"
     },
@@ -467,31 +467,6 @@
             ],
             "metaDescription": "Qëndrim lokal 2–3 ditë në Alpet Shqiptare: akomodim në Kulla, kuzhinë lokale, hikë të guiduara deri në 1250m, plus kalërim me mushka dhe peshkim opsional.",
             "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
-        },
-        "kayak-rental": {
-            "title": "Aventurë me Kajak & Solo",
-            "description": "Merrni me qira një kajak dhe eksploroni qetësisht cepat e fshehur të Lumit të Shalës me ritmin tuaj. Zbuloni plazhe sekrete të aksesueshme vetëm me mjete të vogla lundrimi, vozitni nëpër fjordet e heshtura dhe gjeni copëzën tuaj private të parajsës.",
-            "category": "Aventurë",
-            "duration": "Qira / Orë",
-            "summary": "Kohë Fleksibël · Pajisje Profesionale · Hartat & Siguria e përfshirë",
-            "inclusions": [
-                "Marrje me qira e kajakut cilësor",
-                "Lopatë & Jelek shpëtimi",
-                "Udhëzime sigurie",
-                "Harta e vendeve më të mira",
-                "Vendi për ruajtjen e sendeve"
-            ],
-            "itinerary": [
-                {
-                    "time": "Fleksibël",
-                    "activity": "Marrja në Blini Park ose Lumin e Shalës"
-                },
-                {
-                    "time": "Kohëzgjatja",
-                    "activity": "Qira me orë ose ditë të plotë"
-                }
-            ],
-            "metaDescription": "Merr me qira një kajak në Lumin e Shalës dhe eksploro plazhe të fshehura e fjorde të qeta me ritmin tënd. Përfshin padël, jelek dhe udhëzim sigurie."
         },
         "helicopter-tour": {
             "title": "Kruiz Qiellor me Helikopter",

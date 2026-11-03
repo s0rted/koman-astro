@@ -224,7 +224,7 @@
         },
         "q6": {
             "q": "Do you operate in winter?",
-            "a": "Our boat tours, the Shkoder–Valbona ferry transfer, and the Local Experience run May to October only. Kayak rental, helicopter tours, and custom tours are available year-round. From November to April we also offer separate Autumn & Winter experiences on request (weather permitting)."
+            "a": "Our boat tours, the Shkoder–Valbona ferry transfer, and the Local Experience run May to October only. Helicopter tours and custom tours are available year-round, and kayaks can be added as an optional extra on our boat tours. From November to April we also offer separate Autumn & Winter experiences on request (weather permitting)."
         },
         "winterLink": "Explore Autumn & Winter"
     },
@@ -467,31 +467,6 @@
             ],
             "metaDescription": "Spend 2–3 days living like a local in the Albanian Alps: heritage Kulla stays, organic cuisine, guided peak hikes to 1250m, and optional mule riding or fishing.",
             "summerOnly": "May to October only — not available November to April."
-        },
-        "kayak-rental": {
-            "title": "Kayak & Solo Adventure",
-            "description": "Rent a kayak and explore the hidden corners of the Shala River at your own pace. Discover secret beaches accessible only by small boats, paddle through the silent fjords, and find your own private slice of paradise.",
-            "category": "Adventure",
-            "duration": "Rent / Hour",
-            "summary": "Flexible Timing · Professional Gear · Maps & Safety Briefing included",
-            "inclusions": [
-                "High-quality Kayak rental",
-                "Paddle & Life jacket",
-                "Safety briefing",
-                "Map of best spots",
-                "Storage for belongings"
-            ],
-            "itinerary": [
-                {
-                    "time": "Flexible",
-                    "activity": "Pick up at Blini Park or Shala River"
-                },
-                {
-                    "time": "Duration",
-                    "activity": "Rent by hour or full day"
-                }
-            ],
-            "metaDescription": "Rent a kayak on the Shala River and explore secret beaches and silent fjords at your own pace. Includes paddle, life jacket, safety briefing and a map of spots."
         },
         "helicopter-tour": {
             "title": "Helicopter Sky Cruise",

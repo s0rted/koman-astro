@@ -111,29 +111,6 @@ export const TOURS: Tour[] = [
         category: "Multi-Day Immersion"
     },
     {
-        slug: "kayak-rental",
-        title: "Kayak & Solo Adventure",
-        price: "20",
-        currency: "€",
-        duration: "Rent / Hour",
-        description: "Rent a kayak and explore the hidden corners of the Shala River at your own pace. Discover secret beaches accessible only by small boats, paddle through the silent fjords, and find your own private slice of paradise.",
-        inclusions: [
-            "High-quality Kayak rental",
-            "Paddle & Life jacket",
-            "Safety briefing",
-            "Map of best spots",
-            "Storage for belongings"
-        ],
-        itinerary: [
-            { time: "Flexible", activity: "Pick up at Blini Park or Shala River" },
-            { time: "Duration", activity: "Rent by hour or full day" }
-        ],
-        gallery: [],
-        image: "/images/tours/kayak-adventure.webp",
-        banner: "/images/tours/kayak-adventure.webp",
-        category: "Adventure"
-    },
-    {
         slug: "helicopter-tour",
         title: "Helicopter Sky Cruise",
         price: "Call",
@@ -199,4 +176,14 @@ export const SEASONAL_TOUR_SLUGS = [
 export function isSeasonalTour(slug: string | undefined | null): boolean {
     if (!slug) return false;
     return (SEASONAL_TOUR_SLUGS as readonly string[]).includes(slug);
+}
+
+/** Kayak is not a standalone tour — it is an optional add-on on these tours (€20 per person). */
+export const KAYAK_ADDON_PRICE = 20;
+
+export const KAYAK_ADDON_TOURS = ["boat-tour", "custom-tour"] as const;
+
+export function allowsKayakAddon(slug: string | undefined | null): boolean {
+    if (!slug) return false;
+    return (KAYAK_ADDON_TOURS as readonly string[]).includes(slug);
 }

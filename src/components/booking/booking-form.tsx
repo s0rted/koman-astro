@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X, Copy, MessageCircle } from "lucide-react";
-import { TOURS, isSeasonalTour } from "@/lib/tours";
+import { TOURS, isSeasonalTour, allowsKayakAddon, KAYAK_ADDON_PRICE } from "@/lib/tours";
 import { formatLek } from "@/lib/format";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
@@ -162,6 +162,14 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
 
     const isTransferIncluded = selectedTourSlug === 'boat-tour' || selectedTourSlug === 'local-experience';
 
+    // Kayak is an optional add-on on select tours only. If the tour changes to
+    // one that doesn't allow it, clear the checkbox so it isn't priced or submitted.
+    useEffect(() => {
+        if (!allowsKayakAddon(selectedTourSlug) && form.getValues("addKayak")) {
+            form.setValue("addKayak", false);
+        }
+    }, [selectedTourSlug, form]);
+
     useEffect(() => {
         if (!selectedTour) return;
 
@@ -187,9 +195,8 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         // Transfers are free/included for boat-tour and local-experience
         const transferCost = (hasTransfer && !isTransferIncluded) ? (30 * totalGuests) : 0;
         const ferryCost = hasFerry ? (10 * totalGuests) : 0;
-        // Kayak add-on price comes from tours data (kayak-rental)
-        const kayakAddonPrice = Number(TOURS.find((tour) => tour.slug === 'kayak-rental')?.price) || 20;
-        const kayakCost = hasKayak ? (kayakAddonPrice * totalGuests) : 0;
+        // Kayak add-on: fixed price, only allowed on select tours
+        const kayakCost = (hasKayak && allowsKayakAddon(selectedTourSlug)) ? (KAYAK_ADDON_PRICE * totalGuests) : 0;
 
         setTotalPrice(adultCost + childCost + seniorCost + transferCost + ferryCost + kayakCost);
 
@@ -688,18 +695,20 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                     </div>
                                 )}
 
-                                <FormField
-                                    control={form.control}
-                                    name="addKayak"
-                                    render={({ field }) => (
-                                        <AddonToggle
-                                            label={t('kayak')}
-                                            description={t('kayakDesc')}
-                                            checked={!!field.value}
-                                            onCheckedChange={(checked) => field.onChange(checked)}
-                                        />
-                                    )}
-                                />
+                                {allowsKayakAddon(selectedTourSlug) && (
+                                    <FormField
+                                        control={form.control}
+                                        name="addKayak"
+                                        render={({ field }) => (
+                                            <AddonToggle
+                                                label={t('kayak')}
+                                                description={t('kayakDesc')}
+                                                checked={!!field.value}
+                                                onCheckedChange={(checked) => field.onChange(checked)}
+                                            />
+                                        )}
+                                    />
+                                )}
 
                                 <FormField
                                     control={form.control}

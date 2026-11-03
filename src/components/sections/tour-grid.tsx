@@ -93,7 +93,7 @@ function TourGridContent() {
 
     // Categorize Tours
     const mainTours = TOURS.filter(t => ['boat-tour', 'local-experience', 'custom-tour'].includes(t.slug));
-    const services = TOURS.filter(t => ['shkoder-valbona', 'kayak-rental'].includes(t.slug));
+    const services = TOURS.filter(t => ['shkoder-valbona'].includes(t.slug));
     const helicopter = TOURS.find(t => t.slug === 'helicopter-tour');
 
     const TourCard = ({ tour, priority = false }: { tour: Tour, priority?: boolean }) => {
