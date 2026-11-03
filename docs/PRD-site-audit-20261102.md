@@ -11,10 +11,18 @@
 
 ## Implementation status
 
-- The fixes were meant to be done by GLM-5.3-Flash through Hermes on the Mac mini, because Grok Build is out of balance (HTTP 402).
-- They were **not run.** Hermes points at z.ai's pay-as-you-go endpoint (`api.z.ai/api/paas/v4`, provider `zai`). z.ai's pricing page lists GLM-5.3-Flash at $0.15 per 1M input tokens and $0.50 per 1M output tokens, so it isn't free. The rule is no paid API calls.
-- Free options for later: `glm-4.7-flash` / `glm-4.5-flash`, which are free on z.ai with the same provider; GLM-5.3-Flash on NVIDIA's free API catalog; or Grok Build once its balance is back.
-- So this document is the full spec. Every finding below was reproduced, and the root causes for fix 1 were confirmed (evidence included).
+- **Done 2026-11-03** by GLM 5.3 via Hermes on the Mac mini (z.ai GLM Coding Lite plan), on branch `fix/site-audit-20261102` (base 2969c65). Not merged, not deployed.
+- Fix 1 (hydration #418, Lek formatting + build-date-free booking pages): d0b2b08
+- Fix 2 (gallery captions/alt on /sq/galeria/): e4e198c
+- Fix 3 (privacy and terms in Albanian): d39033a
+- Fix 4 (footer social aria-labels): c7cfe54
+- Fix 5 (helicopter inclusions on sq): 2b870d5
+- Fix 6 (form input labels, tour-select placeholder): 88f89dc
+- Fix 7 (/sq/vjeshte-dimer/ meta description 172 to 144 chars): dfcc269
+- Albanian grammar review pass on fixes 2 and 3: 95daf8f
+- Gate: `npm run build` passed after every session (34 pages).
+- Local audit after: 29 issues (HIGH 0, MED 16, LOW 13) vs before 226 (HIGH 13, MED 187, LOW 26). Remaining MED are the 16 font-comment false positives; LOW are the 11 out-of-scope console warnings plus 2 unlabeled inputs on /en/book/ and /sq/rezervo/ (follow-up).
+- New Albanian (legal pages, 27 gallery captions) still needs native-speaker sign-off before going live.
 
 ## Audit summary (before)
 
