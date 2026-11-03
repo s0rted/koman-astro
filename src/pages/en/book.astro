@@ -28,6 +28,12 @@ const initialValues = {
 };
 
 const selectedTourData = TOURS.find(t => t.slug === tourSlug);
+const tourTitle = (slug: string, fallback: string) => {
+    const k = `ToursData.${slug}.title`;
+    const v = t(locale, k);
+    return v && v !== k ? v : fallback;
+};
+const tourTitles = Object.fromEntries(TOURS.map(x => [x.slug, tourTitle(x.slug, x.title)]));
 
 const title = t(locale, 'Booking.pageTitle') === 'Booking.pageTitle' ? 'Book Your Tour | Komani Lake Tours' : t(locale, 'Booking.pageTitle');
 const description = t(locale, 'Booking.pageDesc') === 'Booking.pageDesc' ? 'Finish your booking for a memorable experience at Koman Lake.' : t(locale, 'Booking.pageDesc');
@@ -42,7 +48,7 @@ const description = t(locale, 'Booking.pageDesc') === 'Booking.pageDesc' ? 'Fini
             {t(locale, 'Booking.finishTitle')} <span class="text-primary">{t(locale, 'Booking.booking')}</span>
           </h1>
           <p class="text-slate-500 text-lg text-pretty">
-            {t(locale, 'Booking.oneStepAway').replace('{tour}', selectedTourData?.title || "Komani Lake")}
+            {t(locale, 'Booking.oneStepAway').split('{tour}')[0]}<span data-tour-title>{(selectedTourData && tourTitles[selectedTourData.slug]) || "Komani Lake"}</span>{t(locale, 'Booking.oneStepAway').split('{tour}')[1]}
           </p>
         </RevealOnScroll>
 
@@ -55,4 +61,12 @@ const description = t(locale, 'Booking.pageDesc') === 'Booking.pageDesc' ? 'Fini
       </div>
     </div>
   </main>
+  <script is:inline define:vars={{ tourTitles }}>
+    // Static build has no query string; show the tour chosen via ?tour= on the client.
+    (function () {
+      var slug = new URLSearchParams(location.search).get('tour');
+      var el = document.querySelector('[data-tour-title]');
+      if (slug && el && tourTitles[slug]) el.textContent = tourTitles[slug];
+    })();
+  </script>
 </Layout>
