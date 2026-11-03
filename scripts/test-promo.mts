@@ -313,6 +313,77 @@ check("buildLineItems with tourPrice 'Call' -> []", () => {
     );
 });
 
+// --- Lunch add-on (fix 20): flat €25pp on boat-tour/local-experience ---
+// Boat tour (€54), 2 adults + 1 child, lunch selected.
+check("lunch on boat-tour 2A+1C: line 75", () => {
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 1,
+        seniors: 0,
+        selected: { addLunch: true },
+    });
+    const lunch = lines.find(l => l.id === "lunch");
+    assert.ok(lunch, "lunch line missing");
+    assert.equal(lunch.regular, 75);
+});
+check("lunch with open early-bird: discount 11, final 64, totals sum", () => {
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 1,
+        seniors: 0,
+        selected: { addLunch: true },
+    });
+    const p = priceBooking(lines, openRate);
+    const lunch = p.lines.find(l => l.id === "lunch")!;
+    assert.ok(lunch, "lunch line missing");
+    assert.equal(lunch.discount, 11); // round(75 * 15 / 100) = round(11.25)
+    assert.equal(lunch.final, 64);
+    assert.equal(p.discount, p.lines.reduce((s, l) => s + l.discount, 0));
+});
+check("lunch with non-qualifying trip 2027-11-01: discount 0", () => {
+    const closed = getPromo(now, mkTrip(2027, 11, 1));
+    assert.equal(closed.applies, false);
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 1,
+        seniors: 0,
+        selected: { addLunch: true },
+    });
+    const p = priceBooking(lines, { applies: closed.applies, percent: closed.percent });
+    const lunch = p.lines.find(l => l.id === "lunch")!;
+    assert.ok(lunch, "lunch line missing");
+    assert.equal(lunch.discount, 0);
+    assert.equal(lunch.final, 75);
+});
+check("lunch not offered on shkoder-valbona even when selected", () => {
+    const lines = buildLineItems({
+        tourSlug: "shkoder-valbona",
+        tourPrice: "30",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addLunch: true },
+    });
+    assert.ok(!lines.some(l => l.id === "lunch"), "lunch line should not exist");
+});
+check("lunch not offered on Call tours: no lines at all", () => {
+    const lines = buildLineItems({
+        tourSlug: "helicopter-tour",
+        tourPrice: "Call",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addLunch: true },
+    });
+    assert.deepEqual(lines, []);
+});
+
 console.log(`\n${count - failures}/${count} passed`);
 if (failures > 0) {
     process.exit(1);

@@ -12,6 +12,7 @@ export const bookingSchema = z.object({
     seniors: z.coerce.number().optional().default(0),
     addTransfer: z.boolean().optional(),
     addKayak: z.boolean().optional(),
+    addLunch: z.boolean().optional(),
     addFerry: z.boolean().optional(),
     addExtraDay: z.boolean().optional(),
     name: z.string().min(2, "Name must be at least 2 characters."),

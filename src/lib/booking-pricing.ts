@@ -59,6 +59,15 @@ export const BOOKING_ADDONS: readonly AddonDef[] = [
         summaryLabel: "Kayak Rental",
     },
     {
+        id: "lunch",
+        field: "addLunch",
+        labelKey: "lunch_addon",
+        descKey: "lunch_addonDesc",
+        pricePerPerson: 25,
+        appliesTo: ["boat-tour", "local-experience"],
+        summaryLabel: "Lunch at the village",
+    },
+    {
         id: "ferry",
         field: "addFerry",
         labelKey: "ferry",

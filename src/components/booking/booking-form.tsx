@@ -166,6 +166,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             seniors: 0,
             addTransfer: false,
             addKayak: false,
+            addLunch: false,
             addFerry: false,
             name: "",
             email: "",
