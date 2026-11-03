@@ -123,7 +123,7 @@ export function FaqJsonLd() {
         },
         {
             question: "Do you operate in winter?",
-            answer: "Our boat tours, the Shkoder–Valbona ferry transfer, and the Local Experience run May to October only. Helicopter tours and custom tours are available year-round, and kayaks can be added as an optional extra on our boat tours. From November to April we also offer separate Autumn & Winter experiences on request (weather permitting). See https://www.komanlake.com/en/autumn-winter/."
+            answer: "Our boat tours, the Shkoder–Valbona ferry transfer, and the Local Experience run May to October only. Helicopter tours and custom tours are available year-round, and kayaks can be added as an optional extra on our boat tours and the Local Experience. From November to April we also offer separate Autumn & Winter experiences on request (weather permitting). See https://www.komanlake.com/en/autumn-winter/."
         },
         {
             question: "How do I book a tour?",

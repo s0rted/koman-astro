@@ -181,7 +181,7 @@ export function isSeasonalTour(slug: string | undefined | null): boolean {
 /** Kayak is not a standalone tour — it is an optional add-on on these tours (€20 per person). */
 export const KAYAK_ADDON_PRICE = 20;
 
-export const KAYAK_ADDON_TOURS = ["boat-tour", "custom-tour"] as const;
+export const KAYAK_ADDON_TOURS = ["boat-tour", "custom-tour", "local-experience"] as const;
 
 export function allowsKayakAddon(slug: string | undefined | null): boolean {
     if (!slug) return false;
