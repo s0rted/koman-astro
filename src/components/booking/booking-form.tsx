@@ -258,8 +258,10 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     // Early-bird promo, derived during render from watched values so it stays
     // live when date / tour / guests / add-ons change. `now` is client-only,
     // so during SSR and the first render the promo state is neutral (no UI).
-    const promo: EarlyBirdPromo | null = now
-        ? getPromo(now, form.watch("date"))
+    // "Call"/"Contact" tours have no computed price, so no promo UI for them.
+    const watchedDate = form.watch("date");
+    const promo: EarlyBirdPromo | null = now && !isCallPrice
+        ? getPromo(now, watchedDate)
         : null;
     const pricing = applyEarlyBird(totalPrice, promo ?? { bookingOpen: false, applies: false, percent: 0, bookByDay: 0, bookByMonth: 0, bookByYear: 0, seasonYear: 0 });
 
@@ -330,7 +332,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         if (data.paymentMethod === "payNow") {
             // === PAYPAL FLOW: Redirect to PayPal checkout ===
             const tourName = getLocalizedTourName();
-            const earlyBirdSuffix = promo?.applies ? " (early-bird −15%)" : "";
+            const earlyBirdSuffix = promo?.applies ? ` (early-bird −${promo.percent}%)` : "";
             const itemName = encodeURIComponent(`${tourName} — ${data.name} (${data.adults}A/${data.children || 0}C/${data.seniors || 0}S)${earlyBirdSuffix}`);
             // Same computed total shown in the sticky bar (guests, transfer,
             // kayak, ferry, extra day), minus the early-bird discount.
