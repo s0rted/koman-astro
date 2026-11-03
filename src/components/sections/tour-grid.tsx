@@ -7,7 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Clock, MapPin, Star, Bus } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import Image from "@/components/ui/image";
-import { TOURS, type Tour, EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
+import { TOURS, type Tour, isSeasonalTour } from "@/lib/tours";
+import { formatLek } from "@/lib/format";
 import { useTranslations, useLocale } from "@/i18n/react-context";
 
 
@@ -99,7 +100,7 @@ function TourGridContent() {
         const isCallPrice = tour.price === "Call" || tour.price === "Contact" || isNaN(Number(tour.price));
         const numericPrice = Number(tour.price);
         const displayPrice = locale === 'sq' && !isCallPrice
-            ? Math.round(numericPrice * EUR_TO_LEK).toLocaleString('sq-AL')
+            ? formatLek(numericPrice)
             : tour.price;
         const displayCurrency = locale === 'sq' && !isCallPrice ? ' Lek' : tour.currency;
         const isTransferIncluded = tour.slug === 'boat-tour' || tour.slug === 'local-experience';

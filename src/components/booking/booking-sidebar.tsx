@@ -8,6 +8,7 @@ import { useTranslations, useLocale } from "@/i18n/react-context";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
 import { EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
+import { formatLek } from "@/lib/format";
 
 interface BookingSidebarProps {
     price: string;
@@ -40,7 +41,7 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
     // Get locale-specific price
     const numericPrice = Number(price);
     const displayPrice = locale === 'sq' && !isCallPrice
-        ? Math.round(numericPrice * EUR_TO_LEK).toLocaleString('sq-AL')
+        ? formatLek(numericPrice)
         : price;
     const displayCurrency = locale === 'sq' && !isCallPrice ? ' Lek' : currency;
 

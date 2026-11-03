@@ -11,9 +11,31 @@ import {
   getDefaultClassNames,
   type DayButton,
 } from "react-day-picker"
+import { format } from "date-fns"
+import { sq as dateFnsSq, type Locale as DateFnsLocale } from "date-fns/locale"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
+
+/** Runtime locale passed to the Calendar ("en" | "sq"). */
+type CalendarLocale = "en" | "sq"
+
+/**
+ * The calendar's SSR-visible strings must be deterministic (React #418):
+ * these match what the default DayPicker renderers produce in Node, and all
+ * date formatting goes through date-fns (bundled CLDR) so Node and the
+ * browser always agree.
+ */
+const NAV_LABELS: Record<CalendarLocale, { prev: string; next: string }> = {
+  en: { prev: "Previous month", next: "Next month" },
+  sq: { prev: "Muaji i mëparshëm", next: "Muaji tjetër" },
+}
+
+// date-fns locale for date formatting inside the calendar (sq when needed).
+const DATE_FNS_LOCALES: Record<CalendarLocale, DateFnsLocale | undefined> = {
+  en: undefined,
+  sq: dateFnsSq,
+}
 
 function Calendar({
   className,
@@ -21,13 +43,22 @@ function Calendar({
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
+  calendarLocale = "en" as CalendarLocale,
   formatters,
   components,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>["variant"]
+  /** "en" (default) or "sq" — controls aria-labels and date formatting. */
+  calendarLocale?: CalendarLocale
 }) {
   const defaultClassNames = getDefaultClassNames()
+  const dateFnsLocale = DATE_FNS_LOCALES[calendarLocale]
+  const navLabels = NAV_LABELS[calendarLocale]
+  // Use date-fns (bundled CLDR) rather than Intl: Node and Chromium can ship
+  // different ICU data for the same locale tag, which breaks hydration.
+  const monthLabel = (month?: Date) =>
+    month ? format(month, "MMMM yyyy", { locale: dateFnsLocale }) : ""
 
   return (
     <DayPicker
@@ -39,13 +70,26 @@ function Calendar({
         className
       )}
       captionLayout={captionLayout}
+      locale={dateFnsLocale}
       labels={{
-        labelPrevious: (month) => `Previous month${month ? `: ${month.toLocaleString("default", { month: "long", year: "numeric" })}` : ""}`,
-        labelNext: (month) => `Next month${month ? `: ${month.toLocaleString("default", { month: "long", year: "numeric" })}` : ""}`,
+        labelPrevious: (month) =>
+          `${navLabels.prev}${month ? `: ${monthLabel(month)}` : ""}`,
+        labelNext: (month) =>
+          `${navLabels.next}${month ? `: ${monthLabel(month)}` : ""}`,
+        ...(calendarLocale === "sq"
+          ? {
+              labelDayButton: (date: Date, modifiers: { today?: boolean; selected?: boolean }) => {
+                let label = format(date, "PPPP", { locale: dateFnsSq });
+                if (modifiers.today) label = `Sot, ${label}`;
+                if (modifiers.selected) label = `${label}, e përzgjedhur`;
+                return label;
+              },
+            }
+          : {}),
       }}
       formatters={{
         formatMonthDropdown: (date) =>
-          date.toLocaleString("default", { month: "short" }),
+          format(date, "MMM", { locale: dateFnsLocale }),
         ...formatters,
       }}
       classNames={{
@@ -104,7 +148,7 @@ function Calendar({
           defaultClassNames.week_number_header
         ),
         week_number: cn(
-          "text-[0.8rem] select-none text-muted-foreground",
+          "text-[0.8rem] text-muted-foreground",
           defaultClassNames.week_number
         ),
         day: cn(
@@ -201,7 +245,7 @@ function CalendarDayButton({
       ref={ref}
       variant="ghost"
       size="icon"
-      data-day={day.date.toLocaleDateString()}
+      data-day={day.date.toLocaleDateString("en-CA")}
       data-selected-single={
         modifiers.selected &&
         !modifiers.range_start &&

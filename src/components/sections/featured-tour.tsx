@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/routing";
 import { Clock, Utensils } from "lucide-react";
 import { useTranslations, useLocale } from "@/i18n/react-context";
+import { formatLek } from "@/lib/format";
 
 import { I18nProvider } from "@/i18n/react-context";
 
@@ -98,7 +99,7 @@ function FeaturedTourContent() {
                             <div className="flex items-baseline gap-1">
                                 {locale === 'sq' ? (
                                     <>
-                                        <span className="text-3xl font-bold text-primary">5,700 Lek</span>
+                                        <span className="text-3xl font-bold text-primary">{formatLek(54)} Lek</span>
                                     </>
                                 ) : (
                                     <>

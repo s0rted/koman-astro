@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, Mail, Phone, User as UserIcon, Minus, Plus, Bus, Clock, Calendar as CalendarIcon, Users, MessageSquare, CreditCard, Wallet, X, Copy, MessageCircle } from "lucide-react";
-import { TOURS, EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
+import { TOURS, isSeasonalTour } from "@/lib/tours";
+import { formatLek } from "@/lib/format";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -103,7 +104,9 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
         resolver: zodResolver(bookingSchema) as any,
         defaultValues: {
             tour: initialValues.tour || "boat-tour",
-            date: initialValues.date || new Date(),
+            // Start undefined so SSR never bakes the build-day date into the
+            // HTML (React #418); set to today after mount below.
+            date: initialValues.date || undefined,
             adults: initialValues.adults || 2,
             children: 0,
             seniors: 0,
@@ -121,6 +124,23 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const selectedTourSlug = form.watch("tour");
     const selectedTour = TOURS.find(t => t.slug === selectedTourSlug);
     const isCallPrice = selectedTour?.price === "Call" || selectedTour?.price === "Contact";
+
+    // Set "today" only after mount: during SSR a `new Date()` would freeze the
+    // build date into the HTML and trigger React hydration error #418.
+    useEffect(() => {
+        if (!form.getValues("date")) {
+            form.setValue("date", new Date(), { shouldDirty: false });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // The calendar marks "today" and past days as disabled at render time, so
+    // its markup depends on the current date. Render it only on the client,
+    // after mount, with a static skeleton for SSR.
+    const [calendarMounted, setCalendarMounted] = useState(false);
+    useEffect(() => {
+        setCalendarMounted(true);
+    }, []);
 
     const countAdults = form.watch("adults");
     const countChildren = form.watch("children") || 0;
@@ -214,7 +234,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const liveTotalLabel = isCallPrice
         ? (locale === 'sq' ? 'Kontakto' : 'Call')
         : (locale === 'sq'
-            ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
+            ? `${formatLek(totalPrice)} Lek`
             : `€${totalPrice.toFixed(0)}`);
 
     const getLocalizedTourName = () => {
@@ -439,7 +459,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                     <p className="text-3xl md:text-4xl font-bold leading-none">
                         {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
                             locale === 'sq'
-                                ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
+                                ? `${formatLek(totalPrice)} Lek`
                                 : `€${totalPrice.toFixed(0)}`
                         )}
                     </p>
@@ -521,16 +541,24 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                 render={({ field }) => (
                                     <FormItem className="flex flex-col items-center">
                                         <div className="bg-slate-50/50 rounded-2xl p-4 border border-slate-100 w-full sm:w-auto shadow-sm flex justify-center">
-                                            <Calendar
-                                                mode="single"
-                                                selected={field.value}
-                                                onSelect={field.onChange}
-                                                disabled={(date) =>
-                                                    date < new Date(new Date().setHours(0, 0, 0, 0))
-                                                }
-                                                className="rounded-md"
-                                                initialFocus
-                                            />
+                                            {calendarMounted ? (
+                                                <Calendar
+                                                    mode="single"
+                                                    selected={field.value}
+                                                    onSelect={field.onChange}
+                                                    disabled={(date) =>
+                                                        date < new Date(new Date().setHours(0, 0, 0, 0))
+                                                    }
+                                                    calendarLocale={locale === 'sq' ? 'sq' : 'en'}
+                                                    className="rounded-md"
+                                                    initialFocus
+                                                />
+                                            ) : (
+                                                <div
+                                                    className="h-[352px] w-[352px] max-w-full animate-pulse rounded-md bg-slate-200/70"
+                                                    aria-hidden="true"
+                                                />
+                                            )}
                                         </div>
                                         <FormMessage />
                                     </FormItem>
@@ -889,7 +917,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                 <p className="text-xl font-bold leading-none mt-1">
                     {isCallPrice ? (locale === 'sq' ? 'Kontakto' : 'Call') : (
                         locale === 'sq'
-                            ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek`
+                            ? `${formatLek(totalPrice)} Lek`
                             : `€${totalPrice.toFixed(0)}`
                     )}
                 </p>

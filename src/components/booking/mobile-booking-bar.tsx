@@ -8,6 +8,7 @@ import { Calendar, Bus } from "lucide-react";
 
 import { Link } from "@/i18n/routing";
 import { EUR_TO_LEK, isSeasonalTour } from "@/lib/tours";
+import { formatLek } from "@/lib/format";
 
 interface MobileBookingBarProps {
     price: string;
@@ -48,7 +49,7 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
     const isCallPrice = price === "Call" || isNaN(Number(price));
     const numericPrice = Number(price);
     const displayPrice = locale === 'sq' && !isCallPrice
-        ? Math.round(numericPrice * EUR_TO_LEK).toLocaleString('sq-AL')
+        ? formatLek(numericPrice)
         : price;
     const displayCurrency = locale === 'sq' && !isCallPrice ? ' Lek' : currency;
 

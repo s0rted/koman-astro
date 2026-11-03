@@ -9,6 +9,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { useTranslations, useLocale } from '@/i18n/react-context';
 import { localizedPath } from "@/i18n/paths";
 import { TOURS, EUR_TO_LEK } from "@/lib/tours";
+import { formatLek } from "@/lib/format";
 import {
     Popover,
     PopoverContent,
@@ -137,6 +138,7 @@ function BookingWidgetContent() {
                                 onSelect={setDate}
                                 initialFocus
                                 disabled={(date) => date < new Date()}
+                                calendarLocale={locale === 'sq' ? 'sq' : 'en'}
                                 className="p-4 bg-white"
                             />
                         </PopoverContent>
@@ -183,7 +185,7 @@ function BookingWidgetContent() {
                         {totalPrice !== null && (
                             <span className="text-[10px] uppercase font-bold text-white mt-0.5 tracking-tighter">
                                 {locale === 'sq'
-                                    ? `${Math.round(totalPrice * EUR_TO_LEK).toLocaleString('sq-AL')} Lek Total`
+                                    ? `${formatLek(totalPrice)} Lek Total`
                                     : `€${totalPrice} Total`}
                             </span>
                         )}

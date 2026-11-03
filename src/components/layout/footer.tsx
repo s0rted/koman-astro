@@ -1,10 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Anchor, Facebook, Instagram, Heart, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "@/i18n/react-context";
 
 import { I18nProvider } from "@/i18n/react-context";
+
+// Pinned fallback year used during SSR, so the static HTML does not depend on
+// the build date. The client updates it to the real year after mount.
+const FIXED_FOOTER_YEAR = 2026;
 
 export function Footer({ messages, locale }: { messages?: any; locale?: string }) {
     if (messages && locale) {
@@ -21,6 +26,13 @@ function FooterContent() {
     const t = useTranslations('Footer');
     const n = useTranslations('Navbar');
     const l = useTranslations('Legal');
+    // Render the year only after mount: a build-time `new Date()` would bake
+    // the build year into the static HTML and break hydration on Jan 1.
+    const [year, setYear] = useState<number | null>(null);
+    useEffect(() => {
+        setYear(new Date().getFullYear());
+    }, []);
+    const copyrightYear = year ?? FIXED_FOOTER_YEAR;
 
     return (
         <footer className="bg-slate-950 text-slate-400 py-20 px-4 border-t border-slate-900 mt-auto">
@@ -108,7 +120,11 @@ function FooterContent() {
                 </div>
 
                 <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-                    <p>© {new Date().getFullYear()} Koman Lake Tours. {t('rights')}</p>
+                    {/* suppressHydrationWarning: if a deployed build is older
+                        than a year, the SSR-pinned year differs from the client
+                        year by design — this is the sanctioned way to render
+                        client-computed text without a mismatch error. */}
+                    <p suppressHydrationWarning>© {copyrightYear} Koman Lake Tours. {t('rights')}</p>
                     <p className="flex items-center gap-1">
                         {t('madeWith')} <Heart className="w-3 h-3 text-rose-500 fill-current" /> {t('byGuards')}
                     </p>
