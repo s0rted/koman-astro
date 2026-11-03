@@ -205,9 +205,10 @@ check("injected fake add-on is priced and discounted generically", () => {
         adults: 2,
         children: 0,
         seniors: 0,
-        selected: { addFakeSnorkel: true },
+        selected: { addFakeSnorkel: true, addTransfer: true, addFerry: true },
         addons: [...BOOKING_ADDONS, fake],
     });
+    assert.deepEqual(lines.map(l => l.id), ["tour", "transfer", "ferry", "fakeSnorkel"]);
     const snorkel = lines.find(l => l.id === "fakeSnorkel");
     assert.ok(snorkel, "fake add-on line missing");
     assert.equal(snorkel.regular, 80);
@@ -215,6 +216,10 @@ check("injected fake add-on is priced and discounted generically", () => {
     const snorkelPriced = p.lines.find(l => l.id === "fakeSnorkel")!;
     assert.equal(snorkelPriced.discount, 12);
     assert.equal(snorkelPriced.final, 68);
+    for (const l of p.lines) assert.equal(l.discount, Math.round(l.regular * 15 / 100), `line ${l.id}`);
+    assert.equal(p.discount, p.lines.reduce((s, l) => s + l.discount, 0));
+    assert.equal(p.discount, 9 + 9 + 3 + 12); // tour 60, transfer 60, ferry 20, snorkel 80
+    assert.equal(p.final, p.regular - p.discount);
 });
 
 // Same booking, non-qualifying trip date: no discount anywhere.

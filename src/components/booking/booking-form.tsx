@@ -359,11 +359,12 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             .filter(line => line.kind === "addon")
             .map(line => line.summaryLabel)
             .join(", ") || "None";
-        const breakdownLines = priced.lines.map(line =>
-            line.discount > 0
-                ? `${line.summaryLabel}: €${formatEur(line.regular)} → €${formatEur(line.final)}`
-                : `${line.summaryLabel}: €${formatEur(line.regular)}`
-        );
+        const breakdownLines = priced.lines.map(line => {
+            const label = line.kind === "tour" ? tourName : line.summaryLabel;
+            return line.discount > 0
+                ? `${label}: €${formatEur(line.regular)} → €${formatEur(line.final)}`
+                : `${label}: €${formatEur(line.regular)}`;
+        });
 
         return {
             tourName,
