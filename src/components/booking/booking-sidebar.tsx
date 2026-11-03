@@ -45,7 +45,7 @@ function BookingSidebarContent({ price, currency, tourSlug }: BookingSidebarProp
         : price;
     const displayCurrency = locale === 'sq' && !isCallPrice ? ' Lek' : currency;
 
-    // Check if this is the boat tour (transfers included)
+    // Check if this is the boat tour (optional transfer)
     const isBoatTour = tourSlug === 'boat-tour';
     const isSeasonal = isSeasonalTour(tourSlug);
     const transfersIncludedText = isBoatTour ? td('boat-tour.transfersIncluded') : null;

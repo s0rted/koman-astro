@@ -217,7 +217,7 @@
         },
         "q3": {
             "q": "Is food or lunch included in the boat tour?",
-            "a": "No, food and drinks are not included in the tour price. We will make a stop for lunch during the tour, so please bring your own food and beverages or purchase them on-site."
+            "a": "No, food and drinks are not included in the tour price. We stop for lunch during the tour: you can bring your own food and drinks, buy them on-site, or add the optional lunch at the village (€25 per person) when booking."
         },
         "q4": {
             "q": "How do I pay?",
@@ -363,10 +363,10 @@
             "duration": "11 Hours",
             "price": "54",
             "priceLek": "5,700",
-            "transfersIncluded": "Round-trip Shkoder transfers included",
-            "summary": "11 Hours · Transfers & Boat Tour included",
+            "transfersIncluded": "Optional round-trip transfer from Shkoder (+€30 per person)",
+            "summary": "11 Hours · Boat Tour included · Optional transfer from Shkoder",
             "inclusions": [
-                "Round-trip Transfers from Shkoder",
+                "Optional round-trip transfer from Shkoder (+€30 per person)",
                 "Traditional Boat Tours",
                 "Scheduled Lunch Stop (Food/Drinks Not Included)",
                 "Kayaking & Swimming",
@@ -402,7 +402,7 @@
                     "activity": "Arrival back in Shkoder"
                 }
             ],
-            "metaDescription": "May–October daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours with transfers.",
+            "metaDescription": "May–October daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours; optional transfer from Shkoder.",
             "summerOnly": "May to October only — not available November to April.",
             "priceEur": "54"
         },
@@ -446,10 +446,10 @@
             "duration": "2 or 3 Days",
             "price": "100",
             "price3Days": "130",
-            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · Transfers, Meals, Accommodation included",
+            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · Meals & Accommodation included · Optional transfer from Shkoder",
             "inclusions": [
                 "Heritage Kulla Accommodation",
-                "Transfers Included",
+                "Optional round-trip transfer from Shkoder (+€30 per person)",
                 "All Meals (Organic Local Cuisine)",
                 "Guided Peak Hikes (1250m)",
                 "Village Exploration & Traditions",

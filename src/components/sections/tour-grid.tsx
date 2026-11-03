@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { RevealOnScroll } from "@/components/animations/reveal-on-scroll";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Clock, MapPin, Star, Bus } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Star } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import Image from "@/components/ui/image";
 import { TOURS, type Tour, isSeasonalTour } from "@/lib/tours";
@@ -103,7 +103,6 @@ function TourGridContent() {
             ? formatLek(numericPrice)
             : tour.price;
         const displayCurrency = locale === 'sq' && !isCallPrice ? ' Lek' : tour.currency;
-        const isTransferIncluded = tour.slug === 'boat-tour' || tour.slug === 'local-experience';
 
         return (
             <div className="h-full border border-slate-100 shadow-lg hover:shadow-xl hover:border-primary/20 transition-all duration-300 overflow-hidden group flex flex-col rounded-2xl bg-white">
@@ -147,12 +146,6 @@ function TourGridContent() {
                                 <Clock className="w-3 h-3 text-primary" />
                                 <span>{td(`${tour.slug}.duration`)}</span>
                             </div>
-                            {isTransferIncluded && (
-                                <div className="flex items-center gap-1.5 text-xs font-bold bg-primary/80 backdrop-blur-sm px-2 py-1 rounded-lg w-fit">
-                                    <Bus className="w-3 h-3" />
-                                    <span>{locale === 'sq' ? 'Transferta të përfshira' : 'Transfers included'}</span>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </Link>

@@ -7,6 +7,7 @@ import {
     buildLineItems,
     priceBooking,
     hasFixedPrice,
+    isAddonAvailable,
     CHILD_SENIOR_RATE,
     BOOKING_ADDONS,
     type AddonDef,
@@ -225,6 +226,60 @@ check("boat-tour 2A+1C transfer: transfer line 90", () => {
     assert.equal(transfer.regular, 90);
 });
 
+// --- Transfer excluded from shkoder-valbona (fix 21) ---
+check("transfer NOT available on shkoder-valbona even when selected", () => {
+    const transferAddon = BOOKING_ADDONS.find(a => a.id === "transfer")!;
+    assert.equal(isAddonAvailable(transferAddon, "shkoder-valbona"), false);
+    const lines = buildLineItems({
+        tourSlug: "shkoder-valbona",
+        tourPrice: "30",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addTransfer: true },
+    });
+    assert.deepEqual(lines.map(l => l.id), ["tour"]);
+    assert.ok(!lines.some(l => l.id === "transfer"), "transfer line should not exist");
+});
+check("transfer still available on boat-tour, local-experience, custom-tour", () => {
+    const transferAddon = BOOKING_ADDONS.find(a => a.id === "transfer")!;
+    for (const slug of ["boat-tour", "local-experience", "custom-tour"]) {
+        assert.equal(isAddonAvailable(transferAddon, slug), true, slug);
+    }
+});
+check("injected add-on with excludedFrom ['boat-tour'] skipped on boat-tour, priced on local-experience", () => {
+    const fake: AddonDef = {
+        id: "fakeCamel",
+        field: "addFakeCamel",
+        labelKey: "fakeCamel",
+        descKey: "fakeCamelDesc",
+        pricePerPerson: 15,
+        excludedFrom: ["boat-tour"],
+        summaryLabel: "Camel Ride",
+    };
+    const skipped = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addFakeCamel: true },
+        addons: [fake],
+    });
+    assert.deepEqual(skipped.map(l => l.id), ["tour"]);
+    const priced = buildLineItems({
+        tourSlug: "local-experience",
+        tourPrice: "100",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addFakeCamel: true },
+        addons: [fake],
+    });
+    assert.deepEqual(priced.map(l => l.id), ["tour", "fakeCamel"]);
+    assert.equal(priced.find(l => l.id === "fakeCamel")!.regular, 30);
+});
+
 // A fake FUTURE add-on injected through the addons param: priced and
 // discounted generically, with no change to the pricing code.
 check("injected fake add-on is priced and discounted generically", () => {
@@ -245,7 +300,9 @@ check("injected fake add-on is priced and discounted generically", () => {
         selected: { addFakeSnorkel: true, addTransfer: true, addFerry: true },
         addons: [...BOOKING_ADDONS, fake],
     });
-    assert.deepEqual(lines.map(l => l.id), ["tour", "transfer", "ferry", "fakeSnorkel"]);
+    // Transfer is now excluded from shkoder-valbona (fix 21): only
+    // tour, ferry and the fake snorkel remain.
+    assert.deepEqual(lines.map(l => l.id), ["tour", "ferry", "fakeSnorkel"]);
     const snorkel = lines.find(l => l.id === "fakeSnorkel");
     assert.ok(snorkel, "fake add-on line missing");
     assert.equal(snorkel.regular, 80);
@@ -255,7 +312,7 @@ check("injected fake add-on is priced and discounted generically", () => {
     assert.equal(snorkelPriced.final, 68);
     for (const l of p.lines) assert.equal(l.discount, Math.round(l.regular * 15 / 100), `line ${l.id}`);
     assert.equal(p.discount, p.lines.reduce((s, l) => s + l.discount, 0));
-    assert.equal(p.discount, 9 + 9 + 3 + 12); // tour 60, transfer 60, ferry 20, snorkel 80
+    assert.equal(p.discount, 9 + 3 + 12); // tour 60, ferry 20, snorkel 80 (transfer excluded)
     assert.equal(p.final, p.regular - p.discount);
 });
 

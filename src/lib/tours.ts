@@ -24,9 +24,9 @@ export const TOURS: Tour[] = [
         price: "54",
         currency: "€",
         duration: "11 Hours",
-        description: "May–October classic boat tour (not available November–April). Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey begins with a seamless transfer from Shkoder, leading you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley with kayaking, trekking, and swimming.",
+        description: "May–October classic boat tour (not available November–April). Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey leads you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley with kayaking, trekking, and swimming.",
         inclusions: [
-            "Seamless transfers from Shkoder",
+            "Optional round-trip transfer from Shkoder (+€30 per person)",
             "Traditional boat navigation",
             "Scheduled lunch stop (Food/drinks not included)",
             "Kayaking, trekking & swimming",
@@ -93,7 +93,7 @@ export const TOURS: Tour[] = [
         duration: "2-3 Days",
         description: "Disconnect to reconnect. Immerse yourself in the living history of the Albanian Alps. Spend 2-3 days in authentic Kullas (fortified tower houses), where the walls whisper tales of ancestry and resilience. Savor organic local cuisine, hike to breathtaking peaks at 1250m, and discover hidden tracks. Options for mule riding and fishing allow you to tailor this deep dive into tradition.",
         inclusions: [
-            "Seamless transfers from Shkoder",
+            "Optional round-trip transfer from Shkoder (+€30 per person)",
             "Heritage Kulla accommodation",
             "Organic local cuisine",
             "Guided peak hikes (1250m)",

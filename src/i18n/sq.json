@@ -217,7 +217,7 @@
         },
         "q3": {
             "q": "A është i përfshirë ushqimi apo dreka në tur?",
-            "a": "Jo, ushqimi dhe pijet nuk janë të përfshira në çmimin e turit. Gjatë turit do të bëjmë një ndalesë për drekë, prandaj ju lutemi merrni ushqimet dhe pijet tuaja me vete ose blini në vend."
+            "a": "Jo, ushqimi dhe pijet nuk përfshihen në çmimin e turit. Gjatë turit bëjmë një ndalesë për drekë: mund të merrni ushqimet dhe pijet tuaja, t'i blini në vend, ose të shtoni drekën opsionale në fshat (€25 për person) gjatë rezervimit."
         },
         "q4": {
             "q": "Si bëhet pagesa?",
@@ -363,10 +363,10 @@
             "duration": "11 Orë",
             "price": "5,700",
             "priceEur": "54",
-            "transfersIncluded": "Transferta vajtje-ardhje nga Shkodra të përfshira",
-            "summary": "11 Orë · Transferta & Tur me Anije të përfshira",
+            "transfersIncluded": "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",
+            "summary": "11 Orë · Tur me Anije i përfshirë · Transfertë opsionale nga Shkodra",
             "inclusions": [
-                "Transferta vajtje-ardhje nga Shkodra",
+                "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",
                 "Ture me anije tradicionale",
                 "Ndalesë për Drekë (Ushqimi/Pijet Nuk Përfshihen)",
                 "Kajak dhe Not",
@@ -402,7 +402,7 @@
                     "activity": "Mbërritja përsëri në Shkodër"
                 }
             ],
-            "metaDescription": "Tur ditor maj–tetor me varkë në Liqenin e Komanit nga Shkodra: lundroni në fjordet drejt Luginës së Mollës për not, kajak dhe kohë të lirë. 11 orë me transferta.",
+            "metaDescription": "Tur ditor maj–tetor me varkë në Liqenin e Komanit nga Shkodra: lundroni në fjordet drejt Luginës së Mollës për not, kajak dhe kohë të lirë. 11 orë; transfertë opsionale nga Shkodra.",
             "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill.",
             "priceLek": "5,700"
         },
@@ -446,10 +446,10 @@
             "duration": "2 ose 3 Ditë",
             "price": "10,600",
             "price3Days": "13,800",
-            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Transferta, Ushqim, Akomodim të përfshira",
+            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Ushqim & Akomodim të përfshira · Transfertë opsionale nga Shkodra",
             "inclusions": [
                 "Akomodim në Kulla tradicionale",
-                "Transferta të përfshira",
+                "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",
                 "Të gjitha vaktet (Ushqim Bio)",
                 "Ecje në majat e maleve (1250m)",
                 "Eksplorim i fshatit dhe traditave",

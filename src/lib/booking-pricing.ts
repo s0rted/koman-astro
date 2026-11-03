@@ -21,6 +21,8 @@ export interface AddonDef {
     pricePerPerson: number;
     /** Tour slugs the add-on is offered on; undefined = all tours. */
     appliesTo?: readonly string[];
+    /** Tour slugs where the add-on is NOT offered. */
+    excludedFrom?: readonly string[];
     /** Tour slugs where it is included free (not priced, not toggleable). */
     includedIn?: readonly string[];
     /** true = children/seniors pay CHILD_SENIOR_RATE of it (extra day). */
@@ -47,6 +49,7 @@ export const BOOKING_ADDONS: readonly AddonDef[] = [
         labelKey: "transfer",
         descKey: "transferDesc",
         pricePerPerson: 30,
+        excludedFrom: ["shkoder-valbona"],
         summaryLabel: "Transfer",
     },
     {
@@ -88,7 +91,8 @@ export function hasFixedPrice(price: unknown): boolean {
 }
 
 export function isAddonAvailable(addon: AddonDef, tourSlug: string): boolean {
-    return !addon.appliesTo || addon.appliesTo.includes(tourSlug);
+    return (!addon.appliesTo || addon.appliesTo.includes(tourSlug))
+        && !(addon.excludedFrom && addon.excludedFrom.includes(tourSlug));
 }
 
 export function isAddonIncluded(addon: AddonDef, tourSlug: string): boolean {
