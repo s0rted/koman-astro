@@ -271,7 +271,7 @@ function TourGridContent() {
                                     </Link>
                                     <p className="text-lg text-slate-200 leading-relaxed mb-6">{td(`${helicopter.slug}.description`)}</p>
                                     <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                                        {helicopter.inclusions.slice(0, 3).map((inc, i) => (
+                                        {(td.raw(`${helicopter.slug}.inclusions`) as string[]).slice(0, 3).map((inc, i) => (
                                             <span key={i} className="text-xs font-bold border border-white/20 bg-white/10 backdrop-blur-md rounded-full px-3 py-1">
                                                 {inc}
                                             </span>
