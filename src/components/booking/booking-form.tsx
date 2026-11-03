@@ -205,10 +205,6 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
     const countSeniors = form.watch("seniors") || 0;
     const watchedForm = form.watch();
 
-    const transferAddon: AddonDef = BOOKING_ADDONS.find(a => a.id === "transfer")!;
-
-    const isTransferIncluded = isAddonIncluded(transferAddon, selectedTourSlug);
-
     // Generic add-on clearing: when the tour changes to one where an add-on
     // isn't offered (or is included free), clear its checkbox so it isn't
     // priced or submitted. Driven by the BOOKING_ADDONS table, not by names.
@@ -588,12 +584,6 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                 ))}
                             </SelectContent>
                         </Select>
-                        {isTransferIncluded && (
-                            <Badge className="bg-primary/20 text-primary border-primary/30 flex items-center gap-1">
-                                <Bus className="w-3 h-3" />
-                                <span className="text-[10px] uppercase font-bold tracking-tighter">Transfers Included</span>
-                            </Badge>
-                        )}
                     </div>
 
                     <div className="flex items-center gap-2 px-2">
@@ -813,7 +803,7 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
                                                         {t(addon.labelKey)}
                                                     </p>
                                                     <p className="text-[13px] text-primary/70 font-medium">
-                                                        {locale === 'sq' ? 'Transferta nga Shkodra është e përfshirë në çmim!' : 'Shkoder transfer is included in your tour price!'}
+                                                        {locale === 'sq' ? 'E përfshirë në çmimin e turit' : 'Included in your tour price'}
                                                     </p>
                                                 </div>
                                                 <Badge className="bg-primary text-white border-none">{locale === 'sq' ? 'E përfshirë' : 'Included'}</Badge>

@@ -341,8 +341,7 @@
         },
         "mobile": {
             "bookNow": "Book Now",
-            "contactUs": "Contact Us",
-            "includesTransfer": "Includes Transfer"
+            "contactUs": "Contact Us"
         },
         "summerOnly": "This tour runs May to October only and is not offered from November to April."
     },

@@ -186,9 +186,9 @@ check("boat-tour 2A+1C kayak+ferry: per-line discount, totals sum", () => {
     }
 });
 
-// Local experience (€100), extra day + kayak + transfer: transfer is
-// included on local-experience, so it must NOT appear as a line.
-check("local-experience extraDay+kayak+transfer: transfer omitted, others discounted", () => {
+// Local experience (€100), extra day + kayak + transfer: the transfer is a
+// paid add-on everywhere, so it appears as its own line (30 * guests).
+check("local-experience extraDay+kayak+transfer: transfer priced at 30 * guests", () => {
     const lines = buildLineItems({
         tourSlug: "local-experience",
         tourPrice: "100",
@@ -197,14 +197,32 @@ check("local-experience extraDay+kayak+transfer: transfer omitted, others discou
         seniors: 0,
         selected: { addTransfer: true, addKayak: true, addExtraDay: true },
     });
-    assert.equal(lines.length, 3);
-    assert.ok(!lines.some(l => l.id === "transfer" || l.summaryLabel === "Transfer"));
+    assert.equal(lines.length, 4);
+    const transfer = lines.find(l => l.id === "transfer");
+    assert.ok(transfer, "transfer line missing");
+    assert.equal(transfer.regular, 60);
     const p = priceBooking(lines, openRate);
-    // tour 200, extra day scales with guest rate (2 adults -> 60), kayak 40.
-    assert.equal(p.regular, 300);
-    assert.equal(p.discount, 45);
-    assert.equal(p.final, 255);
+    // tour 200, extra day scales with guest rate (2 adults -> 60), kayak 40,
+    // transfer 60.
+    assert.equal(p.regular, 360);
+    assert.equal(p.discount, p.lines.reduce((s, l) => s + l.discount, 0));
+    assert.equal(p.final, p.regular - p.discount);
     assert.ok(p.lines.every(l => l.discount > 0));
+});
+
+// Boat tour with transfer selected: transfer line of 30 * guests.
+check("boat-tour 2A+1C transfer: transfer line 90", () => {
+    const lines = buildLineItems({
+        tourSlug: "boat-tour",
+        tourPrice: "54",
+        adults: 2,
+        children: 1,
+        seniors: 0,
+        selected: { addTransfer: true },
+    });
+    const transfer = lines.find(l => l.id === "transfer");
+    assert.ok(transfer, "transfer line missing");
+    assert.equal(transfer.regular, 90);
 });
 
 // A fake FUTURE add-on injected through the addons param: priced and

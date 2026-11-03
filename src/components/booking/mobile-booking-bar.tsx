@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "@/i18n/react-context";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Calendar, Bus } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 
 import { Link } from "@/i18n/routing";
@@ -95,12 +95,6 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
                             {isSeasonalTour(tourSlug) && (
                                 <div className="flex items-center gap-1 bg-sky-100 px-1.5 py-0.5 rounded text-[9px] font-bold text-sky-900 uppercase tracking-tight leading-none whitespace-nowrap w-fit">
                                     <span>{summer('badge')}</span>
-                                </div>
-                            )}
-                            {(tourSlug === 'boat-tour' || tourSlug === 'local-experience') && (
-                                <div className="flex items-center gap-1 bg-primary/10 px-1.5 py-0.5 rounded text-[9px] font-bold text-primary uppercase tracking-tight leading-none whitespace-nowrap w-fit">
-                                    <Bus className="w-2.5 h-2.5" />
-                                    <span>{t('includesTransfer')}</span>
                                 </div>
                             )}
                         </div>

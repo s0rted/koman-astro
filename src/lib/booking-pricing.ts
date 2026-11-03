@@ -47,7 +47,6 @@ export const BOOKING_ADDONS: readonly AddonDef[] = [
         labelKey: "transfer",
         descKey: "transferDesc",
         pricePerPerson: 30,
-        includedIn: ["boat-tour", "local-experience"],
         summaryLabel: "Transfer",
     },
     {
