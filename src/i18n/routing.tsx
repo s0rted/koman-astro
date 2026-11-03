@@ -17,6 +17,15 @@ export function Link({ href, children, ...props }: any) {
         });
     }
 
+    if (typeof href === 'object' && href.query) {
+        const qs = new URLSearchParams(
+            Object.entries(href.query)
+                .filter(([, v]) => v !== undefined && v !== null && v !== '')
+                .map(([k, v]) => [k, String(v)])
+        ).toString();
+        if (qs) path = `${path}?${qs}`;
+    }
+
     const localizedPath = localizeHref(path, locale);
 
     return (

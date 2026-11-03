@@ -97,6 +97,15 @@ function BookingFormContent({ initialValues }: BookingFormProps) {
             setIsSuccess(true);
             setIsPaypalSuccess(true);
         }
+        // Static build: Astro.url.searchParams is empty at build time, so apply
+        // ?tour= / ?guests= / ?date= on the client after mount.
+        const qTour = params.get('tour');
+        if (qTour && TOURS.some(t => t.slug === qTour)) form.setValue('tour', qTour);
+        const qGuests = parseInt(params.get('guests') || '', 10);
+        if (qGuests > 0) form.setValue('adults', qGuests);
+        const qDate = params.get('date');
+        if (qDate && !isNaN(Date.parse(qDate))) form.setValue('date', new Date(qDate + 'T00:00:00'));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const form = useForm<BookingValues>({
