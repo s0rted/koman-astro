@@ -86,28 +86,28 @@ function CookieBannerContent() {
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -100, opacity: 0 }}
-                    className="fixed bottom-32 left-6 z-[100] pointer-events-none md:bottom-6"
+                    className="fixed bottom-[calc(var(--mobile-bar-h,0px)+1rem)] left-4 z-[100] pointer-events-none md:bottom-6 md:left-6"
                 >
                     <div className="flex items-end">
                         {!isExpanded ? (
                             <motion.button
                                 layoutId="cookie-banner-bg"
                                 onClick={() => setIsExpanded(true)}
-                                className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-4 flex items-center gap-3 group hover:border-primary/50 transition-colors"
+                                className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl rounded-2xl p-2.5 md:p-4 flex items-center gap-2 md:gap-3 group hover:border-primary/50 transition-colors max-w-[12rem] md:max-w-none"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <div className="bg-primary/10 p-2 rounded-xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                                    <Cookie className="w-5 h-5" />
+                                <div className="bg-primary/10 p-2 rounded-xl shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                                    <Cookie className="w-4 h-4 md:w-5 md:h-5" />
                                 </div>
-                                <span className="text-sm font-bold text-slate-900 pr-2">
+                                <span className="text-xs md:text-sm font-bold text-slate-900 pr-2 truncate">
                                     {t("chip")}
                                 </span>
                             </motion.button>
                         ) : (
                             <motion.div
                                 layoutId="cookie-banner-bg"
-                                className="pointer-events-auto bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 max-w-sm"
+                                className="pointer-events-auto bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl p-6 md:p-8 flex flex-col gap-6 w-[min(24rem,calc(100vw-2rem))]"
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex items-center gap-3">

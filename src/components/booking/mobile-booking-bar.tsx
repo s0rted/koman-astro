@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "@/i18n/react-context";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -36,6 +36,7 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
     const summer = useTranslations('SummerOnly');
     const locale = useLocale();
     const [isVisible, setIsVisible] = useState(false);
+    const barRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,6 +47,31 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Publish the rendered bar height as --mobile-bar-h so the cookie pill and
+    // WhatsApp float can sit just above the bar (client-only, keeps SSR HTML
+    // deterministic and avoids hydration mismatches).
+    useEffect(() => {
+        const el = barRef.current;
+        const root = document.documentElement;
+        if (!el) {
+            root.style.setProperty("--mobile-bar-h", "0px");
+            return;
+        }
+        const publish = () => {
+            root.style.setProperty(
+                "--mobile-bar-h",
+                isVisible ? `${Math.round(el.offsetHeight)}px` : "0px"
+            );
+        };
+        publish();
+        const observer = new ResizeObserver(publish);
+        observer.observe(el);
+        return () => {
+            observer.disconnect();
+            root.style.setProperty("--mobile-bar-h", "0px");
+        };
+    }, [isVisible]);
+
     const isCallPrice = price === "Call" || isNaN(Number(price));
     const numericPrice = Number(price);
     const displayPrice = locale === 'sq' && !isCallPrice
@@ -55,8 +81,9 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
 
     return (
         <div
+            ref={barRef}
             className={cn(
-                "fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-4 pb-8 md:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.05)] transition-transform duration-300",
+                "fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.05)] transition-transform duration-300",
                 isVisible ? "translate-y-0" : "translate-y-full"
             )}
         >
@@ -91,8 +118,8 @@ function MobileBookingBarContent({ price, currency, title, tourSlug }: MobileBoo
                 </div>
                 <Link href={{ pathname: '/book', query: { tour: tourSlug } }} className="block">
                     <Button
-                        size="lg"
-                        className="rounded-xl px-8 font-bold bg-primary text-white shadow-lg shadow-primary/20"
+                        size="default"
+                        className="h-11 px-5 rounded-xl font-bold bg-primary text-white shadow-lg shadow-primary/20"
                     >
                         {isCallPrice ? t('contactUs') : useTranslations('Common')('bookNow')}
                     </Button>

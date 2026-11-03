@@ -47,7 +47,7 @@ function WhatsAppFloatContent() {
     return (
         <div
             className={cn(
-                "fixed bottom-32 right-6 z-50 md:bottom-6 transition-all duration-500",
+                "fixed bottom-[calc(var(--mobile-bar-h,0px)+1rem)] right-4 z-50 md:bottom-6 md:right-6 transition-all duration-500",
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
             )}
         >
@@ -64,7 +64,7 @@ function WhatsAppFloatContent() {
                 onClick={handleClick}
                 aria-label={t('tooltip')}
                 className={cn(
-                    "group relative flex items-center justify-center w-16 h-16 rounded-xl bg-white border-2 border-white shadow-2xl hover:scale-110 transition-all overflow-hidden",
+                    "group relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl bg-white border-2 border-white shadow-2xl hover:scale-110 transition-all overflow-hidden",
                     isPulsing && "animate-wa-flash"
                 )}
             >
