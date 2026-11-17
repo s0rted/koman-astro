@@ -24,7 +24,7 @@ export const TOURS: Tour[] = [
         price: "54",
         currency: "€",
         duration: "11 Hours",
-        description: "May–October classic boat tour (not available November–April). Escape the ordinary and navigate the 'Thailand of Albania' in our traditional boats. Your journey leads you deep into the emerald fjords of Komani Lake. Experience the serenity of the Molla Valley with kayaking, trekking, and swimming.",
+        description: "May–October classic boat tour (not available November–April). Navigate the 'Thailand of Albania' in our traditional boats and sail deep into the emerald fjords of Komani Lake. Spend time in the serene Molla Valley, with kayaking, trekking and swimming. A round-trip transfer from Shkoder is available as an optional add-on (+€30 per person).",
         inclusions: [
             "Optional round-trip transfer from Shkoder (+€30 per person)",
             "Traditional boat navigation",
@@ -66,12 +66,12 @@ export const TOURS: Tour[] = [
         price: "30",
         currency: "€",
         duration: "6 Hours",
-        description: "Transform your transit into an adventure. Our daily Shkoder-Valbona service combines the efficiency of a direct transfer with the breathtaking beauty of the Komani Lake ferry. Ideal for hikers and explorers, this route offers the most spectacular introduction to the Albanian Alps, surrounding you with towering cliffs and crystal-clear waters.",
+        description: "Transform your transit into an adventure. Our daily one-way Shkoder-Valbona service combines the efficiency of a direct transfer with the breathtaking beauty of the Komani Lake ferry. Ideal for hikers and explorers, this route offers the most spectacular introduction to the Albanian Alps, surrounding you with towering cliffs and crystal-clear waters.",
         inclusions: [
             "Daily departures",
             "Komani Lake ferry ticket",
-            "Complete Shkoder-Valbona route",
-            "Hassle-free transfers",
+            "One-way Shkoder to Valbona route",
+            "Hassle-free one-way transfer",
             "Panoramic mountain views"
         ],
         itinerary: [
@@ -91,11 +91,11 @@ export const TOURS: Tour[] = [
         price: "100",
         currency: "€",
         duration: "2-3 Days",
-        description: "Disconnect to reconnect. Immerse yourself in the living history of the Albanian Alps. Spend 2-3 days in authentic Kullas (fortified tower houses), where the walls whisper tales of ancestry and resilience. Savor organic local cuisine, hike to breathtaking peaks at 1250m, and discover hidden tracks. Options for mule riding and fishing allow you to tailor this deep dive into tradition.",
+        description: "Disconnect to reconnect. Immerse yourself in the living history of the Albanian Alps. Spend 2-3 days in authentic Kullas (fortified tower houses), where the walls whisper tales of ancestry and resilience. Savor organic local cuisine, hike to breathtaking peaks at 1250m, and discover hidden tracks. Options for mule riding and fishing allow you to tailor this deep dive into tradition. All meals are included.",
         inclusions: [
             "Optional round-trip transfer from Shkoder (+€30 per person)",
             "Heritage Kulla accommodation",
-            "Organic local cuisine",
+            "All meals included (organic local cuisine)",
             "Guided peak hikes (1250m)",
             "Cultural storytelling & history",
             "Optional: Mule riding & Fishing"

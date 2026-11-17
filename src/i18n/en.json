@@ -25,8 +25,8 @@
         "requestQuote": "Request Quote",
         "checkAvailability": "Check Availability",
         "addons": "Enhance Your Trip",
-        "transfer": "Shkoder - Valbona Transfer",
-        "transferDesc": "We handle your transport",
+        "transfer": "Round-trip transfer from Shkoder",
+        "transferDesc": "We handle your transport to and from Shkoder",
         "kayak": "Kayak Rental",
         "kayakDesc": "Explore hidden corners",
         "lunch_addon": "Lunch at the village",
@@ -358,7 +358,7 @@
     "ToursData": {
         "boat-tour": {
             "title": "Komani Lake Boat Tour",
-            "description": "May to October only (not available November to April). Everyday organized traditional boat tours. Departing daily from our spots in Shkoder at 7am. Boat tour starts at 9am. Sail through the fjords for about 1.5 hours toward Molla valley and river. Lunch break. Free time exploring around, kayaking, trekking, swimming and fishing till 3pm. Take boat back to return to Shkoder. Arrival in Shkoder approx 6pm.",
+            "description": "May to October only (not available November to April). Our traditional boat tour runs every day. Departures leave from our spots in Shkoder at 7:00 AM, and the boat tour starts at 9:00 AM. You sail through the fjords for about 1.5 hours toward Molla Valley and the river, then stop for a lunch break. Afterwards you have free time until 3:00 PM to explore, kayak, trek, swim and fish. The boat then brings you back, and you arrive in Shkoder at about 6:00 PM. A round-trip transfer from Shkoder is available as an optional add-on (+€30 per person).",
             "category": "Full Day Adventure",
             "duration": "11 Hours",
             "price": "54",
@@ -408,13 +408,13 @@
         },
         "shkoder-valbona": {
             "title": "Shkoder - Valbona Transfer",
-            "description": "Transform your transit into an adventure. Our daily Shkoder-Valbona service combines the efficiency of a direct transfer with the breathtaking beauty of the Komani Lake ferry. Ideal for hikers and explorers, this route offers the most spectacular introduction to the Albanian Alps, surrounding you with towering cliffs and crystal-clear waters.",
+            "description": "Transform your transit into an adventure. Our daily one-way Shkoder-Valbona service combines the efficiency of a direct transfer with the breathtaking beauty of the Komani Lake ferry. Ideal for hikers and explorers, this route offers the most spectacular introduction to the Albanian Alps, surrounding you with towering cliffs and crystal-clear waters.",
             "category": "Transfer",
             "duration": "6 Hours",
             "price": "30",
-            "summary": "6 Hours · Daily round-trip transfers included",
+            "summary": "6 Hours · Daily one-way transfer included",
             "inclusions": [
-                "Daily Shkoder to Valbona Transfers",
+                "Daily one-way transfer from Shkoder to Valbona",
                 "Komani Lake Ferry Trip",
                 "Hassle-free Logistics"
             ],
@@ -436,17 +436,17 @@
                     "activity": "Arrival in Valbona"
                 }
             ],
-            "metaDescription": "Daily Shkoder–Valbona transfer via the spectacular Komani Lake ferry. Towering cliffs and crystal-clear waters — the most scenic route into the Albanian Alps.",
+            "metaDescription": "Daily one-way Shkoder–Valbona transfer via the spectacular Komani Lake ferry. Towering cliffs and crystal-clear waters — the most scenic route into the Albanian Alps.",
             "summerOnly": "May to October only — not available November to April."
         },
         "local-experience": {
             "title": "The Local Experience",
-            "description": "Local exploring for 2 or 3 days. Discover old villages, local cuisine, old tracks and traces of ancestry DNA — a hard life sculpted in the old Kullas built with high precision. Experience peak hikes about 1250m above sea level. Mule riding and fishing days are also arrangeable.",
+            "description": "Local exploring for 2 or 3 days. Discover old villages, local cuisine, old tracks and traces of ancestry DNA — a hard life sculpted in the old Kullas built with high precision. Experience peak hikes about 1250m above sea level. Mule riding and fishing days are also arrangeable. All meals are included in the price.",
             "category": "Multi-Day Immersion",
             "duration": "2 or 3 Days",
             "price": "100",
             "price3Days": "130",
-            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · Meals & Accommodation included · Optional transfer from Shkoder",
+            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · All meals & accommodation included · Optional transfer from Shkoder",
             "inclusions": [
                 "Heritage Kulla Accommodation",
                 "Optional round-trip transfer from Shkoder (+€30 per person)",

@@ -67,7 +67,8 @@ export const BOOKING_ADDONS: readonly AddonDef[] = [
         labelKey: "lunch_addon",
         descKey: "lunch_addonDesc",
         pricePerPerson: 25,
-        appliesTo: ["boat-tour", "local-experience"],
+        // Not offered on local-experience: all meals are already included there.
+        appliesTo: ["boat-tour"],
         summaryLabel: "Lunch at the village",
     },
     {

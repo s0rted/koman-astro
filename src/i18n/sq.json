@@ -25,8 +25,8 @@
         "requestQuote": "Kërko ofertë",
         "checkAvailability": "Shiko disponueshmërinë",
         "addons": "Përmirësoni Udhëtimin",
-        "transfer": "Transfertë Shkodër - Valbonë",
-        "transferDesc": "Ne kujdesemi për transportin",
+        "transfer": "Transfertë vajtje-ardhje nga Shkodra",
+        "transferDesc": "Ne kujdesemi për transportin nga dhe për në Shkodër",
         "kayak": "Qira Kajaku",
         "kayakDesc": "Eksploro qoshet e fshehura",
         "lunch_addon": "Drekë në fshat",
@@ -358,7 +358,7 @@
     "ToursData": {
         "boat-tour": {
             "title": "Tur me Anije në Liqenin e Komanit",
-            "description": "Vetëm maj–tetor (nuk ofrohet nëntor–prill). Ture ditore të organizuara me anije tradicionale. Nisja çdo ditë nga pikat tona në Shkodër në orën 7:00. Turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1.5 orë drejt luginës së Mollës dhe lumit. Ndalesë për drekë. Kohë e lirë për eksplorim, kajak, ecje, not dhe peshkim deri në orën 15:00. Kthimi me anije për në Shkodër. Mbërritja në Shkodër rreth orës 18:00.",
+            "description": "Vetëm maj–tetor (nuk ofrohet nëntor–prill). Turi ynë tradicional me anije zhvillohet çdo ditë. Nisjet bëhen nga pikat tona në Shkodër në orën 7:00, ndërsa turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1.5 orë drejt luginës së Mollës dhe lumit, pastaj bëni një ndalesë për drekë. Më pas keni kohë të lirë deri në orën 15:00 për të eksploruar, bërë kajak, ecje, not dhe peshkim. Anija ju kthen mbrapa dhe mbërrini në Shkodër rreth orës 18:00. Transferta vajtje-ardhje nga Shkodra ofrohet si shtesë opsionale (+€30 për person).",
             "category": "Aventurë Ditore",
             "duration": "11 Orë",
             "price": "5,700",
@@ -408,13 +408,13 @@
         },
         "shkoder-valbona": {
             "title": "Transfertë Shkodër - Valbonë",
-            "description": "Transformoni tranzitin tuaj në një aventurë. Shërbimi ynë i përditshëm Shkodër-Valbonë kombinon efikasitetin e një transferimi direkt me bukurinë mahnitëse të tragetit të Liqenit të Komanit. Ideale për alpinistët dhe eksploruesit, kjo rrugë ofron hyrjen më spektakolare në Alpet Shqiptare, duke ju rrethuar me shkëmbinj të lartë dhe ujëra të kristalta.",
+            "description": "Transformoni tranzitin tuaj në një aventurë. Shërbimi ynë i përditshëm Shkodër-Valbonë, vetëm në një drejtim, kombinon efikasitetin e një transferimi direkt me bukurinë mahnitëse të tragetit të Liqenit të Komanit. Ideale për alpinistët dhe eksploruesit, kjo rrugë ofron hyrjen më spektakolare në Alpet Shqiptare, duke ju rrethuar me shkëmbinj të lartë dhe ujëra të kristalta.",
             "category": "Transfertë",
             "duration": "6 Orë",
             "price": "3,200",
-            "summary": "6 Orë · Transferta ditore vajtje-ardhje të përfshira",
+            "summary": "6 Orë · Transfertë ditore vetëm në një drejtim (Shkodër → Valbonë) e përfshirë",
             "inclusions": [
-                "Transferta ditore Shkodër-Valbonë",
+                "Transfertë ditore vetëm në një drejtim nga Shkodra në Valbonë",
                 "Udhëtim me traget në Liqenin e Komanit",
                 "Logjistikë pa mundim"
             ],
@@ -436,17 +436,17 @@
                     "activity": "Mbërritja në Valbonë"
                 }
             ],
-            "metaDescription": "Transfer Shkodër–Valbonë përmes tragetit të Liqenit të Komanit. Itinerar ditor piktoresk mes shkëmbinjve dhe ujërave të kthjellëta — ideal për hikera.",
+            "metaDescription": "Transfer vetëm në një drejtim Shkodër–Valbonë përmes tragetit të Liqenit të Komanit. Itinerar ditor piktoresk mes shkëmbinjve dhe ujërave të kthjellëta — ideal për hikera.",
             "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
         },
         "local-experience": {
             "title": "Eksperienca Lokale",
-            "description": "Eksplorim lokal për 2 ose 3 ditë. Zbuloni fshatra të vjetër, kuzhinën lokale, shtigjet e vjetra dhe gjurmët e ADN-së së paraardhësve — një jetë e vështirë e skalitur në Kullat e vjetra të ndërtuara me saktësi të lartë. Eksperiencë e ecjes në maja rreth 1250m mbi nivelin e detit. Shëtitjet me mushka dhe ditët e peshkimit janë gjithashtu të organizueshme.",
+            "description": "Eksplorim lokal për 2 ose 3 ditë. Zbuloni fshatra të vjetër, kuzhinën lokale, shtigjet e vjetra dhe gjurmët e ADN-së së paraardhësve — një jetë e vështirë e skalitur në Kullat e vjetra të ndërtuara me saktësi të lartë. Eksperiencë e ecjes në maja rreth 1250m mbi nivelin e detit. Shëtitjet me mushka dhe ditët e peshkimit janë gjithashtu të organizueshme. Të gjitha vaktet janë të përfshira në çmim.",
             "category": "Zhytje Disaditore",
             "duration": "2 ose 3 Ditë",
             "price": "10,600",
             "price3Days": "13,800",
-            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Ushqim & Akomodim të përfshira · Transfertë opsionale nga Shkodra",
+            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Të gjitha vaktet & akomodimi të përfshira · Transfertë opsionale nga Shkodra",
             "inclusions": [
                 "Akomodim në Kulla tradicionale",
                 "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",

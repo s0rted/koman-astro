@@ -370,7 +370,7 @@ check("buildLineItems with tourPrice 'Call' -> []", () => {
     );
 });
 
-// --- Lunch add-on (fix 20): flat €25pp on boat-tour/local-experience ---
+// --- Lunch add-on (fix 20): flat €25pp on boat-tour only (local-experience includes all meals) ---
 // Boat tour (€54), 2 adults + 1 child, lunch selected.
 check("lunch on boat-tour 2A+1C: line 75", () => {
     const lines = buildLineItems({
@@ -417,6 +417,18 @@ check("lunch with non-qualifying trip 2027-11-01: discount 0", () => {
     assert.ok(lunch, "lunch line missing");
     assert.equal(lunch.discount, 0);
     assert.equal(lunch.final, 75);
+});
+check("lunch not offered on local-experience (all meals included) even when selected", () => {
+    const lines = buildLineItems({
+        tourSlug: "local-experience",
+        tourPrice: "100",
+        adults: 2,
+        children: 0,
+        seniors: 0,
+        selected: { addLunch: true },
+    });
+    assert.ok(!lines.some(l => l.id === "lunch"), "lunch line should not exist");
+    assert.ok(lines.some(l => l.kind === "tour"), "tour line should still exist");
 });
 check("lunch not offered on shkoder-valbona even when selected", () => {
     const lines = buildLineItems({
