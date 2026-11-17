@@ -26,7 +26,7 @@
         "checkAvailability": "Shiko disponueshmërinë",
         "addons": "Përmirësoni Udhëtimin",
         "transfer": "Transfertë vajtje-ardhje nga Shkodra",
-        "transferDesc": "Ne kujdesemi për transportin nga dhe për në Shkodër",
+        "transferDesc": "Shtesë opsionale, nuk përfshihet në çmimin e turit. Ne kujdesemi për transportin vajtje-ardhje nga Shkodra.",
         "kayak": "Qira Kajaku",
         "kayakDesc": "Eksploro qoshet e fshehura",
         "lunch_addon": "Drekë në fshat",
@@ -108,7 +108,7 @@
         "bestSeller": "Më i Shituri",
         "title": "Liqeni i Komanit",
         "subtitle": "Eksperienca e Turit me Anije",
-        "description": "Navigoni nëpër 'Fjordet e Ballkanit' për një udhëtim të paharrueshëm 11-orësh. Duke u nisur çdo ditë nga Shkodra, ky tur ju çon nëpër Luginën madhështore të Mollës, me ndalesa për not, kajak dhe një ndalesë për drekë (ushqimi dhe pijet nuk përfshihen).",
+        "description": "Navigoni nëpër 'Fjordet e Ballkanit' për një udhëtim të paharrueshëm 11-orësh nëpër Luginën madhështore të Mollës, me ndalesa për not, kajak dhe një ndalesë për drekë (ushqimi dhe pijet nuk përfshihen). Transferta vajtje-ardhje nga Shkodra është shtesë opsionale (+€30 për person) dhe nuk përfshihet në çmimin e turit.",
         "duration": "11 Orë",
         "durationLabel": "Kohëzgjatja",
         "lunch": "Ndalesë për Drekë",
@@ -358,7 +358,7 @@
     "ToursData": {
         "boat-tour": {
             "title": "Tur me Anije në Liqenin e Komanit",
-            "description": "Vetëm maj–tetor (nuk ofrohet nëntor–prill). Turi ynë tradicional me anije zhvillohet çdo ditë. Nisjet bëhen nga pikat tona në Shkodër në orën 7:00, ndërsa turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1.5 orë drejt luginës së Mollës dhe lumit, pastaj bëni një ndalesë për drekë. Më pas keni kohë të lirë deri në orën 15:00 për të eksploruar, bërë kajak, ecje, not dhe peshkim. Anija ju kthen mbrapa dhe mbërrini në Shkodër rreth orës 18:00. Transferta vajtje-ardhje nga Shkodra ofrohet si shtesë opsionale (+€30 për person).",
+            "description": "Vetëm maj–tetor (nuk ofrohet nëntor–prill). Turi ynë tradicional me anije zhvillohet çdo ditë. Turi me anije fillon në orën 9:00. Lundroni përmes fjordeve për rreth 1,5 orë drejt Luginës së Mollës dhe lumit, pastaj ndaloni për drekë. Më pas keni kohë të lirë deri në orën 15:00 për eksplorim, kajak, ecje, not dhe peshkim. Pastaj ktheheni me anije. Shtesë opsionale: transfertë vajtje-ardhje nga Shkodra, +€30 për person (nuk përfshihet në çmimin e turit). Niset nga pikat tona në Shkodër në orën 7:00 dhe kthehet rreth orës 18:00.",
             "category": "Aventurë Ditore",
             "duration": "11 Orë",
             "price": "5,700",
@@ -366,7 +366,7 @@
             "transfersIncluded": "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",
             "summary": "11 Orë · Tur me Anije i përfshirë · Transfertë opsionale nga Shkodra",
             "inclusions": [
-                "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",
+                "Shtesë opsionale, nuk përfshihet: transfertë vajtje-ardhje nga Shkodra (+€30 për person)",
                 "Ture me anije tradicionale",
                 "Ndalesë për Drekë (Ushqimi/Pijet Nuk Përfshihen)",
                 "Kajak dhe Not",
@@ -375,7 +375,7 @@
             "itinerary": [
                 {
                     "time": "07:00 PD",
-                    "activity": "Nisja çdo ditë nga pikat tona në Shkodër"
+                    "activity": "Transfertë opsionale: nisja nga pikat tona në Shkodër"
                 },
                 {
                     "time": "09:00 PD",
@@ -399,7 +399,7 @@
                 },
                 {
                     "time": "06:00 MD",
-                    "activity": "Mbërritja përsëri në Shkodër"
+                    "activity": "Transfertë opsionale: mbërritja përsëri në Shkodër"
                 }
             ],
             "metaDescription": "Tur ditor maj–tetor me varkë në Liqenin e Komanit nga Shkodra: lundroni në fjordet drejt Luginës së Mollës për not, kajak dhe kohë të lirë. 11 orë; transfertë opsionale nga Shkodra.",
@@ -408,7 +408,7 @@
         },
         "shkoder-valbona": {
             "title": "Transfertë Shkodër - Valbonë",
-            "description": "Transformoni tranzitin tuaj në një aventurë. Shërbimi ynë i përditshëm Shkodër-Valbonë, vetëm në një drejtim, kombinon efikasitetin e një transferimi direkt me bukurinë mahnitëse të tragetit të Liqenit të Komanit. Ideale për alpinistët dhe eksploruesit, kjo rrugë ofron hyrjen më spektakolare në Alpet Shqiptare, duke ju rrethuar me shkëmbinj të lartë dhe ujëra të kristalta.",
+            "description": "Transformoni tranzitin tuaj në një aventurë. Shërbimi ynë i përditshëm nga Shkodra në Valbonë është vetëm në një drejtim dhe kombinon efikasitetin e një transferimi direkt me bukurinë mahnitëse të tragetit të Liqenit të Komanit. Ideale për alpinistët dhe eksploruesit, kjo rrugë ofron hyrjen më spektakolare në Alpet Shqiptare, duke ju rrethuar me shkëmbinj të lartë dhe ujëra të kristalta.",
             "category": "Transfertë",
             "duration": "6 Orë",
             "price": "3,200",
@@ -436,7 +436,7 @@
                     "activity": "Mbërritja në Valbonë"
                 }
             ],
-            "metaDescription": "Transfer vetëm në një drejtim Shkodër–Valbonë përmes tragetit të Liqenit të Komanit. Itinerar ditor piktoresk mes shkëmbinjve dhe ujërave të kthjellëta — ideal për hikera.",
+            "metaDescription": "Transfertë vetëm në një drejtim Shkodër–Valbonë përmes tragetit të Liqenit të Komanit. Itinerar ditor piktoresk mes shkëmbinjve dhe ujërave të kthjellëta — ideal për alpinistët.",
             "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
         },
         "local-experience": {
@@ -446,11 +446,11 @@
             "duration": "2 ose 3 Ditë",
             "price": "10,600",
             "price3Days": "13,800",
-            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Të gjitha vaktet & akomodimi të përfshira · Transfertë opsionale nga Shkodra",
+            "summary": "2-3 Ditë · 10,600L (2 ditë) ose 13,800L (3 ditë) · Të gjitha vaktet & akomodimi të përfshira · Transfertë opsionale nga Shkodra (+€30 për person)",
             "inclusions": [
                 "Akomodim në Kulla tradicionale",
-                "Transfertë opsionale vajtje-ardhje nga Shkodra (+€30 për person)",
-                "Të gjitha vaktet (Ushqim Bio)",
+                "Shtesë opsionale, nuk përfshihet: transfertë vajtje-ardhje nga Shkodra (+€30 për person)",
+                "Të gjitha vaktet (kuzhinë organike lokale)",
                 "Ecje në majat e maleve (1250m)",
                 "Eksplorim i fshatit dhe traditave",
                 "Opsionale: Shëtitje me mushka & Peshkim"
@@ -469,7 +469,7 @@
                     "activity": "Shtigjet e trashëgimisë, peshkim & lamtumirë"
                 }
             ],
-            "metaDescription": "Qëndrim lokal 2–3 ditë në Alpet Shqiptare: akomodim në Kulla, kuzhinë lokale, hikë të guiduara deri në 1250m, plus kalërim me mushka dhe peshkim opsional.",
+            "metaDescription": "Qëndrim lokal 2–3 ditë në Alpet Shqiptare: akomodim në Kulla, të gjitha vaktet e përfshira, ecje të guiduara deri në 1250m, plus shëtitje me mushka dhe peshkim opsional.",
             "summerOnly": "Vetëm maj–tetor — nuk ofrohet nga nëntori deri në prill."
         },
         "helicopter-tour": {

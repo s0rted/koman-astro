@@ -26,7 +26,7 @@
         "checkAvailability": "Check Availability",
         "addons": "Enhance Your Trip",
         "transfer": "Round-trip transfer from Shkoder",
-        "transferDesc": "We handle your transport to and from Shkoder",
+        "transferDesc": "Optional extra, not included in the tour price. We handle transport to and from Shkoder.",
         "kayak": "Kayak Rental",
         "kayakDesc": "Explore hidden corners",
         "lunch_addon": "Lunch at the village",
@@ -108,7 +108,7 @@
         "bestSeller": "Best Seller",
         "title": "The Komani Lake",
         "subtitle": "Boat Tour Experience",
-        "description": "Sail through the 'Fjords of the Balkans' for an unforgettable 11-hour journey. Departing daily from Shkoder, this tour takes you through the majestic Molla Valley, with stops for swimming, kayaking, and a lunch break (food and drinks are not included).",
+        "description": "Sail through the 'Fjords of the Balkans' for an unforgettable 11-hour journey through the majestic Molla Valley, with stops for swimming, kayaking, and a lunch break (food and drinks are not included). The round-trip transfer from Shkoder is an optional extra (+€30 per person), not included in the tour price.",
         "duration": "11 Hours",
         "durationLabel": "Duration",
         "lunch": "Lunch Stop",
@@ -358,7 +358,7 @@
     "ToursData": {
         "boat-tour": {
             "title": "Komani Lake Boat Tour",
-            "description": "May to October only (not available November to April). Our traditional boat tour runs every day. Departures leave from our spots in Shkoder at 7:00 AM, and the boat tour starts at 9:00 AM. You sail through the fjords for about 1.5 hours toward Molla Valley and the river, then stop for a lunch break. Afterwards you have free time until 3:00 PM to explore, kayak, trek, swim and fish. The boat then brings you back, and you arrive in Shkoder at about 6:00 PM. A round-trip transfer from Shkoder is available as an optional add-on (+€30 per person).",
+            "description": "May to October only (not available November to April). Our traditional boat tour runs every day. The boat tour starts at 9:00 AM. You sail through the fjords for about 1.5 hours toward Molla Valley and the river, then stop for a lunch break. Afterwards you have free time until 3:00 PM to explore, kayak, trek, swim and fish. The boat then brings you back. Optional extra: round-trip transfer from Shkoder, +€30 per person (not included in the tour price). It leaves our spots in Shkoder at 7:00 AM and returns about 6:00 PM.",
             "category": "Full Day Adventure",
             "duration": "11 Hours",
             "price": "54",
@@ -366,7 +366,7 @@
             "transfersIncluded": "Optional round-trip transfer from Shkoder (+€30 per person)",
             "summary": "11 Hours · Boat Tour included · Optional transfer from Shkoder",
             "inclusions": [
-                "Optional round-trip transfer from Shkoder (+€30 per person)",
+                "Optional extra, not included: round-trip transfer from Shkoder (+€30 per person)",
                 "Traditional Boat Tours",
                 "Scheduled Lunch Stop (Food/Drinks Not Included)",
                 "Kayaking & Swimming",
@@ -375,7 +375,7 @@
             "itinerary": [
                 {
                     "time": "07:00 AM",
-                    "activity": "Departing daily from our spots in Shkoder"
+                    "activity": "Optional transfer: depart from our spots in Shkoder"
                 },
                 {
                     "time": "09:00 AM",
@@ -399,7 +399,7 @@
                 },
                 {
                     "time": "06:00 PM",
-                    "activity": "Arrival back in Shkoder"
+                    "activity": "Optional transfer: arrive back in Shkoder"
                 }
             ],
             "metaDescription": "May–October daily Komani Lake boat tour from Shkoder: sail the emerald fjords to Molla Valley for swimming, kayaking and free time. About 11 hours; optional transfer from Shkoder.",
@@ -446,10 +446,10 @@
             "duration": "2 or 3 Days",
             "price": "100",
             "price3Days": "130",
-            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · All meals & accommodation included · Optional transfer from Shkoder",
+            "summary": "2-3 Days · €100 (2 days) or €130 (3 days) · All meals & accommodation included · Optional transfer from Shkoder (+€30 per person)",
             "inclusions": [
                 "Heritage Kulla Accommodation",
-                "Optional round-trip transfer from Shkoder (+€30 per person)",
+                "Optional extra, not included: round-trip transfer from Shkoder (+€30 per person)",
                 "All Meals (Organic Local Cuisine)",
                 "Guided Peak Hikes (1250m)",
                 "Village Exploration & Traditions",
@@ -469,7 +469,7 @@
                     "activity": "Heritage tracks, fishing & farewell"
                 }
             ],
-            "metaDescription": "Spend 2–3 days living like a local in the Albanian Alps: heritage Kulla stays, organic cuisine, guided peak hikes to 1250m, and optional mule riding or fishing.",
+            "metaDescription": "Spend 2–3 days living like a local in the Albanian Alps: heritage Kulla stays, all meals included, guided peak hikes to 1250m, and optional mule riding or fishing.",
             "summerOnly": "May to October only — not available November to April."
         },
         "helicopter-tour": {

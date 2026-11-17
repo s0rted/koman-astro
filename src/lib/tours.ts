@@ -24,9 +24,9 @@ export const TOURS: Tour[] = [
         price: "54",
         currency: "€",
         duration: "11 Hours",
-        description: "May–October classic boat tour (not available November–April). Navigate the 'Thailand of Albania' in our traditional boats and sail deep into the emerald fjords of Komani Lake. Spend time in the serene Molla Valley, with kayaking, trekking and swimming. A round-trip transfer from Shkoder is available as an optional add-on (+€30 per person).",
+        description: "May–October classic boat tour (not available November–April). Navigate the 'Thailand of Albania' in our traditional boats and sail deep into the emerald fjords of Komani Lake. Spend time in the serene Molla Valley, with kayaking, trekking and swimming. The round-trip transfer from Shkoder is an optional extra and is not included in the tour price (+€30 per person).",
         inclusions: [
-            "Optional round-trip transfer from Shkoder (+€30 per person)",
+            "Optional extra, not included: round-trip transfer from Shkoder (+€30 per person)",
             "Traditional boat navigation",
             "Scheduled lunch stop (Food/drinks not included)",
             "Kayaking, trekking & swimming",
@@ -34,13 +34,13 @@ export const TOURS: Tour[] = [
             "Expert local guidance"
         ],
         itinerary: [
-            { time: "07:00 AM", activity: "Departing daily from our spots in Shkoder" },
+            { time: "07:00 AM", activity: "Optional transfer: depart from our spots in Shkoder" },
             { time: "09:00 AM", activity: "Boat tour starts" },
             { time: "10:30 AM", activity: "Arrival at Molla valley and river" },
             { time: "12:30 PM", activity: "Lunch break" },
             { time: "01:30 PM", activity: "Free time (kayaking, trekking, swimming, fishing)" },
             { time: "03:00 PM", activity: "Return journey begins" },
-            { time: "06:00 PM", activity: "Arrival in Shkoder" }
+            { time: "06:00 PM", activity: "Optional transfer: arrive in Shkoder" }
         ],
         gallery: [
             "/albums/optimized/IMG_6309.webp",
@@ -91,9 +91,9 @@ export const TOURS: Tour[] = [
         price: "100",
         currency: "€",
         duration: "2-3 Days",
-        description: "Disconnect to reconnect. Immerse yourself in the living history of the Albanian Alps. Spend 2-3 days in authentic Kullas (fortified tower houses), where the walls whisper tales of ancestry and resilience. Savor organic local cuisine, hike to breathtaking peaks at 1250m, and discover hidden tracks. Options for mule riding and fishing allow you to tailor this deep dive into tradition. All meals are included.",
+        description: "Disconnect to reconnect. Immerse yourself in the living history of the Albanian Alps. Spend 2-3 days in authentic Kullas (fortified tower houses), where the walls whisper tales of ancestry and resilience. Savor organic local cuisine, hike to breathtaking peaks at 1250m, and discover hidden tracks. Options for mule riding and fishing allow you to tailor this deep dive into tradition. All meals are included in the price.",
         inclusions: [
-            "Optional round-trip transfer from Shkoder (+€30 per person)",
+            "Optional extra, not included: round-trip transfer from Shkoder (+€30 per person)",
             "Heritage Kulla accommodation",
             "All meals included (organic local cuisine)",
             "Guided peak hikes (1250m)",
